@@ -17,8 +17,9 @@ describe('Browse Projects', () => {
     describe('Display Projects', () => { 
 
         before(() => {
-            cy.visit_version({page: 'ControlCenter/view_projects.php'})
-            cy.require_redcap_stats()
+            cy.visit_version({page: 'ControlCenter/view_projects.php'}).then(() => {
+                cy.require_redcap_stats()
+            })            
         })
 
         it('Should display a list of all projects', () => {
@@ -93,7 +94,7 @@ describe('Browse Projects', () => {
 
         it('Should sort the Records column appropriately', () => {
             cy.check_column_sort_classes('Records', 
-                                         ['pid-cntr-10', 'pid-cntr-5'])
+                                         ['pid-cntr-13', 'pid-cntr-5'])
         })
 
         it('Should sort the Fields column appropriately', () => {

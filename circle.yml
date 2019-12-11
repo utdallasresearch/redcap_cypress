@@ -10,7 +10,7 @@ jobs:
           name: Install MySQL Client
           command: |
             sudo apt-get update
-            sudo apt install mysql-client-core-5.7=5.7.27-0ubuntu0.16.04.1
+            sudo apt-get install mysql-client-core-5.7
       - run:
           name: Build the REDCap Image
           command: |
@@ -23,7 +23,7 @@ jobs:
           name: Start Docker REDCap Container
           command: |
             cd redcap_docker
-            docker-compose up -d
+            docker-compose up -d --build
       - run:
           name: Configure Cypress environment
           command: |
@@ -34,11 +34,7 @@ jobs:
             echo | cat cypress.json.example | sed s/PID/$pid/g > $tmp
  
             mv cypress.json.example.tmp cypress.json
-            mv cypress.env.json.example cypress.env.json 
-      - run:
-          name: Get Pipe Viewer
-          command: |
-            sudo apt install pv                 
+            mv cypress.env.json.example cypress.env.json              
       - run:      
           name: Install Cypress and Run Tests
           command: |
