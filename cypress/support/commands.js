@@ -4,6 +4,14 @@ import './hooks/commands'
 import './modules/commands'
 import './plugins/commands'
 import './projects/commands'
+import 'cypress-file-upload'
+import '@4tw/cypress-drag-drop'
+
+import 'cypress-file-upload'
+import '@4tw/cypress-drag-drop'
+
+import 'cypress-file-upload'
+import '@4tw/cypress-drag-drop'
 
 import compareVersions from 'compare-versions';
 import 'cypress-iframe';
@@ -45,20 +53,19 @@ Cypress.Commands.add('visit_version', (options) => {
 })
 
 Cypress.Commands.add('visit_base', (options) => {
-    cy.maintain_login().then(() => {
+   cy.maintain_login().then(() => {
         if ('url' in options) cy.visit(options['url']) 
-    })
+   })
 })
 
-Cypress.Commands.add('base_db_seed', () => {    
-
+Cypress.Commands.add('base_db_seed', () => {
     let redcap_source_path = Cypress.env('redcap_source_path')
 
     if(redcap_source_path === undefined){
         alert('redcap_source_path, which defines where your REDCap source code exists, is missing in cypress.env.json.  Please configure it before proceeding.')
     }
 
-    cy.task('populateStructureAndData', {   
+    cy.task('populateStructureAndData', {
                                             redcap_version: Cypress.env('redcap_version'), 
                                             advanced_user_info: compareVersions.compare(Cypress.env('redcap_version'), '10.1.0', '>='), 
                                             source_location: redcap_source_path
@@ -111,25 +118,30 @@ Cypress.Commands.add('maintain_login', () => {
                 console.log('Cookie Login')
                 cookies.map(cookie =>  Cypress.Cookies.preserveOnce(cookie['name']) )
 
-            //But, if we don't, then let's simply re-login, right?    
-            } else {     
+            //But, if we don't, then let's simply re-login, right?
+            } else {
                 console.log('Regular Login')
                 cy.login({ username: user, password: pass })
-            }         
-            
-        })  
+            }
+
+        })
 
     //If user type has changed, let's clear cookies and login again
     } else {
         //Ensure we logout when a user changes
         cy.visit('/redcap_v' + Cypress.env('redcap_version') + '/index.php?logout=1')
         cy.login({ username: user, password:  pass })
-    }
+   }
 
     window.user_info.set_previous_user_type()
 })
 
 Cypress.Commands.add('set_user_type', (user_type) => {
+    if(Cypress.env('coupled_mode') !== 'undefined' && Cypress.env('coupled_mode') === false) {
+        console.log(Cypress.env('Non-coupled mode initiated.'))
+        cy.clearCookies()
+        cy.visit('/index.php?logout=1')
+    }
     window.user_info.set_user_type(user_type)
 })
 
@@ -435,6 +447,85 @@ Cypress.Commands.add('mysql_query', (query) => {
 
 Cypress.Commands.add('num_projects_excluding_archived', () => {
     return cy.mysql_query("SELECT count(*) FROM redcap_projects WHERE status != 3;")
+})
+
+
+// UTD Additions
+Cypress.Commands.add('logout', () => {
+    cy.request('index.php?logout=1')
+    cy.visit('/')
+})
+
+Cypress.Commands.add('request_version', (options) => {
+    let version = Cypress.env('redcap_version')
+
+    cy.maintain_login().then(() => {
+        if('params' in options){
+            cy.request('/redcap_v' + version + '/' + options['page'] +  '?' + options['params'])
+        } else {
+            cy.request('/redcap_v' + version + '/' + options['page'])
+        }
+    })
+})
+
+Cypress.Commands.add('subnavItem', (item = 'projHome') => {
+    var navItem;
+
+    if(item === 'projSetup') {
+        navItem = 'Project Setup';
+    }
+    else if(item === 'otherFunc') {
+        navItem = 'Other Functionality';
+    }
+    else if(item === 'projHist') {
+        navItem = 'Project Revision History';
+    }
+    else if(item === 'addNewArm'){
+        navItem = '+Add New Arm';
+    }
+    else if(item === 'designateInstEvents') {
+        navItem = 'Designate Instruments for My Events'
+    }
+    else if(item === 'arm1') {
+        navItem = 'Arm 1'
+    }
+    else if(item === 'arm2') {
+        navItem = 'Arm 2'
+    }
+    else if(item === 'pubSurveyLink') {
+        navItem = 'Public Survey Link'
+    }
+    else if(item === 'designateInst') {
+        navItem = 'Designate Instruments for My Events'
+    }
+    else if(item === 'arm1Event') {
+        navItem = 'Arm 1:'
+    }
+    else if(item === 'addNewArm') {
+        navItem = '+Add New Arm'
+    }
+    else if(item === 'arm1'){
+        navItem = 'Arm 1'
+    }
+    else if(item === 'arm2'){
+        navItem = 'Arm 2'
+    }
+    else if(item === 'armTwo'){
+        navItem = 'Arm Two'
+    }
+    else if(item === 'arm3'){
+        navItem = 'Arm 3'
+    }
+    else {
+        navItem = 'Project Home';
+    }
+
+    return cy.get('div#sub-nav')
+        .within( () => {
+            cy.get('a')
+                .contains(navItem)
+                .click()
+        })
 })
 
 //
