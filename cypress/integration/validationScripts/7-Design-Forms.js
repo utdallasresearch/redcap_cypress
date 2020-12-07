@@ -2021,5 +2021,73 @@ describe('7 - Design Forms Using Data Dictionary and Online Designer', {
                         })
                 })
         })
+
+        // 7-36/37
+
+        it('7-36/37 Should have descriptive text with file field element.', () => {
+            cy.set_user_type('standard')
+            cy.mysql_db('seeds/validations/7/validation-pre-7-36')
+
+            cy.visit_version({page: "Design/online_designer.php", params: "pid=14"})
+            cy.get('div#sub-nav li.active')
+                .should('contain.text', 'Online Designer')
+
+            cy.get('table#table-forms_surveys tbody tr')
+                .within(() => {
+                    cy.get('td a')
+                        .contains('Data Types')
+                        .click()
+                })
+
+            cy.get('div#west div.menubox div.hang a')
+                .contains('Add / Edit Records')
+                .click()
+
+            cy.get('div.projhdr')
+                .should('contain.text', 'Add / Edit Records')
+
+            cy.get('select#record')
+                .select('1')
+
+            cy.get('div#record_display_name')
+                .should('contain.text', 'Arm 1: Arm 1')
+
+            cy.get('table#event_grid_table tbody td')
+                .should('contain.text', 'Data Types')
+                .next('td')
+                .should('contain.html', 'circle_green.png')
+
+            cy.get('table#event_grid_table tbody tr:first td:nth-child(2) a')
+                .click()
+
+            cy.get('div#dataEntryTopOptions')
+                .should('contain.text', 'Data Types')
+            cy.get('table#questiontable tbody tr:first td div.yellow')
+                .should('contain.text', 'Event 1 (Arm 1: Arm 1)')
+
+            cy.get("table#questiontable tbody tr#descriptive_text_file-tr")
+                .should('contain.text', 'Descriptive Text with File')
+                .should('contain.text', 'Attachment:')
+                .should('contain.text', '7-34-image.jpg')
+                .within( () => {
+                    cy.get('a')
+                        .click()
+                })
+
+            cy.request_version({page: 'DataEntry/file_download.php', params: "pid=14&page=data_types&type=attachment&doc_id_hash=e064e127f4b2f725544ecae18413c06b5366decd&instance=1&id=3"}).as('file')
+
+            cy.get('@file').should((response) => {
+                expect(response.status).to.eq(200)
+                expect(response).to.have.property('headers').contains({"content-type": "image/jpeg; name=\"7-34-image.jpg\""})
+            })
+
+            cy.get('button#submit-btn-saverecord:first')
+                .click()
+
+            cy.wait(500)
+
+            cy.get('div.projhdr')
+                .should('contain.text', 'Record Home Page')
+        })
     })
 })
