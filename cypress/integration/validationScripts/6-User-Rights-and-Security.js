@@ -2667,7 +2667,7 @@ describe('6 - Project User Rights and Security', {
                 })
 
             cy.get('div.userSaveMsg')
-                .should('be.visible')
+                .should('exist')
                 .should('contain.text', 'has been successfully ASSIGNED to the user role "Data Entry"')
 
             cy.get('table#table-user_rights_roles_table')
@@ -2739,7 +2739,7 @@ describe('6 - Project User Rights and Security', {
                 })
 
             cy.get('div.userSaveMsg')
-                .should('be.visible')
+                .should('exist')
                 .should('contain.text', 'has been successfully REMOVED from their user role')
 
             cy.get('table#table-user_rights_roles_table')
@@ -2758,7 +2758,7 @@ describe('6 - Project User Rights and Security', {
                 })
 
             cy.get('div.ui-dialog')
-                .should('be.visible')
+                .should('exist')
                 .within( () => {
                     cy.get('div.ui-dialog-titlebar')
                         .should('contain.text', 'NOTICE: User\'s privileges will remain the same')
