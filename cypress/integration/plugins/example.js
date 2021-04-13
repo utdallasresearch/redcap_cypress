@@ -7,7 +7,7 @@ describe('Plugin Example', () => {
 	
 	})
 
-    it('Your plugin spec here', () => {
+    it.skip('Your plugin spec here', () => {
 
     })
 

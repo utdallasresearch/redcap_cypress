@@ -24,19 +24,29 @@ Cypress.Commands.add('login', (options) => {
 
     cy.clearCookies()
 
-    cy.request({
-        method: 'POST',
-        url: '/', // baseUrl is prepended to url
-        form: true, // indicates the body should be form urlencoded and sets Content-Type: application/x-www-form-urlencoded headers
-        body: {
-            'username': options['username'],
-            'password': options['password'],
-            'submitted': 1,
-            'redcap_login_a38us_09i85':'redcap_login_a38us_09i85'
-        }
-    }).should(($a) => {
-        expect($a.status).to.equal(200)
-    })
+    cy.request('/index.php')
+        .its('body')
+        .then((body) => {
+            const $html = Cypress.$(body)
+            const csrf = $html.find('input[name=redcap_login_a38us_09i85]').val()
+
+            cy.request({
+                method: 'POST',
+                url: '/', // baseUrl is prepended to url
+                form: true, // indicates the body should be form urlencoded and sets Content-Type: application/x-www-form-urlencoded headers
+                body: {
+                    'username': options['username'],
+                    'password': options['password'],
+                    'submitted': 1,
+                    //'redcap_login_a38us_09i85':'redcap_login_a38us_09i85'
+                    'redcap_login_a38us_09i85': csrf
+                }
+            }).should(($a) => {
+                expect($a.status).to.equal(200)
+            })
+        })
+
+
 })
 
 Cypress.Commands.add('visit_version', (options) => {

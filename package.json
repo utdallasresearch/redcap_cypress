@@ -10,7 +10,7 @@
     "@4tw/cypress-drag-drop": "^1.4.0",
     "@shelex/cypress-allure-plugin": "^1.8.2",
     "compare-versions": "^3.6.0",
-    "cypress": "^6.1.0",
+    "cypress": "^6.8.0",
     "cypress-file-upload": "^4.1.1",
     "cypress-iframe": "^1.0.1",
     "sed-lite": "0.8.2",

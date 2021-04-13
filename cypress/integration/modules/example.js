@@ -7,7 +7,7 @@ describe('Module Example', () => {
 	
 	})
 
-    it('Your module spec here', () => {
+    it.skip('Your module spec here', () => {
 
     })
 

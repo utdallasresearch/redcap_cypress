@@ -791,9 +791,6 @@ describe('4 - Manage Project Creation/Deletion Settings', {
                     .within(() => {
                         cy.get('div.ui-dialog-titlebar')
                             .should('contain.text', 'Project successfully deleted!')
-                        cy.get('button.ui-button')
-                            .contains('Close', {force: true})
-                            .click()
                     })
             })
         })
@@ -1951,7 +1948,7 @@ describe('4 - Manage Project Creation/Deletion Settings', {
 
         // 54
 
-        it('Should allow admin to review project changes in production.', () => {
+        it('4-54: Should allow admin to review project changes in production.', () => {
             cy.set_user_type('admin')
             cy.mysql_db('seeds/validations/4/validation-pre-4-54')
 
@@ -1980,31 +1977,33 @@ describe('4 - Manage Project Creation/Deletion Settings', {
                                     .click()
                             })
                     })
-                cy.wait(1000)
-                cy.get('iframe')
-                cy.frameLoaded('[id=my-iframe]')
-                // after the frame has loaded, we can use "cy.iframe()"
-                // to retrieve it
-                cy.iframe().find('button.jqbuttonmed:last')
-                    .should('contain.text', 'Remove All Drafted Changes')
-                    .click()
-
-                cy.iframe().find('div.ui-dialog')
-                    .within( () => {
-                        cy.get('div.ui-dialog-titlebar')
-                            .should('contain.text', 'DELETE ALL DRAFT MODE CHANGES?')
-                        cy.get('button')
-                            .contains('Remove All Drafted Changes')
-                            .click()
-                    })
-                // todo - find a workaround for wait here
-                cy.wait(1000)
-                cy.iframe().find('div.projhdr')
-                    .should('contain.text', 'Project Changes Removed / User Notified')
-
-                cy.get('div.trim-close-btn')
-                    .click()
             })
+
+            cy.get('iframe')
+
+            cy.frameLoaded('[id=my-iframe]')
+
+            // after the frame has loaded, we can use "cy.iframe()"
+            // to retrieve it
+            cy.iframe().find('button.jqbuttonmed:last')
+                .should('contain.text', 'Remove All Drafted Changes')
+                .click()
+
+            cy.iframe().find('div.ui-dialog')
+                .within( () => {
+                    cy.get('div.ui-dialog-titlebar')
+                        .should('contain.text', 'DELETE ALL DRAFT MODE CHANGES?')
+                    cy.get('button')
+                        .contains('Remove All Drafted Changes')
+                        .click()
+                })
+            // todo - find a workaround for wait here
+            cy.wait(1000)
+            cy.iframe().find('div.projhdr')
+                .should('contain.text', 'Project Changes Removed / User Notified')
+
+            cy.get('div.trim-close-btn')
+                .click()
         })
 
         // 56

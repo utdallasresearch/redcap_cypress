@@ -6,9 +6,8 @@ describe('5 - Project View/Sort Functions', {
     beforeEach( () => {
         cy.set_user_type('admin')
     })
-    // 5-1
 
-    it('Should have the ability to view all projects.', () => {
+    it('5-1/2: Should have the ability to view all projects.', () => {
         cy.mysql_db('seeds/validations/5/validation-pre-5-1')
 
         cy.visit_version({page: "ControlCenter/index.php"}).then(() => {
@@ -16,7 +15,7 @@ describe('5 - Project View/Sort Functions', {
                 .should('contain.text', 'Projects')
 
             cy.get('div.cc_menu_item')
-                .within( () => {
+                .within(() => {
                     cy.get('a')
                         .contains('Browse Projects')
                         .click()
@@ -25,58 +24,38 @@ describe('5 - Project View/Sort Functions', {
                 .should('contain.text', 'Browse Projects')
 
             cy.get('div#control_center_window')
-                .within( () => {
+                .within(() => {
                     cy.get('button')
-                        .contains ('View all projects')
+                        .contains('View all projects')
                         .click()
                 })
-        })
-    })
 
-    // 5-2
+            // 5-2
+            cy.get('input#project_search')
+                .clear()
+                .type('First')
 
-    it('Should have the ability to filter projects by title.', () => {
-        cy.mysql_db('seeds/validations/5/validation-pre-5-1')
+            cy.get('button#project_search_btn')
+                .should('contain.text', 'Search project title')
+                .click()
 
-        cy.visit_version({page: "ControlCenter/index.php"}).then(() => {
-            cy.get('div.cc_menu_header')
-                .should('contain.text', 'Projects')
-
-            cy.get('div.cc_menu_item')
-                .within( () => {
-                    cy.get('a')
-                        .contains('Browse Projects')
-                        .click()
-                })
-            cy.get('h4')
-                .should('contain.text', 'Browse Projects')
-            cy.get('div#control_center_window')
-                .within( () => {
-                    cy.get('input#project_search')
-                        .type('First')
-
-                    cy.get('button#project_search_btn')
-                        .should('contain.text', 'Search project title')
-                        .click()
-                })
-            })
 
             cy.get('table#table-proj_table')
-                .within( () => {
+                .within(() => {
                     cy.get('a.aGrid')
                         .should('contain.text', 'FirstProject')
                 })
+        })
     })
-
-    // 5-3
     // TODO: The validation script is defined using on the found FirstProject
     // in step 5-2. But since there is only one project found, testing sorting
     // does not make sense. Therefore, I'm returning to view all projects to test sorting.
 
-    it('Should have the ability to sort project search results.', () => {
+    // ToDo: Cypress is failing to execute the sort script when clicking the <th> which has the event tied to it.
+    it('5-3: Should have the ability to sort project search results.', () => {
         cy.mysql_db('seeds/validations/5/validation-pre-5-1')
 
-        cy.visit_version({page: "ControlCenter/view_projects.php"}).then(() => {
+        cy.visit_version({page: "ControlCenter/view_projects.php"})
 
             cy.get('div#control_center_window')
                 .within( () => {
@@ -85,29 +64,16 @@ describe('5 - Project View/Sort Functions', {
                         .click()
                 })
 
-            cy.get('div.hDiv')
-                .within( () => {
-                    cy.get('th')
-                        .contains('Project Title')
-                        .click()
-                })
+
+            cy.get('#proj_table > div.hDiv > div > table > tbody > tr > th:nth-child(1)')
+                .should('contain.text','Project Title')
+                .click({force:true})
+
+
             cy.get('div.bDiv')
                 .within( () => {
-                    cy.get('table#table-proj_table')
-                        .within( () => {
-                            cy.get('tbody')
-                                .within( () => {
-                                    cy.get('tr:first')
-                                        .within( () => {
-                                            cy.get('td:first')
-                                                .within( () => {
-                                                    cy.get('a.aGrid')
-                                                        .should('contain.text', 'Basic Demography')
-                                                })
-                                        })
-                                })
-
-                        })
+                    cy.get('table#table-proj_table tbody tr:first td:first a.aGrid')
+                        .should('contain.text', 'Basic Demography')
                 })
 
 
@@ -268,12 +234,9 @@ describe('5 - Project View/Sort Functions', {
 
                         })
                 })
-        })
     })
 
-    // 5-4
-
-    it('Should have the ability to view projects accessible by username.', () => {
+    it('5-4: Should have the ability to view projects accessible by username.', () => {
         cy.mysql_db('seeds/validations/5/validation-pre-5-1')
         let username = 'test_user'
 
@@ -307,9 +270,7 @@ describe('5 - Project View/Sort Functions', {
 
     })
 
-    // 5-5
-
-    it('Should have the ability to view projects by email address.', () => {
+    it('5-5: Should have the ability to view projects by email address.', () => {
         cy.mysql_db('seeds/validations/5/validation-pre-5-1')
 
         let username = 'test_user'

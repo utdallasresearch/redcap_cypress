@@ -1,3 +1,14 @@
+import {
+    validateImage, deleteDownloadsFolder,
+} from '../utils'
+
+const path = require('path')
+const downloadsFolder = Cypress.config('downloadsFolder')
+
+beforeEach( () => {
+    deleteDownloadsFolder
+})
+
 describe('7 - Design Forms Using Data Dictionary and Online Designer', {
     env: {
         coupled_mode: false
@@ -6,12 +17,10 @@ describe('7 - Design Forms Using Data Dictionary and Online Designer', {
 () => {
 
     describe('Form Creation', () => {
-
-        // 7-1
         // TODO: Right off the bat, the validation script is wrong. The user needs to login, click My
         //  Projects, select the first project, then start step one.
 
-        it('Should verify user has project design and setup privileges.', () => {
+        it('7-1: Should verify user has project design and setup privileges.', () => {
             cy.set_user_type('standard')
             cy.mysql_db('seeds/validations/7/validation-pre-7-1')
 
@@ -57,9 +66,7 @@ describe('7 - Design Forms Using Data Dictionary and Online Designer', {
             })
         })
 
-        // 7-2
-
-        it('Should verify the project does not use surveys and is in development mode.', () => {
+        it('7-2: Should verify the project does not use surveys and is in development mode.', () => {
             cy.set_user_type('standard')
             cy.mysql_db('seeds/validations/7/validation-pre-7-2')
 
@@ -104,9 +111,7 @@ describe('7 - Design Forms Using Data Dictionary and Online Designer', {
             })
         })
 
-        // 7-3
-
-        it('Should verify design instruments tools are available.', () => {
+        it('7-3: Should verify design instruments tools are available.', () => {
             cy.set_user_type('standard')
             cy.mysql_db('seeds/validations/7/validation-pre-7-3')
 
@@ -155,9 +160,7 @@ describe('7 - Design Forms Using Data Dictionary and Online Designer', {
             })
         })
 
-        // 7-4
-
-        it('Should download the project data dictionary.', () => {
+        it('7-4: Should download the project data dictionary.', () => {
             cy.set_user_type('standard')
             cy.mysql_db('seeds/validations/7/validation-pre-7-4')
 
@@ -202,9 +205,7 @@ describe('7 - Design Forms Using Data Dictionary and Online Designer', {
             })
         })
 
-        // 7-5
-
-        it.skip('Should download the project data dictionary.', () => {
+        it.skip('7-5: Should download the project data dictionary.', () => {
             cy.set_user_type('standard')
             cy.mysql_db('seeds/validations/7/validation-pre-7-5')
 
@@ -249,9 +250,7 @@ describe('7 - Design Forms Using Data Dictionary and Online Designer', {
                 })
         })
 
-        // 7-6
-
-        it('Should upload the project data dictionary.', () => {
+        it('7-6: Should upload the project data dictionary.', () => {
             cy.set_user_type('standard')
             cy.mysql_db('seeds/validations/7/validation-pre-7-6')
 
@@ -287,10 +286,10 @@ describe('7 - Design Forms Using Data Dictionary and Online Designer', {
                         })
 
                     cy.get('div#center')
-                        .should('contain.text', 'This module will allow you to create new data collection instruments/surveys')
                         .within( () => {
                             cy.get('div.round')
-                                .within(() => {
+                                .should('contain.text', 'Upload your Data Dictionary file')
+                                .within( () => {
                                     cy.get('input[name=uploadedfile]')
                                         .attachFile(dataDictionary)
                                     cy.wait(1000)
@@ -299,9 +298,12 @@ describe('7 - Design Forms Using Data Dictionary and Online Designer', {
                                 })
                         })
 
-                    cy.get('div.darkgreen')
-                        .should('exist')
-                        .should('contain.text', 'Your document was uploaded successfully and awaits your confirmation below.')
+                     cy.get('div#center')
+                         .within( () => {
+                             cy.get('div.darkgreen')
+                                 .should('exist')
+                                 .should('contain.text', 'Your document was uploaded successfully and awaits your confirmation below.')
+                         })
 
                     cy.get('div.blue')
                         .should('exist')
@@ -319,9 +321,8 @@ describe('7 - Design Forms Using Data Dictionary and Online Designer', {
     })
 
     describe('Field Creation', () => {
-        // 7-7/8
 
-        it('Should upload and reject the project data dictionary with duplication error.', () => {
+        it('7-7/8: Should upload and reject the project data dictionary with duplication error.', () => {
             cy.set_user_type('standard')
             cy.mysql_db('seeds/validations/7/validation-pre-7-7')
 
@@ -358,7 +359,6 @@ describe('7 - Design Forms Using Data Dictionary and Online Designer', {
                     })
 
                 cy.get('div#center')
-                    .should('contain.text', 'This module will allow you to create new data collection instruments/surveys')
                     .within( () => {
                         cy.get('div.round')
                             .within(() => {
@@ -367,12 +367,10 @@ describe('7 - Design Forms Using Data Dictionary and Online Designer', {
                                 cy.wait(1000)
                                 cy.get('button#submit')
                                     .click()
-
                             })
                     })
 
                 cy.get('div.darkgreen')
-                   // .should('not.exist')
                     .should('not.exist')
 
                 cy.get('div.red')
@@ -384,9 +382,7 @@ describe('7 - Design Forms Using Data Dictionary and Online Designer', {
             })
         })
 
-        // 7-9/10
-
-        it('Should upload the corrected project data dictionary.', () => {
+        it('7-9/10: Should upload the corrected project data dictionary.', () => {
             cy.set_user_type('standard')
             cy.mysql_db('seeds/validations/7/validation-pre-7-9')
 
@@ -423,19 +419,15 @@ describe('7 - Design Forms Using Data Dictionary and Online Designer', {
                             })
                     })
 
-                cy.get('div#center')
-                    .should('contain.text', 'This module will allow you to create new data collection instruments/surveys')
-                    .within( () => {
-                        cy.get('div.round')
-                            .within(() => {
-                                cy.get('input[name=uploadedfile]')
-                                    .attachFile(dataDictionary)
-                                cy.wait(1000)
-                                cy.get('button#submit')
-                                    .click()
-                                cy.wait(1000)
-                            })
-                    })
+                    cy.get('div#center div.round')
+                        .within(() => {
+                            cy.get('input[name=uploadedfile]')
+                                .attachFile(dataDictionary)
+                            cy.wait(1000)
+                            cy.get('button#submit')
+                                .click()
+                            cy.wait(1000)
+                        })
 
                 cy.get('div.darkgreen')
                     .should('exist')
@@ -457,9 +449,7 @@ describe('7 - Design Forms Using Data Dictionary and Online Designer', {
             })
         })
 
-        // 7-11
-
-        it('Should verify new data dictionary form fields.', () => {
+        it('7-11: Should verify new data dictionary form fields.', () => {
             cy.set_user_type('standard')
             cy.mysql_db('seeds/validations/7/validation-pre-7-11')
 
@@ -543,8 +533,7 @@ describe('7 - Design Forms Using Data Dictionary and Online Designer', {
             })
         })
 
-        // 7-12
-        it('Should add the demo branching instrument.', () => {
+        it('7-12: Should add the demo branching instrument.', () => {
             cy.set_user_type('standard')
             cy.mysql_db('seeds/validations/7/validation-pre-7-12')
 
@@ -634,8 +623,7 @@ describe('7 - Design Forms Using Data Dictionary and Online Designer', {
             })
         })
 
-        // 7-13
-        it('Should allow renaming of an instrument.', () => {
+        it('7-13: Should allow renaming of an instrument.', () => {
             cy.set_user_type('standard')
             cy.mysql_db('seeds/validations/7/validation-pre-7-13')
 
@@ -710,8 +698,7 @@ describe('7 - Design Forms Using Data Dictionary and Online Designer', {
             })
         })
 
-        // 7-14
-        it('Should allow copying of an instrument, saving with a new name.', () => {
+        it('7-14: Should allow copying of an instrument, saving with a new name.', () => {
             cy.set_user_type('standard')
             cy.mysql_db('seeds/validations/7/validation-pre-7-14')
 
@@ -796,9 +783,7 @@ describe('7 - Design Forms Using Data Dictionary and Online Designer', {
             })
         })
 
-        // 7-15
-
-        it('Should verify that copied instruments have versions appended to the field names.', () => {
+        it('7-15: Should verify that copied instruments have versions appended to the field names.', () => {
             cy.set_user_type('standard')
             cy.mysql_db('seeds/validations/7/validation-pre-7-15')
 
@@ -877,9 +862,7 @@ describe('7 - Design Forms Using Data Dictionary and Online Designer', {
             })
         })
 
-        // 7-16
-
-        it('Should delete an instrument.', () => {
+        it('7-16: Should delete an instrument.', () => {
             cy.set_user_type('standard')
             cy.mysql_db('seeds/validations/7/validation-pre-7-16')
 
@@ -960,8 +943,6 @@ describe('7 - Design Forms Using Data Dictionary and Online Designer', {
             })
         })
 
-        // 7-17
-
         it('7-17: Should use drag-n-drop to re-order instruments.', () => {
             cy.set_user_type('standard')
             cy.mysql_db('seeds/validations/7/validation-pre-7-17')
@@ -989,8 +970,6 @@ describe('7 - Design Forms Using Data Dictionary and Online Designer', {
                     })
             })
         })
-
-        // 7-18
 
         it('7-18: Should designate all instruments in arm 1 to event 1.', () => {
             cy.set_user_type('standard')
@@ -1032,8 +1011,6 @@ describe('7 - Design Forms Using Data Dictionary and Online Designer', {
                         })
             })
         })
-
-        // 7-19/20
 
         it('7-19/20: Should add a field to the Data Types instrument.', () => {
             cy.set_user_type('standard')
@@ -1182,8 +1159,6 @@ describe('7 - Design Forms Using Data Dictionary and Online Designer', {
                 })
         })
 
-        // 7-23
-
         it('7-23: Should reject improper variable names.', () => {
             cy.set_user_type('standard')
             cy.mysql_db('seeds/validations/7/validation-pre-7-23')
@@ -1257,8 +1232,6 @@ describe('7 - Design Forms Using Data Dictionary and Online Designer', {
                 })
         })
 
-        // 7-24
-
         it('7-24: Should create a notes text box.', () => {
             cy.set_user_type('standard')
             cy.mysql_db('seeds/validations/7/validation-pre-7-24')
@@ -1308,8 +1281,6 @@ describe('7 - Design Forms Using Data Dictionary and Online Designer', {
                 })
         })
 
-        // 7-25
-
         it('7-25: Should create a calculated field.', () => {
             cy.set_user_type('standard')
             cy.mysql_db('seeds/validations/7/validation-pre-7-25')
@@ -1336,24 +1307,54 @@ describe('7 - Design Forms Using Data Dictionary and Online Designer', {
                         .should('contain.text', 'Add New Field')
 
                     cy.get('select#field_type')
+                        .focus()
                         .select('Calculated Field')
                         .blur()
 
                     cy.get('textarea#field_label')
+                        .focus()
                         .type('Calculated Field')
                         .blur()
                         .should('have.value', 'Calculated Field')
 
-                    cy.get('textarea[name=element_enum]')
-                        .type('3*2')
-                        .blur()
-
                     cy.get('input#field_name')
+                        .focus()
                         .type('calculated_field')
                         .blur()
                         .should('have.value', 'calculated_field')
 
-                    cy.get('button.ui-button')
+                    // ToDo: Changes in 10.6.4 to display a Logic Editor modal instead
+                    //  of textarea element_enum
+                    // cy.get('textarea[name=element_enum]')
+                    //     .focus()
+                    //     .type('3*2', {force: true})
+                    //     .blur()
+
+                    cy.get('textarea[name=element_enum]')
+                        .click()
+                })
+
+            cy.get('div.ui-dialog')
+                .within( () => {
+                    cy.get('div.ui-dialog-titlebar')
+                        .should('contain.text', 'Logic Editor')
+
+                    cy.get('textarea.ace_text-input')
+                        .focus()
+                        .type('3*2')
+                        .blur()
+
+                    cy.get('span.logicValidatorOkay')
+                        .should('not.contain.text', 'Error in syntax')
+
+                    cy.get('div.ui-dialog-buttonset button')
+                        .contains('Update & Close Editor')
+                        .click()
+                })
+
+            cy.get('div.ui-dialog div.ui-dialog-buttonpane')
+                .within( () => {
+                    cy.get('button')
                         .contains('Save')
                         .click()
                 })
@@ -1365,12 +1366,24 @@ describe('7 - Design Forms Using Data Dictionary and Online Designer', {
                             cy.get('td:first')
                                 .should('contain.text', 'Calculated Field')
                                 .next('td')
-                                .should('contain.text', 'View equation')
+                                .within( () => {
+                                    cy.get('a')
+                                        .should('contain.text', 'View equation')
+                                        .click()
+                                })
                         })
                 })
-        })
+            cy.get('div.ui-dialog')
+                .within( () => {
+                    cy.get('div.ui-dialog-titlebar')
+                        .should('contain.text', 'Calculation equation for variable "calculated_field"')
 
-        // 7-26
+                    cy.get('div#viewEq table tbody tr:nth-child(3) td')
+                        .should('contain.text', 'Calculation')
+                        .next('td')
+                        .should('contain.text', '3*2')
+                })
+        })
 
         it('7-26: Should create a multiple-choice drop down auto list field.', () => {
             cy.set_user_type('standard')
@@ -1452,8 +1465,6 @@ describe('7 - Design Forms Using Data Dictionary and Online Designer', {
                 })
         })
 
-        // 7-27
-
         it('7-27: Should create a multiple-choice drop down manual list field.', () => {
             cy.set_user_type('standard')
             cy.mysql_db('seeds/validations/7/validation-pre-7-27')
@@ -1516,8 +1527,6 @@ describe('7 - Design Forms Using Data Dictionary and Online Designer', {
                         })
                 })
         })
-
-        // 7-28
 
         it('7-28: Should create a multiple-choice radio button auto field.', () => {
             cy.set_user_type('standard')
@@ -1600,8 +1609,6 @@ describe('7 - Design Forms Using Data Dictionary and Online Designer', {
 
         })
 
-        // 7-29
-
         it('7-29: Should create a multiple-choice radio button manual field.', () => {
             cy.set_user_type('standard')
             cy.mysql_db('seeds/validations/7/validation-pre-7-29')
@@ -1667,8 +1674,6 @@ describe('7 - Design Forms Using Data Dictionary and Online Designer', {
 
         })
 
-        // 7-30
-
         it('7-30: Should verify a multiple-choice radio button manual field.', () => {
             cy.set_user_type('standard')
             cy.mysql_db('seeds/validations/7/validation-pre-7-30')
@@ -1710,8 +1715,6 @@ describe('7 - Design Forms Using Data Dictionary and Online Designer', {
             cy.get('div#sub-nav ul li.active')
                 .should('contain.text', 'Online Designer')
         })
-
-        // 7-31
 
         it('7-31: Should create checkboxen field.', () => {
             cy.set_user_type('standard')
@@ -1775,8 +1778,6 @@ describe('7 - Design Forms Using Data Dictionary and Online Designer', {
                 })
         })
 
-        // 7-32
-
         it('7-32: Should create a signature field.', () => {
             cy.set_user_type('standard')
             cy.mysql_db('seeds/validations/7/validation-pre-7-32')
@@ -1831,8 +1832,6 @@ describe('7 - Design Forms Using Data Dictionary and Online Designer', {
                         })
                 })
         })
-
-        // 7-33
 
         it('7-33: Should create a file upload field.', () => {
             cy.set_user_type('standard')
@@ -1889,8 +1888,6 @@ describe('7 - Design Forms Using Data Dictionary and Online Designer', {
                 })
         })
 
-        // 7-34
-
         it('7-34: Should create a descriptive text field with optional file attachment.', () => {
             let uploadfile = '7-34-image.jpg'
             cy.set_user_type('standard')
@@ -1944,6 +1941,7 @@ describe('7 - Design Forms Using Data Dictionary and Online Designer', {
                     cy.get('button.ui-button')
                         .contains('Upload file')
                         .click()
+                    cy.wait(2000)
                     cy.get('div#div_attach_doc_success')
                         .should('contain.text', 'Document was successfully uploaded!')
                     cy.get('button.ui-button')
@@ -1969,9 +1967,7 @@ describe('7 - Design Forms Using Data Dictionary and Online Designer', {
                 })
         })
 
-        // 7-35
-
-        it('7-35: Should create a descriptive text field with optional file attachment.', () => {
+        it('7-35: Should create a descriptive text field with no attachment.', () => {
             cy.set_user_type('standard')
             cy.mysql_db('seeds/validations/7/validation-pre-7-35')
 
@@ -2023,9 +2019,8 @@ describe('7 - Design Forms Using Data Dictionary and Online Designer', {
                 })
         })
 
-        // 7-36/37
-
         it('7-36/37: Should have descriptive text with file field element.', () => {
+
             cy.set_user_type('standard')
             cy.mysql_db('seeds/validations/7/validation-pre-7-36')
 
@@ -2075,12 +2070,19 @@ describe('7 - Design Forms Using Data Dictionary and Online Designer', {
                         .click()
                 })
 
-            cy.request_version({page: 'DataEntry/file_download.php', params: "pid=14&page=data_types&type=attachment&doc_id_hash=e064e127f4b2f725544ecae18413c06b5366decd&instance=1&id=3"}).as('file')
+            const source = './cypress/fixtures/7-34-image.jpg'
 
-            cy.get('@file').should((response) => {
-                expect(response.status).to.eq(200)
-                expect(response).to.have.property('headers').contains({"content-type": "image/jpeg; name=\"7-34-image.jpg\""})
+            // the filename that is stored within seed data
+            const target = '../www/edocs/20201124105500_pid14_5rtZFo.jpg'
+
+            cy.readFile(source, 'binary').then((file) => {
+                cy.writeFile(target, file, 'binary')
             })
+
+            cy.log('**confirm downloaded image**')
+
+            // the filename is changed on download by the server to original filename
+            validateImage('cypress/downloads/7-34-image.jpg')
 
             cy.get('button#submit-btn-saverecord:first')
                 .click()
@@ -2090,8 +2092,6 @@ describe('7 - Design Forms Using Data Dictionary and Online Designer', {
             cy.get('div.projhdr')
                 .should('contain.text', 'Record Home Page')
         })
-
-        // 7-38
 
         it('7-38: Should prevent section break from being created at the end of a form.', () => {
             cy.set_user_type('standard')
@@ -2319,30 +2319,216 @@ describe('7 - Design Forms Using Data Dictionary and Online Designer', {
                 .within( () => {
                     cy.get('td:nth-child(2)')
                         .should('contain.text', 'Data Dictionary Form')
-                    cy.get('td:nth-child(5)')
-                        .within( () => {
-                            cy.get('button.jqbuttonsm')
-                                .click()
-                        })
+                        .click()
                 })
 
-            cy.get('ul#formActionDropdown li.ui-menu-item a#ui-id-3')
-                .should('contain.text', 'Delete')
+            cy.get('table tr#dd_form-tr table#design-dd_form:first a:last')
+                .should('contain.html', 'cross.png')
                 .click()
 
             cy.get('div.ui-dialog')
                 .within( () => {
                     cy.get('div.ui-dialog-titlebar')
-                        .should('contain.text', 'Delete the selected form?')
+                        .should('contain.text', 'DELETE FIELD?')
                     cy.get('button.ui-button')
-                        .contains('Yes, delete it')
+                        .contains('Delete')
                         .click()
                 })
 
-            cy.get('table#table-forms_surveys tbody tr td:nth-child(2)')
-                .should('not.contain.text', 'Data Dictionary Form')
+            cy.wait(500)
+
+            cy.get('span.designVarName')
+                .should('not.contain.text', 'dd_form')
         })
 
-        
+        it('7-44: Should move a field between data instruments', () => {
+            cy.set_user_type('standard')
+            cy.mysql_db('seeds/validations/7/validation-pre-7-44')
+
+            cy.visit_version({page: "Design/online_designer.php", params: "pid=14"})
+            cy.get('div#sub-nav li.active')
+                .should('contain.text', 'Online Designer')
+
+            cy.get('table#table-forms_surveys tbody tr')
+                .within(() => {
+                    cy.get('td a')
+                        .contains('Data Dictionary Form')
+                        .click()
+                })
+            cy.get('span#form_menu_description_label')
+                .should('contain.text', 'Data Dictionary Form')
+
+            cy.get('span.od-field-icons a:nth-child(4)')
+                .should('contain.html', 'file_move.png')
+                .click()
+
+            cy.get('div.ui-dialog')
+                .within( () => {
+                    cy.get('div.ui-dialog-titlebar')
+                        .should('contain.text', 'Move field to another location')
+
+                    cy.get('select#move_after_field')
+                        .select('identifier')
+                        .should('have.value', 'identifier')
+
+
+                    cy.get('button.ui-button')
+                        .contains('Move field')
+                        .click()
+                })
+            cy.wait(500)
+            cy.get('div.ui-dialog')
+                .within( () => {
+                    cy.get('div.ui-dialog-titlebar')
+                        .should('contain.text', 'Successfully moved')
+                    cy.get('button.ui-button:nth-child(1)')
+                        .contains( 'Close')
+                        .click()
+                })
+            cy.get('td.frmedit')
+                .should('not.contain.html', 'a href')
+        })
+
+        it('7-45: Should change upload field to text box edit field.', () => {
+            cy.set_user_type('standard')
+            cy.mysql_db('seeds/validations/7/validation-pre-7-45')
+
+            cy.visit_version({page: "Design/online_designer.php", params: "pid=14"})
+            cy.get('div#sub-nav li.active')
+                .should('contain.text', 'Online Designer')
+
+            cy.get('table#table-forms_surveys tbody tr')
+                .within(() => {
+                    cy.get('td a')
+                        .contains('Data Types')
+                        .click()
+                })
+            cy.get('span#form_menu_description_label')
+                .should('contain.text', 'Data Types')
+
+            cy.get('#dd_test-tr')
+                .within(() => {
+                    cy.get('span.od-field-icons a:nth-child(1)')
+                        .should('contain.html', 'pencil.png')
+                        .click()
+                })
+
+
+            cy.get('div.ui-dialog')
+                .within(() => {
+                    cy.get('div.ui-dialog-titlebar')
+                        .should('contain.text', 'Edit Field')
+
+                    cy.get('select#field_type')
+                        .select('Text Box (Short Text, Number, Date/Time, ...)')
+                        .should('have.value', 'text')
+
+                    cy.get('textarea#field_label')
+                        .clear()
+                        .type('Edit Field')
+                        .should('have.value', 'Edit Field')
+
+                    cy.get('input#field_name')
+                        .clear()
+                        .type('edit_field')
+                        .should('have.value', 'edit_field')
+
+                    cy.get('button')
+                        .contains('Save')
+                        .click()
+                })
+            cy.wait(500)
+
+            cy.get('tr#edit_field-tr span.designVarName')
+                .should('contain.text', 'edit_field')
+
+            cy.get('tr#edit_field-tr label#label-edit_field')
+                .should('contain.text', 'Edit Field')
+        })
+
+        it('7-46: Should allow copy identifier field but cancel.', () => {
+            cy.set_user_type('standard')
+            cy.mysql_db('seeds/validations/7/validation-pre-7-46')
+
+            cy.visit_version({page: "Design/online_designer.php", params: "pid=14"})
+            cy.get('div#sub-nav li.active')
+                .should('contain.text', 'Online Designer')
+
+            cy.get('table#table-forms_surveys tbody tr')
+                .within(() => {
+                    cy.get('td a')
+                        .contains('Data Types')
+                        .click()
+                })
+            cy.get('span#form_menu_description_label')
+                .should('contain.text', 'Data Types')
+
+            cy.get('#identifier-tr')
+                .within(() => {
+                    cy.get('span.od-field-icons a:nth-child(3)')
+                        .should('contain.html', 'page_copy.png')
+                        .click()
+                })
+
+            cy.get('div.ui-dialog')
+                .within(() => {
+                    cy.get('div.ui-dialog-titlebar')
+                        .should('contain.text', 'COPY FIELD?')
+
+                    cy.get('button')
+                        .contains('Cancel')
+                        .click()
+                })
+
+            cy.wait(500)
+
+            cy.get('tr#identifier-tr')
+                .within(() => {
+                    cy.get('span.designVarName')
+                        .should('contain.text', 'identifier')
+                })
+            cy.get('tr#identifier_2-tr')
+                .should('not.exist')
+        })
+
+        it('7-47: Should allow copy of identifier field with auto-generated unique name.', () => {
+            cy.set_user_type('standard')
+            cy.mysql_db('seeds/validations/7/validation-pre-7-47')
+
+            cy.visit_version({page: "Design/online_designer.php", params: "pid=14"})
+            cy.get('div#sub-nav li.active')
+                .should('contain.text', 'Online Designer')
+
+            cy.get('table#table-forms_surveys tbody tr')
+                .within(() => {
+                    cy.get('td a')
+                        .contains('Data Types')
+                        .click()
+                })
+            cy.get('span#form_menu_description_label')
+                .should('contain.text', 'Data Types')
+
+            cy.get('#identifier-tr')
+                .within(() => {
+                    cy.get('span.od-field-icons a:nth-child(3)')
+                        .should('contain.html', 'page_copy.png')
+                        .click()
+                })
+
+            cy.get('div.ui-dialog')
+                .within(() => {
+                    cy.get('div.ui-dialog-titlebar')
+                        .should('contain.text', 'COPY FIELD?')
+
+                    cy.get('button')
+                        .contains('Copy field')
+                        .click()
+                })
+
+            cy.wait(500)
+
+            cy.get('tr#identifier_2-tr')
+                .should('exist')
+        })
     })
 })

@@ -4,9 +4,7 @@ describe('6 - Project User Rights and Security', {
     }
 }, () => {
 
-    // 6-1
-
-    it('Should display elements of a project to a user.', () => {
+    it('6-1: Should display elements of a project to a user.', () => {
         cy.mysql_db('seeds/validations/6/validation-pre-6-1')
         cy.set_user_type('standard')
 
@@ -63,9 +61,7 @@ describe('6 - Project User Rights and Security', {
         })
     })
 
-    // 6-2a
-
-    it('Should allow admin to set a user rights expiration date on a project.', () => {
+    it('6-2a: Should allow admin to set a user rights expiration date on a project.', () => {
         cy.mysql_db('seeds/validations/6/validation-pre-6-2a')
         cy.set_user_type('admin')
 
@@ -107,9 +103,9 @@ describe('6 - Project User Rights and Security', {
         })
     })
 
-    // 6-2b (6-2 should really be split into 2 tests)
+    // ToDo: 6-2b (6-2 should really be split into 2 tests)
 
-    it('Should prevent user access to users without project rights.', () => {
+    it('6-2b: Should prevent user access to users without project rights.', () => {
         cy.mysql_db('seeds/validations/6/validation-pre-6-2b')
         cy.set_user_type('standard')
 
@@ -128,9 +124,7 @@ describe('6 - Project User Rights and Security', {
 
     })
 
-    // 6-3
-
-    it('Should allow admin to restore user rights on a project.', () => {
+    it('6-3: Should allow admin to restore user rights on a project.', () => {
         cy.mysql_db('seeds/validations/6/validation-pre-6-3')
         cy.set_user_type('admin')
 
@@ -235,9 +229,7 @@ describe('6 - Project User Rights and Security', {
         })
     })
 
-    // 6-4
-
-    it('Should allow admin to restore user rights management on a project.', () => {
+    it('6-4: Should allow admin to restore user rights management on a project.', () => {
         cy.mysql_db('seeds/validations/6/validation-pre-6-4')
         cy.set_user_type('admin')
 
@@ -302,9 +294,7 @@ describe('6 - Project User Rights and Security', {
 
     })
 
-    // 6-5
-
-    it('Should verify the user has access to Design and Applications of a project.', () => {
+    it('6-5: Should verify the user has access to Design and Applications of a project.', () => {
         cy.mysql_db('seeds/validations/6/validation-pre-6-5')
         cy.set_user_type('standard')
 
@@ -337,9 +327,7 @@ describe('6 - Project User Rights and Security', {
         })
     })
 
-    // 6-6
-
-    it('Should verify privileged user can add data access rights to a user.', () => {
+    it('6-6: Should verify privileged user can add data access rights to a user.', () => {
         cy.mysql_db('seeds/validations/6/validation-pre-6-6')
         cy.set_user_type('standard')
 
@@ -418,9 +406,7 @@ describe('6 - Project User Rights and Security', {
         })
     })
 
-    // 6-7
-
-    it('Should verify privileged user can be assigned Data exports, de-identified privileges.', () => {
+    it.only('6-7: Should verify privileged user can be assigned Data exports, de-identified privileges.', () => {
         cy.mysql_db('seeds/validations/6/validation-pre-6-7')
         cy.set_user_type('standard')
 
@@ -502,9 +488,7 @@ describe('6 - Project User Rights and Security', {
         })
     })
 
-    // 6-8/9
-
-    it('Should allow a privileged user add survey distribution tools access.', () => {
+    it.only('6-8/9: Should allow a privileged user add survey distribution tools access.', () => {
         cy.mysql_db('seeds/validations/6/validation-pre-6-8')
         cy.set_user_type('standard')
 
@@ -594,9 +578,7 @@ describe('6 - Project User Rights and Security', {
         })
     })
 
-    // 6-10
-
-    it('Should allow a privileged user add Data Import Tool access.', () => {
+    it.only('6-10: Should allow a privileged user add Data Import Tool access.', () => {
         cy.mysql_db('seeds/validations/6/validation-pre-6-10')
         cy.set_user_type('standard')
 
@@ -676,10 +658,7 @@ describe('6 - Project User Rights and Security', {
         })
     })
 
-
-    // 6-11
-
-    it('Should allow a privileged user add Data Comparison Tool access.', () => {
+    it('6-11: Should allow a privileged user add Data Comparison Tool access.', () => {
         cy.mysql_db('seeds/validations/6/validation-pre-6-11')
         cy.set_user_type('standard')
 
@@ -759,9 +738,7 @@ describe('6 - Project User Rights and Security', {
         })
     })
 
-    // 6-12
-
-    it('Should allow a privileged user remove data export, stat import, and comparison tool access and add' +
+    it('6-12: Should allow a privileged user remove data export, stat import, and comparison tool access and add' +
         ' logging access.', () => {
         cy.mysql_db('seeds/validations/6/validation-pre-6-12')
         cy.set_user_type('standard')
@@ -877,9 +854,7 @@ describe('6 - Project User Rights and Security', {
         })
     })
 
-    // 6-13
-
-    it('Should allow a privileged user add the data quality access.', () => {
+    it('6-13: Should allow a privileged user add the data quality access.', () => {
         cy.mysql_db('seeds/validations/6/validation-pre-6-13')
         cy.set_user_type('standard')
 
@@ -959,9 +934,7 @@ describe('6 - Project User Rights and Security', {
         })
     })
 
-    // 6-14
-
-    it('Should allow a privileged user to add the data quality execute rules.', () => {
+    it('6-14: Should allow a privileged user to add the data quality execute rules.', () => {
         cy.mysql_db('seeds/validations/6/validation-pre-6-14')
         cy.set_user_type('standard')
 
@@ -1041,9 +1014,7 @@ describe('6 - Project User Rights and Security', {
         })
     })
 
-    // 6-15
-
-    it('Should allow a privileged user add rights to create records. ', () => {
+    it('6-15: Should allow a privileged user add rights to create records. ', () => {
         // TODO - I'm noting here that since the project is NOT in production at this point,
         // I had to move it to production so you can see the Add New Record button.
         cy.mysql_db('seeds/validations/6/validation-pre-6-15')
@@ -1130,9 +1101,7 @@ describe('6 - Project User Rights and Security', {
             })
     })
 
-    // 6-16
-
-    it('Should allow a privileged user remove rights to create records. ', () => {
+    it('6-16: Should allow a privileged user remove rights to create records. ', () => {
         // TODO - I'm noting here that since the project is NOT in production at this point,
         // I had to move it to production so you can see the Add New Record button.
         cy.mysql_db('seeds/validations/6/validation-pre-6-16')
@@ -1215,9 +1184,7 @@ describe('6 - Project User Rights and Security', {
         })
     })
 
-    // 6-17
-
-    it('Should allow a privileged user to add rename record access. ', () => {
+    it('6-17: Should allow a privileged user to add rename record access. ', () => {
         cy.mysql_db('seeds/validations/6/validation-pre-6-17')
         cy.set_user_type('standard')
 
@@ -1290,9 +1257,7 @@ describe('6 - Project User Rights and Security', {
         })
     })
 
-    // 6-18
-
-    it('Should allow a privileged user to add delete record access. ', () => {
+    it.only('6-18: Should allow a privileged user to add delete record access. ', () => {
         cy.mysql_db('seeds/validations/6/validation-pre-6-18')
         cy.set_user_type('standard')
 
@@ -1389,9 +1354,7 @@ describe('6 - Project User Rights and Security', {
         })
     })
 
-    // 6-19
-
-    it('Should allow a privileged user to add rename record access. ', () => {
+    it('6-19: Should allow a privileged user to add rename record access. ', () => {
         cy.mysql_db('seeds/validations/6/validation-pre-6-19')
         cy.set_user_type('standard')
 
@@ -1495,9 +1458,7 @@ describe('6 - Project User Rights and Security', {
         })
     })
 
-    // 6-20
-
-    it('Should allow a privileged user to add locking/unlocking records with e-sig authority record access. ', () => {
+    it('6-20: Should allow a privileged user to add locking/unlocking records with e-sig authority record access. ', () => {
         cy.mysql_db('seeds/validations/6/validation-pre-6-20')
         cy.set_user_type('standard')
 
@@ -1613,9 +1574,7 @@ describe('6 - Project User Rights and Security', {
         })
     })
 
-    // 6-21
-
-    it('Should allow a privileged user to change to locking/unlocking records access' +
+    it('6-21: Should allow a privileged user to change to locking/unlocking records access' +
         ' access. ', () => {
         cy.mysql_db('seeds/validations/6/validation-pre-6-21')
         cy.set_user_type('standard')
@@ -1712,9 +1671,7 @@ describe('6 - Project User Rights and Security', {
         })
     })
 
-    // 6-22
-
-    it('Should allow a privileged user to change to locking/unlocking records access' +
+    it('6-22: Should allow a privileged user to change to locking/unlocking records access' +
         ' access. ', () => {
         cy.mysql_db('seeds/validations/6/validation-pre-6-22')
         cy.set_user_type('standard')
@@ -1814,9 +1771,7 @@ describe('6 - Project User Rights and Security', {
         })
     })
 
-    // 6-23
-
-    it('Should allow a privileged user to limit user access to data entry.', () => {
+    it('6-23: Should allow a privileged user to limit user access to data entry.', () => {
         cy.mysql_db('seeds/validations/6/validation-pre-6-23')
         cy.set_user_type('standard')
 
@@ -1837,6 +1792,7 @@ describe('6 - Project User Rights and Security', {
             cy.get('div#subheaderDiv2')
                 .should('contain.text', 'SecondProject')
 
+            // todo: Validations ask to click "user privileges" but it is actually "user rights"
             cy.get('div.hang')
                 .contains('User Rights')
                 .click()
@@ -1845,8 +1801,7 @@ describe('6 - Project User Rights and Security', {
                 .within(() => {
                     cy.get('tr.erow')
                         .within(() => {
-                            cy.get('td')
-                                .next('td')
+                            cy.get('td:nth-child(2)')
                                 .within(() => {
                                     cy.get('a')
                                         .contains(username)
@@ -1903,16 +1858,12 @@ describe('6 - Project User Rights and Security', {
                 .should('contain.text', 'Record Home Page')
 
             cy.get('table#event_grid_table')
-                .within( () => {
-                    cy.get('a')
-                        .should('not.contain.html', 'images/circle_green.png')
-                })
+                .should('not.contain.text', 'My First Instrument')
+                .should('not.contain.text', 'My First Instrument 2')
         })
     })
 
-    // 6-24
-
-    it('Should allow a privileged user to set read only access in data rights.', () => {
+    it('6-24: Should allow a privileged user to set read only access in data rights.', () => {
         cy.mysql_db('seeds/validations/6/validation-pre-6-24')
         cy.set_user_type('standard')
 
@@ -2018,11 +1969,10 @@ describe('6 - Project User Rights and Security', {
         })
     })
 
-    // 6-25
-    // TODO: Note, the v9 validation script is in error here. It states the survey response should be "read
-    // only" when it actually SHOULD BE editable
+    // TODO: 6-25: Note, the v9 validation script is in error here. It states the survey response should be "read only"
+    //  when it actually SHOULD BE editable
 
-    it('Should allow a privileged user to set view/edit privs in data rights.', () => {
+    it('6-25: Should allow a privileged user to set view/edit privs in data rights.', () => {
         cy.mysql_db('seeds/validations/6/validation-pre-6-25')
         cy.set_user_type('standard')
 
@@ -2127,9 +2077,7 @@ describe('6 - Project User Rights and Security', {
         })
     })
 
-    // 6-26
-
-    it('Should allow a privileged user to set edit privileges on survey responses.', () => {
+    it('6-26: Should allow a privileged user to set edit privileges on survey responses.', () => {
         cy.mysql_db('seeds/validations/6/validation-pre-6-26')
         cy.set_user_type('standard')
 
@@ -2235,9 +2183,7 @@ describe('6 - Project User Rights and Security', {
         })
     })
 
-    // 6-27
-
-    it('Should allow a privileged user to create a data entry role.', () => {
+    it('6-27: Should allow a privileged user to create a data entry role.', () => {
         cy.mysql_db('seeds/validations/6/validation-pre-6-27')
         cy.set_user_type('standard')
 
@@ -2287,9 +2233,7 @@ describe('6 - Project User Rights and Security', {
         })
     })
 
-    // 6-28
-
-    it('Should allow a privileged user to copy a role.', () => {
+    it('6-28: Should allow a privileged user to copy a role.', () => {
         cy.mysql_db('seeds/validations/6/validation-pre-6-28')
         cy.set_user_type('standard')
         cy.visit_version({page: ""}).then(() => {
@@ -2378,9 +2322,7 @@ describe('6 - Project User Rights and Security', {
         })
     })
 
-    // 6-29
-
-    it('Should allow a privileged user to delete a role but cancel.', () => {
+    it('6-29: Should allow a privileged user to delete a role but cancel.', () => {
         cy.mysql_db('seeds/validations/6/validation-pre-6-29')
         cy.set_user_type('standard')
         cy.visit_version({page: ""}).then(() => {
@@ -2462,9 +2404,7 @@ describe('6 - Project User Rights and Security', {
         })
     })
 
-    // 6-30
-
-    it('Should allow a privileged user to delete a role.', () => {
+    it('6-30: Should allow a privileged user to delete a role.', () => {
         cy.mysql_db('seeds/validations/6/validation-pre-6-30')
         cy.set_user_type('standard')
         cy.visit_version({page: ""}).then(() => {
@@ -2539,9 +2479,7 @@ describe('6 - Project User Rights and Security', {
         })
     })
 
-    // 6-31
-
-    it('Should deny a user from assigning a role to the themselves for which they do not already have.', () => {
+    it('6-31: Should deny a user from assigning a role to the themselves for which they do not already have.', () => {
         cy.mysql_db('seeds/validations/6/validation-pre-6-31')
         cy.set_user_type('standard')
 
@@ -2609,9 +2547,7 @@ describe('6 - Project User Rights and Security', {
         })
     })
 
-    // 6-32
-
-    it('Should allow admin to add a role to a user.', () => {
+    it('6-32: Should allow admin to add a role to a user.', () => {
         cy.mysql_db('seeds/validations/6/validation-pre-6-32')
         cy.set_user_type('admin')
 
@@ -2687,9 +2623,7 @@ describe('6 - Project User Rights and Security', {
         })
     })
 
-    // 6-33
-
-    it('Should allow admin to remove a role from a user.', () => {
+    it('6-33: Should allow admin to remove a role from a user.', () => {
         cy.mysql_db('seeds/validations/6/validation-pre-6-33')
         cy.set_user_type('admin')
 

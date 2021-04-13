@@ -6,7 +6,7 @@ describe('Hook Example', () => {
 	    cy.mysql_db('/hooks/example')
 	})
 
-    it('Your hook spec here', () => {
+    it.skip('Your hook spec here', () => {
 
     })
 

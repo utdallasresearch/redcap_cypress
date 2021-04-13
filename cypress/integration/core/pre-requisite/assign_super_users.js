@@ -6,11 +6,11 @@ describe('Assign Super Users / Account Managers', () => {
 
 	describe('Control Center', () => {
 
-	    it('Should have the ability to view all current administrators and account managers', () => {
+	    it.skip('Should have the ability to view all current administrators and account managers', () => {
             
 	    })
 
-	    it('Should have the ability to grant and revoke administrators and account manager access to the system for individual users', () => {
+	    it.skip('Should have the ability to grant and revoke administrators and account manager access to the system for individual users', () => {
 	            
 	    })
 

@@ -9,7 +9,7 @@ describe('Data Access Groups (DAGs)', () => {
 		
 		before(() => {
 			cy.set_user_type('admin')
-			cy.visit_version({page: 'DataAccessGroups/index.php', params: 'pid=1'})
+			cy.visit_version({page: 'index.php', params: 'route=DataAccessGroupsController:index&pid=1'})
 		})
 
 		it('Should have the ability to create Data Access Groups', () => {
@@ -31,7 +31,7 @@ describe('Data Access Groups (DAGs)', () => {
 	    })
 
 	    it('Should have the ability to provide a unique Data Access Group name in the data export CSV or label', () => {
-			cy.visit_version({page: 'DataAccessGroups/index.php', params: 'pid=13'})
+			cy.visit_version({page: 'index.php', params: 'route=DataAccessGroupsController:index&pid=13'})
 			cy.get('input#new_group').type('t1')
 			cy.get('button#new_group_button').click()
 			// cy.get('input#new_group').type('Gr2')
@@ -50,36 +50,52 @@ describe('Data Access Groups (DAGs)', () => {
 				cy.add_users_to_data_access_groups(['Group 1', 'Group 2'], ['test_user', 'test_user2'], '13')
 			})
 
-		    it('Should have the ability to restrict a user to the data they entered', () => {
-				
+		    it.skip('Should have the ability to restrict a user to the data they entered', () => {
+
 		    })
 
 		    it('Should have the ability to restrict a user to the data of the same Data Access Group', () => {
-				cy.set_user_type('standard')  
-				cy.visit_version({page: 'index.php', params: 'pid=13'})
-				cy.get('a').contains("Add / Edit Records").click()
-				
-				cy.get('button').contains('Add new record').click().then(() => {
+				cy.set_user_type('standard')
+				cy.visit_version({page: 'index.php', params: 'route=DataAccessGroupsController:index&pid=13'})
 
-					cy.get('button#submit-btn-saverecord').first().click()
+				cy.get('a').contains("Add / Edit Records")
+					.click()
+				
+				cy.get('button').contains('Add new record')
+					.click()
+					.then(() => {
+
+					cy.get('button#submit-btn-saverecord')
+						.first()
+						.click()
 
 					cy.set_user_type('standard2')
 					cy.visit_version({page: 'index.php', params: 'pid=13'})
-					cy.get('a').contains("Add / Edit Records").click()
-					cy.get('button').contains('Add new record').click()
-					cy.get('button#submit-btn-saverecord').click()
-					cy.get('a').contains('Record Status Dashboard').click()
-					cy.get('table#record_status_table').should(($table) => {
+
+					cy.get('a').contains("Add / Edit Records")
+						.click()
+					cy.get('button').contains('Add new record')
+						.click()
+					cy.get('button#submit-btn-saverecord')
+						.click()
+					cy.get('a').contains('Record Status Dashboard')
+						.click()
+
+					cy.get('table#record_status_table')
+						.should(($table) => {
 						expect($table).not.to.contain('3-1')
 						expect($table).to.contain('4-1')
 					})
-					cy.set_user_type('standard') 
+
+					cy.set_user_type('standard')
 					cy.visit_version({page: 'index.php', params: 'pid=13'})
+
 					cy.get('a').contains('Record Status Dashboard').click()
 					cy.get('table#record_status_table').should(($table) => {
 						expect($table).not.to.contain('4-1')
 						expect($table).to.contain('3-1')
 					})
+
 					cy.set_user_type('admin')
 					cy.visit_version({page: 'index.php', params: 'pid=13'})
 					cy.get('a').contains('Record Status Dashboard').click()

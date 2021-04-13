@@ -13,7 +13,7 @@ describe('Branching Logic', () => {
                 })
             
                 cy.visit_version({page: 'ProjectSetup/other_functionality.php', params: "pid=5"})
-                cy.get('button').contains('development status').click()
+                cy.get('button').contains('Move back to Development status').click()
 
                 cy.get('body', { timeout: 10000 }).should(($body) => {
                     expect($body).to.contain('The project is now back in development status.')
@@ -29,8 +29,28 @@ describe('Branching Logic', () => {
                     }).then(() => {
                         cy.visit_version({page: 'Design/online_designer.php', params: 'pid=5&page=demographics'})
                         cy.find_online_designer_field("Last Name").parent().parentsUntil('tr').find('img[title="Branching Logic"]').click()
-                        cy.get('textarea#advBranchingBox').type('[first_name]!=""')
-                        cy.get('button').contains('Save').click()
+                        cy.get('textarea#advBranchingBox').click()
+
+                        cy.wait(100)
+
+                        cy.get('div.ui-dialog')
+                            .within( () => {
+                                cy.get('div.ui-dialog-titlebar')
+                                    .should('contain.text', 'Logic Editor')
+
+                                cy.get('textarea.ace_text-input')
+                                    .clear()
+                                    .type('[first_name]!=""')
+
+                                cy.get('button')
+                                    .contains('Update & Close Editor')
+                                    .click()
+                            })
+                        cy.get('div.ui-dialog')
+                            .within(() => {
+                                cy.get('button').contains('Save').click()
+                            })
+
                     })
                 })
             })    

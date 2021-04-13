@@ -7,7 +7,7 @@ describe('Project Example', () => {
 	
 	})
 
-    it('Your project spec here', () => {
+    it.skip('Your project spec here', () => {
 
     })
 

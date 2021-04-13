@@ -23,3 +23,4 @@ cypress.env.json
 /mysql
 
 mysql-cli.zip
+cypress/downloads

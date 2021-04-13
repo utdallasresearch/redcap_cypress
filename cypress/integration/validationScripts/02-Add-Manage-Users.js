@@ -229,7 +229,6 @@ describe('2 - Add/Manage Users', {
 
         it('Should have the ability to suspend a user.', () => {
             let username = 'test_user'
-            let password = 'Testing123'
             let firstname = 'Test'
             let lastname = 'User'
 
@@ -279,14 +278,19 @@ describe('2 - Add/Manage Users', {
                         })
 
                     // confirm user is suspended
-                    cy.get('#nav-tab-logout').click()
-                    cy.get('input#username').type(username)
-                    cy.get('input#password').type(password)
-                    cy.get('button#login_btn').click()
+                    // cy.logout()
+                    // cy.clearCookies()
+
+                })
+        })
+
+        it('Should not allow suspended users to login', () => {
+            cy.set_user_type('standard')
+            cy.mysql_db('seeds/validations/2/validation-pre-2-1')
+
+            cy.visit_version({page: "index.php"}).then(() => {
                     cy.get('body')
                         .should('contain.text', 'The following REDCap user account has been suspended')
-                    cy.get('button')
-                        .click()
                 })
         })
 

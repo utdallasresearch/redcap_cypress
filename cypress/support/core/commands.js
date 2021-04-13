@@ -218,39 +218,37 @@ Cypress.Commands.add('add_users_to_project', (usernames = [], project_id) => {
 })
 
 Cypress.Commands.add('add_users_to_data_access_groups', (groups = [], usernames = [], project_id) => {
-      cy.visit_version({page: 'DataAccessGroups/index.php', params: 'pid=' + project_id})
-      cy.server()
+    cy.visit_version({page: 'index.php', params: 'route=DataAccessGroupsController:index&pid=' + project_id})
+        .then( () => {
+            for (let i = 0; i < groups.length; i++) {
+                let cur_group = groups[i]
+                let cur_user = usernames[i]
 
-      //Add each access for ecah user group specified      
-      for (var i = 0; i < groups.length; i++) {
+                cy.get('input#new_group')
+                    .clear()
+                    .type(cur_group)
+                cy.get('button#new_group_button')
+                    .click()
+                cy.get('table#table-dags_table')
+                    .should('contain.text', cur_group)
 
-        let cur_group = groups[i]
-        let cur_user = usernames[i]
+                cy.get('select#group_users')
+                    .select(cur_user)
+                    .then( () => {
+                        cy.get('select#groups')
+                            .select(cur_group)
+                            .then( () => {
+                              cy.get('button#user_group_button')
+                                  .click()
+                            })
+                      cy.get('.dagMsg')
+                          .should('exist')
+                          .and('contain.text', 'User "' + cur_user + '" has been assigned to Data Access Group "' + cur_group + '"!')
 
-        cy.get('input#new_group').type(cur_group)
-        cy.get('button#new_group_button').click()
-        cy.get('table#table-dags_table').should(($table) => {
-          expect($table).to.contain(cur_group)
+
+                    })
+            }
         })
-
-        cy.route({method: 'GET', 
-                  url: '**/DataAccessGroups/data_access_groups_ajax.php?pid=' + project_id + '&action=select_group&user=' + cur_user}).as('user_ajax')
-      
-        cy.get('select#group_users').select(cur_user)
-
-        //Wait for the query to finish first before we proceed
-        cy.wait('@user_ajax')
-
-        cy.route({method: 'GET', 
-          url: '**/DataAccessGroups/data_access_groups_ajax.php?pid=' + project_id + '&action=add_user&user=' + cur_user + '&group_id=*'}).as('group_ajax')
-
-
-        cy.get('select#groups').select(cur_group)
-        cy.get('button#user_group_button').click()
-
-        //Wait for the query to finish first before we proceed
-        cy.wait('@group_ajax')
-      }
 })
 
 
