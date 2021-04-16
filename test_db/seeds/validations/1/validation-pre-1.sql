@@ -474,7 +474,7 @@ VALUES
 	('record_locking_pdf_vault_filesystem_private_key_path',''),
 	('record_locking_pdf_vault_filesystem_type',''),
 	('record_locking_pdf_vault_filesystem_username',''),
-	('redcap_base_url','http://localhost/'),
+	('redcap_base_url','http://localhost:8080/'),
 	('redcap_base_url_display_error_on_mismatch','1'),
 	('redcap_last_install_date','2020-09-24'),
 	('redcap_survey_base_url',''),
