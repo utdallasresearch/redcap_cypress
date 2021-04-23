@@ -26,7 +26,7 @@ describe('7 - Design Forms Using Data Dictionary and Online Designer', {
 
             let username = 'test_user'
 
-            cy.visit_version({page: ""}).then(() => {
+            cy.visit_base({url: "/"}).then(() => {
 
                 cy.get('a.nav-link')
                     .contains('My Projects')
@@ -70,7 +70,7 @@ describe('7 - Design Forms Using Data Dictionary and Online Designer', {
             cy.set_user_type('standard')
             cy.mysql_db('seeds/validations/7/validation-pre-7-2')
 
-            cy.visit_version({page: ""}).then(() => {
+            cy.visit_base({url: "/"}).then(() => {
 
                 cy.get('a.nav-link')
                     .contains('My Projects')
@@ -117,7 +117,7 @@ describe('7 - Design Forms Using Data Dictionary and Online Designer', {
 
             // let username = 'test_user'
 
-            cy.visit_version({page: ""}).then(() => {
+            cy.visit_base({url: "/"}).then(() => {
 
                 cy.get('a.nav-link')
                     .contains('My Projects')
@@ -164,7 +164,7 @@ describe('7 - Design Forms Using Data Dictionary and Online Designer', {
             cy.set_user_type('standard')
             cy.mysql_db('seeds/validations/7/validation-pre-7-4')
 
-            cy.visit_version({page: ""})
+            cy.visit_base({url: "/"})
                 .then( () => {
 
                     cy.get('a.nav-link')
@@ -209,7 +209,7 @@ describe('7 - Design Forms Using Data Dictionary and Online Designer', {
             cy.set_user_type('standard')
             cy.mysql_db('seeds/validations/7/validation-pre-7-5')
 
-            cy.visit_version({page: ""})
+            cy.visit_base({url: "/"})
                 .then( () => {
 
                     cy.get('a.nav-link')
@@ -255,7 +255,7 @@ describe('7 - Design Forms Using Data Dictionary and Online Designer', {
             cy.mysql_db('seeds/validations/7/validation-pre-7-6')
 
             let dataDictionary = '7-6-data_dictionary.csv'
-            cy.visit_version({page: ""})
+            cy.visit_base({url: "/"})
                  .then( () => {
                     cy.get('a.nav-link')
                         .contains('My Projects')
@@ -328,7 +328,7 @@ describe('7 - Design Forms Using Data Dictionary and Online Designer', {
 
             let dataDictionary = '7-7-duplicate_data_dictionary.csv'
 
-            cy.visit_version({page: ""}).then( () => {
+            cy.visit_base({url: "/"}).then( () => {
 
                 cy.get('a.nav-link')
                     .contains('My Projects')
@@ -388,7 +388,7 @@ describe('7 - Design Forms Using Data Dictionary and Online Designer', {
 
             let dataDictionary = '7-9-corrected_data_dictionary.csv'
 
-            cy.visit_version({page: ""}).then(() => {
+            cy.visit_base({url: "/"}).then(() => {
 
                 cy.get('a.nav-link')
                     .contains('My Projects')
@@ -453,7 +453,7 @@ describe('7 - Design Forms Using Data Dictionary and Online Designer', {
             cy.set_user_type('standard')
             cy.mysql_db('seeds/validations/7/validation-pre-7-11')
 
-            cy.visit_version({page: ""}).then(() => {
+            cy.visit_base({url: "/"}).then(() => {
 
                 cy.get('a.nav-link')
                     .contains('My Projects')
@@ -537,7 +537,7 @@ describe('7 - Design Forms Using Data Dictionary and Online Designer', {
             cy.set_user_type('standard')
             cy.mysql_db('seeds/validations/7/validation-pre-7-12')
 
-            cy.visit_version({page: ""}).then(() => {
+            cy.visit_base({url: "/"}).then(() => {
 
                 cy.get('a.nav-link')
                     .contains('My Projects')
@@ -627,7 +627,7 @@ describe('7 - Design Forms Using Data Dictionary and Online Designer', {
             cy.set_user_type('standard')
             cy.mysql_db('seeds/validations/7/validation-pre-7-13')
 
-            cy.visit_version({page: ""}).then(() => {
+            cy.visit_base({url: "/"}).then(() => {
 
                 cy.get('a.nav-link')
                     .contains('My Projects')
@@ -702,7 +702,7 @@ describe('7 - Design Forms Using Data Dictionary and Online Designer', {
             cy.set_user_type('standard')
             cy.mysql_db('seeds/validations/7/validation-pre-7-14')
 
-            cy.visit_version({page: ""}).then(() => {
+            cy.visit_base({url: "/"}).then(() => {
 
                 cy.get('a.nav-link')
                     .contains('My Projects')
@@ -787,7 +787,7 @@ describe('7 - Design Forms Using Data Dictionary and Online Designer', {
             cy.set_user_type('standard')
             cy.mysql_db('seeds/validations/7/validation-pre-7-15')
 
-            cy.visit_version({page: ""}).then(() => {
+            cy.visit_base({url: "/"}).then(() => {
 
                 cy.get('a.nav-link')
                     .contains('My Projects')
@@ -866,7 +866,7 @@ describe('7 - Design Forms Using Data Dictionary and Online Designer', {
             cy.set_user_type('standard')
             cy.mysql_db('seeds/validations/7/validation-pre-7-16')
 
-            cy.visit_version({page: ""}).then(() => {
+            cy.visit_base({url: "/"}).then(() => {
 
                 cy.get('a.nav-link')
                     .contains('My Projects')

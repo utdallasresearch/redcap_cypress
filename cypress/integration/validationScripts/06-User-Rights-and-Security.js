@@ -8,7 +8,7 @@ describe('6 - Project User Rights and Security', {
         cy.mysql_db('seeds/validations/6/validation-pre-6-1')
         cy.set_user_type('standard')
 
-        cy.visit_version({page: ""}).then(() => {
+        cy.visit_base({url: "/"}).then(() => {
 
             cy.get('a.nav-link')
                 .contains('My Projects')
@@ -61,6 +61,8 @@ describe('6 - Project User Rights and Security', {
         })
     })
 
+    // ToDo: 6-2 should really be split into 2 tests. I have done so.
+
     it('6-2a: Should allow admin to set a user rights expiration date on a project.', () => {
         cy.mysql_db('seeds/validations/6/validation-pre-6-2a')
         cy.set_user_type('admin')
@@ -68,48 +70,37 @@ describe('6 - Project User Rights and Security', {
         let y = new Date(new Date().setDate(new Date().getDate()-1));
         let expired_date = y.getMonth() + '-' + y.getDate() + '-' + y.getFullYear()
 
-        cy.visit_version({page: "ControlCenter/view_projects.php", params: "view_all=1"}).then(() => {
-            cy.get('a.aGrid')
-                .contains('SecondProject')
-                .click()
+        cy.visit_version({page: "ControlCenter/view_projects.php", params: "view_all=1"})
+            .then(() => {
+                cy.get('a.aGrid')
+                    .contains('SecondProject')
+                    .click()
 
-            cy.get('div.hang')
-                .contains('User Rights')
-                .click()
-            cy.get('div#center')
-                .should('contain.text', 'This page may be used for granting users access to this project')
+                cy.get('div.hang')
+                    .contains('User Rights')
+                    .click()
 
-            cy.get('table#table-user_rights_roles_table')
-                .within( () => {
-                    cy.get('tr.erow')
-                        .within( () => {
-                            cy.get('td:nth-child(3)')
-                                .within( () => {
-                                    cy.get('a')
-                                        .contains('never')
-                                        .click()
-                                })
-                        })
-                })
+                cy.get('div#center')
+                    .should('contain.text', 'This page may be used for granting users access to this project')
 
-            cy.get('div#userClickExpiration')
-                .within( () => {
-                    cy.get('input#tooltipExpiration')
-                        .type(expired_date)
-                    cy.get('button#tooltipExpirationBtn')
-                        .should('contain.text', 'Save')
-                        .click({force:true})
-                })
-        })
+                cy.get('table#table-user_rights_roles_table tr.erow td:nth-child(3) a')
+                    .contains('never')
+                    .click()
+
+                cy.get('div#userClickExpiration input#tooltipExpiration')
+                    .clear()
+                    .type(expired_date)
+                cy.get('button#tooltipExpirationBtn')
+                    .should('contain.text', 'Save')
+                    .click({force:true})
+            })
     })
-
-    // ToDo: 6-2b (6-2 should really be split into 2 tests)
 
     it('6-2b: Should prevent user access to users without project rights.', () => {
         cy.mysql_db('seeds/validations/6/validation-pre-6-2b')
         cy.set_user_type('standard')
 
-        cy.visit_version({page: ""}).then(() => {
+        cy.visit_base({url: "/"}).then(() => {
             cy.get('a.nav-link')
                 .contains('My Projects')
                 .click()
@@ -132,101 +123,78 @@ describe('6 - Project User Rights and Security', {
         let expired_date = y.getMonth() + '-' + y.getDate() + '-' + y.getFullYear()
         let username = 'test_user'
 
-        cy.visit_version({page: "ControlCenter/view_projects.php", params: "view_all=1"}).then(() => {
-            cy.get('a.aGrid')
-                .contains('SecondProject')
-                .click()
+        cy.visit_version({page: "ControlCenter/view_projects.php", params: "view_all=1"})
 
-            cy.get('div.hang')
-                .contains('User Rights')
-                .click()
-            cy.get('div#center')
-                .should('contain.text', 'This page may be used for granting users access to this project')
+                cy.get('a.aGrid')
+                    .contains('SecondProject')
+                    .click()
 
-            cy.get('table#table-user_rights_roles_table')
-                .within( () => {
-                    cy.get('tr.erow')
-                        .within( () => {
-                            cy.get('td:nth-child(3)')
-                                .within( () => {
-                                    cy.get('a')
-                                        .should('not.contain.text', 'never')
-                                        //.contains(expired_date)
-                                        .click()
-                                })
-                        })
-                })
+                cy.get('div.hang')
+                    .contains('User Rights')
+                    .click()
 
-            cy.get('div#userClickExpiration')
-                .within( () => {
-                    cy.get('input#tooltipExpiration')
-                        .clear()
-                    cy.get('button#tooltipExpirationBtn')
-                        .should('contain.text', 'Save')
-                        .click({force:true})
-                })
-            cy.wait(500)
-            cy.get('table#table-user_rights_roles_table')
-                .within( () => {
-                    cy.get('tr.erow')
-                        .within( () => {
-                            cy.get('td')
-                                .next('td')
-                                .within( () => {
-                                    cy.get('a')
-                                        .contains(username)
-                                        .click()
-                                })
-                        })
-                })
+                cy.get('div#center')
+                    .should('contain.text', 'This page may be used for granting users access to this project')
 
-            cy.get('div#userClickTooltip')
-                .within( () => {
-                    cy.get('button.jqbuttonmed')
-                        .contains('Edit user privileges')
-                        .click()
-                })
+                cy.get('#table-user_rights_roles_table tbody tr.erow td:nth-child(3) div.fc div.wrap' +
+                    ' div.expireLinkDiv a.userRightsExpired')
+                    .should('not.contain.text', 'never')
+                    // ToDo: Since a th is not an "actionable" element, we must pass a force & double click to force
+                    //  Cypress to click the element. This is bad design choice by REDCap.
+                    .click({force: true})
+                    .click()
 
-            cy.get('div.ui-dialog')
-                .within( () => {
-                    cy.get('div.ui-dialog-titlebar')
-                        .should('contain.text', 'Editing existing user')
-                    cy.get('input[name=design]')
-                        .check()
-                    cy.get('button.ui-button')
-                        .contains('Save Changes')
-                        .click()
-                })
-            cy.wait(500)
-            cy.get('div.userSaveMsg')
-                .should('contain.text', 'User "' + username + '" was successfully edited')
+                cy.get('#userClickExpiration')
+                    .should('be.visible')
+                    .then( () => {
+                        cy.get('input#tooltipExpiration')
+                            .clear()
+                        cy.get('button#tooltipExpirationBtn')
+                            .contains('Save')
+                            .click({force: true})
+                    })
 
-            cy.wait(500)
-            cy.get('div.hang')
-                .contains('User Rights')
-                .click()
+                cy.get('table#table-user_rights_roles_table tbody tr.erow td div div.wrap div.userNameLinkDiv a.userLinkInTable')
+                    .should('contain.text', username)
+                    .click({force: true})
 
-            cy.get('table#table-user_rights_roles_table')
-                .within( () => {
-                    cy.get('tr.erow')
-                        .within( () => {
-                            cy.get('td:nth-child(3)')
-                                .within( () => {
-                                    cy.get('a')
-                                        .should('contain.text', 'never')
-                                })
-                        })
-                })
+                cy.get('div#userClickTooltip')
+                    .should('be.visible')
+                    .then( () => {
+                        cy.get('button.jqbuttonmed')
+                            .contains('Edit user privileges')
+                            .click({force: true})
+                    })
 
-            cy.get('table#table-user_rights_roles_table')
-                .within( () => {
-                    cy.get('tr.erow')
-                        .within(() => {
-                            cy.get('td:nth-child(4)')
-                                .should('contain.html', 'images/tick.png')
-                        })
-                })
-        })
+                cy.get('div.ui-dialog')
+                    .within( () => {
+                        cy.get('div.ui-dialog-titlebar')
+                            .should('contain.text', 'Editing existing user')
+                        cy.get('input[name=design]')
+                            .check()
+                        cy.get('button.ui-button')
+                            .contains('Save Changes')
+                            .click()
+                    })
+                //cy.wait(500)
+                cy.get('div.userSaveMsg')
+                    .should('contain.text', 'User "' + username + '" was successfully edited')
+
+                cy.get('div.userSaveMsg')
+                    .should('not.be.visible')
+                    .then( () => {
+                        cy.get('div.hang')
+                            .contains('User Rights')
+                            .click()
+                    })
+                //cy.wait(500)
+
+                cy.get('table#table-user_rights_roles_table tr.erow td:nth-child(3) a')
+                    .should('contain.text', 'never')
+
+                cy.get('table#table-user_rights_roles_table tr.erow td:nth-child(4)')
+                    .should('contain.html', 'images/tick.png')
+
     })
 
     it('6-4: Should allow admin to restore user rights management on a project.', () => {
@@ -298,7 +266,7 @@ describe('6 - Project User Rights and Security', {
         cy.mysql_db('seeds/validations/6/validation-pre-6-5')
         cy.set_user_type('standard')
 
-        cy.visit_version({page: ""}).then(() => {
+        cy.visit_base({url: "/"}).then(() => {
             cy.get('a.nav-link')
                 .contains('My Projects')
                 .click()
@@ -333,7 +301,7 @@ describe('6 - Project User Rights and Security', {
 
         let username = 'test_user'
 
-        cy.visit_version({page: ""}).then(() => {
+        cy.visit_base({url: "/"}).then(() => {
             cy.get('a.nav-link')
                 .contains('My Projects')
                 .click()
@@ -406,185 +374,162 @@ describe('6 - Project User Rights and Security', {
         })
     })
 
-    it.only('6-7: Should verify privileged user can be assigned Data exports, de-identified privileges.', () => {
+    it('6-7: Should verify privileged user can be assigned Data exports, de-identified privileges.', () => {
         cy.mysql_db('seeds/validations/6/validation-pre-6-7')
         cy.set_user_type('standard')
 
         let username = 'test_user'
 
-        cy.visit_version({page: ""}).then(() => {
-            cy.get('a.nav-link')
-                .contains('My Projects')
-                .click()
+        cy.visit_base({url: ""})
+            .then(() => {
+                cy.get('a.nav-link')
+                    .contains('My Projects')
+                    .click()
 
-            cy.get('table#table-proj_table')
-                .within(() => {
-                    cy.get('a.aGrid')
-                        .contains('SecondProject')
-                        .click()
-                })
+                cy.get('table#table-proj_table')
+                    .within(() => {
+                        cy.get('a.aGrid')
+                            .contains('SecondProject')
+                            .click()
+                    })
 
-            cy.get('div#subheaderDiv2')
-                .should('contain.text', 'SecondProject')
+                cy.get('div#subheaderDiv2')
+                    .should('contain.text', 'SecondProject')
 
-            cy.get('div.hang')
-                .contains('User Rights')
-                .click()
+                cy.get('div.hang')
+                    .contains('User Rights')
+                    .click()
 
-            cy.get('table#table-user_rights_roles_table')
-                .within(() => {
-                    cy.get('tr.erow')
-                        .within(() => {
-                            cy.get('td')
-                                .next('td')
-                                .within(() => {
-                                    cy.get('a')
-                                        .contains(username)
-                                        .click()
-                                })
-                        })
-                })
+                cy.get('table#table-user_rights_roles_table')
+                    .within(() => {
+                        cy.get('tr.erow')
+                            .within(() => {
+                                cy.get('td')
+                                    .next('td')
+                                    .within(() => {
+                                        cy.get('a')
+                                            .contains(username)
+                                            .click()
+                                    })
+                            })
+                    })
 
-            cy.get('div#userClickTooltip')
-                .within(() => {
-                    cy.get('button.jqbuttonmed')
-                        .contains('Edit user privileges')
-                        .click()
-                })
+                cy.get('div#userClickTooltip')
+                    .within(() => {
+                        cy.get('button.jqbuttonmed')
+                            .contains('Edit user privileges')
+                            .click()
+                    })
 
-            cy.wait(500)
-            cy.get('div.ui-dialog')
-                .within(() => {
-                    cy.get('input[name=data_export_tool]')
-                        .check('2')
-                    cy.get('button')
-                        .contains('Save Changes')
-                        .click()
-                })
+                cy.wait(500)
+                cy.get('div.ui-dialog')
+                    .within(() => {
+                        cy.get('input[name=data_export_tool]')
+                            .check('2')
+                        cy.get('button')
+                            .contains('Save Changes')
+                            .click()
+                    })
 
-            cy.wait(500)
+                cy.wait(500)
 
-            cy.get('div.userSaveMsg')
-                .should('contain.text', 'User "' + username + '" was successfully edited')
+                cy.get('div.userSaveMsg')
+                    .should('contain.text', 'User "' + username + '" was successfully edited')
 
-            cy.wait(500)
-            cy.get('table#table-user_rights_roles_table')
-                .within( () => {
-                    cy.get('tr.erow')
-                        .within(() => {
-                            cy.get('td:nth-child(7)') // Data Export Tool
-                                .should('contain.text', 'De-Identified')
-                        })
-                })
+                cy.wait(500)
+                cy.get('table#table-user_rights_roles_table')
+                    .within( () => {
+                        cy.get('tr.erow')
+                            .within(() => {
+                                cy.get('td:nth-child(7)') // Data Export Tool
+                                    .should('contain.text', 'De-Identified')
+                            })
+                    })
 
-            cy.reload(true)
-            cy.get('div#app_panel')
-                .within( () => {
-                    cy.get('a')
-                        .should('contain.text','Data Exports, Reports, and Stats')
-                })
-
+                cy.reload(true)
+                cy.get('div#app_panel')
+                    .within( () => {
+                        cy.get('a')
+                            .should('contain.text','Data Exports, Reports, and Stats')
+                    })
 
         })
     })
 
-    it.only('6-8/9: Should allow a privileged user add survey distribution tools access.', () => {
+    it('6-8/9: Should allow a privileged user add survey distribution tools access.', () => {
         cy.mysql_db('seeds/validations/6/validation-pre-6-8')
         cy.set_user_type('standard')
 
         let username = 'test_user'
 
-        cy.visit_base({url: ""}).then(() => {
-            cy.get('a.nav-link')
-                .contains('My Projects')
-                .click()
+        cy.visit_base({url: "/"})
 
-            cy.get('table#table-proj_table')
-                .within(() => {
-                    cy.get('a.aGrid')
-                        .contains('SecondProject')
-                        .click()
-                })
+        cy.get('a.nav-link')
+            .contains('My Projects')
+            .click()
 
-            cy.get('div#subheaderDiv2')
-                .should('contain.text', 'SecondProject')
+        cy.get('table#table-proj_table a.aGrid')
+            .contains('SecondProject')
+            .click()
 
-            cy.get('div.hang')
-                .contains('User Rights')
-                .click()
+        cy.get('div#subheaderDiv2')
+            .should('contain.text', 'SecondProject')
 
-            cy.get('table#table-user_rights_roles_table')
-                .within(() => {
-                    cy.get('tr.erow')
-                        .within(() => {
-                            cy.get('td')
-                                .next('td')
-                                .within(() => {
-                                    cy.get('a')
-                                        .contains(username)
-                                        .click()
-                                })
-                        })
-                })
+        cy.get('div.hang')
+            .contains('User Rights')
+            .click()
 
-            cy.get('div#userClickTooltip')
-                .within(() => {
-                    cy.get('button.jqbuttonmed')
-                        .contains('Edit user privileges')
-                        .click()
-                })
+        cy.get('table#table-user_rights_roles_table tbody tr.erow td:nth-child(2) div' +
+            ' div.wrap div.userNameLinkDiv a.userLinkInTable')
+            .contains(username)
+            .click({force: true})
+            .click()
 
-            cy.wait(500)
-            cy.get('div.ui-dialog')
-                .within(() => {
-                    cy.get('input[name=participants]')
-                        .check({force: true})
-                    cy.get('input[name=calendar]')
-                        .uncheck()
-                    cy.get('input[name=data_import_tool]')
-                        .uncheck()
-                    cy.get('input[name=data_comparison_tool]')
-                        .uncheck()
-                    cy.get('input[name=data_logging]')
-                        .uncheck()
-                    cy.get('input[name=file_repository]')
-                        .uncheck()
-                    cy.get('button')
-                        .contains('Save Changes')
-                        .click()
-                })
+        cy.get('div#userClickTooltip')
+            .should('be.visible')
+            .then(() => {
+                cy.get('button.jqbuttonmed')
+                    .contains('Edit user privileges')
+                    .click()
+            })
 
-            cy.wait(500)
+        cy.get('div.ui-dialog')
+            .within(() => {
+                cy.get('input[name=participants]')
+                    .check({force: true})
+                cy.get('input[name=calendar]')
+                    .uncheck()
+                cy.get('input[name=data_import_tool]')
+                    .uncheck()
+                cy.get('input[name=data_comparison_tool]')
+                    .uncheck()
+                cy.get('input[name=data_logging]')
+                    .uncheck()
+                cy.get('input[name=file_repository]')
+                    .uncheck()
+                cy.get('button')
+                    .contains('Save Changes')
+                    .click()
+            })
 
-            cy.get('div.userSaveMsg')
-                .should('contain.text', 'User "' + username + '" was successfully edited')
+        cy.get('div.userSaveMsg')
+            .should('contain.text', 'User "' + username + '" was successfully edited')
 
-            cy.wait(500)
-            cy.get('table#table-user_rights_roles_table')
-                .within( () => {
-                    cy.get('tr.erow')
-                        .within(() => {
-                            cy.get('td:nth-child(10)') // Survey Distribution Tools
-                                .should('contain.html', 'images/tick.png')
-                        })
-                })
+        cy.get('table#table-user_rights_roles_table tr.erow td:nth-child(10)')
+            .should('contain.html', 'images/tick.png')
 
             cy.reload(true)
-            cy.get('div.x-panel')
-                .within( () => {
-                    cy.get('a')
-                        .should('contain.text','Survey Distribution Tools')
-                })
-        })
+            cy.get('div.x-panel a')
+                .should('contain.text','Survey Distribution Tools')
     })
 
-    it.only('6-10: Should allow a privileged user add Data Import Tool access.', () => {
+    it('6-10: Should allow a privileged user add Data Import Tool access.', () => {
         cy.mysql_db('seeds/validations/6/validation-pre-6-10')
         cy.set_user_type('standard')
 
         let username = 'test_user'
 
-        cy.visit_version({page: ""}).then(() => {
+        cy.visit_base({url: "/"}).then(() => {
             cy.get('a.nav-link')
                 .contains('My Projects')
                 .click()
@@ -664,7 +609,7 @@ describe('6 - Project User Rights and Security', {
 
         let username = 'test_user'
 
-        cy.visit_version({page: ""}).then(() => {
+        cy.visit_base({url: "/"}).then(() => {
             cy.get('a.nav-link')
                 .contains('My Projects')
                 .click()
@@ -745,7 +690,7 @@ describe('6 - Project User Rights and Security', {
 
         let username = 'test_user'
 
-        cy.visit_version({page: ""}).then(() => {
+        cy.visit_base({url: "/"}).then(() => {
             cy.get('a.nav-link')
                 .contains('My Projects')
                 .click()
@@ -860,7 +805,7 @@ describe('6 - Project User Rights and Security', {
 
         let username = 'test_user'
 
-        cy.visit_version({page: ""}).then(() => {
+        cy.visit_base({url: "/"}).then(() => {
             cy.get('a.nav-link')
                 .contains('My Projects')
                 .click()
@@ -940,7 +885,7 @@ describe('6 - Project User Rights and Security', {
 
         let username = 'test_user'
 
-        cy.visit_version({page: ""}).then(() => {
+        cy.visit_base({url: "/"}).then(() => {
             cy.get('a.nav-link')
                 .contains('My Projects')
                 .click()
@@ -1022,7 +967,7 @@ describe('6 - Project User Rights and Security', {
 
         let username = 'test_user'
 
-        cy.visit_version({page: ""}).then(() => {
+        cy.visit_base({url: "/"}).then(() => {
             cy.get('a.nav-link')
                 .contains('My Projects')
                 .click()
@@ -1109,7 +1054,7 @@ describe('6 - Project User Rights and Security', {
 
         let username = 'test_user'
 
-        cy.visit_version({page: ""}).then(() => {
+        cy.visit_base({url: "/"}).then(() => {
             cy.get('a.nav-link')
                 .contains('My Projects')
                 .click()
@@ -1190,7 +1135,7 @@ describe('6 - Project User Rights and Security', {
 
         let username = 'test_user'
 
-        cy.visit_version({page: ""}).then(() => {
+        cy.visit_base({url: "/"}).then(() => {
             cy.get('a.nav-link')
                 .contains('My Projects')
                 .click()
@@ -1257,13 +1202,13 @@ describe('6 - Project User Rights and Security', {
         })
     })
 
-    it.only('6-18: Should allow a privileged user to add delete record access. ', () => {
+    it('6-18: Should allow a privileged user to add delete record access. ', () => {
         cy.mysql_db('seeds/validations/6/validation-pre-6-18')
         cy.set_user_type('standard')
 
         let username = 'test_user'
 
-        cy.visit_version({page: ""}).then(() => {
+        cy.visit_base({url: "/"}).then(() => {
             cy.get('a.nav-link')
                 .contains('My Projects')
                 .click()
@@ -1360,7 +1305,7 @@ describe('6 - Project User Rights and Security', {
 
         let username = 'test_user'
 
-        cy.visit_version({page: ""}).then(() => {
+        cy.visit_base({url: "/"}).then(() => {
             cy.get('a.nav-link')
                 .contains('My Projects')
                 .click()
@@ -1464,7 +1409,7 @@ describe('6 - Project User Rights and Security', {
 
         let username = 'test_user'
 
-        cy.visit_version({page: ""}).then(() => {
+        cy.visit_base({url: "/"}).then(() => {
             cy.get('a.nav-link')
                 .contains('My Projects')
                 .click()
@@ -1581,7 +1526,7 @@ describe('6 - Project User Rights and Security', {
 
         let username = 'test_user'
 
-        cy.visit_version({page: ""}).then(() => {
+        cy.visit_base({url: "/"}).then(() => {
             cy.get('a.nav-link')
                 .contains('My Projects')
                 .click()
@@ -1678,7 +1623,7 @@ describe('6 - Project User Rights and Security', {
 
         let username = 'test_user'
 
-        cy.visit_version({page: ""}).then(() => {
+        cy.visit_base({url: "/"}).then(() => {
             cy.get('a.nav-link')
                 .contains('My Projects')
                 .click()
@@ -1777,7 +1722,7 @@ describe('6 - Project User Rights and Security', {
 
         let username = 'test_user'
 
-        cy.visit_version({page: ""}).then(() => {
+        cy.visit_base({url: "/"}).then(() => {
             cy.get('a.nav-link')
                 .contains('My Projects')
                 .click()
@@ -1869,7 +1814,7 @@ describe('6 - Project User Rights and Security', {
 
         let username = 'test_user'
 
-        cy.visit_version({page: ""}).then(() => {
+        cy.visit_base({url: "/"}).then(() => {
             cy.get('a.nav-link')
                 .contains('My Projects')
                 .click()
@@ -1978,7 +1923,7 @@ describe('6 - Project User Rights and Security', {
 
         let username = 'test_user'
 
-        cy.visit_version({page: ""}).then(() => {
+        cy.visit_base({url: "/"}).then(() => {
             cy.get('a.nav-link')
                 .contains('My Projects')
                 .click()
@@ -2083,7 +2028,7 @@ describe('6 - Project User Rights and Security', {
 
         let username = 'test_user'
 
-        cy.visit_version({page: ""}).then(() => {
+        cy.visit_base({url: "/"}).then(() => {
             cy.get('a.nav-link')
                 .contains('My Projects')
                 .click()
@@ -2189,7 +2134,7 @@ describe('6 - Project User Rights and Security', {
 
         let username = 'test_user'
 
-        cy.visit_version({page: ""}).then(() => {
+        cy.visit_base({url: "/"}).then(() => {
             cy.get('a.nav-link')
                 .contains('My Projects')
                 .click()
@@ -2236,7 +2181,7 @@ describe('6 - Project User Rights and Security', {
     it('6-28: Should allow a privileged user to copy a role.', () => {
         cy.mysql_db('seeds/validations/6/validation-pre-6-28')
         cy.set_user_type('standard')
-        cy.visit_version({page: ""}).then(() => {
+        cy.visit_base({url: "/"}).then(() => {
             cy.get('a.nav-link')
                 .contains('My Projects')
                 .click()
@@ -2325,7 +2270,7 @@ describe('6 - Project User Rights and Security', {
     it('6-29: Should allow a privileged user to delete a role but cancel.', () => {
         cy.mysql_db('seeds/validations/6/validation-pre-6-29')
         cy.set_user_type('standard')
-        cy.visit_version({page: ""}).then(() => {
+        cy.visit_base({url: "/"}).then(() => {
             cy.get('a.nav-link')
                 .contains('My Projects')
                 .click()
@@ -2407,7 +2352,7 @@ describe('6 - Project User Rights and Security', {
     it('6-30: Should allow a privileged user to delete a role.', () => {
         cy.mysql_db('seeds/validations/6/validation-pre-6-30')
         cy.set_user_type('standard')
-        cy.visit_version({page: ""}).then(() => {
+        cy.visit_base({url: "/"}).then(() => {
             cy.get('a.nav-link')
                 .contains('My Projects')
                 .click()
@@ -2485,7 +2430,7 @@ describe('6 - Project User Rights and Security', {
 
         let username = 'test_user'
 
-        cy.visit_version({page: ""}).then(() => {
+        cy.visit_base({url: "/"}).then(() => {
             cy.get('a.nav-link')
                 .contains('My Projects')
                 .click()
@@ -2553,7 +2498,7 @@ describe('6 - Project User Rights and Security', {
 
         let username = 'test_user'
 
-        cy.visit_version({page: ""}).then(() => {
+        cy.visit_base({url: "/"}).then(() => {
             cy.get('a.nav-link')
                 .contains('My Projects')
                 .click()
@@ -2629,7 +2574,7 @@ describe('6 - Project User Rights and Security', {
 
         let username = 'test_user'
 
-        cy.visit_version({page: ""}).then(() => {
+        cy.visit_base({url: "/"}).then(() => {
             cy.get('a.nav-link')
                 .contains('My Projects')
                 .click()
