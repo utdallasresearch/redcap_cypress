@@ -4,11 +4,6 @@ import './hooks/commands'
 import './modules/commands'
 import './plugins/commands'
 import './projects/commands'
-import 'cypress-file-upload'
-import '@4tw/cypress-drag-drop'
-
-import 'cypress-file-upload'
-import '@4tw/cypress-drag-drop'
 
 import 'cypress-file-upload'
 import '@4tw/cypress-drag-drop'
@@ -24,7 +19,7 @@ Cypress.Commands.add('login', (options) => {
 
     cy.clearCookies()
 
-    cy.request('/index.php')
+    cy.request({url: '/index.php', timeout: '50000' })
         .its('body')
         .then((body) => {
             const $html = Cypress.$(body)
@@ -69,6 +64,7 @@ Cypress.Commands.add('visit_base', (options) => {
 })
 
 Cypress.Commands.add('base_db_seed', () => {
+
     let redcap_source_path = Cypress.env('redcap_source_path')
 
     if(redcap_source_path === undefined){
@@ -76,10 +72,10 @@ Cypress.Commands.add('base_db_seed', () => {
     }
 
     cy.task('populateStructureAndData', {
-                                            redcap_version: Cypress.env('redcap_version'), 
-                                            advanced_user_info: compareVersions.compare(Cypress.env('redcap_version'), '10.1.0', '>='), 
-                                            source_location: redcap_source_path
-                                        }).then((structure_and_data_file_exists) => {
+        redcap_version: Cypress.env('redcap_version'),
+        advanced_user_info: compareVersions.compare(Cypress.env('redcap_version'), '10.1.0', '>='),
+        source_location: redcap_source_path
+    }).then((structure_and_data_file_exists) => {
 
         //Only run this block if the Structure and Data File exists and has gone through proper processes
         if(structure_and_data_file_exists){
@@ -99,12 +95,12 @@ Cypress.Commands.add('base_db_seed', () => {
                     cy.clearCookies()
                 })
 
-            })          
+            })
 
         } else {
             alert('Warning: Error generating structure and data file.  This usually happpens because your REDCap source code is missing files.')
         }
-     
+
     })
 })
 
@@ -163,9 +159,8 @@ Cypress.Commands.add('set_user_info', (users) => {
     }
 })
 
-
 Cypress.Commands.add('mysql_db', (type, replace = '', include_db_name = true) => {
-    
+
     const mysql = Cypress.env("mysql")
 
     let version = Cypress.env('redcap_version')
@@ -175,28 +170,28 @@ Cypress.Commands.add('mysql_db', (type, replace = '', include_db_name = true) =>
     }
 
     //Create the MySQL Installation
-    cy.task('generateMySQLCommand', {   
-                                mysql_name: mysql['path'],
-                                host: mysql['host'],
-                                port: mysql['port'],
-                                db_name: mysql['db_name'],
-                                db_user: mysql['db_user'],
-                                db_pass: mysql['db_pass'],
-                                type: type, 
-                                replace: replace,
-                                include_db_name: include_db_name
-                              }).then((mysql_cli) => {
-                                    
-                                    //Execute the MySQL Command
-                                    cy.exec(mysql_cli['cmd'], { timeout: 100000}).then((data_import) => {
-                                        expect(data_import['code']).to.eq(0)
+    cy.task('generateMySQLCommand', {
+        mysql_name: mysql['path'],
+        host: mysql['host'],
+        port: mysql['port'],
+        db_name: mysql['db_name'],
+        db_user: mysql['db_user'],
+        db_pass: mysql['db_pass'],
+        type: type,
+        replace: replace,
+        include_db_name: include_db_name
+    }).then((mysql_cli) => {
 
-                                        //Clean up after ourselves    
-                                        cy.task('deleteFile', { path: mysql_cli['tmp'] }).then((deleted_tmp_file) => {
-                                            expect(deleted_tmp_file).to.eq(true)                                         
-                                        })
-                                    })
-                              })
+        //Execute the MySQL Command
+        cy.exec(mysql_cli['cmd'], { timeout: 100000}).then((data_import) => {
+            expect(data_import['code']).to.eq(0)
+
+            //Clean up after ourselves
+            cy.task('deleteFile', { path: mysql_cli['tmp'] }).then((deleted_tmp_file) => {
+                expect(deleted_tmp_file).to.eq(true)
+            })
+        })
+    })
 })
 
 function test_link (link, title, try_again = true) {
