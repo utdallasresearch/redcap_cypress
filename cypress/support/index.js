@@ -21,8 +21,10 @@ import { hooks } from './hooks/index'
 import { modules } from './modules/index'
 import { plugins } from './plugins/index'
 import { projects } from './projects/index'
+import '@shelex/cypress-allure-plugin';
 
 const sed_lite = require('sed-lite').sed;
+
 
 function UserInfo() {
 

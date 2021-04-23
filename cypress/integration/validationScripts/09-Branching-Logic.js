@@ -532,9 +532,9 @@ describe('09 - Branching Logic', {
 
             })
 
-            it('9-10: ', () => {
+            it('9-5: ', () => {
                 cy.set_user_type('standard')
-                cy.mysql_db('seeds/validations/9/validation-pre-9-10')
+                cy.mysql_db('seeds/validations/9/validation-pre-9-5')
 
                 cy.visit_base({url: "/index.php?action=myprojects"})
                     .then(() => {

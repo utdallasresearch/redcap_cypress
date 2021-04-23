@@ -24,3 +24,6 @@ cypress.env.json
 
 mysql-cli.zip
 cypress/downloads
+allure-report
+allure-results
+allure-report
