@@ -60,7 +60,7 @@ describe('8 - Field Validation / Data Integrity', {
 
                 let testFile = '8_FieldValidation_DataDictionary.csv'
 
-                cy.visit_version({page: ""}).then(() => {
+                cy.visit_base({url: "/"}).then(() => {
 
                     cy.get('a.nav-link')
                         .contains('My Projects')
