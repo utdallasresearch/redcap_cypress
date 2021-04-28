@@ -1,196 +1,221 @@
-START TRANSACTION;
+# Truncate all the tables 
 
+SELECT CONCAT('TRUNCATE TABLE ',table_schema,'.',TABLE_NAME, ';')
+FROM INFORMATION_SCHEMA.TABLES
+WHERE TABLE_SCHEMA = 'REDCAP_DB_NAME';
+
+START TRANSACTION;
 USE `REDCAP_DB_NAME`;
 SET AUTOCOMMIT=0;
-
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
-SET NAMES utf8mb4;
+/*!40101 SET NAMES utf8mb4 */;
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 
-TRUNCATE TABLE redcap_actions;
-TRUNCATE TABLE redcap_alerts;
-TRUNCATE TABLE redcap_alerts_recurrence;
-TRUNCATE TABLE redcap_alerts_sent;
-TRUNCATE TABLE redcap_alerts_sent_log;
-TRUNCATE TABLE redcap_auth;
-TRUNCATE TABLE redcap_auth_history;
-TRUNCATE TABLE redcap_auth_questions;
-TRUNCATE TABLE redcap_config;
-TRUNCATE TABLE redcap_crons;
-TRUNCATE TABLE redcap_crons_history;
-TRUNCATE TABLE redcap_dashboard_ip_location_cache;
-TRUNCATE TABLE redcap_data;
-TRUNCATE TABLE redcap_data_access_groups;
-TRUNCATE TABLE redcap_data_access_groups_users;
-TRUNCATE TABLE redcap_data_dictionaries;
-TRUNCATE TABLE redcap_data_quality_resolutions;
-TRUNCATE TABLE redcap_data_quality_rules;
-TRUNCATE TABLE redcap_data_quality_status;
-TRUNCATE TABLE redcap_ddp_log_view;
-TRUNCATE TABLE redcap_ddp_log_view_data;
-TRUNCATE TABLE redcap_ddp_mapping;
-TRUNCATE TABLE redcap_ddp_preview_fields;
-TRUNCATE TABLE redcap_ddp_records;
-TRUNCATE TABLE redcap_ddp_records_data;
-TRUNCATE TABLE redcap_docs;
-TRUNCATE TABLE redcap_docs_to_edocs;
-TRUNCATE TABLE redcap_edocs_metadata;
-TRUNCATE TABLE redcap_ehr_access_tokens;
-TRUNCATE TABLE redcap_ehr_datamart_revisions;
-TRUNCATE TABLE redcap_ehr_fhir_logs;
-TRUNCATE TABLE redcap_ehr_import_counts;
-TRUNCATE TABLE redcap_ehr_user_map;
-TRUNCATE TABLE redcap_ehr_user_projects;
-TRUNCATE TABLE redcap_esignatures;
-TRUNCATE TABLE redcap_events_arms;
-TRUNCATE TABLE redcap_events_calendar;
-TRUNCATE TABLE redcap_events_forms;
-TRUNCATE TABLE redcap_events_metadata;
-TRUNCATE TABLE redcap_events_repeat;
-TRUNCATE TABLE redcap_external_links;
-TRUNCATE TABLE redcap_external_links_dags;
-TRUNCATE TABLE redcap_external_links_exclude_projects;
-TRUNCATE TABLE redcap_external_links_users;
-TRUNCATE TABLE redcap_external_module_settings;
-TRUNCATE TABLE redcap_external_modules;
-TRUNCATE TABLE redcap_external_modules_downloads;
-TRUNCATE TABLE redcap_external_modules_log;
-TRUNCATE TABLE redcap_external_modules_log_parameters;
-TRUNCATE TABLE redcap_folders;
-TRUNCATE TABLE redcap_folders_projects;
-TRUNCATE TABLE redcap_history_size;
-TRUNCATE TABLE redcap_history_version;
-TRUNCATE TABLE redcap_instrument_zip;
-TRUNCATE TABLE redcap_instrument_zip_authors;
-TRUNCATE TABLE redcap_instrument_zip_origins;
-TRUNCATE TABLE redcap_ip_banned;
-TRUNCATE TABLE redcap_ip_cache;
-TRUNCATE TABLE redcap_library_map;
-TRUNCATE TABLE redcap_locking_data;
-TRUNCATE TABLE redcap_locking_labels;
-TRUNCATE TABLE redcap_locking_records;
-TRUNCATE TABLE redcap_locking_records_pdf_archive;
-TRUNCATE TABLE redcap_log_event;
-TRUNCATE TABLE redcap_log_event2;
-TRUNCATE TABLE redcap_log_event3;
-TRUNCATE TABLE redcap_log_event4;
-TRUNCATE TABLE redcap_log_event5;
-TRUNCATE TABLE redcap_log_view;
-TRUNCATE TABLE redcap_log_view_requests;
-TRUNCATE TABLE redcap_messages;
-TRUNCATE TABLE redcap_messages_recipients;
-TRUNCATE TABLE redcap_messages_status;
-TRUNCATE TABLE redcap_messages_threads;
-TRUNCATE TABLE redcap_metadata;
-TRUNCATE TABLE redcap_metadata_archive;
-TRUNCATE TABLE redcap_metadata_prod_revisions;
-TRUNCATE TABLE redcap_metadata_temp;
-TRUNCATE TABLE redcap_mobile_app_devices;
-TRUNCATE TABLE redcap_mobile_app_files;
-TRUNCATE TABLE redcap_mobile_app_log;
-TRUNCATE TABLE redcap_mycap_messages;
-TRUNCATE TABLE redcap_mycap_participants;
-TRUNCATE TABLE redcap_mycap_projectfiles;
-TRUNCATE TABLE redcap_mycap_projects;
-TRUNCATE TABLE redcap_mycap_syncissuefiles;
-TRUNCATE TABLE redcap_mycap_syncissues;
-TRUNCATE TABLE redcap_new_record_cache;
-TRUNCATE TABLE redcap_outgoing_email_counts;
-TRUNCATE TABLE redcap_page_hits;
-TRUNCATE TABLE redcap_project_checklist;
-TRUNCATE TABLE redcap_projects;
-TRUNCATE TABLE redcap_projects_external;
-TRUNCATE TABLE redcap_projects_templates;
-TRUNCATE TABLE redcap_projects_user_hidden;
-TRUNCATE TABLE redcap_pub_articles;
-TRUNCATE TABLE redcap_pub_authors;
-TRUNCATE TABLE redcap_pub_matches;
-TRUNCATE TABLE redcap_pub_mesh_terms;
-TRUNCATE TABLE redcap_pub_sources;
-TRUNCATE TABLE redcap_queue;
-TRUNCATE TABLE redcap_randomization;
-TRUNCATE TABLE redcap_randomization_allocation;
-TRUNCATE TABLE redcap_record_counts;
-TRUNCATE TABLE redcap_record_dashboards;
-TRUNCATE TABLE redcap_record_list;
-TRUNCATE TABLE redcap_reports;
-TRUNCATE TABLE redcap_reports_access_dags;
-TRUNCATE TABLE redcap_reports_access_roles;
-TRUNCATE TABLE redcap_reports_access_users;
-TRUNCATE TABLE redcap_reports_edit_access_dags;
-TRUNCATE TABLE redcap_reports_edit_access_roles;
-TRUNCATE TABLE redcap_reports_edit_access_users;
-TRUNCATE TABLE redcap_reports_fields;
-TRUNCATE TABLE redcap_reports_filter_dags;
-TRUNCATE TABLE redcap_reports_filter_events;
-TRUNCATE TABLE redcap_reports_folders;
-TRUNCATE TABLE redcap_reports_folders_items;
-TRUNCATE TABLE redcap_sendit_docs;
-TRUNCATE TABLE redcap_sendit_recipients;
-TRUNCATE TABLE redcap_sessions;
-TRUNCATE TABLE redcap_surveys;
-TRUNCATE TABLE redcap_surveys_emails;
-TRUNCATE TABLE redcap_surveys_emails_recipients;
-TRUNCATE TABLE redcap_surveys_emails_send_rate;
-TRUNCATE TABLE redcap_surveys_erase_twilio_log;
-TRUNCATE TABLE redcap_surveys_login;
-TRUNCATE TABLE redcap_surveys_participants;
-TRUNCATE TABLE redcap_surveys_pdf_archive;
-TRUNCATE TABLE redcap_surveys_phone_codes;
-TRUNCATE TABLE redcap_surveys_queue;
-TRUNCATE TABLE redcap_surveys_queue_hashes;
-TRUNCATE TABLE redcap_surveys_response;
-TRUNCATE TABLE redcap_surveys_scheduler;
-TRUNCATE TABLE redcap_surveys_scheduler_queue;
-TRUNCATE TABLE redcap_surveys_short_codes;
-TRUNCATE TABLE redcap_surveys_themes;
-TRUNCATE TABLE redcap_todo_list;
-TRUNCATE TABLE redcap_two_factor_response;
-TRUNCATE TABLE redcap_user_allowlist;
-TRUNCATE TABLE redcap_user_information;
-TRUNCATE TABLE redcap_user_rights;
-TRUNCATE TABLE redcap_user_roles;
-TRUNCATE TABLE redcap_validation_types;
-TRUNCATE TABLE redcap_web_service_cache;
-
-# SELECT Concat('TRUNCATE TABLE ',table_schema,'.',TABLE_NAME, ';')
-# FROM INFORMATION_SCHEMA.TABLES where table_schema in ('redcap');
-
 # Dump of table redcap_actions
 # ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `redcap_actions`;
+
+CREATE TABLE `redcap_actions` (
+  `action_id` int(10) NOT NULL AUTO_INCREMENT,
+  `project_id` int(10) DEFAULT NULL,
+  `survey_id` int(10) DEFAULT NULL,
+  `action_trigger` enum('MANUAL','ENDOFSURVEY','SURVEYQUESTION') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `action_response` enum('NONE','EMAIL_PRIMARY','EMAIL_SECONDARY','EMAIL_TERTIARY','STOPSURVEY','PROMPT') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `custom_text` text COLLATE utf8mb4_unicode_ci,
+  `recipient_id` int(10) DEFAULT NULL COMMENT 'FK user_information',
+  PRIMARY KEY (`action_id`),
+  UNIQUE KEY `survey_recipient_id` (`survey_id`,`recipient_id`),
+  KEY `project_id` (`project_id`),
+  KEY `recipient_id` (`recipient_id`),
+  CONSTRAINT `redcap_actions_ibfk_1` FOREIGN KEY (`project_id`) REFERENCES `redcap_projects` (`project_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `redcap_actions_ibfk_2` FOREIGN KEY (`recipient_id`) REFERENCES `redcap_user_information` (`ui_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `redcap_actions_ibfk_3` FOREIGN KEY (`survey_id`) REFERENCES `redcap_surveys` (`survey_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
 
 # Dump of table redcap_alerts
 # ------------------------------------------------------------
 
+DROP TABLE IF EXISTS `redcap_alerts`;
+
+CREATE TABLE `redcap_alerts` (
+  `alert_id` int(10) NOT NULL AUTO_INCREMENT,
+  `project_id` int(10) DEFAULT NULL,
+  `alert_title` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `alert_type` enum('EMAIL','SMS','VOICE_CALL') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'EMAIL',
+  `alert_stop_type` enum('RECORD','RECORD_EVENT','RECORD_EVENT_INSTRUMENT','RECORD_INSTRUMENT','RECORD_EVENT_INSTRUMENT_INSTANCE') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'RECORD_EVENT_INSTRUMENT_INSTANCE',
+  `email_deleted` tinyint(1) NOT NULL DEFAULT '0',
+  `alert_expiration` datetime DEFAULT NULL,
+  `form_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Instrument Name',
+  `form_name_event` int(10) DEFAULT NULL COMMENT 'Event ID',
+  `alert_condition` text COLLATE utf8mb4_unicode_ci COMMENT 'Conditional logic',
+  `ensure_logic_still_true` tinyint(1) NOT NULL DEFAULT '0',
+  `prevent_piping_identifiers` tinyint(1) NOT NULL DEFAULT '1',
+  `email_incomplete` tinyint(1) DEFAULT '0' COMMENT 'Send alert for any form status?',
+  `email_from` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Email From',
+  `email_from_display` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Email sender display name',
+  `email_to` text COLLATE utf8mb4_unicode_ci COMMENT 'Email To',
+  `phone_number_to` text COLLATE utf8mb4_unicode_ci,
+  `email_cc` text COLLATE utf8mb4_unicode_ci COMMENT 'Email CC',
+  `email_bcc` text COLLATE utf8mb4_unicode_ci COMMENT 'Email BCC',
+  `email_subject` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Subject',
+  `alert_message` text COLLATE utf8mb4_unicode_ci COMMENT 'Message',
+  `email_failed` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email_attachment_variable` text COLLATE utf8mb4_unicode_ci COMMENT 'REDCap file variables',
+  `email_attachment1` int(10) DEFAULT NULL,
+  `email_attachment2` int(10) DEFAULT NULL,
+  `email_attachment3` int(10) DEFAULT NULL,
+  `email_attachment4` int(10) DEFAULT NULL,
+  `email_attachment5` int(10) DEFAULT NULL,
+  `email_repetitive` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'Re-send alert on form re-save?',
+  `email_repetitive_change` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'Re-send alert on form re-save if data has been added or modified?',
+  `email_repetitive_change_calcs` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'Include calc fields for email_repetitive_change?',
+  `cron_send_email_on` enum('now','date','time_lag','next_occurrence') COLLATE utf8mb4_unicode_ci DEFAULT 'now' COMMENT 'When to send alert',
+  `cron_send_email_on_date` datetime DEFAULT NULL COMMENT 'Exact time to send',
+  `cron_send_email_on_time_lag_days` int(4) DEFAULT NULL,
+  `cron_send_email_on_time_lag_hours` int(3) DEFAULT NULL,
+  `cron_send_email_on_time_lag_minutes` int(3) DEFAULT NULL,
+  `cron_send_email_on_field` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `cron_send_email_on_field_after` enum('before','after') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'after',
+  `cron_send_email_on_next_day_type` enum('DAY','WEEKDAY','WEEKENDDAY','SUNDAY','MONDAY','TUESDAY','WEDNESDAY','THURSDAY','FRIDAY','SATURDAY') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'DAY',
+  `cron_send_email_on_next_time` time DEFAULT NULL,
+  `cron_repeat_for` smallint(4) NOT NULL DEFAULT '0' COMMENT 'Repeat every # of days',
+  `cron_repeat_for_units` enum('DAYS','HOURS','MINUTES') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'DAYS',
+  `cron_repeat_for_max` smallint(4) DEFAULT NULL,
+  `email_timestamp_sent` datetime DEFAULT NULL COMMENT 'Time last alert was sent',
+  `email_sent` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'Has at least one alert been sent?',
+  PRIMARY KEY (`alert_id`),
+  KEY `alert_expiration` (`alert_expiration`),
+  KEY `email_attachment1` (`email_attachment1`),
+  KEY `email_attachment2` (`email_attachment2`),
+  KEY `email_attachment3` (`email_attachment3`),
+  KEY `email_attachment4` (`email_attachment4`),
+  KEY `email_attachment5` (`email_attachment5`),
+  KEY `form_name_event` (`form_name_event`),
+  KEY `project_id` (`project_id`),
+  CONSTRAINT `redcap_alerts_ibfk_1` FOREIGN KEY (`email_attachment1`) REFERENCES `redcap_edocs_metadata` (`doc_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `redcap_alerts_ibfk_2` FOREIGN KEY (`email_attachment2`) REFERENCES `redcap_edocs_metadata` (`doc_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `redcap_alerts_ibfk_3` FOREIGN KEY (`email_attachment3`) REFERENCES `redcap_edocs_metadata` (`doc_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `redcap_alerts_ibfk_4` FOREIGN KEY (`email_attachment4`) REFERENCES `redcap_edocs_metadata` (`doc_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `redcap_alerts_ibfk_5` FOREIGN KEY (`email_attachment5`) REFERENCES `redcap_edocs_metadata` (`doc_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `redcap_alerts_ibfk_6` FOREIGN KEY (`form_name_event`) REFERENCES `redcap_events_metadata` (`event_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `redcap_alerts_ibfk_7` FOREIGN KEY (`project_id`) REFERENCES `redcap_projects` (`project_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 
 
 # Dump of table redcap_alerts_recurrence
 # ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `redcap_alerts_recurrence`;
+
+CREATE TABLE `redcap_alerts_recurrence` (
+  `aq_id` int(10) NOT NULL AUTO_INCREMENT,
+  `alert_id` int(10) DEFAULT NULL,
+  `creation_date` datetime DEFAULT NULL,
+  `record` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `event_id` int(10) DEFAULT NULL,
+  `instrument` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `instance` smallint(4) DEFAULT NULL,
+  `send_option` enum('now','date','time_lag','next_occurrence') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'now',
+  `times_sent` smallint(4) DEFAULT NULL,
+  `last_sent` datetime DEFAULT NULL,
+  `status` enum('IDLE','QUEUED','SENDING') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'IDLE',
+  `first_send_time` datetime DEFAULT NULL,
+  `next_send_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`aq_id`),
+  UNIQUE KEY `alert_id_record_instrument_instance` (`alert_id`,`record`,`event_id`,`instrument`,`instance`),
+  KEY `alert_id_status_times_sent` (`status`,`alert_id`,`times_sent`),
+  KEY `creation_date` (`creation_date`),
+  KEY `event_id` (`event_id`),
+  KEY `first_send_time` (`first_send_time`),
+  KEY `last_sent` (`last_sent`),
+  KEY `next_send_time_alert_id_status` (`next_send_time`,`alert_id`,`status`),
+  KEY `send_option` (`send_option`),
+  CONSTRAINT `redcap_alerts_recurrence_ibfk_1` FOREIGN KEY (`alert_id`) REFERENCES `redcap_alerts` (`alert_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `redcap_alerts_recurrence_ibfk_2` FOREIGN KEY (`event_id`) REFERENCES `redcap_events_metadata` (`event_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
 
 # Dump of table redcap_alerts_sent
 # ------------------------------------------------------------
 
+DROP TABLE IF EXISTS `redcap_alerts_sent`;
+
+CREATE TABLE `redcap_alerts_sent` (
+  `alert_sent_id` int(10) NOT NULL AUTO_INCREMENT,
+  `alert_id` int(10) NOT NULL,
+  `record` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `event_id` int(10) DEFAULT NULL,
+  `instrument` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `instance` smallint(4) DEFAULT '1',
+  `last_sent` datetime DEFAULT NULL,
+  PRIMARY KEY (`alert_sent_id`),
+  UNIQUE KEY `alert_id_record_event_instrument_instance` (`alert_id`,`record`,`event_id`,`instrument`,`instance`),
+  KEY `event_id_record_alert_id` (`event_id`,`record`,`alert_id`),
+  KEY `last_sent` (`last_sent`),
+  CONSTRAINT `redcap_alerts_sent_ibfk_1` FOREIGN KEY (`alert_id`) REFERENCES `redcap_alerts` (`alert_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `redcap_alerts_sent_ibfk_2` FOREIGN KEY (`event_id`) REFERENCES `redcap_events_metadata` (`event_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 
 
 # Dump of table redcap_alerts_sent_log
 # ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `redcap_alerts_sent_log`;
+
+CREATE TABLE `redcap_alerts_sent_log` (
+  `alert_sent_log_id` int(10) NOT NULL AUTO_INCREMENT,
+  `alert_sent_id` int(10) DEFAULT NULL,
+  `alert_type` enum('EMAIL','SMS','VOICE_CALL') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'EMAIL',
+  `time_sent` datetime DEFAULT NULL,
+  `email_from` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email_to` text COLLATE utf8mb4_unicode_ci,
+  `phone_number_to` text COLLATE utf8mb4_unicode_ci,
+  `email_cc` text COLLATE utf8mb4_unicode_ci,
+  `email_bcc` text COLLATE utf8mb4_unicode_ci,
+  `subject` text COLLATE utf8mb4_unicode_ci,
+  `message` text COLLATE utf8mb4_unicode_ci,
+  `attachment_names` text COLLATE utf8mb4_unicode_ci,
+  PRIMARY KEY (`alert_sent_log_id`),
+  KEY `alert_sent_id_time_sent` (`alert_sent_id`,`time_sent`),
+  KEY `email_from` (`email_from`),
+  KEY `time_sent` (`time_sent`),
+  CONSTRAINT `redcap_alerts_sent_log_ibfk_1` FOREIGN KEY (`alert_sent_id`) REFERENCES `redcap_alerts_sent` (`alert_sent_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
 
 # Dump of table redcap_auth
 # ------------------------------------------------------------
 
+DROP TABLE IF EXISTS `redcap_auth`;
+
+CREATE TABLE `redcap_auth` (
+  `username` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Hash of user''s password',
+  `password_salt` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Unique random salt for password',
+  `legacy_hash` int(1) NOT NULL DEFAULT '0' COMMENT 'Using older legacy hash for password storage?',
+  `temp_pwd` int(1) NOT NULL DEFAULT '0' COMMENT 'Flag to force user to re-enter password',
+  `password_question` int(10) DEFAULT NULL COMMENT 'PK of question',
+  `password_answer` text COLLATE utf8mb4_unicode_ci COMMENT 'Hashed answer to password recovery question',
+  `password_question_reminder` datetime DEFAULT NULL COMMENT 'When to prompt user to set up security question',
+  `password_reset_key` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`username`),
+  UNIQUE KEY `password_reset_key` (`password_reset_key`),
+  KEY `password_question` (`password_question`),
+  CONSTRAINT `redcap_auth_ibfk_1` FOREIGN KEY (`password_question`) REFERENCES `redcap_auth_questions` (`qid`) ON DELETE SET NULL ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 LOCK TABLES `redcap_auth` WRITE;
 /*!40000 ALTER TABLE `redcap_auth` DISABLE KEYS */;
@@ -209,6 +234,15 @@ UNLOCK TABLES;
 
 # Dump of table redcap_auth_history
 # ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `redcap_auth_history`;
+
+CREATE TABLE `redcap_auth_history` (
+  `username` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `timestamp` datetime DEFAULT NULL,
+  KEY `username_password` (`username`(191),`password`(191))
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Stores last 5 passwords';
 
 LOCK TABLES `redcap_auth_history` WRITE;
 /*!40000 ALTER TABLE `redcap_auth_history` DISABLE KEYS */;
@@ -232,6 +266,14 @@ UNLOCK TABLES;
 
 # Dump of table redcap_auth_questions
 # ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `redcap_auth_questions`;
+
+CREATE TABLE `redcap_auth_questions` (
+  `qid` int(10) NOT NULL AUTO_INCREMENT,
+  `question` text COLLATE utf8mb4_unicode_ci,
+  PRIMARY KEY (`qid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 LOCK TABLES `redcap_auth_questions` WRITE;
 /*!40000 ALTER TABLE `redcap_auth_questions` DISABLE KEYS */;
@@ -264,8 +306,87 @@ VALUES
 UNLOCK TABLES;
 
 
+# Dump of table redcap_cde_cache
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `redcap_cde_cache`;
+
+CREATE TABLE `redcap_cde_cache` (
+  `tinyId` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `steward` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `choices` text COLLATE utf8mb4_unicode_ci,
+  `updated_on` datetime DEFAULT NULL,
+  PRIMARY KEY (`tinyId`),
+  KEY `steward` (`steward`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+
+# Dump of table redcap_cde_field_mapping
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `redcap_cde_field_mapping`;
+
+CREATE TABLE `redcap_cde_field_mapping` (
+  `project_id` int(10) DEFAULT NULL,
+  `field_name` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `tinyId` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `steward` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `org_selected` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  UNIQUE KEY `project_field` (`project_id`,`field_name`),
+  KEY `org_project` (`org_selected`,`project_id`),
+  KEY `steward_project` (`steward`,`project_id`),
+  KEY `tinyId_project` (`tinyId`,`project_id`),
+  CONSTRAINT `redcap_cde_field_mapping_ibfk_1` FOREIGN KEY (`project_id`) REFERENCES `redcap_projects` (`project_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+
+# Dump of table redcap_cde_orgs
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `redcap_cde_orgs`;
+
+CREATE TABLE `redcap_cde_orgs` (
+  `org_name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `org_description` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`org_name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+LOCK TABLES `redcap_cde_orgs` WRITE;
+/*!40000 ALTER TABLE `redcap_cde_orgs` DISABLE KEYS */;
+
+INSERT INTO `redcap_cde_orgs` (`org_name`, `org_description`)
+VALUES
+	('AHRQ','Agency for Healthcare Research and Quality'),
+	('cLBP','Chronic Low Back Pain'),
+	('External Forms','External Forms'),
+	('GRDR','Global Rare Diseases Patient Registry Data Repository'),
+	('NCI','National Cancer Institute'),
+	('NEI','National Eye Institute'),
+	('NHLBI','National Heart, Lung and Blood Institute'),
+	('NICHD','Eunice Kennedy Shriver National Institute of Child Health and Human Development'),
+	('NIDA','National Institute on Drug Abuse'),
+	('NINDS','National Institute of Neurological Disorders and Stroke'),
+	('NINR','National Institute of Nursing'),
+	('NLM','National Library of Medicine'),
+	('ONC','Office of the National Coordinator'),
+	('Women\'s CRN','Women\'s Health Technology Coordinated Registry Network');
+
+/*!40000 ALTER TABLE `redcap_cde_orgs` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
 # Dump of table redcap_config
 # ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `redcap_config`;
+
+CREATE TABLE `redcap_config` (
+  `field_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `value` mediumtext COLLATE utf8mb4_unicode_ci,
+  PRIMARY KEY (`field_name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Stores global settings';
 
 LOCK TABLES `redcap_config` WRITE;
 /*!40000 ALTER TABLE `redcap_config` DISABLE KEYS */;
@@ -345,6 +466,7 @@ VALUES
 	('enable_survey_text_to_speech','1'),
 	('enable_url_shortener','1'),
 	('enable_url_shortener_redcap','1'),
+	('enable_user_allowlist','0'),
 	('enable_Userllowlist','0'),
 	('external_module_alt_paths',''),
 	('external_modules_allow_activation_user_request','1'),
@@ -374,6 +496,7 @@ VALUES
 	('fhir_source_system_custom_name','EHR'),
 	('fhir_standalone_authentication_flow','standalone_launch'),
 	('fhir_stop_fetch_inactivity_days','7'),
+	('fhir_url_user_access',''),
 	('fhir_url_Userccess',''),
 	('fhir_user_rights_super_users_only','1'),
 	('field_comment_log_enabled_default','1'),
@@ -466,6 +589,7 @@ VALUES
 	('realtime_webservice_stop_fetch_inactivity_days','7'),
 	('realtime_webservice_url_data',''),
 	('realtime_webservice_url_metadata',''),
+	('realtime_webservice_url_user_access',''),
 	('realtime_webservice_url_Userccess',''),
 	('realtime_webservice_user_rights_super_users_only','1'),
 	('record_locking_pdf_vault_filesystem_host',''),
@@ -478,15 +602,15 @@ VALUES
 	('redcap_base_url_display_error_on_mismatch','1'),
 	('redcap_last_install_date','2020-09-24'),
 	('redcap_survey_base_url',''),
-	('redcap_updates_available','{\"lts\":[],\"std\":[],\"current_branch\":\"std\",\"latest_version\":null}'),
-	('redcap_updates_available_last_check','2020-09-24 20:57:02'),
+	('redcap_updates_available','{\"lts\":[{\"version_number\":\"10.6.17\",\"release_date\":\"2021-04-22\",\"release_notes\":\"Bug fixes\"},{\"version_number\":\"10.6.16\",\"release_date\":\"2021-04-16\",\"release_notes\":\"Bug fixes\"},{\"version_number\":\"10.6.15\",\"release_date\":\"2021-04-09\",\"release_notes\":\"Bug fixes\"},{\"version_number\":\"10.6.14\",\"release_date\":\"2021-04-02\",\"release_notes\":\"Bug fixes\"},{\"version_number\":\"10.6.13\",\"release_date\":\"2021-03-26\",\"release_notes\":\"Bug fixes\"},{\"version_number\":\"10.6.12\",\"release_date\":\"2021-03-05\",\"release_notes\":\"Bug fixes\"},{\"version_number\":\"10.6.11\",\"release_date\":\"2021-02-26\",\"release_notes\":\"Bug fixes\"},{\"version_number\":\"10.6.10\",\"release_date\":\"2021-02-19\",\"release_notes\":\"Bug fixes\"},{\"version_number\":\"10.6.9\",\"release_date\":\"2021-02-12\",\"release_notes\":\"Bug fixes\"},{\"version_number\":\"10.6.8\",\"release_date\":\"2021-02-05\",\"release_notes\":\"Bug fixes\"}],\"std\":[{\"version_number\":\"10.9.4\",\"release_date\":\"2021-04-22\",\"release_notes\":\"Bug fixes\"},{\"version_number\":\"10.9.3\",\"release_date\":\"2021-04-16\",\"release_notes\":\"Bug fixes + minor improvements\"},{\"version_number\":\"10.9.2\",\"release_date\":\"2021-04-09\",\"release_notes\":\"Bug fixes + minor improvements\"},{\"version_number\":\"10.9.1\",\"release_date\":\"2021-04-02\",\"release_notes\":\"Bug fixes + minor improvements\"},{\"version_number\":\"10.9.0\",\"release_date\":\"2021-03-26\",\"release_notes\":\"New features: Mappable field for Twilio delivery preference + new survey settings\\r; Bug fixes + minor improvements\"},{\"version_number\":\"10.8.5\",\"release_date\":\"2021-03-05\",\"release_notes\":\"Bug fixes + minor improvements\"},{\"version_number\":\"10.8.4\",\"release_date\":\"2021-02-26\",\"release_notes\":\"Bug fixes + minor improvements\"},{\"version_number\":\"10.8.3\",\"release_date\":\"2021-02-19\",\"release_notes\":\"Bug fixes\"},{\"version_number\":\"10.8.2\",\"release_date\":\"2021-02-12\",\"release_notes\":\"Bug fixes\"},{\"version_number\":\"10.8.1\",\"release_date\":\"2021-02-05\",\"release_notes\":\"Bug fixes\"}],\"current_branch\":\"lts\",\"latest_version\":\"10.9.4\"}'),
+	('redcap_updates_available_last_check','2021-04-28 10:47:49'),
 	('redcap_updates_community_password',''),
 	('redcap_updates_community_user',''),
 	('redcap_updates_password',''),
 	('redcap_updates_password_encrypted','1'),
 	('redcap_updates_user',''),
 	('redcap_version','10.6.4'),
-	('report_stats_url','https://redcap.vanderbilt.edu/consortium/collect_stats.php?hostname=localhost&ip=172.25.0.4&alt_hostname=localhost&hostkey_hash=54259fdcd1bc0144cdbad41ba4f7ef54&num_prots=0&num_prods=0&num_archived=0&rnd982g4078393ae839z1_auto&purposes=0,0,0,0&num_inactive=0&num_users=1&auth_meth=none&version=10.6.4&activeusers1m=0&activeusers6m=0&activeuserstotal=0&usersloggedin1m=1&usersloggedin6m=1&usersloggedintotal=1&hostlabel=SoAndSo+University&homepage_contact=REDCap+Administrator+%28123-456-7890%29&homepage_contact_email=email@yoursite.edu&dts=0&ddp=0&ddp_records=0&ddp_fhir=0&ddp_fhir_records=0&data_mart=&data_mart_records=&rand=0&dde=0&parentchild=0&cats_dev=0&cats_prod=0&mobile_app_users=0&mobile_app_users1m=0&mobile_app_users6m=0&mobile_app_projects_init=0&mobile_app_projects_sync=0&two_factor=DISABLED&twilio_projects=0&full_url=http%3A%2F%2Flocalhost%2F&site_org_type=SoAndSo+Institute+for+Clinical+and+Translational+Research&econsent_projects=0&econsent_files=0&aws_quickstart=0&azure_quickstart=0&alerts=0&alerts_projects=0&alerts_projects_prod=0&php_version=7.3.16&mysql_version=5.7&modules=%5B%5D'),
+	('report_stats_url','https://redcap.vanderbilt.edu/consortium/collect_stats.php?hostname=localhost&ip=172.18.0.4&alt_hostname=localhost&hostkey_hash=65eef0b8cfb23620f1dd1b6cbf7d6977&num_prots=0&num_prods=0&num_archived=0&rnd982g4078393ae839z1_auto&purposes=0,0,0,0&num_inactive=0&num_users=6&auth_meth=table&version=10.6.4&activeusers1m=0&activeusers6m=0&activeuserstotal=6&usersloggedin1m=2&usersloggedin6m=2&usersloggedintotal=6&hostlabel=SoAndSo+University&homepage_contact=REDCap+Administrator+%28123-456-7890%29&homepage_contact_email=email@yoursite.edu&dts=0&ddp=0&ddp_records=0&ddp_fhir=0&ddp_fhir_records=0&data_mart=&data_mart_records=&rand=0&dde=0&parentchild=0&cats_dev=0&cats_prod=0&mobile_app_users=0&mobile_app_users1m=0&mobile_app_users6m=0&mobile_app_projects_init=0&mobile_app_projects_sync=0&two_factor=DISABLED&twilio_projects=0&full_url=http%3A%2F%2Flocalhost%3A8080%2F&site_org_type=SoAndSo+Institute+for+Clinical+and+Translational+Research&econsent_projects=0&econsent_files=0&aws_quickstart=0&azure_quickstart=0&alerts=0&alerts_projects=0&alerts_projects_prod=0&php_version=7.3.16&mysql_version=5.7&modules=%5B%5D'),
 	('sams_logout',''),
 	('send_emails_admin_tasks','1'),
 	('sendgrid_api_key',''),
@@ -508,7 +632,7 @@ VALUES
 	('suspend_users_inactive_type',''),
 	('system_offline','0'),
 	('system_offline_message',''),
-	('temp_files_last_delete','2020-09-24 20:57:02'),
+	('temp_files_last_delete','2021-04-28 10:47:49'),
 	('twilio_display_info_project_setup','0'),
 	('twilio_enabled_by_super_users_only','0'),
 	('twilio_enabled_global','1'),
@@ -544,46 +668,69 @@ UNLOCK TABLES;
 # Dump of table redcap_crons
 # ------------------------------------------------------------
 
+DROP TABLE IF EXISTS `redcap_crons`;
+
+CREATE TABLE `redcap_crons` (
+  `cron_id` int(10) NOT NULL AUTO_INCREMENT,
+  `cron_name` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Unique name for each job',
+  `external_module_id` int(11) DEFAULT NULL,
+  `cron_description` text COLLATE utf8mb4_unicode_ci,
+  `cron_enabled` enum('ENABLED','DISABLED') COLLATE utf8mb4_unicode_ci DEFAULT 'ENABLED',
+  `cron_frequency` int(10) DEFAULT NULL COMMENT 'seconds',
+  `cron_max_run_time` int(10) DEFAULT NULL COMMENT 'max # seconds a cron should run',
+  `cron_instances_max` int(2) NOT NULL DEFAULT '1' COMMENT 'Number of instances that can run simultaneously',
+  `cron_instances_current` int(2) NOT NULL DEFAULT '0' COMMENT 'Current number of instances running',
+  `cron_last_run_start` datetime DEFAULT NULL,
+  `cron_last_run_end` datetime DEFAULT NULL,
+  `cron_times_failed` int(2) NOT NULL DEFAULT '0' COMMENT 'After X failures, set as Disabled',
+  `cron_external_url` text COLLATE utf8mb4_unicode_ci COMMENT 'URL to call for custom jobs not defined by REDCap',
+  PRIMARY KEY (`cron_id`),
+  UNIQUE KEY `cron_name_module_id` (`cron_name`,`external_module_id`),
+  KEY `external_module_id` (`external_module_id`),
+  CONSTRAINT `redcap_crons_ibfk_1` FOREIGN KEY (`external_module_id`) REFERENCES `redcap_external_modules` (`external_module_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='List of all jobs to be run by universal cron job';
+
 LOCK TABLES `redcap_crons` WRITE;
 /*!40000 ALTER TABLE `redcap_crons` DISABLE KEYS */;
 
 INSERT INTO `redcap_crons` (`cron_id`, `cron_name`, `external_module_id`, `cron_description`, `cron_enabled`, `cron_frequency`, `cron_max_run_time`, `cron_instances_max`, `cron_instances_current`, `cron_last_run_start`, `cron_last_run_end`, `cron_times_failed`, `cron_external_url`)
 VALUES
 	(1,'PubMed',NULL,'Query the PubMed API to find publications associated with PIs in REDCap, and store publication attributes and PI/project info. Emails will then be sent to any PIs that have been found to have publications in PubMed, and (if applicable) will be asked to associate their publication to a REDCap project.','DISABLED',86400,7200,1,0,NULL,NULL,0,NULL),
-	(2,'RemoveTempAndDeletedFiles',NULL,'Delete all files from the REDCap temp directory, and delete all edoc and Send-It files marked for deletion.','ENABLED',120,600,1,0,NULL,NULL,0,NULL),
-	(3,'ExpireSurveys',NULL,'For any surveys where an expiration timestamp is set, if the timestamp <= NOW, then make the survey inactive.','ENABLED',120,600,1,0,NULL,NULL,0,NULL),
-	(4,'SurveyInvitationEmailer',NULL,'Mailer that sends any survey invitations that have been scheduled.','ENABLED',60,1800,5,0,NULL,NULL,0,NULL),
-	(5,'DeleteProjects',NULL,'Delete all projects that are scheduled for permanent deletion','ENABLED',300,1200,1,0,NULL,NULL,0,NULL),
-	(6,'ClearIPCache',NULL,'Clear all IP addresses older than X minutes from the redcap_ip_cache table.','ENABLED',180,60,1,0,NULL,NULL,0,NULL),
-	(7,'ExpireUsers',NULL,'For any users whose expiration timestamp is set, if the timestamp <= NOW, then suspend the user\'s account and set expiration time back to NULL.','ENABLED',120,600,1,0,NULL,NULL,0,NULL),
-	(8,'WarnUsersAccountExpiration',NULL,'For any users whose expiration timestamp is set, if the expiration time is less than X days from now, then email the user to warn them of their impending account expiration.','ENABLED',86400,600,1,0,NULL,NULL,0,NULL),
-	(9,'SuspendInactiveUsers',NULL,'For any users whose last login time exceeds the defined max days of inactivity, auto-suspend their account (if setting enabled).','ENABLED',86400,600,1,0,NULL,NULL,0,NULL),
-	(10,'ReminderUserAccessDashboard',NULL,'At a regular interval, email all users to remind them to visit the User Access Dashboard page. Enables the ReminderUserAccessDashboardEmail cron job.','ENABLED',86400,600,1,0,NULL,NULL,0,NULL),
+	(2,'RemoveTempAndDeletedFiles',NULL,'Delete all files from the REDCap temp directory, and delete all edoc and Send-It files marked for deletion.','ENABLED',120,600,1,0,'2021-04-28 10:47:50','2021-04-28 10:47:50',0,NULL),
+	(3,'ExpireSurveys',NULL,'For any surveys where an expiration timestamp is set, if the timestamp <= NOW, then make the survey inactive.','ENABLED',120,600,1,0,'2021-04-28 10:47:50','2021-04-28 10:47:50',0,NULL),
+	(4,'SurveyInvitationEmailer',NULL,'Mailer that sends any survey invitations that have been scheduled.','ENABLED',60,1800,5,0,'2021-04-28 10:47:50','2021-04-28 10:47:50',0,NULL),
+	(5,'DeleteProjects',NULL,'Delete all projects that are scheduled for permanent deletion','ENABLED',300,1200,1,0,'2021-04-28 10:47:50','2021-04-28 10:47:50',0,NULL),
+	(6,'ClearIPCache',NULL,'Clear all IP addresses older than X minutes from the redcap_ip_cache table.','ENABLED',180,60,1,0,'2021-04-28 10:47:50','2021-04-28 10:47:50',0,NULL),
+	(7,'ExpireUsers',NULL,'For any users whose expiration timestamp is set, if the timestamp <= NOW, then suspend the user\'s account and set expiration time back to NULL.','ENABLED',120,600,1,0,'2021-04-28 10:47:50','2021-04-28 10:47:50',0,NULL),
+	(8,'WarnUsersAccountExpiration',NULL,'For any users whose expiration timestamp is set, if the expiration time is less than X days from now, then email the user to warn them of their impending account expiration.','ENABLED',86400,600,1,0,'2021-04-28 10:47:50','2021-04-28 10:47:50',0,NULL),
+	(9,'SuspendInactiveUsers',NULL,'For any users whose last login time exceeds the defined max days of inactivity, auto-suspend their account (if setting enabled).','ENABLED',86400,600,1,0,'2021-04-28 10:47:50','2021-04-28 10:47:50',0,NULL),
+	(10,'ReminderUserAccessDashboard',NULL,'At a regular interval, email all users to remind them to visit the User Access Dashboard page. Enables the ReminderUserAccessDashboardEmail cron job.','ENABLED',86400,600,1,0,'2021-04-28 10:47:50','2021-04-28 10:47:50',0,NULL),
 	(11,'ReminderUserAccessDashboardEmail',NULL,'Email all users in batches to remind them to visit the User Access Dashboard page. Will disable itself when done.','DISABLED',60,1800,5,0,NULL,NULL,0,NULL),
-	(12,'DDPQueueRecordsAllProjects',NULL,'Queue records that are ready to be fetched from the external source system via the DDP service.','ENABLED',300,600,1,0,NULL,NULL,0,NULL),
-	(13,'DDPFetchRecordsAllProjects',NULL,'Fetch data from the external source system for records already queued by the DDP service.','ENABLED',60,1800,5,0,NULL,NULL,0,NULL),
-	(14,'PurgeCronHistory',NULL,'Purges all rows from the crons history table that are older than one week.','ENABLED',86400,600,1,0,NULL,NULL,0,NULL),
+	(12,'DDPQueueRecordsAllProjects',NULL,'Queue records that are ready to be fetched from the external source system via the DDP service.','ENABLED',300,600,1,0,'2021-04-28 10:47:50','2021-04-28 10:47:51',0,NULL),
+	(13,'DDPFetchRecordsAllProjects',NULL,'Fetch data from the external source system for records already queued by the DDP service.','ENABLED',60,1800,5,0,'2021-04-28 10:47:50','2021-04-28 10:47:51',0,NULL),
+	(14,'PurgeCronHistory',NULL,'Purges all rows from the crons history table that are older than one week.','ENABLED',86400,600,1,0,'2021-04-28 10:47:50','2021-04-28 10:47:50',0,NULL),
 	(15,'UpdateUserPasswordAlgo',NULL,'Send email to all Table-based users telling them to log in for the purpose of upgrading their password security (one time only)','DISABLED',86400,7200,1,0,NULL,NULL,0,NULL),
 	(16,'AutomatedSurveyInvitationsDatediffChecker',NULL,'Check all conditional logic in Automated Surveys Invitations that uses \"today\" inside datediff() function','DISABLED',43200,7200,1,0,NULL,NULL,0,NULL),
-	(17,'AutomatedSurveyInvitationsDatediffChecker2',NULL,'Check all conditional logic in Automated Surveys Invitations that uses \"today\" inside datediff() function - replacement for AutomatedSurveyInvitationsDatediffChecker','ENABLED',14400,7200,1,0,NULL,NULL,0,NULL),
-	(18,'ClearSurveyShortCodes',NULL,'Clear all survey short codes older than X minutes.','ENABLED',300,60,1,0,NULL,NULL,0,NULL),
-	(19,'ClearLogViewRequests',NULL,'Clear all items from redcap_log_view_requests table older than X hours.','ENABLED',1800,300,1,0,NULL,NULL,0,NULL),
-	(20,'EraseTwilioLog',NULL,'Clear all items from redcap_surveys_erase_twilio_log table.','ENABLED',120,300,1,0,NULL,NULL,0,NULL),
-	(21,'ClearNewRecordCache',NULL,'Clear all items from redcap_new_record_cache table older than X hours.','ENABLED',10800,300,1,0,NULL,NULL,0,NULL),
-	(22,'FixStuckSurveyInvitations',NULL,'Reset any survey invitations stuck in SENDING status for than X hours back to QUEUED status.','ENABLED',3600,300,1,0,NULL,NULL,0,NULL),
-	(23,'DbUsage',NULL,'Record the daily space usage of the database tables and the uploaded files stored on the server.','ENABLED',86400,600,1,0,NULL,NULL,0,NULL),
-	(24,'RemoveOutdatedRecordCounts',NULL,'Delete all rows from the record counts table older than X days.','ENABLED',3600,60,1,0,NULL,NULL,0,NULL),
-	(25,'DDPReencryptData',NULL,'Re-encrypt all DDP data from the external source system.','ENABLED',60,1800,10,0,NULL,NULL,0,NULL),
-	(26,'UserMessagingEmailNotifications',NULL,'Send notification emails to users who are logged out but have received a user message or notification.','ENABLED',60,600,1,0,NULL,NULL,0,NULL),
-	(27,'CacheStatsReportingUrl',NULL,'Generate the stats reporting URL and store it in the config table.','ENABLED',10800,1200,1,0,NULL,NULL,0,NULL),
-	(28,'ExternalModuleValidation',NULL,'Perform various validation checks on External Modules that are installed.','ENABLED',1800,300,1,0,NULL,NULL,0,NULL),
-	(29,'CheckREDCapRepoUpdates',NULL,'Check if any installed External Modules have updates available on the REDCap Repo.','ENABLED',10800,300,1,0,NULL,NULL,0,NULL),
-	(30,'CheckREDCapVersionUpdates',NULL,'Check if there is a newer REDCap version available','ENABLED',10800,300,1,0,NULL,NULL,0,NULL),
-	(31,'DeleteFileRepositoryExportFiles',NULL,'For projects with this feature enabled, delete all archived data export files older than X days.','ENABLED',43200,300,1,0,NULL,NULL,0,NULL),
-	(32,'AlertsNotificationsSender',NULL,'Sends notifications for Alerts','ENABLED',60,1800,5,0,NULL,NULL,0,NULL),
-	(33,'AlertsNotificationsDatediffChecker',NULL,'Check all conditional logic in Alerts that uses \"today\" inside datediff() function','ENABLED',14400,7200,1,0,NULL,NULL,0,NULL),
-	(34,'ClinicalDataMartDataFetch',NULL,'Fetches EHR data for all Clinical Data Mart projects','ENABLED',43200,3600,1,0,NULL,NULL,0,NULL),
-	(35,'ProcessQueue',NULL,'Process queue with a worker.','ENABLED',60,3600,5,0,NULL,NULL,0,NULL);
+	(17,'AutomatedSurveyInvitationsDatediffChecker2',NULL,'Check all conditional logic in Automated Surveys Invitations that uses \"today\" inside datediff() function - replacement for AutomatedSurveyInvitationsDatediffChecker','ENABLED',14400,7200,1,0,'2021-04-28 10:47:50','2021-04-28 10:47:50',0,NULL),
+	(18,'ClearSurveyShortCodes',NULL,'Clear all survey short codes older than X minutes.','ENABLED',300,60,1,0,'2021-04-28 10:47:50','2021-04-28 10:47:50',0,NULL),
+	(19,'ClearLogViewRequests',NULL,'Clear all items from redcap_log_view_requests table older than X hours.','ENABLED',1800,300,1,0,'2021-04-28 10:47:50','2021-04-28 10:47:50',0,NULL),
+	(20,'EraseTwilioLog',NULL,'Clear all items from redcap_surveys_erase_twilio_log table.','ENABLED',120,300,1,0,'2021-04-28 10:47:50','2021-04-28 10:47:50',0,NULL),
+	(21,'ClearNewRecordCache',NULL,'Clear all items from redcap_new_record_cache table older than X hours.','ENABLED',10800,300,1,0,'2021-04-28 10:47:50','2021-04-28 10:47:50',0,NULL),
+	(22,'FixStuckSurveyInvitations',NULL,'Reset any survey invitations stuck in SENDING status for than X hours back to QUEUED status.','ENABLED',3600,300,1,0,'2021-04-28 10:47:50','2021-04-28 10:47:50',0,NULL),
+	(23,'DbUsage',NULL,'Record the daily space usage of the database tables and the uploaded files stored on the server.','ENABLED',86400,600,1,0,'2021-04-28 10:47:50','2021-04-28 10:47:50',0,NULL),
+	(24,'RemoveOutdatedRecordCounts',NULL,'Delete all rows from the record counts table older than X days.','ENABLED',3600,60,1,0,'2021-04-28 10:47:50','2021-04-28 10:47:50',0,NULL),
+	(25,'DDPReencryptData',NULL,'Re-encrypt all DDP data from the external source system.','ENABLED',60,1800,10,0,'2021-04-28 10:47:50','2021-04-28 10:47:51',0,NULL),
+	(26,'UserMessagingEmailNotifications',NULL,'Send notification emails to users who are logged out but have received a user message or notification.','ENABLED',60,600,1,0,'2021-04-28 10:47:50','2021-04-28 10:47:50',0,NULL),
+	(27,'CacheStatsReportingUrl',NULL,'Generate the stats reporting URL and store it in the config table.','ENABLED',10800,1200,1,0,'2021-04-28 10:47:50','2021-04-28 10:47:50',0,NULL),
+	(28,'ExternalModuleValidation',NULL,'Perform various validation checks on External Modules that are installed.','ENABLED',1800,300,1,0,'2021-04-28 10:47:50','2021-04-28 10:47:50',0,NULL),
+	(29,'CheckREDCapRepoUpdates',NULL,'Check if any installed External Modules have updates available on the REDCap Repo.','ENABLED',10800,300,1,0,'2021-04-28 10:47:50','2021-04-28 10:47:50',0,NULL),
+	(30,'CheckREDCapVersionUpdates',NULL,'Check if there is a newer REDCap version available','ENABLED',10800,300,1,0,'2021-04-28 10:47:50','2021-04-28 10:47:51',0,NULL),
+	(31,'DeleteFileRepositoryExportFiles',NULL,'For projects with this feature enabled, delete all archived data export files older than X days.','ENABLED',43200,300,1,0,'2021-04-28 10:47:50','2021-04-28 10:47:51',0,NULL),
+	(32,'AlertsNotificationsSender',NULL,'Sends notifications for Alerts','ENABLED',60,1800,5,0,'2021-04-28 10:47:50','2021-04-28 10:47:51',0,NULL),
+	(33,'AlertsNotificationsDatediffChecker',NULL,'Check all conditional logic in Alerts that uses \"today\" inside datediff() function','ENABLED',14400,7200,1,0,'2021-04-28 10:47:50','2021-04-28 10:47:51',0,NULL),
+	(34,'ClinicalDataMartDataFetch',NULL,'Fetches EHR data for all Clinical Data Mart projects','ENABLED',43200,3600,1,0,'2021-04-28 10:47:50','2021-04-28 10:47:51',0,NULL),
+	(35,'ProcessQueue',NULL,'Process queue with a worker.','ENABLED',60,3600,5,0,'2021-04-28 10:47:50','2021-04-28 10:47:51',0,NULL),
+	(36,'DbHealthCheck',NULL,'Kill any long-running database queries and check percentage of database connections being used','ENABLED',120,180,1,0,'2021-04-28 10:47:50','2021-04-28 10:47:51',0,NULL);
 
 /*!40000 ALTER TABLE `redcap_crons` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -592,130 +739,614 @@ UNLOCK TABLES;
 # Dump of table redcap_crons_history
 # ------------------------------------------------------------
 
+DROP TABLE IF EXISTS `redcap_crons_history`;
+
+CREATE TABLE `redcap_crons_history` (
+  `ch_id` int(10) NOT NULL AUTO_INCREMENT,
+  `cron_id` int(10) DEFAULT NULL,
+  `cron_run_start` datetime DEFAULT NULL,
+  `cron_run_end` datetime DEFAULT NULL,
+  `cron_run_status` enum('PROCESSING','COMPLETED','FAILED') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `cron_info` text COLLATE utf8mb4_unicode_ci COMMENT 'Any pertinent info that might be logged',
+  PRIMARY KEY (`ch_id`),
+  KEY `cron_id` (`cron_id`),
+  KEY `cron_run_end` (`cron_run_end`),
+  KEY `cron_run_start` (`cron_run_start`),
+  CONSTRAINT `redcap_crons_history_ibfk_1` FOREIGN KEY (`cron_id`) REFERENCES `redcap_crons` (`cron_id`) ON DELETE SET NULL ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='History of all jobs run by universal cron job';
+
+LOCK TABLES `redcap_crons_history` WRITE;
+/*!40000 ALTER TABLE `redcap_crons_history` DISABLE KEYS */;
+
+INSERT INTO `redcap_crons_history` (`ch_id`, `cron_id`, `cron_run_start`, `cron_run_end`, `cron_run_status`, `cron_info`)
+VALUES
+	(1,2,'2021-04-28 10:47:50','2021-04-28 10:47:50','COMPLETED',NULL),
+	(2,3,'2021-04-28 10:47:50','2021-04-28 10:47:50','COMPLETED',NULL),
+	(3,4,'2021-04-28 10:47:50','2021-04-28 10:47:50','COMPLETED',NULL),
+	(4,5,'2021-04-28 10:47:50','2021-04-28 10:47:50','COMPLETED',NULL),
+	(5,6,'2021-04-28 10:47:50','2021-04-28 10:47:50','COMPLETED',NULL),
+	(6,7,'2021-04-28 10:47:50','2021-04-28 10:47:50','COMPLETED',NULL),
+	(7,8,'2021-04-28 10:47:50','2021-04-28 10:47:50','COMPLETED',NULL),
+	(8,9,'2021-04-28 10:47:50','2021-04-28 10:47:50','COMPLETED',NULL),
+	(9,10,'2021-04-28 10:47:50','2021-04-28 10:47:50','COMPLETED',NULL),
+	(10,14,'2021-04-28 10:47:50','2021-04-28 10:47:50','COMPLETED',NULL),
+	(11,17,'2021-04-28 10:47:50','2021-04-28 10:47:50','COMPLETED',NULL),
+	(12,18,'2021-04-28 10:47:50','2021-04-28 10:47:50','COMPLETED',NULL),
+	(13,19,'2021-04-28 10:47:50','2021-04-28 10:47:50','COMPLETED',NULL),
+	(14,20,'2021-04-28 10:47:50','2021-04-28 10:47:50','COMPLETED',NULL),
+	(15,21,'2021-04-28 10:47:50','2021-04-28 10:47:50','COMPLETED',NULL),
+	(16,22,'2021-04-28 10:47:50','2021-04-28 10:47:50','COMPLETED',NULL),
+	(17,23,'2021-04-28 10:47:50','2021-04-28 10:47:50','COMPLETED','1 row added to redcap_history_size'),
+	(18,24,'2021-04-28 10:47:50','2021-04-28 10:47:50','COMPLETED',NULL),
+	(19,26,'2021-04-28 10:47:50','2021-04-28 10:47:50','COMPLETED',NULL),
+	(20,27,'2021-04-28 10:47:50','2021-04-28 10:47:50','COMPLETED','The stats reporting URL was cached in redcap_config'),
+	(21,28,'2021-04-28 10:47:50','2021-04-28 10:47:50','COMPLETED',NULL),
+	(22,29,'2021-04-28 10:47:50','2021-04-28 10:47:50','COMPLETED',NULL),
+	(23,30,'2021-04-28 10:47:50','2021-04-28 10:47:51','COMPLETED','20 REDCap versions are available for upgrading to: Array, Array, Array, Array, Array, Array, Array, Array, Array, Array, Array, Array, Array, Array, Array, Array, Array, Array, Array, Array'),
+	(24,31,'2021-04-28 10:47:50','2021-04-28 10:47:51','COMPLETED',NULL),
+	(25,32,'2021-04-28 10:47:50','2021-04-28 10:47:51','COMPLETED',NULL),
+	(26,33,'2021-04-28 10:47:50','2021-04-28 10:47:51','COMPLETED',NULL),
+	(27,34,'2021-04-28 10:47:50','2021-04-28 10:47:51','COMPLETED',NULL),
+	(28,36,'2021-04-28 10:47:50','2021-04-28 10:47:51','COMPLETED',NULL),
+	(29,35,'2021-04-28 10:47:50','2021-04-28 10:47:51','COMPLETED',NULL),
+	(30,12,'2021-04-28 10:47:50','2021-04-28 10:47:51','COMPLETED',NULL),
+	(31,13,'2021-04-28 10:47:50','2021-04-28 10:47:51','COMPLETED',NULL),
+	(32,25,'2021-04-28 10:47:50','2021-04-28 10:47:51','COMPLETED',NULL);
+
+/*!40000 ALTER TABLE `redcap_crons_history` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 # Dump of table redcap_dashboard_ip_location_cache
 # ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `redcap_dashboard_ip_location_cache`;
+
+CREATE TABLE `redcap_dashboard_ip_location_cache` (
+  `ip` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `latitude` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `longitude` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `city` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `region` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `country` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`ip`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
 
 # Dump of table redcap_data
 # ------------------------------------------------------------
 
+DROP TABLE IF EXISTS `redcap_data`;
+
+CREATE TABLE `redcap_data` (
+  `project_id` int(10) NOT NULL DEFAULT '0',
+  `event_id` int(10) DEFAULT NULL,
+  `record` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `field_name` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `value` text COLLATE utf8mb4_unicode_ci,
+  `instance` smallint(4) DEFAULT NULL,
+  KEY `event_id_instance` (`event_id`,`instance`),
+  KEY `proj_record_field` (`project_id`,`record`,`field_name`),
+  KEY `project_field` (`project_id`,`field_name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 
 
 # Dump of table redcap_data_access_groups
 # ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `redcap_data_access_groups`;
+
+CREATE TABLE `redcap_data_access_groups` (
+  `group_id` int(10) NOT NULL AUTO_INCREMENT,
+  `project_id` int(10) DEFAULT NULL,
+  `group_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`group_id`),
+  KEY `project_id` (`project_id`),
+  CONSTRAINT `redcap_data_access_groups_ibfk_1` FOREIGN KEY (`project_id`) REFERENCES `redcap_projects` (`project_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
 
 # Dump of table redcap_data_access_groups_users
 # ------------------------------------------------------------
 
+DROP TABLE IF EXISTS `redcap_data_access_groups_users`;
+
+CREATE TABLE `redcap_data_access_groups_users` (
+  `project_id` int(10) DEFAULT NULL,
+  `group_id` int(10) DEFAULT NULL,
+  `username` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  UNIQUE KEY `group_id` (`group_id`,`username`),
+  UNIQUE KEY `username` (`username`,`project_id`,`group_id`),
+  KEY `project_id` (`project_id`),
+  CONSTRAINT `redcap_data_access_groups_users_ibfk_1` FOREIGN KEY (`group_id`) REFERENCES `redcap_data_access_groups` (`group_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `redcap_data_access_groups_users_ibfk_2` FOREIGN KEY (`project_id`) REFERENCES `redcap_projects` (`project_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 
 
 # Dump of table redcap_data_dictionaries
 # ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `redcap_data_dictionaries`;
+
+CREATE TABLE `redcap_data_dictionaries` (
+  `dd_id` int(10) NOT NULL AUTO_INCREMENT,
+  `project_id` int(10) DEFAULT NULL,
+  `doc_id` int(10) DEFAULT NULL,
+  `ui_id` int(10) DEFAULT NULL,
+  PRIMARY KEY (`dd_id`),
+  KEY `doc_id` (`doc_id`),
+  KEY `project_id` (`project_id`),
+  KEY `ui_id` (`ui_id`),
+  CONSTRAINT `redcap_data_dictionaries_ibfk_1` FOREIGN KEY (`doc_id`) REFERENCES `redcap_edocs_metadata` (`doc_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `redcap_data_dictionaries_ibfk_2` FOREIGN KEY (`project_id`) REFERENCES `redcap_projects` (`project_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `redcap_data_dictionaries_ibfk_3` FOREIGN KEY (`ui_id`) REFERENCES `redcap_user_information` (`ui_id`) ON DELETE SET NULL ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
 
 # Dump of table redcap_data_quality_resolutions
 # ------------------------------------------------------------
 
+DROP TABLE IF EXISTS `redcap_data_quality_resolutions`;
+
+CREATE TABLE `redcap_data_quality_resolutions` (
+  `res_id` int(10) NOT NULL AUTO_INCREMENT,
+  `status_id` int(10) DEFAULT NULL COMMENT 'FK from data_quality_status',
+  `ts` datetime DEFAULT NULL COMMENT 'Date/time added',
+  `user_id` int(10) DEFAULT NULL COMMENT 'Current user',
+  `response_requested` int(1) NOT NULL DEFAULT '0' COMMENT 'Is a response requested?',
+  `response` enum('DATA_MISSING','TYPOGRAPHICAL_ERROR','CONFIRMED_CORRECT','WRONG_SOURCE','OTHER') COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Response category if user responded to query',
+  `comment` text COLLATE utf8mb4_unicode_ci COMMENT 'Text for comment',
+  `current_query_status` enum('OPEN','CLOSED','VERIFIED','DEVERIFIED') COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Current query status of thread',
+  `upload_doc_id` int(10) DEFAULT NULL COMMENT 'FK of uploaded document',
+  `field_comment_edited` int(1) NOT NULL DEFAULT '0' COMMENT 'Denote if field comment was edited',
+  PRIMARY KEY (`res_id`),
+  KEY `doc_id` (`upload_doc_id`),
+  KEY `status_id` (`status_id`),
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `redcap_data_quality_resolutions_ibfk_1` FOREIGN KEY (`status_id`) REFERENCES `redcap_data_quality_status` (`status_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `redcap_data_quality_resolutions_ibfk_2` FOREIGN KEY (`upload_doc_id`) REFERENCES `redcap_edocs_metadata` (`doc_id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `redcap_data_quality_resolutions_ibfk_3` FOREIGN KEY (`user_id`) REFERENCES `redcap_user_information` (`ui_id`) ON DELETE SET NULL ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 
 
 # Dump of table redcap_data_quality_rules
 # ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `redcap_data_quality_rules`;
+
+CREATE TABLE `redcap_data_quality_rules` (
+  `rule_id` int(10) NOT NULL AUTO_INCREMENT,
+  `project_id` int(10) DEFAULT NULL,
+  `rule_order` int(3) DEFAULT '1',
+  `rule_name` text COLLATE utf8mb4_unicode_ci,
+  `rule_logic` text COLLATE utf8mb4_unicode_ci,
+  `real_time_execute` int(1) NOT NULL DEFAULT '0' COMMENT 'Run in real-time on data entry forms?',
+  PRIMARY KEY (`rule_id`),
+  KEY `project_id` (`project_id`),
+  CONSTRAINT `redcap_data_quality_rules_ibfk_1` FOREIGN KEY (`project_id`) REFERENCES `redcap_projects` (`project_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
 
 # Dump of table redcap_data_quality_status
 # ------------------------------------------------------------
 
+DROP TABLE IF EXISTS `redcap_data_quality_status`;
+
+CREATE TABLE `redcap_data_quality_status` (
+  `status_id` int(10) NOT NULL AUTO_INCREMENT,
+  `rule_id` int(10) DEFAULT NULL COMMENT 'FK from data_quality_rules table',
+  `pd_rule_id` int(2) DEFAULT NULL COMMENT 'Name of pre-defined rules',
+  `non_rule` int(1) DEFAULT NULL COMMENT '1 for non-rule, else NULL',
+  `project_id` int(11) DEFAULT NULL,
+  `record` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `event_id` int(10) DEFAULT NULL,
+  `field_name` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Only used if field-level is required',
+  `repeat_instrument` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `instance` smallint(4) NOT NULL DEFAULT '1',
+  `status` int(2) DEFAULT NULL COMMENT 'Current status of discrepancy',
+  `exclude` int(1) NOT NULL DEFAULT '0' COMMENT 'Hide from results',
+  `query_status` enum('OPEN','CLOSED','VERIFIED','DEVERIFIED') COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Status of data query',
+  `assigned_user_id` int(10) DEFAULT NULL COMMENT 'UI ID of user assigned to query',
+  PRIMARY KEY (`status_id`),
+  UNIQUE KEY `nonrule_proj_record_event_field` (`non_rule`,`project_id`,`record`,`event_id`,`field_name`,`instance`),
+  UNIQUE KEY `pd_rule_proj_record_event_field` (`pd_rule_id`,`record`,`event_id`,`field_name`,`project_id`,`instance`),
+  UNIQUE KEY `rule_record_event` (`rule_id`,`record`,`event_id`,`instance`),
+  KEY `assigned_user_id` (`assigned_user_id`),
+  KEY `event_record` (`event_id`,`record`),
+  KEY `pd_rule_proj_record_event` (`pd_rule_id`,`record`,`event_id`,`project_id`,`instance`),
+  KEY `project_query_status` (`project_id`,`query_status`),
+  CONSTRAINT `redcap_data_quality_status_ibfk_1` FOREIGN KEY (`assigned_user_id`) REFERENCES `redcap_user_information` (`ui_id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `redcap_data_quality_status_ibfk_2` FOREIGN KEY (`event_id`) REFERENCES `redcap_events_metadata` (`event_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `redcap_data_quality_status_ibfk_3` FOREIGN KEY (`project_id`) REFERENCES `redcap_projects` (`project_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `redcap_data_quality_status_ibfk_4` FOREIGN KEY (`rule_id`) REFERENCES `redcap_data_quality_rules` (`rule_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 
 
 # Dump of table redcap_ddp_log_view
 # ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `redcap_ddp_log_view`;
+
+CREATE TABLE `redcap_ddp_log_view` (
+  `ml_id` int(10) NOT NULL AUTO_INCREMENT,
+  `time_viewed` datetime DEFAULT NULL COMMENT 'Time the data was displayed to the user',
+  `user_id` int(10) DEFAULT NULL COMMENT 'PK from user_information table',
+  `project_id` int(10) DEFAULT NULL,
+  `source_id` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'ID value from source system (e.g. MRN)',
+  PRIMARY KEY (`ml_id`),
+  KEY `project_id` (`project_id`),
+  KEY `source_id` (`source_id`(191)),
+  KEY `time_viewed` (`time_viewed`),
+  KEY `user_project` (`user_id`,`project_id`),
+  CONSTRAINT `redcap_ddp_log_view_ibfk_1` FOREIGN KEY (`project_id`) REFERENCES `redcap_projects` (`project_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `redcap_ddp_log_view_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `redcap_user_information` (`ui_id`) ON DELETE SET NULL ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
 
 # Dump of table redcap_ddp_log_view_data
 # ------------------------------------------------------------
 
+DROP TABLE IF EXISTS `redcap_ddp_log_view_data`;
+
+CREATE TABLE `redcap_ddp_log_view_data` (
+  `ml_id` int(10) DEFAULT NULL COMMENT 'PK from ddp_log_view table',
+  `source_field` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Field name from source system',
+  `source_timestamp` datetime DEFAULT NULL COMMENT 'Date of service from source system',
+  `md_id` int(10) DEFAULT NULL COMMENT 'PK from ddp_records_data table',
+  KEY `md_id` (`md_id`),
+  KEY `ml_id` (`ml_id`),
+  KEY `source_field` (`source_field`),
+  KEY `source_timestamp` (`source_timestamp`),
+  CONSTRAINT `redcap_ddp_log_view_data_ibfk_1` FOREIGN KEY (`md_id`) REFERENCES `redcap_ddp_records_data` (`md_id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `redcap_ddp_log_view_data_ibfk_2` FOREIGN KEY (`ml_id`) REFERENCES `redcap_ddp_log_view` (`ml_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 
 
 # Dump of table redcap_ddp_mapping
 # ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `redcap_ddp_mapping`;
+
+CREATE TABLE `redcap_ddp_mapping` (
+  `map_id` int(10) NOT NULL AUTO_INCREMENT,
+  `external_source_field_name` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Unique name of field mapped from external data source',
+  `is_record_identifier` int(1) DEFAULT NULL COMMENT '1=Yes, Null=No',
+  `project_id` int(10) DEFAULT NULL,
+  `event_id` int(10) DEFAULT NULL,
+  `field_name` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `temporal_field` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'REDCap date field',
+  `preselect` enum('MIN','MAX','FIRST','LAST','NEAR') COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Preselect a source value for temporal fields only',
+  PRIMARY KEY (`map_id`),
+  UNIQUE KEY `project_field_event_source` (`project_id`,`event_id`,`field_name`,`external_source_field_name`),
+  UNIQUE KEY `project_identifier` (`project_id`,`is_record_identifier`),
+  KEY `event_id` (`event_id`),
+  KEY `external_source_field_name` (`external_source_field_name`),
+  KEY `field_name` (`field_name`),
+  KEY `temporal_field` (`temporal_field`),
+  CONSTRAINT `redcap_ddp_mapping_ibfk_1` FOREIGN KEY (`event_id`) REFERENCES `redcap_events_metadata` (`event_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `redcap_ddp_mapping_ibfk_2` FOREIGN KEY (`project_id`) REFERENCES `redcap_projects` (`project_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
 
 # Dump of table redcap_ddp_preview_fields
 # ------------------------------------------------------------
 
+DROP TABLE IF EXISTS `redcap_ddp_preview_fields`;
+
+CREATE TABLE `redcap_ddp_preview_fields` (
+  `project_id` int(10) NOT NULL,
+  `field1` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `field2` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `field3` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `field4` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `field5` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`project_id`),
+  CONSTRAINT `redcap_ddp_preview_fields_ibfk_1` FOREIGN KEY (`project_id`) REFERENCES `redcap_projects` (`project_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 
 
 # Dump of table redcap_ddp_records
 # ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `redcap_ddp_records`;
+
+CREATE TABLE `redcap_ddp_records` (
+  `mr_id` int(10) NOT NULL AUTO_INCREMENT,
+  `project_id` int(10) DEFAULT NULL,
+  `record` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL COMMENT 'Time of last data fetch',
+  `item_count` int(10) DEFAULT NULL COMMENT 'New item count (as of last viewing)',
+  `fetch_status` enum('QUEUED','FETCHING') COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Current status of data fetch for this record',
+  `future_date_count` int(10) NOT NULL DEFAULT '0' COMMENT 'Count of datetime reference fields with values in the future',
+  PRIMARY KEY (`mr_id`),
+  UNIQUE KEY `project_record` (`project_id`,`record`),
+  KEY `project_id_fetch_status` (`fetch_status`,`project_id`),
+  KEY `project_updated_at` (`updated_at`,`project_id`),
+  CONSTRAINT `redcap_ddp_records_ibfk_1` FOREIGN KEY (`project_id`) REFERENCES `redcap_projects` (`project_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
 
 # Dump of table redcap_ddp_records_data
 # ------------------------------------------------------------
 
+DROP TABLE IF EXISTS `redcap_ddp_records_data`;
+
+CREATE TABLE `redcap_ddp_records_data` (
+  `md_id` int(10) NOT NULL AUTO_INCREMENT,
+  `map_id` int(10) NOT NULL COMMENT 'PK from ddp_mapping table',
+  `mr_id` int(10) DEFAULT NULL COMMENT 'PK from ddp_records table',
+  `source_timestamp` datetime DEFAULT NULL COMMENT 'Date of service from source system',
+  `source_value` text COLLATE utf8mb4_unicode_ci COMMENT 'Encrypted data value from source system',
+  `source_value2` text COLLATE utf8mb4_unicode_ci,
+  `adjudicated` int(1) NOT NULL DEFAULT '0' COMMENT 'Has source value been adjudicated?',
+  `exclude` int(1) NOT NULL DEFAULT '0' COMMENT 'Has source value been excluded?',
+  PRIMARY KEY (`md_id`),
+  KEY `map_id_mr_id_timestamp_value` (`map_id`,`mr_id`,`source_timestamp`,`source_value2`(128)),
+  KEY `map_id_timestamp` (`map_id`,`source_timestamp`),
+  KEY `mr_id_adjudicated` (`mr_id`,`adjudicated`),
+  KEY `mr_id_exclude` (`mr_id`,`exclude`),
+  CONSTRAINT `redcap_ddp_records_data_ibfk_1` FOREIGN KEY (`map_id`) REFERENCES `redcap_ddp_mapping` (`map_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `redcap_ddp_records_data_ibfk_2` FOREIGN KEY (`mr_id`) REFERENCES `redcap_ddp_records` (`mr_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Cached data values from web service';
+
 
 
 # Dump of table redcap_docs
 # ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `redcap_docs`;
+
+CREATE TABLE `redcap_docs` (
+  `docs_id` int(11) NOT NULL AUTO_INCREMENT,
+  `project_id` int(10) NOT NULL DEFAULT '0',
+  `docs_date` date DEFAULT NULL,
+  `docs_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `docs_size` double DEFAULT NULL,
+  `docs_type` text COLLATE utf8mb4_unicode_ci,
+  `docs_file` longblob,
+  `docs_comment` text COLLATE utf8mb4_unicode_ci,
+  `docs_rights` text COLLATE utf8mb4_unicode_ci,
+  `export_file` int(1) NOT NULL DEFAULT '0',
+  `temp` int(1) NOT NULL DEFAULT '0' COMMENT 'Is file only a temp file?',
+  PRIMARY KEY (`docs_id`),
+  KEY `docs_name` (`docs_name`(191)),
+  KEY `project_id_comment` (`project_id`,`docs_comment`(190)),
+  KEY `project_id_export_file_temp` (`project_id`,`export_file`,`temp`),
+  CONSTRAINT `redcap_docs_ibfk_1` FOREIGN KEY (`project_id`) REFERENCES `redcap_projects` (`project_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
 
 # Dump of table redcap_docs_to_edocs
 # ------------------------------------------------------------
 
+DROP TABLE IF EXISTS `redcap_docs_to_edocs`;
+
+CREATE TABLE `redcap_docs_to_edocs` (
+  `docs_id` int(11) NOT NULL COMMENT 'PK redcap_docs',
+  `doc_id` int(11) NOT NULL COMMENT 'PK redcap_edocs_metadata',
+  PRIMARY KEY (`docs_id`,`doc_id`),
+  KEY `doc_id` (`doc_id`),
+  CONSTRAINT `redcap_docs_to_edocs_ibfk_1` FOREIGN KEY (`doc_id`) REFERENCES `redcap_edocs_metadata` (`doc_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `redcap_docs_to_edocs_ibfk_2` FOREIGN KEY (`docs_id`) REFERENCES `redcap_docs` (`docs_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 
 
 # Dump of table redcap_edocs_metadata
 # ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `redcap_edocs_metadata`;
+
+CREATE TABLE `redcap_edocs_metadata` (
+  `doc_id` int(10) NOT NULL AUTO_INCREMENT,
+  `stored_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'stored name',
+  `mime_type` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `doc_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `doc_size` int(10) DEFAULT NULL,
+  `file_extension` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `gzipped` int(1) NOT NULL DEFAULT '0' COMMENT 'Is file gzip compressed?',
+  `project_id` int(10) DEFAULT NULL,
+  `stored_date` datetime DEFAULT NULL COMMENT 'stored date',
+  `delete_date` datetime DEFAULT NULL COMMENT 'date deleted',
+  `date_deleted_server` datetime DEFAULT NULL COMMENT 'When really deleted from server',
+  PRIMARY KEY (`doc_id`),
+  KEY `date_deleted` (`delete_date`,`date_deleted_server`),
+  KEY `project_id` (`project_id`),
+  CONSTRAINT `redcap_edocs_metadata_ibfk_1` FOREIGN KEY (`project_id`) REFERENCES `redcap_projects` (`project_id`) ON DELETE SET NULL ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
 
 # Dump of table redcap_ehr_access_tokens
 # ------------------------------------------------------------
 
+DROP TABLE IF EXISTS `redcap_ehr_access_tokens`;
+
+CREATE TABLE `redcap_ehr_access_tokens` (
+  `patient` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `mrn` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'If different from patient id',
+  `token_owner` int(11) DEFAULT NULL COMMENT 'REDCap User ID',
+  `expiration` datetime DEFAULT NULL,
+  `access_token` text COLLATE utf8mb4_unicode_ci,
+  `refresh_token` text COLLATE utf8mb4_unicode_ci,
+  `permission_Patient` tinyint(1) DEFAULT NULL,
+  `permission_Observation` tinyint(1) DEFAULT NULL,
+  `permission_Condition` tinyint(1) DEFAULT NULL,
+  `permission_MedicationOrder` tinyint(1) DEFAULT NULL,
+  `permission_AllergyIntolerance` tinyint(1) DEFAULT NULL,
+  UNIQUE KEY `token_owner_mrn` (`token_owner`,`mrn`),
+  UNIQUE KEY `token_owner_patient` (`token_owner`,`patient`),
+  KEY `access_token` (`access_token`(190)),
+  KEY `expiration` (`expiration`),
+  KEY `mrn` (`mrn`),
+  KEY `patient` (`patient`),
+  CONSTRAINT `redcap_ehr_access_tokens_ibfk_1` FOREIGN KEY (`token_owner`) REFERENCES `redcap_user_information` (`ui_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 
 
 # Dump of table redcap_ehr_datamart_revisions
 # ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `redcap_ehr_datamart_revisions`;
+
+CREATE TABLE `redcap_ehr_datamart_revisions` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `project_id` int(11) DEFAULT NULL,
+  `request_id` int(11) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `mrns` mediumtext COLLATE utf8mb4_unicode_ci,
+  `date_min` date DEFAULT NULL,
+  `date_max` date DEFAULT NULL,
+  `fields` mediumtext COLLATE utf8mb4_unicode_ci,
+  `approved` tinyint(1) NOT NULL DEFAULT '0',
+  `is_deleted` tinyint(1) NOT NULL DEFAULT '0',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `executed_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `request_id` (`request_id`),
+  KEY `project_id` (`project_id`),
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `redcap_ehr_datamart_revisions_ibfk_1` FOREIGN KEY (`project_id`) REFERENCES `redcap_projects` (`project_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `redcap_ehr_datamart_revisions_ibfk_2` FOREIGN KEY (`request_id`) REFERENCES `redcap_todo_list` (`request_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `redcap_ehr_datamart_revisions_ibfk_3` FOREIGN KEY (`user_id`) REFERENCES `redcap_user_information` (`ui_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
 
 # Dump of table redcap_ehr_fhir_logs
 # ------------------------------------------------------------
 
+DROP TABLE IF EXISTS `redcap_ehr_fhir_logs`;
+
+CREATE TABLE `redcap_ehr_fhir_logs` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) DEFAULT NULL,
+  `fhir_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `mrn` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `project_id` int(11) NOT NULL,
+  `resource_type` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `status` int(11) NOT NULL,
+  `created_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `project_id_mrn` (`project_id`,`mrn`),
+  KEY `user_project_mrn_resource` (`user_id`,`project_id`,`mrn`,`resource_type`),
+  CONSTRAINT `redcap_ehr_fhir_logs_ibfk_1` FOREIGN KEY (`project_id`) REFERENCES `redcap_projects` (`project_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `redcap_ehr_fhir_logs_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `redcap_user_information` (`ui_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 
 
 # Dump of table redcap_ehr_import_counts
 # ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `redcap_ehr_import_counts`;
+
+CREATE TABLE `redcap_ehr_import_counts` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `ts` datetime DEFAULT NULL,
+  `type` enum('CDP','CDM') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'CDP',
+  `adjudicated` tinyint(1) NOT NULL DEFAULT '0',
+  `project_id` int(11) DEFAULT NULL,
+  `record` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `counts_Patient` mediumint(7) DEFAULT NULL,
+  `counts_Observation` mediumint(7) DEFAULT NULL,
+  `counts_Condition` mediumint(7) DEFAULT NULL,
+  `counts_MedicationOrder` mediumint(7) DEFAULT NULL,
+  `counts_AllergyIntolerance` mediumint(7) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `project_record` (`project_id`,`record`),
+  KEY `ts_project_adjud` (`ts`,`project_id`,`adjudicated`),
+  KEY `type_adjud_project_record` (`type`,`adjudicated`,`project_id`,`record`),
+  KEY `type_project_record` (`type`,`project_id`,`record`),
+  CONSTRAINT `redcap_ehr_import_counts_ibfk_1` FOREIGN KEY (`project_id`) REFERENCES `redcap_projects` (`project_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
 
 # Dump of table redcap_ehr_user_map
 # ------------------------------------------------------------
 
+DROP TABLE IF EXISTS `redcap_ehr_user_map`;
+
+CREATE TABLE `redcap_ehr_user_map` (
+  `ehr_username` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `redcap_userid` int(11) DEFAULT NULL,
+  UNIQUE KEY `ehr_username` (`ehr_username`),
+  UNIQUE KEY `redcap_userid` (`redcap_userid`),
+  CONSTRAINT `redcap_ehr_user_map_ibfk_1` FOREIGN KEY (`redcap_userid`) REFERENCES `redcap_user_information` (`ui_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 
 
 # Dump of table redcap_ehr_user_projects
 # ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `redcap_ehr_user_projects`;
+
+CREATE TABLE `redcap_ehr_user_projects` (
+  `project_id` int(11) DEFAULT NULL,
+  `redcap_userid` int(11) DEFAULT NULL,
+  UNIQUE KEY `project_id_userid` (`project_id`,`redcap_userid`),
+  KEY `redcap_userid` (`redcap_userid`),
+  CONSTRAINT `redcap_ehr_user_projects_ibfk_1` FOREIGN KEY (`project_id`) REFERENCES `redcap_projects` (`project_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `redcap_ehr_user_projects_ibfk_2` FOREIGN KEY (`redcap_userid`) REFERENCES `redcap_user_information` (`ui_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
 
 # Dump of table redcap_esignatures
 # ------------------------------------------------------------
 
+DROP TABLE IF EXISTS `redcap_esignatures`;
+
+CREATE TABLE `redcap_esignatures` (
+  `esign_id` int(11) NOT NULL AUTO_INCREMENT,
+  `project_id` int(10) DEFAULT NULL,
+  `record` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `event_id` int(10) DEFAULT NULL,
+  `form_name` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `instance` smallint(4) NOT NULL DEFAULT '1',
+  `username` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `timestamp` datetime DEFAULT NULL,
+  PRIMARY KEY (`esign_id`),
+  UNIQUE KEY `proj_rec_event_form_instance` (`project_id`,`record`,`event_id`,`form_name`,`instance`),
+  KEY `event_id` (`event_id`),
+  KEY `username` (`username`(191)),
+  CONSTRAINT `redcap_esignatures_ibfk_1` FOREIGN KEY (`event_id`) REFERENCES `redcap_events_metadata` (`event_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `redcap_esignatures_ibfk_2` FOREIGN KEY (`project_id`) REFERENCES `redcap_projects` (`project_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 
 
 # Dump of table redcap_events_arms
 # ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `redcap_events_arms`;
+
+CREATE TABLE `redcap_events_arms` (
+  `arm_id` int(10) NOT NULL AUTO_INCREMENT,
+  `project_id` int(10) NOT NULL DEFAULT '0',
+  `arm_num` int(2) NOT NULL DEFAULT '1',
+  `arm_name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Arm 1',
+  PRIMARY KEY (`arm_id`),
+  UNIQUE KEY `proj_arm_num` (`project_id`,`arm_num`),
+  CONSTRAINT `redcap_events_arms_ibfk_1` FOREIGN KEY (`project_id`) REFERENCES `redcap_projects` (`project_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 LOCK TABLES `redcap_events_arms` WRITE;
 /*!40000 ALTER TABLE `redcap_events_arms` DISABLE KEYS */;
@@ -744,10 +1375,44 @@ UNLOCK TABLES;
 # Dump of table redcap_events_calendar
 # ------------------------------------------------------------
 
+DROP TABLE IF EXISTS `redcap_events_calendar`;
+
+CREATE TABLE `redcap_events_calendar` (
+  `cal_id` int(10) NOT NULL AUTO_INCREMENT,
+  `record` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `project_id` int(10) DEFAULT NULL,
+  `event_id` int(10) DEFAULT NULL,
+  `baseline_date` date DEFAULT NULL,
+  `group_id` int(10) DEFAULT NULL,
+  `event_date` date DEFAULT NULL,
+  `event_time` varchar(5) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'HH:MM',
+  `event_status` int(2) DEFAULT NULL COMMENT 'NULL=Ad Hoc, 0=Due Date, 1=Scheduled, 2=Confirmed, 3=Cancelled, 4=No Show',
+  `note_type` int(2) DEFAULT NULL,
+  `notes` text COLLATE utf8mb4_unicode_ci,
+  `extra_notes` text COLLATE utf8mb4_unicode_ci,
+  PRIMARY KEY (`cal_id`),
+  KEY `event_id` (`event_id`),
+  KEY `group_id` (`group_id`),
+  KEY `project_date` (`project_id`,`event_date`),
+  KEY `project_record` (`project_id`,`record`),
+  CONSTRAINT `redcap_events_calendar_ibfk_1` FOREIGN KEY (`event_id`) REFERENCES `redcap_events_metadata` (`event_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `redcap_events_calendar_ibfk_2` FOREIGN KEY (`group_id`) REFERENCES `redcap_data_access_groups` (`group_id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `redcap_events_calendar_ibfk_3` FOREIGN KEY (`project_id`) REFERENCES `redcap_projects` (`project_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Calendar Data';
+
 
 
 # Dump of table redcap_events_forms
 # ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `redcap_events_forms`;
+
+CREATE TABLE `redcap_events_forms` (
+  `event_id` int(10) NOT NULL DEFAULT '0',
+  `form_name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  UNIQUE KEY `event_form` (`event_id`,`form_name`),
+  CONSTRAINT `redcap_events_forms_ibfk_1` FOREIGN KEY (`event_id`) REFERENCES `redcap_events_metadata` (`event_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 LOCK TABLES `redcap_events_forms` WRITE;
 /*!40000 ALTER TABLE `redcap_events_forms` DISABLE KEYS */;
@@ -831,6 +1496,25 @@ UNLOCK TABLES;
 # Dump of table redcap_events_metadata
 # ------------------------------------------------------------
 
+DROP TABLE IF EXISTS `redcap_events_metadata`;
+
+CREATE TABLE `redcap_events_metadata` (
+  `event_id` int(10) NOT NULL AUTO_INCREMENT,
+  `arm_id` int(10) NOT NULL DEFAULT '0' COMMENT 'FK for events_arms',
+  `day_offset` float NOT NULL DEFAULT '0' COMMENT 'Days from Start Date',
+  `offset_min` float NOT NULL DEFAULT '0',
+  `offset_max` float NOT NULL DEFAULT '0',
+  `descrip` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Event 1' COMMENT 'Event Name',
+  `external_id` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `custom_event_label` text COLLATE utf8mb4_unicode_ci,
+  PRIMARY KEY (`event_id`),
+  KEY `arm_dayoffset_descrip` (`arm_id`,`day_offset`,`descrip`),
+  KEY `day_offset` (`day_offset`),
+  KEY `descrip` (`descrip`),
+  KEY `external_id` (`external_id`(191)),
+  CONSTRAINT `redcap_events_metadata_ibfk_1` FOREIGN KEY (`arm_id`) REFERENCES `redcap_events_arms` (`arm_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 LOCK TABLES `redcap_events_metadata` WRITE;
 /*!40000 ALTER TABLE `redcap_events_metadata` DISABLE KEYS */;
 
@@ -884,6 +1568,16 @@ UNLOCK TABLES;
 # Dump of table redcap_events_repeat
 # ------------------------------------------------------------
 
+DROP TABLE IF EXISTS `redcap_events_repeat`;
+
+CREATE TABLE `redcap_events_repeat` (
+  `event_id` int(10) DEFAULT NULL,
+  `form_name` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `custom_repeat_form_label` text COLLATE utf8mb4_unicode_ci,
+  UNIQUE KEY `event_id_form` (`event_id`,`form_name`),
+  CONSTRAINT `redcap_events_repeat_ibfk_1` FOREIGN KEY (`event_id`) REFERENCES `redcap_events_metadata` (`event_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 LOCK TABLES `redcap_events_repeat` WRITE;
 /*!40000 ALTER TABLE `redcap_events_repeat` DISABLE KEYS */;
 
@@ -901,160 +1595,872 @@ UNLOCK TABLES;
 # Dump of table redcap_external_links
 # ------------------------------------------------------------
 
+DROP TABLE IF EXISTS `redcap_external_links`;
+
+CREATE TABLE `redcap_external_links` (
+  `ext_id` int(10) NOT NULL AUTO_INCREMENT,
+  `project_id` int(10) DEFAULT NULL,
+  `link_order` int(5) NOT NULL DEFAULT '1',
+  `link_url` text COLLATE utf8mb4_unicode_ci,
+  `link_label` text COLLATE utf8mb4_unicode_ci,
+  `open_new_window` int(10) NOT NULL DEFAULT '0',
+  `link_type` enum('LINK','POST_AUTHKEY','REDCAP_PROJECT') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'LINK',
+  `user_access` enum('ALL','DAG','SELECTED') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'ALL',
+  `append_record_info` int(1) NOT NULL DEFAULT '0' COMMENT 'Append record and event to URL',
+  `append_pid` int(1) NOT NULL DEFAULT '0' COMMENT 'Append project_id to URL',
+  `link_to_project_id` int(10) DEFAULT NULL,
+  PRIMARY KEY (`ext_id`),
+  KEY `link_to_project_id` (`link_to_project_id`),
+  KEY `project_id` (`project_id`),
+  CONSTRAINT `redcap_external_links_ibfk_1` FOREIGN KEY (`link_to_project_id`) REFERENCES `redcap_projects` (`project_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `redcap_external_links_ibfk_2` FOREIGN KEY (`project_id`) REFERENCES `redcap_projects` (`project_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 
 
 # Dump of table redcap_external_links_dags
 # ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `redcap_external_links_dags`;
+
+CREATE TABLE `redcap_external_links_dags` (
+  `ext_id` int(11) NOT NULL AUTO_INCREMENT,
+  `group_id` int(10) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`ext_id`,`group_id`),
+  KEY `group_id` (`group_id`),
+  CONSTRAINT `redcap_external_links_dags_ibfk_1` FOREIGN KEY (`ext_id`) REFERENCES `redcap_external_links` (`ext_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `redcap_external_links_dags_ibfk_2` FOREIGN KEY (`group_id`) REFERENCES `redcap_data_access_groups` (`group_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
 
 # Dump of table redcap_external_links_exclude_projects
 # ------------------------------------------------------------
 
+DROP TABLE IF EXISTS `redcap_external_links_exclude_projects`;
+
+CREATE TABLE `redcap_external_links_exclude_projects` (
+  `ext_id` int(11) NOT NULL AUTO_INCREMENT,
+  `project_id` int(10) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`ext_id`,`project_id`),
+  KEY `project_id` (`project_id`),
+  CONSTRAINT `redcap_external_links_exclude_projects_ibfk_1` FOREIGN KEY (`ext_id`) REFERENCES `redcap_external_links` (`ext_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `redcap_external_links_exclude_projects_ibfk_2` FOREIGN KEY (`project_id`) REFERENCES `redcap_projects` (`project_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Projects to exclude for global external links';
+
 
 
 # Dump of table redcap_external_links_users
 # ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `redcap_external_links_users`;
+
+CREATE TABLE `redcap_external_links_users` (
+  `ext_id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  PRIMARY KEY (`ext_id`,`username`),
+  KEY `username` (`username`),
+  CONSTRAINT `redcap_external_links_users_ibfk_1` FOREIGN KEY (`ext_id`) REFERENCES `redcap_external_links` (`ext_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
 
 # Dump of table redcap_external_module_settings
 # ------------------------------------------------------------
 
+DROP TABLE IF EXISTS `redcap_external_module_settings`;
+
+CREATE TABLE `redcap_external_module_settings` (
+  `external_module_id` int(11) NOT NULL,
+  `project_id` int(11) DEFAULT NULL,
+  `key` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `type` varchar(12) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'string',
+  `value` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  KEY `external_module_id` (`external_module_id`),
+  KEY `key` (`key`(191)),
+  KEY `project_id` (`project_id`),
+  KEY `value` (`value`(190)),
+  CONSTRAINT `redcap_external_module_settings_ibfk_1` FOREIGN KEY (`external_module_id`) REFERENCES `redcap_external_modules` (`external_module_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `redcap_external_module_settings_ibfk_2` FOREIGN KEY (`project_id`) REFERENCES `redcap_projects` (`project_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 
 
 # Dump of table redcap_external_modules
 # ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `redcap_external_modules`;
+
+CREATE TABLE `redcap_external_modules` (
+  `external_module_id` int(11) NOT NULL AUTO_INCREMENT,
+  `directory_prefix` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`external_module_id`),
+  UNIQUE KEY `directory_prefix` (`directory_prefix`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
 
 # Dump of table redcap_external_modules_downloads
 # ------------------------------------------------------------
 
+DROP TABLE IF EXISTS `redcap_external_modules_downloads`;
+
+CREATE TABLE `redcap_external_modules_downloads` (
+  `module_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `module_id` int(11) DEFAULT NULL,
+  `time_downloaded` datetime DEFAULT NULL,
+  `time_deleted` datetime DEFAULT NULL,
+  PRIMARY KEY (`module_name`),
+  UNIQUE KEY `module_id` (`module_id`),
+  KEY `time_deleted` (`time_deleted`),
+  KEY `time_downloaded` (`time_downloaded`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Modules downloaded from the external modules repository';
+
 
 
 # Dump of table redcap_external_modules_log
 # ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `redcap_external_modules_log`;
+
+CREATE TABLE `redcap_external_modules_log` (
+  `log_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `timestamp` datetime NOT NULL,
+  `ui_id` int(11) DEFAULT NULL,
+  `ip` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `external_module_id` int(11) DEFAULT NULL,
+  `project_id` int(11) DEFAULT NULL,
+  `record` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `message` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`log_id`),
+  KEY `external_module_id` (`external_module_id`),
+  KEY `message` (`message`(190)),
+  KEY `record` (`record`),
+  KEY `redcap_log_redcap_projects_record` (`project_id`,`record`),
+  KEY `timestamp` (`timestamp`),
+  KEY `ui_id` (`ui_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
 
 # Dump of table redcap_external_modules_log_parameters
 # ------------------------------------------------------------
 
+DROP TABLE IF EXISTS `redcap_external_modules_log_parameters`;
+
+CREATE TABLE `redcap_external_modules_log_parameters` (
+  `log_id` bigint(20) unsigned NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `value` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`log_id`,`name`(191)),
+  KEY `name` (`name`(191)),
+  KEY `value` (`value`(190)),
+  CONSTRAINT `redcap_external_modules_log_parameters_ibfk_1` FOREIGN KEY (`log_id`) REFERENCES `redcap_external_modules_log` (`log_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 
 
 # Dump of table redcap_folders
 # ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `redcap_folders`;
+
+CREATE TABLE `redcap_folders` (
+  `folder_id` int(10) NOT NULL AUTO_INCREMENT,
+  `ui_id` int(10) DEFAULT NULL,
+  `name` varchar(64) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `position` int(10) DEFAULT NULL,
+  `foreground` varchar(6) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `background` varchar(6) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `collapsed` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`folder_id`),
+  UNIQUE KEY `ui_id_name_uniq` (`ui_id`,`name`),
+  CONSTRAINT `redcap_folders_ibfk_1` FOREIGN KEY (`ui_id`) REFERENCES `redcap_user_information` (`ui_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
 
 # Dump of table redcap_folders_projects
 # ------------------------------------------------------------
 
+DROP TABLE IF EXISTS `redcap_folders_projects`;
+
+CREATE TABLE `redcap_folders_projects` (
+  `ui_id` int(10) DEFAULT NULL,
+  `project_id` int(10) DEFAULT NULL,
+  `folder_id` int(10) DEFAULT NULL,
+  UNIQUE KEY `ui_id_project_folder` (`ui_id`,`project_id`,`folder_id`),
+  KEY `folder_id` (`folder_id`),
+  KEY `project_id` (`project_id`),
+  CONSTRAINT `redcap_folders_projects_ibfk_1` FOREIGN KEY (`folder_id`) REFERENCES `redcap_folders` (`folder_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `redcap_folders_projects_ibfk_2` FOREIGN KEY (`project_id`) REFERENCES `redcap_projects` (`project_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `redcap_folders_projects_ibfk_3` FOREIGN KEY (`ui_id`) REFERENCES `redcap_user_information` (`ui_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 
 
 # Dump of table redcap_history_size
 # ------------------------------------------------------------
 
+DROP TABLE IF EXISTS `redcap_history_size`;
+
+CREATE TABLE `redcap_history_size` (
+  `date` date NOT NULL DEFAULT '1000-01-01',
+  `size_db` float DEFAULT NULL COMMENT 'MB',
+  `size_files` float DEFAULT NULL COMMENT 'MB',
+  PRIMARY KEY (`date`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Space usage of REDCap database and uploaded files.';
+
+LOCK TABLES `redcap_history_size` WRITE;
+/*!40000 ALTER TABLE `redcap_history_size` DISABLE KEYS */;
+
+INSERT INTO `redcap_history_size` (`date`, `size_db`, `size_files`)
+VALUES
+	('2021-04-28',9.4,0);
+
+/*!40000 ALTER TABLE `redcap_history_size` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 # Dump of table redcap_history_version
 # ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `redcap_history_version`;
+
+CREATE TABLE `redcap_history_version` (
+  `date` date NOT NULL DEFAULT '1000-01-01',
+  `redcap_version` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`date`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='History of REDCap versions installed on this server.';
 
 
 
 # Dump of table redcap_instrument_zip
 # ------------------------------------------------------------
 
+DROP TABLE IF EXISTS `redcap_instrument_zip`;
+
+CREATE TABLE `redcap_instrument_zip` (
+  `iza_id` int(10) NOT NULL DEFAULT '0',
+  `instrument_id` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `upload_count` smallint(5) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`iza_id`,`instrument_id`),
+  KEY `instrument_id` (`instrument_id`),
+  CONSTRAINT `redcap_instrument_zip_ibfk_1` FOREIGN KEY (`iza_id`) REFERENCES `redcap_instrument_zip_authors` (`iza_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 
 
 # Dump of table redcap_instrument_zip_authors
 # ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `redcap_instrument_zip_authors`;
+
+CREATE TABLE `redcap_instrument_zip_authors` (
+  `iza_id` int(10) NOT NULL AUTO_INCREMENT,
+  `author_name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`iza_id`),
+  UNIQUE KEY `author_name` (`author_name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
 
 # Dump of table redcap_instrument_zip_origins
 # ------------------------------------------------------------
 
+DROP TABLE IF EXISTS `redcap_instrument_zip_origins`;
+
+CREATE TABLE `redcap_instrument_zip_origins` (
+  `server_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `upload_count` smallint(5) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`server_name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 
 
 # Dump of table redcap_ip_banned
 # ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `redcap_ip_banned`;
+
+CREATE TABLE `redcap_ip_banned` (
+  `ip` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `time_of_ban` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`ip`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
 
 # Dump of table redcap_ip_cache
 # ------------------------------------------------------------
 
+DROP TABLE IF EXISTS `redcap_ip_cache`;
+
+CREATE TABLE `redcap_ip_cache` (
+  `ip_hash` varchar(32) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `timestamp` timestamp NULL DEFAULT NULL,
+  KEY `ip_hash` (`ip_hash`),
+  KEY `timestamp` (`timestamp`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+LOCK TABLES `redcap_ip_cache` WRITE;
+/*!40000 ALTER TABLE `redcap_ip_cache` DISABLE KEYS */;
+
+INSERT INTO `redcap_ip_cache` (`ip_hash`, `timestamp`)
+VALUES
+	('201cb7cec29ddc46cb8e1c6d1a04b08a','2021-04-28 10:46:03'),
+	('201cb7cec29ddc46cb8e1c6d1a04b08a','2021-04-28 10:46:03'),
+	('201cb7cec29ddc46cb8e1c6d1a04b08a','2021-04-28 10:46:05'),
+	('201cb7cec29ddc46cb8e1c6d1a04b08a','2021-04-28 10:46:05'),
+	('201cb7cec29ddc46cb8e1c6d1a04b08a','2021-04-28 10:46:05'),
+	('201cb7cec29ddc46cb8e1c6d1a04b08a','2021-04-28 10:46:06'),
+	('201cb7cec29ddc46cb8e1c6d1a04b08a','2021-04-28 10:46:58'),
+	('201cb7cec29ddc46cb8e1c6d1a04b08a','2021-04-28 10:46:58'),
+	('201cb7cec29ddc46cb8e1c6d1a04b08a','2021-04-28 10:47:00'),
+	('201cb7cec29ddc46cb8e1c6d1a04b08a','2021-04-28 10:47:01'),
+	('201cb7cec29ddc46cb8e1c6d1a04b08a','2021-04-28 10:47:06'),
+	('201cb7cec29ddc46cb8e1c6d1a04b08a','2021-04-28 10:47:06'),
+	('201cb7cec29ddc46cb8e1c6d1a04b08a','2021-04-28 10:47:07'),
+	('201cb7cec29ddc46cb8e1c6d1a04b08a','2021-04-28 10:47:33'),
+	('201cb7cec29ddc46cb8e1c6d1a04b08a','2021-04-28 10:47:57'),
+	('201cb7cec29ddc46cb8e1c6d1a04b08a','2021-04-28 10:47:57'),
+	('201cb7cec29ddc46cb8e1c6d1a04b08a','2021-04-28 10:48:19'),
+	('201cb7cec29ddc46cb8e1c6d1a04b08a','2021-04-28 10:48:37'),
+	('201cb7cec29ddc46cb8e1c6d1a04b08a','2021-04-28 10:48:40'),
+	('201cb7cec29ddc46cb8e1c6d1a04b08a','2021-04-28 10:48:41'),
+	('201cb7cec29ddc46cb8e1c6d1a04b08a','2021-04-28 10:48:43'),
+	('201cb7cec29ddc46cb8e1c6d1a04b08a','2021-04-28 10:48:43'),
+	('201cb7cec29ddc46cb8e1c6d1a04b08a','2021-04-28 10:49:02'),
+	('201cb7cec29ddc46cb8e1c6d1a04b08a','2021-04-28 10:49:02'),
+	('201cb7cec29ddc46cb8e1c6d1a04b08a','2021-04-28 10:49:06'),
+	('201cb7cec29ddc46cb8e1c6d1a04b08a','2021-04-28 10:49:20'),
+	('201cb7cec29ddc46cb8e1c6d1a04b08a','2021-04-28 10:49:20'),
+	('201cb7cec29ddc46cb8e1c6d1a04b08a','2021-04-28 10:49:20'),
+	('201cb7cec29ddc46cb8e1c6d1a04b08a','2021-04-28 10:49:20'),
+	('201cb7cec29ddc46cb8e1c6d1a04b08a','2021-04-28 10:49:20'),
+	('201cb7cec29ddc46cb8e1c6d1a04b08a','2021-04-28 10:49:20'),
+	('201cb7cec29ddc46cb8e1c6d1a04b08a','2021-04-28 10:49:21'),
+	('201cb7cec29ddc46cb8e1c6d1a04b08a','2021-04-28 10:49:21'),
+	('201cb7cec29ddc46cb8e1c6d1a04b08a','2021-04-28 10:49:39'),
+	('201cb7cec29ddc46cb8e1c6d1a04b08a','2021-04-28 10:49:40'),
+	('201cb7cec29ddc46cb8e1c6d1a04b08a','2021-04-28 10:49:52'),
+	('201cb7cec29ddc46cb8e1c6d1a04b08a','2021-04-28 10:50:02'),
+	('201cb7cec29ddc46cb8e1c6d1a04b08a','2021-04-28 10:50:04'),
+	('201cb7cec29ddc46cb8e1c6d1a04b08a','2021-04-28 10:50:05'),
+	('201cb7cec29ddc46cb8e1c6d1a04b08a','2021-04-28 10:50:11');
+
+/*!40000 ALTER TABLE `redcap_ip_cache` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 # Dump of table redcap_library_map
 # ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `redcap_library_map`;
+
+CREATE TABLE `redcap_library_map` (
+  `project_id` int(10) NOT NULL DEFAULT '0',
+  `form_name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `type` int(11) NOT NULL DEFAULT '0' COMMENT '1 = Downloaded; 2 = Uploaded',
+  `library_id` int(10) NOT NULL DEFAULT '0',
+  `upload_timestamp` datetime DEFAULT NULL,
+  `acknowledgement` text COLLATE utf8mb4_unicode_ci,
+  `acknowledgement_cache` datetime DEFAULT NULL,
+  `promis_key` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'PROMIS instrument key',
+  `scoring_type` enum('EACH_ITEM','END_ONLY') COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'If has scoring, what type?',
+  `battery` tinyint(1) NOT NULL DEFAULT '0',
+  `promis_battery_key` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'PROMIS battery key',
+  PRIMARY KEY (`project_id`,`form_name`,`type`,`library_id`),
+  KEY `form_name` (`form_name`),
+  KEY `library_id` (`library_id`),
+  KEY `type` (`type`),
+  CONSTRAINT `redcap_library_map_ibfk_1` FOREIGN KEY (`project_id`) REFERENCES `redcap_projects` (`project_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
 
 # Dump of table redcap_locking_data
 # ------------------------------------------------------------
 
+DROP TABLE IF EXISTS `redcap_locking_data`;
+
+CREATE TABLE `redcap_locking_data` (
+  `ld_id` int(11) NOT NULL AUTO_INCREMENT,
+  `project_id` int(10) DEFAULT NULL,
+  `record` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `event_id` int(10) DEFAULT NULL,
+  `form_name` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `instance` smallint(4) NOT NULL DEFAULT '1',
+  `username` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `timestamp` datetime DEFAULT NULL,
+  PRIMARY KEY (`ld_id`),
+  UNIQUE KEY `proj_rec_event_form_instance` (`project_id`,`record`,`event_id`,`form_name`,`instance`),
+  KEY `event_id` (`event_id`),
+  KEY `username` (`username`),
+  CONSTRAINT `redcap_locking_data_ibfk_1` FOREIGN KEY (`event_id`) REFERENCES `redcap_events_metadata` (`event_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `redcap_locking_data_ibfk_2` FOREIGN KEY (`project_id`) REFERENCES `redcap_projects` (`project_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 
 
 # Dump of table redcap_locking_labels
 # ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `redcap_locking_labels`;
+
+CREATE TABLE `redcap_locking_labels` (
+  `ll_id` int(11) NOT NULL AUTO_INCREMENT,
+  `project_id` int(11) DEFAULT NULL,
+  `form_name` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `label` text COLLATE utf8mb4_unicode_ci,
+  `display` int(1) NOT NULL DEFAULT '1',
+  `display_esignature` int(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`ll_id`),
+  UNIQUE KEY `project_form` (`project_id`,`form_name`),
+  CONSTRAINT `redcap_locking_labels_ibfk_1` FOREIGN KEY (`project_id`) REFERENCES `redcap_projects` (`project_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
 
 # Dump of table redcap_locking_records
 # ------------------------------------------------------------
 
+DROP TABLE IF EXISTS `redcap_locking_records`;
+
+CREATE TABLE `redcap_locking_records` (
+  `lr_id` int(11) NOT NULL AUTO_INCREMENT,
+  `project_id` int(10) DEFAULT NULL,
+  `record` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `arm_id` int(10) NOT NULL,
+  `username` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `timestamp` datetime DEFAULT NULL,
+  PRIMARY KEY (`lr_id`),
+  UNIQUE KEY `arm_id_record` (`arm_id`,`record`),
+  KEY `project_record` (`project_id`,`record`),
+  KEY `username` (`username`),
+  CONSTRAINT `redcap_locking_records_ibfk_1` FOREIGN KEY (`arm_id`) REFERENCES `redcap_events_arms` (`arm_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `redcap_locking_records_ibfk_2` FOREIGN KEY (`project_id`) REFERENCES `redcap_projects` (`project_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 
 
 # Dump of table redcap_locking_records_pdf_archive
 # ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `redcap_locking_records_pdf_archive`;
+
+CREATE TABLE `redcap_locking_records_pdf_archive` (
+  `doc_id` int(10) DEFAULT NULL,
+  `project_id` int(10) DEFAULT NULL,
+  `record` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `arm_id` int(10) NOT NULL,
+  UNIQUE KEY `doc_id` (`doc_id`),
+  KEY `arm_id_record` (`arm_id`,`record`),
+  KEY `project_record` (`project_id`,`record`),
+  CONSTRAINT `redcap_locking_records_pdf_archive_ibfk_1` FOREIGN KEY (`arm_id`) REFERENCES `redcap_events_arms` (`arm_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `redcap_locking_records_pdf_archive_ibfk_2` FOREIGN KEY (`doc_id`) REFERENCES `redcap_edocs_metadata` (`doc_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `redcap_locking_records_pdf_archive_ibfk_3` FOREIGN KEY (`project_id`) REFERENCES `redcap_projects` (`project_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
 
 # Dump of table redcap_log_event
 # ------------------------------------------------------------
 
+DROP TABLE IF EXISTS `redcap_log_event`;
+
+CREATE TABLE `redcap_log_event` (
+  `log_event_id` int(11) NOT NULL AUTO_INCREMENT,
+  `project_id` int(10) NOT NULL DEFAULT '0',
+  `ts` bigint(14) DEFAULT NULL,
+  `user` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ip` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `page` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `event` enum('UPDATE','INSERT','DELETE','SELECT','ERROR','LOGIN','LOGOUT','OTHER','DATA_EXPORT','DOC_UPLOAD','DOC_DELETE','MANAGE','LOCK_RECORD','ESIGNATURE') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `object_type` varchar(128) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `sql_log` mediumtext COLLATE utf8mb4_unicode_ci,
+  `pk` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `event_id` int(10) DEFAULT NULL,
+  `data_values` text COLLATE utf8mb4_unicode_ci,
+  `description` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `legacy` int(1) NOT NULL DEFAULT '0',
+  `change_reason` text COLLATE utf8mb4_unicode_ci,
+  PRIMARY KEY (`log_event_id`),
+  KEY `description` (`description`),
+  KEY `event_project` (`event`,`project_id`),
+  KEY `object_type` (`object_type`),
+  KEY `pk` (`pk`(191)),
+  KEY `ts` (`ts`),
+  KEY `user` (`user`(191)),
+  KEY `user_project` (`project_id`,`user`(191))
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+LOCK TABLES `redcap_log_event` WRITE;
+/*!40000 ALTER TABLE `redcap_log_event` DISABLE KEYS */;
+
+INSERT INTO `redcap_log_event` (`log_event_id`, `project_id`, `ts`, `user`, `ip`, `page`, `event`, `object_type`, `sql_log`, `pk`, `event_id`, `data_values`, `description`, `legacy`, `change_reason`)
+VALUES
+	(1,0,20210428104837,'test_admin','172.18.0.1','ControlCenter/general_settings.php','MANAGE','redcap_config','UPDATE redcap_config SET value = \'0\' WHERE field_name = \'auto_report_stats\'',NULL,NULL,'auto_report_stats = \'0\'','Modify system configuration',0,NULL),
+	(2,0,20210428105002,'test_admin','172.18.0.1','ControlCenter/general_settings.php','MANAGE','redcap_config','UPDATE redcap_config SET value = \'1\' WHERE field_name = \'auto_report_stats\'',NULL,NULL,'auto_report_stats = \'1\'','Modify system configuration',0,NULL);
+
+/*!40000 ALTER TABLE `redcap_log_event` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 # Dump of table redcap_log_event2
 # ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `redcap_log_event2`;
+
+CREATE TABLE `redcap_log_event2` (
+  `log_event_id` int(11) NOT NULL AUTO_INCREMENT,
+  `project_id` int(10) NOT NULL DEFAULT '0',
+  `ts` bigint(14) DEFAULT NULL,
+  `user` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ip` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `page` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `event` enum('UPDATE','INSERT','DELETE','SELECT','ERROR','LOGIN','LOGOUT','OTHER','DATA_EXPORT','DOC_UPLOAD','DOC_DELETE','MANAGE','LOCK_RECORD','ESIGNATURE') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `object_type` varchar(128) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `sql_log` mediumtext COLLATE utf8mb4_unicode_ci,
+  `pk` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `event_id` int(10) DEFAULT NULL,
+  `data_values` text COLLATE utf8mb4_unicode_ci,
+  `description` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `legacy` int(1) NOT NULL DEFAULT '0',
+  `change_reason` text COLLATE utf8mb4_unicode_ci,
+  PRIMARY KEY (`log_event_id`),
+  KEY `description_project` (`description`,`project_id`),
+  KEY `event_project` (`event`,`project_id`),
+  KEY `object_type` (`object_type`),
+  KEY `page_project` (`page`(191),`project_id`),
+  KEY `pk_project` (`pk`(191),`project_id`),
+  KEY `project_user` (`project_id`,`user`(191)),
+  KEY `ts_project` (`ts`,`project_id`),
+  KEY `user_project` (`user`(191),`project_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
 
 # Dump of table redcap_log_event3
 # ------------------------------------------------------------
 
+DROP TABLE IF EXISTS `redcap_log_event3`;
+
+CREATE TABLE `redcap_log_event3` (
+  `log_event_id` int(11) NOT NULL AUTO_INCREMENT,
+  `project_id` int(10) NOT NULL DEFAULT '0',
+  `ts` bigint(14) DEFAULT NULL,
+  `user` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ip` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `page` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `event` enum('UPDATE','INSERT','DELETE','SELECT','ERROR','LOGIN','LOGOUT','OTHER','DATA_EXPORT','DOC_UPLOAD','DOC_DELETE','MANAGE','LOCK_RECORD','ESIGNATURE') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `object_type` varchar(128) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `sql_log` mediumtext COLLATE utf8mb4_unicode_ci,
+  `pk` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `event_id` int(10) DEFAULT NULL,
+  `data_values` text COLLATE utf8mb4_unicode_ci,
+  `description` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `legacy` int(1) NOT NULL DEFAULT '0',
+  `change_reason` text COLLATE utf8mb4_unicode_ci,
+  PRIMARY KEY (`log_event_id`),
+  KEY `description_project` (`description`,`project_id`),
+  KEY `event_project` (`event`,`project_id`),
+  KEY `object_type` (`object_type`),
+  KEY `page_project` (`page`(191),`project_id`),
+  KEY `pk_project` (`pk`(191),`project_id`),
+  KEY `project_user` (`project_id`,`user`(191)),
+  KEY `ts_project` (`ts`,`project_id`),
+  KEY `user_project` (`user`(191),`project_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 
 
 # Dump of table redcap_log_event4
 # ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `redcap_log_event4`;
+
+CREATE TABLE `redcap_log_event4` (
+  `log_event_id` int(11) NOT NULL AUTO_INCREMENT,
+  `project_id` int(10) NOT NULL DEFAULT '0',
+  `ts` bigint(14) DEFAULT NULL,
+  `user` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ip` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `page` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `event` enum('UPDATE','INSERT','DELETE','SELECT','ERROR','LOGIN','LOGOUT','OTHER','DATA_EXPORT','DOC_UPLOAD','DOC_DELETE','MANAGE','LOCK_RECORD','ESIGNATURE') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `object_type` varchar(128) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `sql_log` mediumtext COLLATE utf8mb4_unicode_ci,
+  `pk` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `event_id` int(10) DEFAULT NULL,
+  `data_values` text COLLATE utf8mb4_unicode_ci,
+  `description` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `legacy` int(1) NOT NULL DEFAULT '0',
+  `change_reason` text COLLATE utf8mb4_unicode_ci,
+  PRIMARY KEY (`log_event_id`),
+  KEY `description_project` (`description`,`project_id`),
+  KEY `event_project` (`event`,`project_id`),
+  KEY `object_type` (`object_type`),
+  KEY `page_project` (`page`(191),`project_id`),
+  KEY `pk_project` (`pk`(191),`project_id`),
+  KEY `project_user` (`project_id`,`user`(191)),
+  KEY `ts_project` (`ts`,`project_id`),
+  KEY `user_project` (`user`(191),`project_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
 
 # Dump of table redcap_log_event5
 # ------------------------------------------------------------
 
+DROP TABLE IF EXISTS `redcap_log_event5`;
+
+CREATE TABLE `redcap_log_event5` (
+  `log_event_id` int(11) NOT NULL AUTO_INCREMENT,
+  `project_id` int(10) NOT NULL DEFAULT '0',
+  `ts` bigint(14) DEFAULT NULL,
+  `user` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ip` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `page` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `event` enum('UPDATE','INSERT','DELETE','SELECT','ERROR','LOGIN','LOGOUT','OTHER','DATA_EXPORT','DOC_UPLOAD','DOC_DELETE','MANAGE','LOCK_RECORD','ESIGNATURE') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `object_type` varchar(128) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `sql_log` mediumtext COLLATE utf8mb4_unicode_ci,
+  `pk` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `event_id` int(10) DEFAULT NULL,
+  `data_values` text COLLATE utf8mb4_unicode_ci,
+  `description` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `legacy` int(1) NOT NULL DEFAULT '0',
+  `change_reason` text COLLATE utf8mb4_unicode_ci,
+  PRIMARY KEY (`log_event_id`),
+  KEY `description_project` (`description`,`project_id`),
+  KEY `event_project` (`event`,`project_id`),
+  KEY `object_type` (`object_type`),
+  KEY `page_project` (`page`(191),`project_id`),
+  KEY `pk_project` (`pk`(191),`project_id`),
+  KEY `project_user` (`project_id`,`user`(191)),
+  KEY `ts_project` (`ts`,`project_id`),
+  KEY `user_project` (`user`(191),`project_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 
 
 # Dump of table redcap_log_view
 # ------------------------------------------------------------
 
+DROP TABLE IF EXISTS `redcap_log_view`;
+
+CREATE TABLE `redcap_log_view` (
+  `log_view_id` int(11) NOT NULL AUTO_INCREMENT,
+  `ts` timestamp NULL DEFAULT NULL,
+  `user` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `event` enum('LOGIN_SUCCESS','LOGIN_FAIL','LOGOUT','PAGE_VIEW') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ip` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `browser_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `browser_version` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `full_url` text COLLATE utf8mb4_unicode_ci,
+  `page` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `project_id` int(10) DEFAULT NULL,
+  `event_id` int(10) DEFAULT NULL,
+  `record` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `form_name` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `miscellaneous` text COLLATE utf8mb4_unicode_ci,
+  `session_id` varchar(32) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`log_view_id`),
+  KEY `browser_name` (`browser_name`(191)),
+  KEY `browser_version` (`browser_version`(191)),
+  KEY `event` (`event`),
+  KEY `ip` (`ip`),
+  KEY `page` (`page`(191)),
+  KEY `project_event_record` (`project_id`,`event_id`,`record`(191)),
+  KEY `session_id` (`session_id`),
+  KEY `ts` (`ts`),
+  KEY `user_project` (`user`(191),`project_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+LOCK TABLES `redcap_log_view` WRITE;
+/*!40000 ALTER TABLE `redcap_log_view` DISABLE KEYS */;
+
+INSERT INTO `redcap_log_view` (`log_view_id`, `ts`, `user`, `event`, `ip`, `browser_name`, `browser_version`, `full_url`, `page`, `project_id`, `event_id`, `record`, `form_name`, `miscellaneous`, `session_id`)
+VALUES
+	(1,'2021-04-28 10:46:03','test_user','LOGIN_SUCCESS','172.18.0.1','firefox','88.0','http://localhost:8080/','index.php',NULL,NULL,NULL,NULL,NULL,'81c32e7b7980f43e9c1b9116bdf10ed4'),
+	(2,'2021-04-28 10:46:03','test_user','PAGE_VIEW','172.18.0.1','firefox','88.0','http://localhost:8080/index.php?action=myprojects','index.php',NULL,NULL,NULL,NULL,NULL,'81c32e7b7980f43e9c1b9116bdf10ed4'),
+	(3,'2021-04-28 10:46:05','test_admin','LOGIN_SUCCESS','172.18.0.1','firefox','88.0','http://localhost:8080/','index.php',NULL,NULL,NULL,NULL,NULL,'435ad4cb72266a6050815f98077a4305'),
+	(4,'2021-04-28 10:46:05','test_admin','PAGE_VIEW','172.18.0.1','firefox','88.0','http://localhost:8080/index.php?action=myprojects','index.php',NULL,NULL,NULL,NULL,NULL,'435ad4cb72266a6050815f98077a4305'),
+	(5,'2021-04-28 10:46:05','test_admin','PAGE_VIEW','172.18.0.1','firefox','88.0','http://localhost:8080/redcap_v10.6.4/ControlCenter/index.php','ControlCenter/index.php',NULL,NULL,NULL,NULL,NULL,'435ad4cb72266a6050815f98077a4305'),
+	(6,'2021-04-28 10:46:06','test_admin','PAGE_VIEW','172.18.0.1','firefox','88.0','http://localhost:8080/redcap_v10.6.4/ControlCenter/version_check.php','ControlCenter/version_check.php',NULL,NULL,NULL,NULL,NULL,'435ad4cb72266a6050815f98077a4305'),
+	(7,'2021-04-28 10:46:58','test_admin','LOGIN_SUCCESS','172.18.0.1','safari','14.1','http://localhost:8080/','index.php',NULL,NULL,NULL,NULL,NULL,'3f94019b7028dcff4c28e47bb9809d5e'),
+	(8,'2021-04-28 10:46:58','test_admin','PAGE_VIEW','172.18.0.1','safari','14.1','http://localhost:8080/index.php?action=myprojects','index.php',NULL,NULL,NULL,NULL,NULL,'3f94019b7028dcff4c28e47bb9809d5e'),
+	(9,'2021-04-28 10:47:00','test_admin','PAGE_VIEW','172.18.0.1','safari','14.1','http://localhost:8080/redcap_v10.6.4/ControlCenter/index.php','ControlCenter/index.php',NULL,NULL,NULL,NULL,NULL,'3f94019b7028dcff4c28e47bb9809d5e'),
+	(10,'2021-04-28 10:47:01','test_admin','PAGE_VIEW','172.18.0.1','safari','14.1','http://localhost:8080/redcap_v10.6.4/ControlCenter/version_check.php','ControlCenter/version_check.php',NULL,NULL,NULL,NULL,NULL,'3f94019b7028dcff4c28e47bb9809d5e'),
+	(11,'2021-04-28 10:47:06','test_admin','PAGE_VIEW','172.18.0.1','safari','14.1','http://localhost:8080/redcap_v10.6.4/index.php?route=ControlCenterController:autoFixTables','ControlCenterController:autoFixTables',NULL,NULL,NULL,NULL,NULL,'3f94019b7028dcff4c28e47bb9809d5e'),
+	(12,'2021-04-28 10:47:06','test_admin','PAGE_VIEW','172.18.0.1','safari','14.1','http://localhost:8080/redcap_v10.6.4/ControlCenter/index.php','ControlCenter/index.php',NULL,NULL,NULL,NULL,NULL,'3f94019b7028dcff4c28e47bb9809d5e'),
+	(13,'2021-04-28 10:47:07','test_admin','PAGE_VIEW','172.18.0.1','safari','14.1','http://localhost:8080/redcap_v10.6.4/ControlCenter/version_check.php','ControlCenter/version_check.php',NULL,NULL,NULL,NULL,NULL,'3f94019b7028dcff4c28e47bb9809d5e'),
+	(14,'2021-04-28 10:47:33','test_admin','PAGE_VIEW','172.18.0.1','safari','14.1','http://localhost:8080/redcap_v10.6.4/ControlCenter/cron_jobs.php','ControlCenter/cron_jobs.php',NULL,NULL,NULL,NULL,NULL,'3f94019b7028dcff4c28e47bb9809d5e'),
+	(15,'2021-04-28 10:47:57','test_admin','PAGE_VIEW','172.18.0.1','safari','14.1','http://localhost:8080/redcap_v10.6.4/ControlCenter/index.php','ControlCenter/index.php',NULL,NULL,NULL,NULL,NULL,'3f94019b7028dcff4c28e47bb9809d5e'),
+	(16,'2021-04-28 10:47:57','test_admin','PAGE_VIEW','172.18.0.1','safari','14.1','http://localhost:8080/redcap_v10.6.4/ControlCenter/version_check.php','ControlCenter/version_check.php',NULL,NULL,NULL,NULL,NULL,'3f94019b7028dcff4c28e47bb9809d5e'),
+	(17,'2021-04-28 10:48:19','test_admin','PAGE_VIEW','172.18.0.1','safari','14.1','http://localhost:8080/redcap_v10.6.4/ControlCenter/general_settings.php','ControlCenter/general_settings.php',NULL,NULL,NULL,NULL,NULL,'3f94019b7028dcff4c28e47bb9809d5e'),
+	(18,'2021-04-28 10:48:37','test_admin','PAGE_VIEW','172.18.0.1','safari','14.1','http://localhost:8080/redcap_v10.6.4/ControlCenter/general_settings.php','ControlCenter/general_settings.php',NULL,NULL,NULL,NULL,NULL,'3f94019b7028dcff4c28e47bb9809d5e'),
+	(19,'2021-04-28 10:48:40','test_admin','PAGE_VIEW','172.18.0.1','safari','14.1','http://localhost:8080/redcap_v10.6.4/ControlCenter/index.php','ControlCenter/index.php',NULL,NULL,NULL,NULL,NULL,'3f94019b7028dcff4c28e47bb9809d5e'),
+	(20,'2021-04-28 10:48:41','test_admin','PAGE_VIEW','172.18.0.1','safari','14.1','http://localhost:8080/redcap_v10.6.4/ControlCenter/version_check.php','ControlCenter/version_check.php',NULL,NULL,NULL,NULL,NULL,'3f94019b7028dcff4c28e47bb9809d5e'),
+	(21,'2021-04-28 10:48:43','test_admin','PAGE_VIEW','172.18.0.1','safari','14.1','http://localhost:8080/redcap_v10.6.4/ControlCenter/index.php?sentstats=fail','ControlCenter/index.php',NULL,NULL,NULL,NULL,NULL,'3f94019b7028dcff4c28e47bb9809d5e'),
+	(22,'2021-04-28 10:48:43','test_admin','PAGE_VIEW','172.18.0.1','safari','14.1','http://localhost:8080/redcap_v10.6.4/ControlCenter/version_check.php','ControlCenter/version_check.php',NULL,NULL,NULL,NULL,NULL,'3f94019b7028dcff4c28e47bb9809d5e'),
+	(23,'2021-04-28 10:49:02','test_admin','PAGE_VIEW','172.18.0.1','safari','14.1','http://localhost:8080/redcap_v10.6.4/ControlCenter/index.php','ControlCenter/index.php',NULL,NULL,NULL,NULL,NULL,'3f94019b7028dcff4c28e47bb9809d5e'),
+	(24,'2021-04-28 10:49:02','test_admin','PAGE_VIEW','172.18.0.1','safari','14.1','http://localhost:8080/redcap_v10.6.4/ControlCenter/version_check.php','ControlCenter/version_check.php',NULL,NULL,NULL,NULL,NULL,'3f94019b7028dcff4c28e47bb9809d5e'),
+	(25,'2021-04-28 10:49:06','test_admin','PAGE_VIEW','172.18.0.1','safari','14.1','http://localhost:8080/redcap_v10.6.4/ControlCenter/cron_jobs.php','ControlCenter/cron_jobs.php',NULL,NULL,NULL,NULL,NULL,'3f94019b7028dcff4c28e47bb9809d5e'),
+	(26,'2021-04-28 10:49:20','test_admin','PAGE_VIEW','172.18.0.1','safari','14.1','http://localhost:8080/redcap_v10.6.4/ControlCenter/check_server_ping.php','ControlCenter/check_server_ping.php',NULL,NULL,NULL,NULL,NULL,'3f94019b7028dcff4c28e47bb9809d5e'),
+	(27,'2021-04-28 10:49:20','test_admin','PAGE_VIEW','172.18.0.1','safari','14.1','http://localhost:8080/redcap_v10.6.4/ControlCenter/check_server_ping.php','ControlCenter/check_server_ping.php',NULL,NULL,NULL,NULL,NULL,'3f94019b7028dcff4c28e47bb9809d5e'),
+	(28,'2021-04-28 10:49:20','test_admin','PAGE_VIEW','172.18.0.1','safari','14.1','http://localhost:8080/redcap_v10.6.4/ControlCenter/check_server_ping.php','ControlCenter/check_server_ping.php',NULL,NULL,NULL,NULL,NULL,'3f94019b7028dcff4c28e47bb9809d5e'),
+	(29,'2021-04-28 10:49:20','test_admin','PAGE_VIEW','172.18.0.1','safari','14.1','http://localhost:8080/redcap_v10.6.4/ControlCenter/check_server_ping.php','ControlCenter/check_server_ping.php',NULL,NULL,NULL,NULL,NULL,'3f94019b7028dcff4c28e47bb9809d5e'),
+	(30,'2021-04-28 10:49:20','test_admin','PAGE_VIEW','172.18.0.1','safari','14.1','http://localhost:8080/redcap_v10.6.4/ControlCenter/check_server_ping.php','ControlCenter/check_server_ping.php',NULL,NULL,NULL,NULL,NULL,'3f94019b7028dcff4c28e47bb9809d5e'),
+	(31,'2021-04-28 10:49:20','test_admin','PAGE_VIEW','172.18.0.1','safari','14.1','http://localhost:8080/redcap_v10.6.4/ControlCenter/check_server_ping.php','ControlCenter/check_server_ping.php',NULL,NULL,NULL,NULL,NULL,'3f94019b7028dcff4c28e47bb9809d5e'),
+	(32,'2021-04-28 10:49:21','test_admin','PAGE_VIEW','172.18.0.1','safari','14.1','http://localhost:8080/redcap_v10.6.4/ControlCenter/check_server_ping.php','ControlCenter/check_server_ping.php',NULL,NULL,NULL,NULL,NULL,'3f94019b7028dcff4c28e47bb9809d5e'),
+	(33,'2021-04-28 10:49:21','test_admin','PAGE_VIEW','172.18.0.1','safari','14.1','http://localhost:8080/redcap_v10.6.4/ControlCenter/check_server_ping.php','ControlCenter/check_server_ping.php',NULL,NULL,NULL,NULL,NULL,'3f94019b7028dcff4c28e47bb9809d5e'),
+	(34,'2021-04-28 10:49:39','test_admin','PAGE_VIEW','172.18.0.1','safari','14.1','http://localhost:8080/redcap_v10.6.4/ControlCenter/index.php','ControlCenter/index.php',NULL,NULL,NULL,NULL,NULL,'3f94019b7028dcff4c28e47bb9809d5e'),
+	(35,'2021-04-28 10:49:40','test_admin','PAGE_VIEW','172.18.0.1','safari','14.1','http://localhost:8080/redcap_v10.6.4/ControlCenter/version_check.php','ControlCenter/version_check.php',NULL,NULL,NULL,NULL,NULL,'3f94019b7028dcff4c28e47bb9809d5e'),
+	(36,'2021-04-28 10:49:52','test_admin','PAGE_VIEW','172.18.0.1','safari','14.1','http://localhost:8080/redcap_v10.6.4/ControlCenter/general_settings.php','ControlCenter/general_settings.php',NULL,NULL,NULL,NULL,NULL,'3f94019b7028dcff4c28e47bb9809d5e'),
+	(37,'2021-04-28 10:50:02','test_admin','PAGE_VIEW','172.18.0.1','safari','14.1','http://localhost:8080/redcap_v10.6.4/ControlCenter/general_settings.php','ControlCenter/general_settings.php',NULL,NULL,NULL,NULL,NULL,'3f94019b7028dcff4c28e47bb9809d5e'),
+	(38,'2021-04-28 10:50:04','test_admin','PAGE_VIEW','172.18.0.1','safari','14.1','http://localhost:8080/redcap_v10.6.4/ControlCenter/index.php','ControlCenter/index.php',NULL,NULL,NULL,NULL,NULL,'3f94019b7028dcff4c28e47bb9809d5e'),
+	(39,'2021-04-28 10:50:05','test_admin','PAGE_VIEW','172.18.0.1','safari','14.1','http://localhost:8080/redcap_v10.6.4/ControlCenter/version_check.php','ControlCenter/version_check.php',NULL,NULL,NULL,NULL,NULL,'3f94019b7028dcff4c28e47bb9809d5e'),
+	(40,'2021-04-28 10:50:11','test_admin','LOGOUT','172.18.0.1','safari','14.1','http://localhost:8080/redcap_v10.6.4/ControlCenter/index.php?logout=1','ControlCenter/index.php',NULL,NULL,NULL,NULL,NULL,'3f94019b7028dcff4c28e47bb9809d5e');
+
+/*!40000 ALTER TABLE `redcap_log_view` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 # Dump of table redcap_log_view_requests
 # ------------------------------------------------------------
 
+DROP TABLE IF EXISTS `redcap_log_view_requests`;
+
+CREATE TABLE `redcap_log_view_requests` (
+  `lvr_id` int(10) NOT NULL AUTO_INCREMENT,
+  `log_view_id` int(10) DEFAULT NULL COMMENT 'FK from redcap_log_view',
+  `mysql_process_id` int(10) DEFAULT NULL COMMENT 'Process ID for MySQL',
+  `php_process_id` int(10) DEFAULT NULL COMMENT 'Process ID for PHP',
+  `script_execution_time` float DEFAULT NULL COMMENT 'Total PHP script execution time (seconds)',
+  `is_ajax` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'Is request an AJAX request?',
+  `ui_id` int(11) DEFAULT NULL COMMENT 'FK from redcap_user_information',
+  PRIMARY KEY (`lvr_id`),
+  UNIQUE KEY `log_view_id` (`log_view_id`),
+  UNIQUE KEY `log_view_id_time_ui_id` (`log_view_id`,`script_execution_time`,`ui_id`),
+  KEY `mysql_process_id` (`mysql_process_id`),
+  KEY `php_process_id` (`php_process_id`),
+  KEY `ui_id` (`ui_id`),
+  CONSTRAINT `redcap_log_view_requests_ibfk_1` FOREIGN KEY (`log_view_id`) REFERENCES `redcap_log_view` (`log_view_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `redcap_log_view_requests_ibfk_2` FOREIGN KEY (`ui_id`) REFERENCES `redcap_user_information` (`ui_id`) ON DELETE SET NULL ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+LOCK TABLES `redcap_log_view_requests` WRITE;
+/*!40000 ALTER TABLE `redcap_log_view_requests` DISABLE KEYS */;
+
+INSERT INTO `redcap_log_view_requests` (`lvr_id`, `log_view_id`, `mysql_process_id`, `php_process_id`, `script_execution_time`, `is_ajax`, `ui_id`)
+VALUES
+	(1,1,108,13,0.153,0,NULL),
+	(2,2,109,13,0.246,0,3),
+	(3,3,113,13,0.201,0,NULL),
+	(4,4,114,13,0.222,0,2),
+	(5,5,115,13,0.48,0,2),
+	(6,6,116,37,0.356,1,2),
+	(7,NULL,117,6,0.581,1,2),
+	(8,7,121,15,0.128,0,NULL),
+	(9,8,122,15,0.19,0,2),
+	(10,NULL,123,15,0.2,1,2),
+	(11,NULL,124,14,0.169,1,2),
+	(12,NULL,125,15,0.453,1,2),
+	(13,9,126,15,0.33,0,2),
+	(14,10,127,15,0.255,1,2),
+	(15,NULL,128,14,0.405,1,2),
+	(16,11,129,6,0.38,1,2),
+	(17,12,130,6,0.356,0,2),
+	(18,13,131,6,0.207,1,2),
+	(19,NULL,132,28,0.345,1,2),
+	(20,14,133,29,0.381,0,2),
+	(21,NULL,134,29,0.44,1,2),
+	(22,NULL,135,15,0.15,1,2),
+	(23,NULL,136,14,1.514,0,NULL),
+	(24,15,137,26,0.329,0,2),
+	(25,16,138,26,0.21,1,2),
+	(26,NULL,139,13,0.509,1,2),
+	(27,17,140,36,0.179,0,2),
+	(28,NULL,141,36,0.456,1,2),
+	(29,18,142,29,0.201,0,2),
+	(30,NULL,143,29,0.356,1,2),
+	(31,19,144,29,0.31,0,2),
+	(32,20,145,29,0.171,1,2),
+	(33,NULL,146,29,0.334,1,2),
+	(34,21,147,29,0.285,0,2),
+	(35,22,148,29,0.167,1,2),
+	(36,NULL,149,15,0.448,1,2),
+	(37,23,150,14,0.377,0,2),
+	(38,24,151,14,0.17,1,2),
+	(39,25,152,49,0.254,0,2),
+	(40,NULL,153,26,0.16,1,2),
+	(41,NULL,154,13,0.446,0,2),
+	(42,26,160,48,0.9,1,2),
+	(43,27,155,29,1.95,1,2),
+	(44,28,156,13,0.745,1,2),
+	(45,29,159,28,0.858,1,2),
+	(46,30,158,36,1.207,1,2),
+	(47,31,157,6,0.975,1,2),
+	(48,32,161,13,0.542,1,2),
+	(49,33,162,28,0.218,1,2),
+	(50,34,163,14,0.314,0,2),
+	(51,35,164,14,0.155,1,2),
+	(52,36,165,49,0.191,0,2),
+	(53,37,166,26,0.204,0,2),
+	(54,38,167,68,0.318,0,2),
+	(55,39,168,68,0.152,1,2),
+	(56,NULL,169,68,0.491,1,2),
+	(57,40,170,48,0.124,0,2),
+	(58,NULL,172,6,0.147,1,2);
+
+/*!40000 ALTER TABLE `redcap_log_view_requests` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 # Dump of table redcap_messages
 # ------------------------------------------------------------
 
+DROP TABLE IF EXISTS `redcap_messages`;
+
+CREATE TABLE `redcap_messages` (
+  `message_id` int(10) NOT NULL AUTO_INCREMENT,
+  `thread_id` int(10) DEFAULT NULL COMMENT 'Thread that message belongs to (FK from redcap_messages_threads)',
+  `sent_time` datetime DEFAULT NULL COMMENT 'Time message was sent',
+  `author_user_id` int(10) DEFAULT NULL COMMENT 'Author of message (FK from redcap_user_information)',
+  `message_body` text COLLATE utf8mb4_unicode_ci COMMENT 'The message itself',
+  `attachment_doc_id` int(10) DEFAULT NULL COMMENT 'doc_id if there is an attachment (FK from redcap_edocs_metadata)',
+  `stored_url` varchar(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`message_id`),
+  KEY `attachment_doc_id` (`attachment_doc_id`),
+  KEY `author_user_id` (`author_user_id`),
+  KEY `message_body` (`message_body`(190)),
+  KEY `sent_time` (`sent_time`),
+  KEY `thread_id` (`thread_id`),
+  CONSTRAINT `redcap_messages_ibfk_1` FOREIGN KEY (`attachment_doc_id`) REFERENCES `redcap_edocs_metadata` (`doc_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `redcap_messages_ibfk_2` FOREIGN KEY (`author_user_id`) REFERENCES `redcap_user_information` (`ui_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `redcap_messages_ibfk_3` FOREIGN KEY (`thread_id`) REFERENCES `redcap_messages_threads` (`thread_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 
 
 # Dump of table redcap_messages_recipients
 # ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `redcap_messages_recipients`;
+
+CREATE TABLE `redcap_messages_recipients` (
+  `recipient_id` int(10) NOT NULL AUTO_INCREMENT,
+  `thread_id` int(10) DEFAULT NULL COMMENT 'Thread that recipient belongs to (FK from redcap_messages_threads)',
+  `recipient_user_id` int(10) DEFAULT NULL COMMENT 'Individual recipient in thread (FK from redcap_user_information)',
+  `all_users` tinyint(1) DEFAULT '0' COMMENT 'Set if recipients = ALL USERS',
+  `prioritize` tinyint(1) NOT NULL DEFAULT '0',
+  `conv_leader` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`recipient_id`),
+  UNIQUE KEY `recipient_user_thread_id` (`recipient_user_id`,`thread_id`),
+  KEY `thread_id_users` (`thread_id`,`all_users`),
+  CONSTRAINT `redcap_messages_recipients_ibfk_1` FOREIGN KEY (`recipient_user_id`) REFERENCES `redcap_user_information` (`ui_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `redcap_messages_recipients_ibfk_2` FOREIGN KEY (`thread_id`) REFERENCES `redcap_messages_threads` (`thread_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 LOCK TABLES `redcap_messages_recipients` WRITE;
 /*!40000 ALTER TABLE `redcap_messages_recipients` DISABLE KEYS */;
@@ -1072,10 +2478,42 @@ UNLOCK TABLES;
 # Dump of table redcap_messages_status
 # ------------------------------------------------------------
 
+DROP TABLE IF EXISTS `redcap_messages_status`;
+
+CREATE TABLE `redcap_messages_status` (
+  `status_id` int(10) NOT NULL AUTO_INCREMENT,
+  `message_id` int(10) DEFAULT NULL COMMENT 'FK from redcap_messages',
+  `recipient_id` int(10) DEFAULT NULL COMMENT 'Individual recipient in thread (FK from redcap_messages_recipients)',
+  `recipient_user_id` int(10) DEFAULT NULL COMMENT 'Individual recipient in thread (FK from redcap_user_information)',
+  `urgent` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`status_id`),
+  KEY `message_id` (`message_id`),
+  KEY `recipient_id` (`recipient_id`),
+  KEY `recipient_user_id` (`recipient_user_id`),
+  CONSTRAINT `redcap_messages_status_ibfk_1` FOREIGN KEY (`message_id`) REFERENCES `redcap_messages` (`message_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `redcap_messages_status_ibfk_2` FOREIGN KEY (`recipient_id`) REFERENCES `redcap_messages_recipients` (`recipient_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `redcap_messages_status_ibfk_3` FOREIGN KEY (`recipient_user_id`) REFERENCES `redcap_user_information` (`ui_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 
 
 # Dump of table redcap_messages_threads
 # ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `redcap_messages_threads`;
+
+CREATE TABLE `redcap_messages_threads` (
+  `thread_id` int(10) NOT NULL AUTO_INCREMENT,
+  `type` enum('CHANNEL','NOTIFICATION','CONVERSATION') COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Type of entity',
+  `channel_name` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Only for channels',
+  `invisible` tinyint(1) NOT NULL DEFAULT '0',
+  `archived` tinyint(1) NOT NULL DEFAULT '0',
+  `project_id` int(11) DEFAULT NULL COMMENT 'Associated project',
+  PRIMARY KEY (`thread_id`),
+  KEY `project_id` (`project_id`),
+  KEY `type_channel` (`type`,`channel_name`),
+  CONSTRAINT `redcap_messages_threads_ibfk_1` FOREIGN KEY (`project_id`) REFERENCES `redcap_projects` (`project_id`) ON DELETE SET NULL ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 LOCK TABLES `redcap_messages_threads` WRITE;
 /*!40000 ALTER TABLE `redcap_messages_threads` DISABLE KEYS */;
@@ -1092,6 +2530,46 @@ UNLOCK TABLES;
 
 # Dump of table redcap_metadata
 # ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `redcap_metadata`;
+
+CREATE TABLE `redcap_metadata` (
+  `project_id` int(10) NOT NULL DEFAULT '0',
+  `field_name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `field_phi` varchar(5) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `form_name` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `form_menu_description` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `field_order` float DEFAULT NULL,
+  `field_units` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `element_preceding_header` mediumtext COLLATE utf8mb4_unicode_ci,
+  `element_type` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `element_label` mediumtext COLLATE utf8mb4_unicode_ci,
+  `element_enum` mediumtext COLLATE utf8mb4_unicode_ci,
+  `element_note` mediumtext COLLATE utf8mb4_unicode_ci,
+  `element_validation_type` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `element_validation_min` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `element_validation_max` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `element_validation_checktype` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `branching_logic` text COLLATE utf8mb4_unicode_ci,
+  `field_req` int(1) NOT NULL DEFAULT '0',
+  `edoc_id` int(10) DEFAULT NULL COMMENT 'image/file attachment',
+  `edoc_display_img` int(1) NOT NULL DEFAULT '0',
+  `custom_alignment` enum('LH','LV','RH','RV') COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'RV = NULL = default',
+  `stop_actions` text COLLATE utf8mb4_unicode_ci,
+  `question_num` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `grid_name` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Unique name of grid group',
+  `grid_rank` int(1) NOT NULL DEFAULT '0',
+  `misc` mediumtext COLLATE utf8mb4_unicode_ci COMMENT 'Miscellaneous field attributes',
+  `video_url` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `video_display_inline` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`project_id`,`field_name`),
+  KEY `edoc_id` (`edoc_id`),
+  KEY `field_name` (`field_name`),
+  KEY `project_id_fieldorder` (`project_id`,`field_order`),
+  KEY `project_id_form` (`project_id`,`form_name`),
+  CONSTRAINT `redcap_metadata_ibfk_1` FOREIGN KEY (`edoc_id`) REFERENCES `redcap_edocs_metadata` (`doc_id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `redcap_metadata_ibfk_2` FOREIGN KEY (`project_id`) REFERENCES `redcap_projects` (`project_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 LOCK TABLES `redcap_metadata` WRITE;
 /*!40000 ALTER TABLE `redcap_metadata` DISABLE KEYS */;
@@ -2078,80 +3556,400 @@ UNLOCK TABLES;
 # Dump of table redcap_metadata_archive
 # ------------------------------------------------------------
 
+DROP TABLE IF EXISTS `redcap_metadata_archive`;
+
+CREATE TABLE `redcap_metadata_archive` (
+  `project_id` int(10) NOT NULL DEFAULT '0',
+  `field_name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `field_phi` varchar(5) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `form_name` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `form_menu_description` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `field_order` float DEFAULT NULL,
+  `field_units` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `element_preceding_header` mediumtext COLLATE utf8mb4_unicode_ci,
+  `element_type` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `element_label` mediumtext COLLATE utf8mb4_unicode_ci,
+  `element_enum` mediumtext COLLATE utf8mb4_unicode_ci,
+  `element_note` mediumtext COLLATE utf8mb4_unicode_ci,
+  `element_validation_type` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `element_validation_min` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `element_validation_max` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `element_validation_checktype` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `branching_logic` text COLLATE utf8mb4_unicode_ci,
+  `field_req` int(1) NOT NULL DEFAULT '0',
+  `edoc_id` int(10) DEFAULT NULL COMMENT 'image/file attachment',
+  `edoc_display_img` int(1) NOT NULL DEFAULT '0',
+  `custom_alignment` enum('LH','LV','RH','RV') COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'RV = NULL = default',
+  `stop_actions` text COLLATE utf8mb4_unicode_ci,
+  `question_num` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `grid_name` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Unique name of grid group',
+  `grid_rank` int(1) NOT NULL DEFAULT '0',
+  `misc` mediumtext COLLATE utf8mb4_unicode_ci COMMENT 'Miscellaneous field attributes',
+  `video_url` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `video_display_inline` tinyint(1) NOT NULL DEFAULT '0',
+  `pr_id` int(10) DEFAULT NULL,
+  UNIQUE KEY `project_field_prid` (`project_id`,`field_name`,`pr_id`),
+  KEY `edoc_id` (`edoc_id`),
+  KEY `field_name` (`field_name`),
+  KEY `pr_id` (`pr_id`),
+  KEY `project_id_form` (`project_id`,`form_name`),
+  CONSTRAINT `redcap_metadata_archive_ibfk_1` FOREIGN KEY (`edoc_id`) REFERENCES `redcap_edocs_metadata` (`doc_id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `redcap_metadata_archive_ibfk_2` FOREIGN KEY (`pr_id`) REFERENCES `redcap_metadata_prod_revisions` (`pr_id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `redcap_metadata_archive_ibfk_3` FOREIGN KEY (`project_id`) REFERENCES `redcap_projects` (`project_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 
 
 # Dump of table redcap_metadata_prod_revisions
 # ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `redcap_metadata_prod_revisions`;
+
+CREATE TABLE `redcap_metadata_prod_revisions` (
+  `pr_id` int(10) NOT NULL AUTO_INCREMENT,
+  `project_id` int(10) NOT NULL DEFAULT '0',
+  `ui_id_requester` int(10) DEFAULT NULL,
+  `ui_id_approver` int(10) DEFAULT NULL,
+  `ts_req_approval` datetime DEFAULT NULL,
+  `ts_approved` datetime DEFAULT NULL,
+  PRIMARY KEY (`pr_id`),
+  KEY `project_approved` (`project_id`,`ts_approved`),
+  KEY `project_user` (`project_id`,`ui_id_requester`),
+  KEY `ui_id_approver` (`ui_id_approver`),
+  KEY `ui_id_requester` (`ui_id_requester`),
+  CONSTRAINT `redcap_metadata_prod_revisions_ibfk_1` FOREIGN KEY (`project_id`) REFERENCES `redcap_projects` (`project_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `redcap_metadata_prod_revisions_ibfk_2` FOREIGN KEY (`ui_id_approver`) REFERENCES `redcap_user_information` (`ui_id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `redcap_metadata_prod_revisions_ibfk_3` FOREIGN KEY (`ui_id_requester`) REFERENCES `redcap_user_information` (`ui_id`) ON DELETE SET NULL ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
 
 # Dump of table redcap_metadata_temp
 # ------------------------------------------------------------
 
+DROP TABLE IF EXISTS `redcap_metadata_temp`;
+
+CREATE TABLE `redcap_metadata_temp` (
+  `project_id` int(10) NOT NULL DEFAULT '0',
+  `field_name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `field_phi` varchar(5) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `form_name` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `form_menu_description` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `field_order` float DEFAULT NULL,
+  `field_units` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `element_preceding_header` mediumtext COLLATE utf8mb4_unicode_ci,
+  `element_type` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `element_label` mediumtext COLLATE utf8mb4_unicode_ci,
+  `element_enum` mediumtext COLLATE utf8mb4_unicode_ci,
+  `element_note` mediumtext COLLATE utf8mb4_unicode_ci,
+  `element_validation_type` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `element_validation_min` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `element_validation_max` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `element_validation_checktype` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `branching_logic` text COLLATE utf8mb4_unicode_ci,
+  `field_req` int(1) NOT NULL DEFAULT '0',
+  `edoc_id` int(10) DEFAULT NULL COMMENT 'image/file attachment',
+  `edoc_display_img` int(1) NOT NULL DEFAULT '0',
+  `custom_alignment` enum('LH','LV','RH','RV') COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'RV = NULL = default',
+  `stop_actions` text COLLATE utf8mb4_unicode_ci,
+  `question_num` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `grid_name` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Unique name of grid group',
+  `grid_rank` int(1) NOT NULL DEFAULT '0',
+  `misc` mediumtext COLLATE utf8mb4_unicode_ci COMMENT 'Miscellaneous field attributes',
+  `video_url` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `video_display_inline` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`project_id`,`field_name`),
+  KEY `edoc_id` (`edoc_id`),
+  KEY `field_name` (`field_name`),
+  KEY `project_id_form` (`project_id`,`form_name`),
+  CONSTRAINT `redcap_metadata_temp_ibfk_1` FOREIGN KEY (`edoc_id`) REFERENCES `redcap_edocs_metadata` (`doc_id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `redcap_metadata_temp_ibfk_2` FOREIGN KEY (`project_id`) REFERENCES `redcap_projects` (`project_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 
 
 # Dump of table redcap_mobile_app_devices
 # ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `redcap_mobile_app_devices`;
+
+CREATE TABLE `redcap_mobile_app_devices` (
+  `device_id` int(10) NOT NULL AUTO_INCREMENT,
+  `uuid` varchar(128) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `project_id` int(10) DEFAULT NULL,
+  `nickname` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `revoked` tinyint(4) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`device_id`),
+  UNIQUE KEY `uuid_project_id` (`uuid`,`project_id`),
+  KEY `project_id` (`project_id`),
+  CONSTRAINT `redcap_mobile_app_devices_ibfk_1` FOREIGN KEY (`project_id`) REFERENCES `redcap_projects` (`project_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
 
 # Dump of table redcap_mobile_app_files
 # ------------------------------------------------------------
 
+DROP TABLE IF EXISTS `redcap_mobile_app_files`;
+
+CREATE TABLE `redcap_mobile_app_files` (
+  `af_id` int(10) NOT NULL AUTO_INCREMENT,
+  `doc_id` int(10) NOT NULL,
+  `type` enum('ESCAPE_HATCH','LOGGING') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `user_id` int(10) DEFAULT NULL,
+  `device_id` int(10) DEFAULT NULL,
+  PRIMARY KEY (`af_id`),
+  KEY `device_id` (`device_id`),
+  KEY `doc_id` (`doc_id`),
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `redcap_mobile_app_files_ibfk_1` FOREIGN KEY (`device_id`) REFERENCES `redcap_mobile_app_devices` (`device_id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `redcap_mobile_app_files_ibfk_2` FOREIGN KEY (`doc_id`) REFERENCES `redcap_edocs_metadata` (`doc_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `redcap_mobile_app_files_ibfk_3` FOREIGN KEY (`user_id`) REFERENCES `redcap_user_information` (`ui_id`) ON DELETE SET NULL ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 
 
 # Dump of table redcap_mobile_app_log
 # ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `redcap_mobile_app_log`;
+
+CREATE TABLE `redcap_mobile_app_log` (
+  `mal_id` int(10) NOT NULL AUTO_INCREMENT,
+  `project_id` int(10) DEFAULT NULL,
+  `ui_id` int(11) DEFAULT NULL,
+  `log_event_id` int(10) DEFAULT NULL,
+  `device_id` int(10) DEFAULT NULL,
+  `event` enum('INIT_PROJECT','INIT_DOWNLOAD_DATA','INIT_DOWNLOAD_DATA_PARTIAL','REINIT_PROJECT','REINIT_DOWNLOAD_DATA','REINIT_DOWNLOAD_DATA_PARTIAL','SYNC_DATA') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `details` text COLLATE utf8mb4_unicode_ci,
+  `longitude` double DEFAULT NULL,
+  `latitude` double DEFAULT NULL,
+  PRIMARY KEY (`mal_id`),
+  KEY `device_id` (`device_id`),
+  KEY `log_event_id` (`log_event_id`),
+  KEY `project_id_event` (`project_id`,`event`),
+  KEY `ui_id` (`ui_id`),
+  CONSTRAINT `redcap_mobile_app_log_ibfk_1` FOREIGN KEY (`device_id`) REFERENCES `redcap_mobile_app_devices` (`device_id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `redcap_mobile_app_log_ibfk_2` FOREIGN KEY (`project_id`) REFERENCES `redcap_projects` (`project_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `redcap_mobile_app_log_ibfk_3` FOREIGN KEY (`ui_id`) REFERENCES `redcap_user_information` (`ui_id`) ON DELETE SET NULL ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
 
 # Dump of table redcap_mycap_messages
 # ------------------------------------------------------------
 
+DROP TABLE IF EXISTS `redcap_mycap_messages`;
+
+CREATE TABLE `redcap_mycap_messages` (
+  `uuid` char(36) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'UUID',
+  `project_code` varchar(36) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `type` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Announcement, standard',
+  `from` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Either a participant code or a redcap user',
+  `to` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Either a participant code or a redcap user',
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Optional title',
+  `body` text COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Body content',
+  `sent_date` datetime NOT NULL COMMENT 'Unix timestamp',
+  `received_date` datetime DEFAULT NULL COMMENT 'Unix timestamp',
+  `read_date` datetime DEFAULT NULL COMMENT 'Unix timestamp',
+  `processed` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0 = No, 1 = Yes',
+  `processed_by` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'message processed by this REDCap user. FK to redcap_user_information.username',
+  PRIMARY KEY (`uuid`),
+  KEY `project_code_idx` (`project_code`),
+  KEY `received_date` (`received_date`),
+  KEY `sent_date` (`sent_date`),
+  CONSTRAINT `redcap_mycap_messages_ibfk_1` FOREIGN KEY (`project_code`) REFERENCES `redcap_mycap_projects` (`code`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 
 
 # Dump of table redcap_mycap_participants
 # ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `redcap_mycap_participants`;
+
+CREATE TABLE `redcap_mycap_participants` (
+  `code` varchar(36) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Participant identifier. Alias for record_id. We never store record_id on the mobile app for security reasons.',
+  `project_code` varchar(36) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'FK to redcap_mycap_projects.code',
+  `record` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'FK to ???',
+  `join_date` datetime DEFAULT NULL COMMENT 'Date participant joined the project',
+  `baseline_date` datetime DEFAULT NULL COMMENT 'Date of important event. Used for scheduling.',
+  `push_notification_ids` text COLLATE utf8mb4_unicode_ci COMMENT 'Stores push notification identifiers',
+  PRIMARY KEY (`code`),
+  UNIQUE KEY `code_unique` (`code`),
+  KEY `project_code` (`project_code`),
+  CONSTRAINT `redcap_mycap_participants_ibfk_1` FOREIGN KEY (`code`) REFERENCES `redcap_mycap_projects` (`code`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
 
 # Dump of table redcap_mycap_projectfiles
 # ------------------------------------------------------------
 
+DROP TABLE IF EXISTS `redcap_mycap_projectfiles`;
+
+CREATE TABLE `redcap_mycap_projectfiles` (
+  `project_code` varchar(36) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'PFK to redcap_mycap_projects.code',
+  `doc_id` int(10) NOT NULL COMMENT 'PFK to redcap_edocs_metadata.doc_id',
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'File name',
+  `category` int(10) DEFAULT NULL COMMENT 'File categorization, if any. 1=PROMIS Form, 2=PROMIS Calibration, 3=Image, 4=Config Version',
+  PRIMARY KEY (`project_code`,`doc_id`),
+  KEY `doc_id_idx` (`doc_id`),
+  CONSTRAINT `redcap_mycap_projectfiles_ibfk_1` FOREIGN KEY (`doc_id`) REFERENCES `redcap_edocs_metadata` (`doc_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `redcap_mycap_projectfiles_ibfk_2` FOREIGN KEY (`project_code`) REFERENCES `redcap_mycap_projects` (`code`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 
 
 # Dump of table redcap_mycap_projects
 # ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `redcap_mycap_projects`;
+
+CREATE TABLE `redcap_mycap_projects` (
+  `code` varchar(36) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Project identifier. Alias for project_id. We never store project_id on the mobile app for security reasons.',
+  `project_id` int(10) NOT NULL COMMENT 'FK to redcap_projects.project_id',
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Name of the project within the app',
+  `allow_new_participants` tinyint(1) NOT NULL DEFAULT '1' COMMENT 'Participants cannot join if FALSE',
+  `config` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'JSON representation of the config',
+  `status` int(1) NOT NULL DEFAULT '1' COMMENT '0=Deleted, 1=Active',
+  PRIMARY KEY (`code`),
+  UNIQUE KEY `code_unique` (`code`),
+  KEY `mcp_project_id` (`project_id`),
+  CONSTRAINT `redcap_mycap_projects_ibfk_1` FOREIGN KEY (`project_id`) REFERENCES `redcap_projects` (`project_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
 
 # Dump of table redcap_mycap_syncissuefiles
 # ------------------------------------------------------------
 
+DROP TABLE IF EXISTS `redcap_mycap_syncissuefiles`;
+
+CREATE TABLE `redcap_mycap_syncissuefiles` (
+  `uuid` char(36) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'PFK to redcap_mycap_syncissues.uuid',
+  `doc_id` int(10) NOT NULL COMMENT 'PFK to redcap_edocs_metadata.doc_id',
+  PRIMARY KEY (`doc_id`,`uuid`),
+  KEY `uuid_idx` (`uuid`),
+  CONSTRAINT `redcap_mycap_syncissuefiles_ibfk_1` FOREIGN KEY (`doc_id`) REFERENCES `redcap_edocs_metadata` (`doc_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `redcap_mycap_syncissuefiles_ibfk_2` FOREIGN KEY (`uuid`) REFERENCES `redcap_mycap_syncissues` (`uuid`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 
 
 # Dump of table redcap_mycap_syncissues
 # ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `redcap_mycap_syncissues`;
+
+CREATE TABLE `redcap_mycap_syncissues` (
+  `uuid` char(36) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'UUID generated by app. Maps to a field with annotation @MC-TASK-UUID',
+  `participant_code` varchar(36) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'FK to a record with field annotation @MC-PARTICIPANT-CODE. FK is not enforced as someone may inadvertently delete a participant, but we still want to get results',
+  `project_code` varchar(36) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'FK to redcap_mycap_projects.code. Not enforced because someone may accidentally delete a project.',
+  `received_date` datetime NOT NULL COMMENT 'Date received by the server',
+  `payload` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Request payload in JSON format',
+  `instrument` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'FK to redcap_metadata.form_name. Relationship not enforced as we may receive results for tasks that were deleted in REDCap.',
+  `error_type` int(1) NOT NULL DEFAULT '0' COMMENT '1 = REDCap Save, 2 = Could not find participant, 3 = Could not find project, 4 = Other',
+  `error_message` varchar(4000) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Error message that REDCap returned when attempting to save the result, or that MyCap identified',
+  `resolved` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0 = Unresolved, 1 = Resolved',
+  `resolved_by` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'issue resolved by this user. FK to redcap_user_information.username',
+  `resolved_comment` varchar(2000) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Optional comment describing why issue was toggled as resolved',
+  PRIMARY KEY (`uuid`),
+  KEY `participant_code` (`participant_code`),
+  KEY `project_code` (`project_code`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
 
 # Dump of table redcap_new_record_cache
 # ------------------------------------------------------------
 
+DROP TABLE IF EXISTS `redcap_new_record_cache`;
+
+CREATE TABLE `redcap_new_record_cache` (
+  `project_id` int(10) NOT NULL DEFAULT '0',
+  `event_id` int(10) DEFAULT NULL,
+  `arm_id` int(11) DEFAULT NULL,
+  `record` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `creation_time` datetime DEFAULT NULL,
+  UNIQUE KEY `proj_record_event` (`project_id`,`record`),
+  KEY `arm_id` (`arm_id`),
+  KEY `creation_time` (`creation_time`),
+  KEY `event_id` (`event_id`),
+  KEY `project_id` (`project_id`),
+  KEY `record_arm` (`record`,`arm_id`),
+  CONSTRAINT `redcap_new_record_cache_ibfk_1` FOREIGN KEY (`arm_id`) REFERENCES `redcap_events_arms` (`arm_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `redcap_new_record_cache_ibfk_2` FOREIGN KEY (`event_id`) REFERENCES `redcap_events_metadata` (`event_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `redcap_new_record_cache_ibfk_3` FOREIGN KEY (`project_id`) REFERENCES `redcap_projects` (`project_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Save new record names to prevent record duplication';
+
 
 
 # Dump of table redcap_outgoing_email_counts
 # ------------------------------------------------------------
 
+DROP TABLE IF EXISTS `redcap_outgoing_email_counts`;
+
+CREATE TABLE `redcap_outgoing_email_counts` (
+  `date` date NOT NULL,
+  `send_count` int(10) DEFAULT '1' COMMENT 'Total',
+  `smtp` int(10) DEFAULT '0',
+  `sendgrid` int(10) DEFAULT '0',
+  `mandrill` int(10) DEFAULT '0',
+  PRIMARY KEY (`date`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+LOCK TABLES `redcap_outgoing_email_counts` WRITE;
+/*!40000 ALTER TABLE `redcap_outgoing_email_counts` DISABLE KEYS */;
+
+INSERT INTO `redcap_outgoing_email_counts` (`date`, `send_count`, `smtp`, `sendgrid`, `mandrill`)
+VALUES
+	('2021-04-28',1,1,0,0);
+
+/*!40000 ALTER TABLE `redcap_outgoing_email_counts` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 # Dump of table redcap_page_hits
 # ------------------------------------------------------------
 
+DROP TABLE IF EXISTS `redcap_page_hits`;
+
+CREATE TABLE `redcap_page_hits` (
+  `date` date NOT NULL,
+  `page_name` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `page_hits` float NOT NULL DEFAULT '1',
+  UNIQUE KEY `date` (`date`,`page_name`),
+  KEY `page_name` (`page_name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+LOCK TABLES `redcap_page_hits` WRITE;
+/*!40000 ALTER TABLE `redcap_page_hits` DISABLE KEYS */;
+
+INSERT INTO `redcap_page_hits` (`date`, `page_name`, `page_hits`)
+VALUES
+	('2021-04-28','index.php',3),
+	('2021-04-28','ControlCenter/index.php',9),
+	('2021-04-28','ControlCenter/cron_jobs.php',2),
+	('2021-04-28','ControlCenter/general_settings.php',4);
+
+/*!40000 ALTER TABLE `redcap_page_hits` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 # Dump of table redcap_project_checklist
 # ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `redcap_project_checklist`;
+
+CREATE TABLE `redcap_project_checklist` (
+  `list_id` int(11) NOT NULL AUTO_INCREMENT,
+  `project_id` int(10) DEFAULT NULL,
+  `name` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`list_id`),
+  UNIQUE KEY `project_name` (`project_id`,`name`),
+  CONSTRAINT `redcap_project_checklist_ibfk_1` FOREIGN KEY (`project_id`) REFERENCES `redcap_projects` (`project_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 LOCK TABLES `redcap_project_checklist` WRITE;
 /*!40000 ALTER TABLE `redcap_project_checklist` DISABLE KEYS */;
@@ -2169,24 +3967,187 @@ UNLOCK TABLES;
 # Dump of table redcap_projects
 # ------------------------------------------------------------
 
+DROP TABLE IF EXISTS `redcap_projects`;
+
+CREATE TABLE `redcap_projects` (
+  `project_id` int(10) NOT NULL AUTO_INCREMENT,
+  `project_name` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `app_title` text COLLATE utf8mb4_unicode_ci,
+  `status` int(1) NOT NULL DEFAULT '0',
+  `creation_time` datetime DEFAULT NULL,
+  `production_time` datetime DEFAULT NULL,
+  `inactive_time` datetime DEFAULT NULL,
+  `completed_time` datetime DEFAULT NULL,
+  `completed_by` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `data_locked` tinyint(1) NOT NULL DEFAULT '0',
+  `log_event_table` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'redcap_log_event' COMMENT 'Project redcap_log_event table',
+  `created_by` int(10) DEFAULT NULL COMMENT 'FK from User Info',
+  `draft_mode` int(1) NOT NULL DEFAULT '0',
+  `surveys_enabled` int(1) NOT NULL DEFAULT '0' COMMENT '0 = forms only, 1 = survey+forms, 2 = single survey only',
+  `repeatforms` int(1) NOT NULL DEFAULT '0',
+  `scheduling` int(1) NOT NULL DEFAULT '0',
+  `purpose` int(2) DEFAULT NULL,
+  `purpose_other` text COLLATE utf8mb4_unicode_ci,
+  `show_which_records` int(1) NOT NULL DEFAULT '0',
+  `__SALT__` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Alphanumeric hash unique to each project',
+  `count_project` int(1) NOT NULL DEFAULT '1',
+  `investigators` text COLLATE utf8mb4_unicode_ci,
+  `project_note` mediumtext COLLATE utf8mb4_unicode_ci,
+  `online_offline` int(1) NOT NULL DEFAULT '1',
+  `auth_meth` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `double_data_entry` int(1) NOT NULL DEFAULT '0',
+  `project_language` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'English',
+  `project_encoding` enum('japanese_sjis','chinese_utf8','chinese_utf8_traditional') COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Encoding to be used for various exported files',
+  `is_child_of` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `date_shift_max` int(10) NOT NULL DEFAULT '364',
+  `institution` text COLLATE utf8mb4_unicode_ci,
+  `site_org_type` text COLLATE utf8mb4_unicode_ci,
+  `grant_cite` text COLLATE utf8mb4_unicode_ci,
+  `project_contact_name` text COLLATE utf8mb4_unicode_ci,
+  `project_contact_email` text COLLATE utf8mb4_unicode_ci,
+  `headerlogo` text COLLATE utf8mb4_unicode_ci,
+  `auto_inc_set` int(1) NOT NULL DEFAULT '0',
+  `custom_data_entry_note` text COLLATE utf8mb4_unicode_ci,
+  `custom_index_page_note` text COLLATE utf8mb4_unicode_ci,
+  `order_id_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `custom_reports` mediumtext COLLATE utf8mb4_unicode_ci COMMENT 'Legacy report builder',
+  `report_builder` mediumtext COLLATE utf8mb4_unicode_ci,
+  `disable_data_entry` int(1) NOT NULL DEFAULT '0',
+  `google_translate_default` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `require_change_reason` int(1) NOT NULL DEFAULT '0',
+  `dts_enabled` int(1) NOT NULL DEFAULT '0',
+  `project_pi_firstname` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `project_pi_mi` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `project_pi_lastname` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `project_pi_email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `project_pi_alias` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `project_pi_username` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `project_pi_pub_exclude` int(1) DEFAULT NULL,
+  `project_pub_matching_institution` text COLLATE utf8mb4_unicode_ci,
+  `project_irb_number` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `project_grant_number` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `history_widget_enabled` int(1) NOT NULL DEFAULT '1',
+  `secondary_pk` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'field_name of seconary identifier',
+  `secondary_pk_display_value` tinyint(1) NOT NULL DEFAULT '1',
+  `secondary_pk_display_label` tinyint(1) NOT NULL DEFAULT '1',
+  `custom_record_label` text COLLATE utf8mb4_unicode_ci,
+  `display_project_logo_institution` int(1) NOT NULL DEFAULT '1',
+  `imported_from_rs` int(1) NOT NULL DEFAULT '0' COMMENT 'If imported from REDCap Survey',
+  `display_today_now_button` int(1) NOT NULL DEFAULT '1',
+  `auto_variable_naming` int(1) NOT NULL DEFAULT '0',
+  `randomization` int(1) NOT NULL DEFAULT '0',
+  `enable_participant_identifiers` int(1) NOT NULL DEFAULT '0',
+  `survey_email_participant_field` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Field name that stores participant email',
+  `survey_phone_participant_field` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Field name that stores participant phone number',
+  `data_entry_trigger_url` text COLLATE utf8mb4_unicode_ci COMMENT 'URL for sending Post request when a record is created or modified',
+  `template_id` int(10) DEFAULT NULL COMMENT 'If created from a project template, the project_id of the template',
+  `date_deleted` datetime DEFAULT NULL COMMENT 'Time that project was flagged for deletion',
+  `data_resolution_enabled` int(1) NOT NULL DEFAULT '1' COMMENT '0=Disabled, 1=Field comment log, 2=Data Quality resolution workflow',
+  `field_comment_edit_delete` int(1) NOT NULL DEFAULT '1' COMMENT 'Allow users to edit or delete Field Comments',
+  `realtime_webservice_enabled` int(1) NOT NULL DEFAULT '0' COMMENT 'Is real-time web service enabled for external data import?',
+  `realtime_webservice_type` enum('CUSTOM','FHIR') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'CUSTOM',
+  `realtime_webservice_offset_days` float NOT NULL DEFAULT '7' COMMENT 'Default value of days offset',
+  `realtime_webservice_offset_plusminus` enum('+','-','+-') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '+-' COMMENT 'Default value of plus-minus range for days offset',
+  `last_logged_event` datetime DEFAULT NULL,
+  `survey_queue_custom_text` text COLLATE utf8mb4_unicode_ci,
+  `survey_queue_hide` tinyint(1) NOT NULL DEFAULT '0',
+  `survey_auth_enabled` int(1) NOT NULL DEFAULT '0',
+  `survey_auth_field1` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `survey_auth_event_id1` int(10) DEFAULT NULL,
+  `survey_auth_field2` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `survey_auth_event_id2` int(10) DEFAULT NULL,
+  `survey_auth_field3` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `survey_auth_event_id3` int(10) DEFAULT NULL,
+  `survey_auth_min_fields` enum('1','2','3') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `survey_auth_apply_all_surveys` int(1) NOT NULL DEFAULT '1',
+  `survey_auth_custom_message` text COLLATE utf8mb4_unicode_ci,
+  `survey_auth_fail_limit` int(2) DEFAULT NULL,
+  `survey_auth_fail_window` int(3) DEFAULT NULL,
+  `twilio_enabled` int(1) NOT NULL DEFAULT '0',
+  `twilio_modules_enabled` enum('SURVEYS','ALERTS','SURVEYS_ALERTS') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'SURVEYS',
+  `twilio_hide_in_project` tinyint(1) NOT NULL DEFAULT '0',
+  `twilio_account_sid` varchar(64) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `twilio_auth_token` varchar(64) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `twilio_from_number` bigint(16) DEFAULT NULL,
+  `twilio_voice_language` varchar(5) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'en',
+  `twilio_option_voice_initiate` tinyint(1) NOT NULL DEFAULT '0',
+  `twilio_option_sms_initiate` tinyint(1) NOT NULL DEFAULT '0',
+  `twilio_option_sms_invite_make_call` tinyint(1) NOT NULL DEFAULT '0',
+  `twilio_option_sms_invite_receive_call` tinyint(1) NOT NULL DEFAULT '0',
+  `twilio_option_sms_invite_web` tinyint(1) NOT NULL DEFAULT '0',
+  `twilio_default_delivery_preference` enum('EMAIL','VOICE_INITIATE','SMS_INITIATE','SMS_INVITE_MAKE_CALL','SMS_INVITE_RECEIVE_CALL','SMS_INVITE_WEB') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'EMAIL',
+  `twilio_request_inspector_checked` datetime DEFAULT NULL,
+  `twilio_request_inspector_enabled` int(1) NOT NULL DEFAULT '1',
+  `twilio_append_response_instructions` int(1) NOT NULL DEFAULT '1',
+  `twilio_multiple_sms_behavior` enum('OVERWRITE','CHOICE','FIRST') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'CHOICE',
+  `two_factor_exempt_project` tinyint(1) NOT NULL DEFAULT '0',
+  `two_factor_force_project` tinyint(1) NOT NULL DEFAULT '0',
+  `disable_autocalcs` tinyint(1) NOT NULL DEFAULT '0',
+  `custom_public_survey_links` text COLLATE utf8mb4_unicode_ci,
+  `pdf_custom_header_text` text COLLATE utf8mb4_unicode_ci,
+  `pdf_show_logo_url` tinyint(1) NOT NULL DEFAULT '1',
+  `pdf_hide_secondary_field` tinyint(1) NOT NULL DEFAULT '0',
+  `pdf_hide_record_id` tinyint(1) NOT NULL DEFAULT '0',
+  `shared_library_enabled` tinyint(1) NOT NULL DEFAULT '1',
+  `allow_delete_record_from_log` tinyint(1) NOT NULL DEFAULT '0',
+  `delete_file_repository_export_files` int(3) NOT NULL DEFAULT '0' COMMENT 'Will auto-delete files after X days',
+  `custom_project_footer_text` text COLLATE utf8mb4_unicode_ci,
+  `custom_project_footer_text_link` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `google_recaptcha_enabled` tinyint(1) NOT NULL DEFAULT '0',
+  `datamart_allow_repeat_revision` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'If true, a normal user can run a revision multiple times',
+  `datamart_allow_create_revision` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'If true, a normal user can request a new revision',
+  `datamart_enabled` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'Is project a Clinical Data Mart project?',
+  `break_the_glass_enabled` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'Are users allowed to use the Epic feature Break-the-Glass feature?',
+  `datamart_cron_enabled` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'If true, the cron job will pull data automatically for all records at a specified interval X times per day.',
+  `datamart_cron_end_date` datetime DEFAULT NULL COMMENT 'stop processing the cron job after this date',
+  `fhir_include_email_address_project` tinyint(1) DEFAULT NULL,
+  `file_upload_vault_enabled` tinyint(1) NOT NULL DEFAULT '0',
+  `file_upload_versioning_enabled` tinyint(1) NOT NULL DEFAULT '1',
+  `missing_data_codes` text COLLATE utf8mb4_unicode_ci,
+  `record_locking_pdf_vault_enabled` tinyint(1) NOT NULL DEFAULT '0',
+  `record_locking_pdf_vault_custom_text` text COLLATE utf8mb4_unicode_ci,
+  PRIMARY KEY (`project_id`),
+  UNIQUE KEY `project_name` (`project_name`),
+  UNIQUE KEY `twilio_from_number` (`twilio_from_number`),
+  KEY `app_title` (`app_title`(190)),
+  KEY `auth_meth` (`auth_meth`),
+  KEY `completed_by` (`completed_by`),
+  KEY `completed_time` (`completed_time`),
+  KEY `created_by` (`created_by`),
+  KEY `date_deleted` (`date_deleted`),
+  KEY `delete_file_repository_export_files` (`delete_file_repository_export_files`),
+  KEY `last_logged_event` (`last_logged_event`),
+  KEY `project_note` (`project_note`(190)),
+  KEY `survey_auth_event_id1` (`survey_auth_event_id1`),
+  KEY `survey_auth_event_id2` (`survey_auth_event_id2`),
+  KEY `survey_auth_event_id3` (`survey_auth_event_id3`),
+  KEY `template_id` (`template_id`),
+  KEY `twilio_account_sid` (`twilio_account_sid`),
+  CONSTRAINT `redcap_projects_ibfk_1` FOREIGN KEY (`created_by`) REFERENCES `redcap_user_information` (`ui_id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `redcap_projects_ibfk_2` FOREIGN KEY (`survey_auth_event_id1`) REFERENCES `redcap_events_metadata` (`event_id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `redcap_projects_ibfk_3` FOREIGN KEY (`survey_auth_event_id2`) REFERENCES `redcap_events_metadata` (`event_id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `redcap_projects_ibfk_4` FOREIGN KEY (`survey_auth_event_id3`) REFERENCES `redcap_events_metadata` (`event_id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `redcap_projects_ibfk_5` FOREIGN KEY (`template_id`) REFERENCES `redcap_projects` (`project_id`) ON DELETE SET NULL ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Stores project-level values';
+
 LOCK TABLES `redcap_projects` WRITE;
 /*!40000 ALTER TABLE `redcap_projects` DISABLE KEYS */;
 
-INSERT INTO `redcap_projects` (`project_id`, `project_name`, `app_title`, `status`, `creation_time`, `production_time`, `inactive_time`, `completed_time`, `completed_by`, `data_locked`, `log_event_table`, `created_by`, `draft_mode`, `surveys_enabled`, `repeatforms`, `scheduling`, `purpose`, `purpose_other`, `show_which_records`, `__SALT__`, `count_project`, `investigators`, `project_note`, `online_offline`, `auth_meth`, `double_data_entry`, `project_language`, `project_encoding`, `is_child_of`, `date_shift_max`, `institution`, `site_org_type`, `grant_cite`, `project_contact_name`, `project_contact_email`, `headerlogo`, `auto_inc_set`, `custom_data_entry_note`, `custom_index_page_note`, `order_id_by`, `custom_reports`, `report_builder`, `disable_data_entry`, `google_translate_default`, `require_change_reason`, `dts_enabled`, `project_pi_firstname`, `project_pi_mi`, `project_pi_lastname`, `project_pi_email`, `project_pi_alias`, `project_pi_username`, `project_pi_pub_exclude`, `project_pub_matching_institution`, `project_irb_number`, `project_grant_number`, `history_widget_enabled`, `secondary_pk`, `secondary_pk_display_value`, `secondary_pk_display_label`, `custom_record_label`, `display_project_logo_institution`, `imported_from_rs`, `display_today_now_button`, `auto_variable_naming`, `randomization`, `enable_participant_identifiers`, `survey_email_participant_field`, `survey_phone_participant_field`, `data_entry_trigger_url`, `template_id`, `date_deleted`, `data_resolution_enabled`, `field_comment_edit_delete`, `realtime_webservice_enabled`, `realtime_webservice_type`, `realtime_webservice_offset_days`, `realtime_webservice_offset_plusminus`, `last_logged_event`, `survey_queue_custom_text`, `survey_queue_hide`, `survey_auth_enabled`, `survey_auth_field1`, `survey_auth_event_id1`, `survey_auth_field2`, `survey_auth_event_id2`, `survey_auth_field3`, `survey_auth_event_id3`, `survey_auth_min_fields`, `survey_auth_apply_all_surveys`, `survey_auth_custom_message`, `survey_auth_fail_limit`, `survey_auth_fail_window`, `twilio_enabled`, `twilio_modules_enabled`, `twilio_hide_in_project`, `twilio_account_sid`, `twilio_auth_token`, `twilio_from_number`, `twilio_voice_language`, `twilio_option_voice_initiate`, `twilio_option_sms_initiate`, `twilio_option_sms_invite_make_call`, `twilio_option_sms_invite_receive_call`, `twilio_option_sms_invite_web`, `twilio_default_delivery_preference`, `twilio_request_inspector_checked`, `twilio_request_inspector_enabled`, `twilio_append_response_instructions`, `twilio_multiple_sms_behavior`, `two_factor_exempt_project`, `two_factor_force_project`, `disable_autocalcs`, `custom_public_survey_links`, `pdf_custom_header_text`, `pdf_show_logo_url`, `pdf_hide_secondary_field`, `pdf_hide_record_id`, `shared_library_enabled`, `allow_delete_record_from_log`, `delete_file_repository_export_files`, `custom_project_footer_text`, `custom_project_footer_text_link`, `google_recaptcha_enabled`, `datamart_allow_repeat_revision`, `datamart_allow_create_revision`, `datamart_enabled`, `break_the_glass_enabled`, `datamart_cron_enabled`, `fhir_include_email_address_project`, `file_upload_vault_enabled`, `file_upload_versioning_enabled`, `missing_data_codes`, `record_locking_pdf_vault_enabled`, `record_locking_pdf_vault_custom_text`)
+INSERT INTO `redcap_projects` (`project_id`, `project_name`, `app_title`, `status`, `creation_time`, `production_time`, `inactive_time`, `completed_time`, `completed_by`, `data_locked`, `log_event_table`, `created_by`, `draft_mode`, `surveys_enabled`, `repeatforms`, `scheduling`, `purpose`, `purpose_other`, `show_which_records`, `__SALT__`, `count_project`, `investigators`, `project_note`, `online_offline`, `auth_meth`, `double_data_entry`, `project_language`, `project_encoding`, `is_child_of`, `date_shift_max`, `institution`, `site_org_type`, `grant_cite`, `project_contact_name`, `project_contact_email`, `headerlogo`, `auto_inc_set`, `custom_data_entry_note`, `custom_index_page_note`, `order_id_by`, `custom_reports`, `report_builder`, `disable_data_entry`, `google_translate_default`, `require_change_reason`, `dts_enabled`, `project_pi_firstname`, `project_pi_mi`, `project_pi_lastname`, `project_pi_email`, `project_pi_alias`, `project_pi_username`, `project_pi_pub_exclude`, `project_pub_matching_institution`, `project_irb_number`, `project_grant_number`, `history_widget_enabled`, `secondary_pk`, `secondary_pk_display_value`, `secondary_pk_display_label`, `custom_record_label`, `display_project_logo_institution`, `imported_from_rs`, `display_today_now_button`, `auto_variable_naming`, `randomization`, `enable_participant_identifiers`, `survey_email_participant_field`, `survey_phone_participant_field`, `data_entry_trigger_url`, `template_id`, `date_deleted`, `data_resolution_enabled`, `field_comment_edit_delete`, `realtime_webservice_enabled`, `realtime_webservice_type`, `realtime_webservice_offset_days`, `realtime_webservice_offset_plusminus`, `last_logged_event`, `survey_queue_custom_text`, `survey_queue_hide`, `survey_auth_enabled`, `survey_auth_field1`, `survey_auth_event_id1`, `survey_auth_field2`, `survey_auth_event_id2`, `survey_auth_field3`, `survey_auth_event_id3`, `survey_auth_min_fields`, `survey_auth_apply_all_surveys`, `survey_auth_custom_message`, `survey_auth_fail_limit`, `survey_auth_fail_window`, `twilio_enabled`, `twilio_modules_enabled`, `twilio_hide_in_project`, `twilio_account_sid`, `twilio_auth_token`, `twilio_from_number`, `twilio_voice_language`, `twilio_option_voice_initiate`, `twilio_option_sms_initiate`, `twilio_option_sms_invite_make_call`, `twilio_option_sms_invite_receive_call`, `twilio_option_sms_invite_web`, `twilio_default_delivery_preference`, `twilio_request_inspector_checked`, `twilio_request_inspector_enabled`, `twilio_append_response_instructions`, `twilio_multiple_sms_behavior`, `two_factor_exempt_project`, `two_factor_force_project`, `disable_autocalcs`, `custom_public_survey_links`, `pdf_custom_header_text`, `pdf_show_logo_url`, `pdf_hide_secondary_field`, `pdf_hide_record_id`, `shared_library_enabled`, `allow_delete_record_from_log`, `delete_file_repository_export_files`, `custom_project_footer_text`, `custom_project_footer_text_link`, `google_recaptcha_enabled`, `datamart_allow_repeat_revision`, `datamart_allow_create_revision`, `datamart_enabled`, `break_the_glass_enabled`, `datamart_cron_enabled`, `datamart_cron_end_date`, `fhir_include_email_address_project`, `file_upload_vault_enabled`, `file_upload_versioning_enabled`, `missing_data_codes`, `record_locking_pdf_vault_enabled`, `record_locking_pdf_vault_custom_text`)
 VALUES
-	(1,'redcap_demo_951573','Classic Database',1,'2020-09-24 20:56:22','2020-09-24 20:56:22',NULL,NULL,NULL,0,'redcap_log_event',NULL,0,0,0,0,NULL,NULL,0,NULL,0,NULL,NULL,1,'none',0,'English',NULL,NULL,364,'SoAndSo University','SoAndSo Institute for Clinical and Translational Research','','REDCap Administrator (123-456-7890)','email@yoursite.edu','',1,NULL,NULL,NULL,NULL,NULL,0,NULL,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,1,1,NULL,0,0,1,0,0,0,NULL,NULL,NULL,NULL,NULL,1,1,0,'CUSTOM',7,'+-',NULL,NULL,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,NULL,NULL,0,'SURVEYS',0,NULL,NULL,NULL,'en',0,0,0,0,0,'EMAIL',NULL,1,1,'CHOICE',0,0,0,NULL,NULL,1,0,0,1,0,0,NULL,NULL,0,0,0,0,0,0,NULL,0,1,NULL,0,NULL),
-	(2,'redcap_demo_5d65da','Longitudinal Database (1 arm)',1,'2020-09-24 20:56:22','2020-09-24 20:56:22',NULL,NULL,NULL,0,'redcap_log_event',NULL,0,0,1,0,NULL,NULL,0,NULL,0,NULL,NULL,1,'none',0,'English',NULL,NULL,364,'SoAndSo University','SoAndSo Institute for Clinical and Translational Research','','REDCap Administrator (123-456-7890)','email@yoursite.edu','',1,NULL,NULL,NULL,NULL,NULL,0,NULL,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,1,1,NULL,0,0,1,0,0,0,NULL,NULL,NULL,NULL,NULL,1,1,0,'CUSTOM',7,'+-',NULL,NULL,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,NULL,NULL,0,'SURVEYS',0,NULL,NULL,NULL,'en',0,0,0,0,0,'EMAIL',NULL,1,1,'CHOICE',0,0,0,NULL,NULL,1,0,0,1,0,0,NULL,NULL,0,0,0,0,0,0,NULL,0,1,NULL,0,NULL),
-	(3,'redcap_demo_9165e5','Longitudinal Database (2 arms)',1,'2020-09-24 20:56:22','2020-09-24 20:56:22',NULL,NULL,NULL,0,'redcap_log_event',NULL,0,0,1,0,NULL,NULL,0,NULL,0,NULL,NULL,1,'none',0,'English',NULL,NULL,364,'SoAndSo University','SoAndSo Institute for Clinical and Translational Research','','REDCap Administrator (123-456-7890)','email@yoursite.edu','',1,NULL,NULL,NULL,NULL,NULL,0,NULL,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,1,1,NULL,0,0,1,0,0,0,NULL,NULL,NULL,NULL,NULL,1,1,0,'CUSTOM',7,'+-',NULL,NULL,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,NULL,NULL,0,'SURVEYS',0,NULL,NULL,NULL,'en',0,0,0,0,0,'EMAIL',NULL,1,1,'CHOICE',0,0,0,NULL,NULL,1,0,0,1,0,0,NULL,NULL,0,0,0,0,0,0,NULL,0,1,NULL,0,NULL),
-	(4,'redcap_demo_06046c','Single Survey',1,'2020-09-24 20:56:22','2020-09-24 20:56:22',NULL,NULL,NULL,0,'redcap_log_event',NULL,0,1,0,0,NULL,NULL,0,NULL,0,NULL,NULL,1,'none',0,'English',NULL,NULL,364,'SoAndSo University','SoAndSo Institute for Clinical and Translational Research','','REDCap Administrator (123-456-7890)','email@yoursite.edu','',1,NULL,NULL,NULL,NULL,NULL,0,NULL,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,1,1,NULL,0,0,1,0,0,0,NULL,NULL,NULL,NULL,NULL,1,1,0,'CUSTOM',7,'+-',NULL,NULL,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,NULL,NULL,0,'SURVEYS',0,NULL,NULL,NULL,'en',0,0,0,0,0,'EMAIL',NULL,1,1,'CHOICE',0,0,0,NULL,NULL,1,0,0,1,0,0,NULL,NULL,0,0,0,0,0,0,NULL,0,1,NULL,0,NULL),
-	(5,'redcap_demo_b0f79d','Basic Demography',1,'2020-09-24 20:56:22','2020-09-24 20:56:22',NULL,NULL,NULL,0,'redcap_log_event',NULL,0,0,0,0,NULL,NULL,0,NULL,0,NULL,NULL,1,'none',0,'English',NULL,NULL,364,'SoAndSo University','SoAndSo Institute for Clinical and Translational Research','','REDCap Administrator (123-456-7890)','email@yoursite.edu','',1,NULL,NULL,NULL,NULL,NULL,0,NULL,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,1,1,NULL,0,0,1,0,0,0,NULL,NULL,NULL,NULL,NULL,1,1,0,'CUSTOM',7,'+-',NULL,NULL,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,NULL,NULL,0,'SURVEYS',0,NULL,NULL,NULL,'en',0,0,0,0,0,'EMAIL',NULL,1,1,'CHOICE',0,0,0,NULL,NULL,1,0,0,1,0,0,NULL,NULL,0,0,0,0,0,0,NULL,0,1,NULL,0,NULL),
-	(6,'redcap_demo_7b4560','Project Tracking Database',1,'2020-09-24 20:56:22','2020-09-24 20:56:22',NULL,NULL,NULL,0,'redcap_log_event',NULL,0,0,0,0,NULL,NULL,0,NULL,0,NULL,NULL,1,'none',0,'English',NULL,NULL,364,'SoAndSo University','SoAndSo Institute for Clinical and Translational Research','','REDCap Administrator (123-456-7890)','email@yoursite.edu','',1,NULL,NULL,NULL,NULL,NULL,0,NULL,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,1,1,NULL,0,0,1,0,0,0,NULL,NULL,NULL,NULL,NULL,1,1,0,'CUSTOM',7,'+-',NULL,NULL,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,NULL,NULL,0,'SURVEYS',0,NULL,NULL,NULL,'en',0,0,0,0,0,'EMAIL',NULL,1,1,'CHOICE',0,0,0,NULL,NULL,1,0,0,1,0,0,NULL,NULL,0,0,0,0,0,0,NULL,0,1,NULL,0,NULL),
-	(7,'redcap_demo_42e922','Randomized Clinical Trial',1,'2020-09-24 20:56:22','2020-09-24 20:56:22',NULL,NULL,NULL,0,'redcap_log_event',NULL,0,0,0,0,NULL,NULL,0,NULL,0,NULL,NULL,1,'none',0,'English',NULL,NULL,364,'SoAndSo University','SoAndSo Institute for Clinical and Translational Research','','REDCap Administrator (123-456-7890)','email@yoursite.edu','',1,NULL,NULL,NULL,NULL,NULL,0,NULL,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,1,1,NULL,0,0,1,0,1,0,NULL,NULL,NULL,NULL,NULL,1,1,0,'CUSTOM',7,'+-',NULL,NULL,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,NULL,NULL,0,'SURVEYS',0,NULL,NULL,NULL,'en',0,0,0,0,0,'EMAIL',NULL,1,1,'CHOICE',0,0,0,NULL,NULL,1,0,0,1,0,0,NULL,NULL,0,0,0,0,0,0,NULL,0,1,NULL,0,NULL),
-	(8,'redcap_demo_2fc110','Human Cancer Tissue Biobank',1,'2020-09-24 20:56:22','2020-09-24 20:56:22',NULL,NULL,NULL,0,'redcap_log_event',NULL,0,0,0,0,NULL,NULL,0,NULL,0,NULL,NULL,1,'none',0,'English',NULL,NULL,364,'SoAndSo University','SoAndSo Institute for Clinical and Translational Research','','REDCap Administrator (123-456-7890)','email@yoursite.edu','',1,NULL,NULL,NULL,NULL,NULL,0,NULL,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,1,1,NULL,0,0,1,0,0,0,NULL,NULL,NULL,NULL,NULL,1,1,0,'CUSTOM',7,'+-',NULL,NULL,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,NULL,NULL,0,'SURVEYS',0,NULL,NULL,NULL,'en',0,0,0,0,0,'EMAIL',NULL,1,1,'CHOICE',0,0,0,NULL,NULL,1,0,0,1,0,0,NULL,NULL,0,0,0,0,0,0,NULL,0,1,NULL,0,NULL),
-	(9,'redcap_demo_54ab97','Multiple Surveys (classic)',1,'2020-09-24 20:56:22','2020-09-24 20:56:22',NULL,NULL,NULL,0,'redcap_log_event',NULL,0,1,0,0,NULL,NULL,0,NULL,0,NULL,NULL,1,'none',0,'English',NULL,NULL,364,'SoAndSo University','SoAndSo Institute for Clinical and Translational Research','','REDCap Administrator (123-456-7890)','email@yoursite.edu','',1,NULL,NULL,NULL,NULL,NULL,0,NULL,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,1,1,NULL,0,0,1,0,0,0,'email',NULL,NULL,NULL,NULL,1,1,0,'CUSTOM',7,'+-',NULL,NULL,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,NULL,NULL,0,'SURVEYS',0,NULL,NULL,NULL,'en',0,0,0,0,0,'EMAIL',NULL,1,1,'CHOICE',0,0,0,NULL,NULL,1,0,0,1,0,0,NULL,NULL,0,0,0,0,0,0,NULL,0,1,NULL,0,NULL),
-	(10,'redcap_demo_3c0871','Multiple Surveys (longitudinal)',1,'2020-09-24 20:56:22','2020-09-24 20:56:22',NULL,NULL,NULL,0,'redcap_log_event',NULL,0,1,1,0,NULL,NULL,0,NULL,0,NULL,NULL,1,'none',0,'English',NULL,NULL,364,'SoAndSo University','SoAndSo Institute for Clinical and Translational Research','','REDCap Administrator (123-456-7890)','email@yoursite.edu','',1,NULL,NULL,NULL,NULL,NULL,0,NULL,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,1,1,NULL,0,0,1,0,0,0,'email',NULL,NULL,NULL,NULL,1,1,0,'CUSTOM',7,'+-',NULL,NULL,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,NULL,NULL,0,'SURVEYS',0,NULL,NULL,NULL,'en',0,0,0,0,0,'EMAIL',NULL,1,1,'CHOICE',0,0,0,NULL,NULL,1,0,0,1,0,0,NULL,NULL,0,0,0,0,0,0,NULL,0,1,NULL,0,NULL),
-	(11,'redcap_demo_38e07f','Piping Example Project',1,'2020-09-24 20:56:22','2020-09-24 20:56:22',NULL,NULL,NULL,0,'redcap_log_event',NULL,0,1,0,0,NULL,NULL,0,NULL,0,NULL,NULL,1,'none',0,'English',NULL,NULL,364,'SoAndSo University','SoAndSo Institute for Clinical and Translational Research','','REDCap Administrator (123-456-7890)','email@yoursite.edu','',1,NULL,NULL,NULL,NULL,NULL,0,NULL,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,1,1,NULL,0,0,1,0,0,0,NULL,NULL,NULL,NULL,NULL,1,1,0,'CUSTOM',7,'+-',NULL,NULL,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,NULL,NULL,0,'SURVEYS',0,NULL,NULL,NULL,'en',0,0,0,0,0,'EMAIL',NULL,1,1,'CHOICE',0,0,0,NULL,NULL,1,0,0,1,0,0,NULL,NULL,0,0,0,0,0,0,NULL,0,1,NULL,0,NULL),
-	(12,'redcap_demo_db9576','Repeating Instruments',1,'2020-09-24 20:56:22','2020-09-24 20:56:22',NULL,NULL,NULL,0,'redcap_log_event',NULL,0,0,0,0,NULL,NULL,0,NULL,0,NULL,NULL,1,'none',0,'English',NULL,NULL,364,'SoAndSo University','SoAndSo Institute for Clinical and Translational Research','','REDCap Administrator (123-456-7890)','email@yoursite.edu','',1,NULL,NULL,NULL,NULL,NULL,0,NULL,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,1,1,NULL,0,0,1,0,0,0,NULL,NULL,NULL,NULL,NULL,1,1,0,'CUSTOM',7,'+-',NULL,NULL,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,NULL,NULL,0,'SURVEYS',0,NULL,NULL,NULL,'en',0,0,0,0,0,'EMAIL',NULL,1,1,'CHOICE',0,0,0,NULL,NULL,1,0,0,1,0,0,NULL,NULL,0,0,0,0,0,0,NULL,0,1,NULL,0,NULL),
-	(13,'redcap_demo_76bacb','Field Embedding Example Project',1,'2020-09-24 20:56:22','2020-09-24 20:56:22',NULL,NULL,NULL,0,'redcap_log_event',NULL,0,0,0,0,NULL,NULL,0,NULL,0,NULL,NULL,1,'none',0,'English',NULL,NULL,364,'SoAndSo University','SoAndSo Institute for Clinical and Translational Research','','REDCap Administrator (123-456-7890)','email@yoursite.edu','',1,NULL,NULL,NULL,NULL,NULL,0,NULL,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,1,1,NULL,0,0,1,0,0,0,NULL,NULL,NULL,NULL,NULL,1,1,0,'CUSTOM',7,'+-',NULL,NULL,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,NULL,NULL,0,'SURVEYS',0,NULL,NULL,NULL,'en',0,0,0,0,0,'EMAIL',NULL,1,1,'CHOICE',0,0,0,NULL,NULL,1,0,0,1,0,0,NULL,NULL,0,0,0,0,0,0,NULL,0,1,NULL,0,NULL);
+	(1,'redcap_demo_951573','Classic Database',1,'2020-09-24 20:56:22','2020-09-24 20:56:22',NULL,NULL,NULL,0,'redcap_log_event',NULL,0,0,0,0,NULL,NULL,0,NULL,0,NULL,NULL,1,'none',0,'English',NULL,NULL,364,'SoAndSo University','SoAndSo Institute for Clinical and Translational Research','','REDCap Administrator (123-456-7890)','email@yoursite.edu','',1,NULL,NULL,NULL,NULL,NULL,0,NULL,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,1,1,NULL,0,0,1,0,0,0,NULL,NULL,NULL,NULL,NULL,1,1,0,'CUSTOM',7,'+-',NULL,NULL,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,NULL,NULL,0,'SURVEYS',0,NULL,NULL,NULL,'en',0,0,0,0,0,'EMAIL',NULL,1,1,'CHOICE',0,0,0,NULL,NULL,1,0,0,1,0,0,NULL,NULL,0,0,0,0,0,0,NULL,NULL,0,1,NULL,0,NULL),
+	(2,'redcap_demo_5d65da','Longitudinal Database (1 arm)',1,'2020-09-24 20:56:22','2020-09-24 20:56:22',NULL,NULL,NULL,0,'redcap_log_event',NULL,0,0,1,0,NULL,NULL,0,NULL,0,NULL,NULL,1,'none',0,'English',NULL,NULL,364,'SoAndSo University','SoAndSo Institute for Clinical and Translational Research','','REDCap Administrator (123-456-7890)','email@yoursite.edu','',1,NULL,NULL,NULL,NULL,NULL,0,NULL,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,1,1,NULL,0,0,1,0,0,0,NULL,NULL,NULL,NULL,NULL,1,1,0,'CUSTOM',7,'+-',NULL,NULL,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,NULL,NULL,0,'SURVEYS',0,NULL,NULL,NULL,'en',0,0,0,0,0,'EMAIL',NULL,1,1,'CHOICE',0,0,0,NULL,NULL,1,0,0,1,0,0,NULL,NULL,0,0,0,0,0,0,NULL,NULL,0,1,NULL,0,NULL),
+	(3,'redcap_demo_9165e5','Longitudinal Database (2 arms)',1,'2020-09-24 20:56:22','2020-09-24 20:56:22',NULL,NULL,NULL,0,'redcap_log_event',NULL,0,0,1,0,NULL,NULL,0,NULL,0,NULL,NULL,1,'none',0,'English',NULL,NULL,364,'SoAndSo University','SoAndSo Institute for Clinical and Translational Research','','REDCap Administrator (123-456-7890)','email@yoursite.edu','',1,NULL,NULL,NULL,NULL,NULL,0,NULL,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,1,1,NULL,0,0,1,0,0,0,NULL,NULL,NULL,NULL,NULL,1,1,0,'CUSTOM',7,'+-',NULL,NULL,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,NULL,NULL,0,'SURVEYS',0,NULL,NULL,NULL,'en',0,0,0,0,0,'EMAIL',NULL,1,1,'CHOICE',0,0,0,NULL,NULL,1,0,0,1,0,0,NULL,NULL,0,0,0,0,0,0,NULL,NULL,0,1,NULL,0,NULL),
+	(4,'redcap_demo_06046c','Single Survey',1,'2020-09-24 20:56:22','2020-09-24 20:56:22',NULL,NULL,NULL,0,'redcap_log_event',NULL,0,1,0,0,NULL,NULL,0,NULL,0,NULL,NULL,1,'none',0,'English',NULL,NULL,364,'SoAndSo University','SoAndSo Institute for Clinical and Translational Research','','REDCap Administrator (123-456-7890)','email@yoursite.edu','',1,NULL,NULL,NULL,NULL,NULL,0,NULL,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,1,1,NULL,0,0,1,0,0,0,NULL,NULL,NULL,NULL,NULL,1,1,0,'CUSTOM',7,'+-',NULL,NULL,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,NULL,NULL,0,'SURVEYS',0,NULL,NULL,NULL,'en',0,0,0,0,0,'EMAIL',NULL,1,1,'CHOICE',0,0,0,NULL,NULL,1,0,0,1,0,0,NULL,NULL,0,0,0,0,0,0,NULL,NULL,0,1,NULL,0,NULL),
+	(5,'redcap_demo_b0f79d','Basic Demography',1,'2020-09-24 20:56:22','2020-09-24 20:56:22',NULL,NULL,NULL,0,'redcap_log_event',NULL,0,0,0,0,NULL,NULL,0,NULL,0,NULL,NULL,1,'none',0,'English',NULL,NULL,364,'SoAndSo University','SoAndSo Institute for Clinical and Translational Research','','REDCap Administrator (123-456-7890)','email@yoursite.edu','',1,NULL,NULL,NULL,NULL,NULL,0,NULL,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,1,1,NULL,0,0,1,0,0,0,NULL,NULL,NULL,NULL,NULL,1,1,0,'CUSTOM',7,'+-',NULL,NULL,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,NULL,NULL,0,'SURVEYS',0,NULL,NULL,NULL,'en',0,0,0,0,0,'EMAIL',NULL,1,1,'CHOICE',0,0,0,NULL,NULL,1,0,0,1,0,0,NULL,NULL,0,0,0,0,0,0,NULL,NULL,0,1,NULL,0,NULL),
+	(6,'redcap_demo_7b4560','Project Tracking Database',1,'2020-09-24 20:56:22','2020-09-24 20:56:22',NULL,NULL,NULL,0,'redcap_log_event',NULL,0,0,0,0,NULL,NULL,0,NULL,0,NULL,NULL,1,'none',0,'English',NULL,NULL,364,'SoAndSo University','SoAndSo Institute for Clinical and Translational Research','','REDCap Administrator (123-456-7890)','email@yoursite.edu','',1,NULL,NULL,NULL,NULL,NULL,0,NULL,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,1,1,NULL,0,0,1,0,0,0,NULL,NULL,NULL,NULL,NULL,1,1,0,'CUSTOM',7,'+-',NULL,NULL,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,NULL,NULL,0,'SURVEYS',0,NULL,NULL,NULL,'en',0,0,0,0,0,'EMAIL',NULL,1,1,'CHOICE',0,0,0,NULL,NULL,1,0,0,1,0,0,NULL,NULL,0,0,0,0,0,0,NULL,NULL,0,1,NULL,0,NULL),
+	(7,'redcap_demo_42e922','Randomized Clinical Trial',1,'2020-09-24 20:56:22','2020-09-24 20:56:22',NULL,NULL,NULL,0,'redcap_log_event',NULL,0,0,0,0,NULL,NULL,0,NULL,0,NULL,NULL,1,'none',0,'English',NULL,NULL,364,'SoAndSo University','SoAndSo Institute for Clinical and Translational Research','','REDCap Administrator (123-456-7890)','email@yoursite.edu','',1,NULL,NULL,NULL,NULL,NULL,0,NULL,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,1,1,NULL,0,0,1,0,1,0,NULL,NULL,NULL,NULL,NULL,1,1,0,'CUSTOM',7,'+-',NULL,NULL,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,NULL,NULL,0,'SURVEYS',0,NULL,NULL,NULL,'en',0,0,0,0,0,'EMAIL',NULL,1,1,'CHOICE',0,0,0,NULL,NULL,1,0,0,1,0,0,NULL,NULL,0,0,0,0,0,0,NULL,NULL,0,1,NULL,0,NULL),
+	(8,'redcap_demo_2fc110','Human Cancer Tissue Biobank',1,'2020-09-24 20:56:22','2020-09-24 20:56:22',NULL,NULL,NULL,0,'redcap_log_event',NULL,0,0,0,0,NULL,NULL,0,NULL,0,NULL,NULL,1,'none',0,'English',NULL,NULL,364,'SoAndSo University','SoAndSo Institute for Clinical and Translational Research','','REDCap Administrator (123-456-7890)','email@yoursite.edu','',1,NULL,NULL,NULL,NULL,NULL,0,NULL,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,1,1,NULL,0,0,1,0,0,0,NULL,NULL,NULL,NULL,NULL,1,1,0,'CUSTOM',7,'+-',NULL,NULL,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,NULL,NULL,0,'SURVEYS',0,NULL,NULL,NULL,'en',0,0,0,0,0,'EMAIL',NULL,1,1,'CHOICE',0,0,0,NULL,NULL,1,0,0,1,0,0,NULL,NULL,0,0,0,0,0,0,NULL,NULL,0,1,NULL,0,NULL),
+	(9,'redcap_demo_54ab97','Multiple Surveys (classic)',1,'2020-09-24 20:56:22','2020-09-24 20:56:22',NULL,NULL,NULL,0,'redcap_log_event',NULL,0,1,0,0,NULL,NULL,0,NULL,0,NULL,NULL,1,'none',0,'English',NULL,NULL,364,'SoAndSo University','SoAndSo Institute for Clinical and Translational Research','','REDCap Administrator (123-456-7890)','email@yoursite.edu','',1,NULL,NULL,NULL,NULL,NULL,0,NULL,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,1,1,NULL,0,0,1,0,0,0,'email',NULL,NULL,NULL,NULL,1,1,0,'CUSTOM',7,'+-',NULL,NULL,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,NULL,NULL,0,'SURVEYS',0,NULL,NULL,NULL,'en',0,0,0,0,0,'EMAIL',NULL,1,1,'CHOICE',0,0,0,NULL,NULL,1,0,0,1,0,0,NULL,NULL,0,0,0,0,0,0,NULL,NULL,0,1,NULL,0,NULL),
+	(10,'redcap_demo_3c0871','Multiple Surveys (longitudinal)',1,'2020-09-24 20:56:22','2020-09-24 20:56:22',NULL,NULL,NULL,0,'redcap_log_event',NULL,0,1,1,0,NULL,NULL,0,NULL,0,NULL,NULL,1,'none',0,'English',NULL,NULL,364,'SoAndSo University','SoAndSo Institute for Clinical and Translational Research','','REDCap Administrator (123-456-7890)','email@yoursite.edu','',1,NULL,NULL,NULL,NULL,NULL,0,NULL,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,1,1,NULL,0,0,1,0,0,0,'email',NULL,NULL,NULL,NULL,1,1,0,'CUSTOM',7,'+-',NULL,NULL,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,NULL,NULL,0,'SURVEYS',0,NULL,NULL,NULL,'en',0,0,0,0,0,'EMAIL',NULL,1,1,'CHOICE',0,0,0,NULL,NULL,1,0,0,1,0,0,NULL,NULL,0,0,0,0,0,0,NULL,NULL,0,1,NULL,0,NULL),
+	(11,'redcap_demo_38e07f','Piping Example Project',1,'2020-09-24 20:56:22','2020-09-24 20:56:22',NULL,NULL,NULL,0,'redcap_log_event',NULL,0,1,0,0,NULL,NULL,0,NULL,0,NULL,NULL,1,'none',0,'English',NULL,NULL,364,'SoAndSo University','SoAndSo Institute for Clinical and Translational Research','','REDCap Administrator (123-456-7890)','email@yoursite.edu','',1,NULL,NULL,NULL,NULL,NULL,0,NULL,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,1,1,NULL,0,0,1,0,0,0,NULL,NULL,NULL,NULL,NULL,1,1,0,'CUSTOM',7,'+-',NULL,NULL,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,NULL,NULL,0,'SURVEYS',0,NULL,NULL,NULL,'en',0,0,0,0,0,'EMAIL',NULL,1,1,'CHOICE',0,0,0,NULL,NULL,1,0,0,1,0,0,NULL,NULL,0,0,0,0,0,0,NULL,NULL,0,1,NULL,0,NULL),
+	(12,'redcap_demo_db9576','Repeating Instruments',1,'2020-09-24 20:56:22','2020-09-24 20:56:22',NULL,NULL,NULL,0,'redcap_log_event',NULL,0,0,0,0,NULL,NULL,0,NULL,0,NULL,NULL,1,'none',0,'English',NULL,NULL,364,'SoAndSo University','SoAndSo Institute for Clinical and Translational Research','','REDCap Administrator (123-456-7890)','email@yoursite.edu','',1,NULL,NULL,NULL,NULL,NULL,0,NULL,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,1,1,NULL,0,0,1,0,0,0,NULL,NULL,NULL,NULL,NULL,1,1,0,'CUSTOM',7,'+-',NULL,NULL,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,NULL,NULL,0,'SURVEYS',0,NULL,NULL,NULL,'en',0,0,0,0,0,'EMAIL',NULL,1,1,'CHOICE',0,0,0,NULL,NULL,1,0,0,1,0,0,NULL,NULL,0,0,0,0,0,0,NULL,NULL,0,1,NULL,0,NULL),
+	(13,'redcap_demo_76bacb','Field Embedding Example Project',1,'2020-09-24 20:56:22','2020-09-24 20:56:22',NULL,NULL,NULL,0,'redcap_log_event',NULL,0,0,0,0,NULL,NULL,0,NULL,0,NULL,NULL,1,'none',0,'English',NULL,NULL,364,'SoAndSo University','SoAndSo Institute for Clinical and Translational Research','','REDCap Administrator (123-456-7890)','email@yoursite.edu','',1,NULL,NULL,NULL,NULL,NULL,0,NULL,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,1,1,NULL,0,0,1,0,0,0,NULL,NULL,NULL,NULL,NULL,1,1,0,'CUSTOM',7,'+-',NULL,NULL,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,NULL,NULL,0,'SURVEYS',0,NULL,NULL,NULL,'en',0,0,0,0,0,'EMAIL',NULL,1,1,'CHOICE',0,0,0,NULL,NULL,1,0,0,1,0,0,NULL,NULL,0,0,0,0,0,0,NULL,NULL,0,1,NULL,0,NULL);
 
 /*!40000 ALTER TABLE `redcap_projects` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -2195,10 +4156,38 @@ UNLOCK TABLES;
 # Dump of table redcap_projects_external
 # ------------------------------------------------------------
 
+DROP TABLE IF EXISTS `redcap_projects_external`;
+
+CREATE TABLE `redcap_projects_external` (
+  `project_id` varchar(32) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Brief user-defined project identifier unique within custom_type',
+  `custom_type` varchar(32) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Brief user-defined name for the resource/category/bucket under which the project falls',
+  `app_title` text COLLATE utf8mb4_unicode_ci,
+  `creation_time` datetime DEFAULT NULL,
+  `project_pi_firstname` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `project_pi_mi` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `project_pi_lastname` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `project_pi_email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `project_pi_alias` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `project_pi_pub_exclude` int(1) DEFAULT NULL,
+  `project_pub_matching_institution` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`project_id`,`custom_type`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 
 
 # Dump of table redcap_projects_templates
 # ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `redcap_projects_templates`;
+
+CREATE TABLE `redcap_projects_templates` (
+  `project_id` int(10) NOT NULL DEFAULT '0',
+  `title` text COLLATE utf8mb4_unicode_ci,
+  `description` text COLLATE utf8mb4_unicode_ci,
+  `enabled` int(1) NOT NULL DEFAULT '0' COMMENT 'If enabled, template is visible to users in list.',
+  PRIMARY KEY (`project_id`),
+  CONSTRAINT `redcap_projects_templates_ibfk_1` FOREIGN KEY (`project_id`) REFERENCES `redcap_projects` (`project_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Info about which projects are used as templates';
 
 LOCK TABLES `redcap_projects_templates` WRITE;
 /*!40000 ALTER TABLE `redcap_projects_templates` DISABLE KEYS */;
@@ -2226,30 +4215,117 @@ UNLOCK TABLES;
 # Dump of table redcap_projects_user_hidden
 # ------------------------------------------------------------
 
+DROP TABLE IF EXISTS `redcap_projects_user_hidden`;
+
+CREATE TABLE `redcap_projects_user_hidden` (
+  `project_id` int(10) NOT NULL,
+  `ui_id` int(10) NOT NULL,
+  PRIMARY KEY (`project_id`,`ui_id`),
+  KEY `ui_id` (`ui_id`),
+  CONSTRAINT `redcap_projects_user_hidden_ibfk_1` FOREIGN KEY (`project_id`) REFERENCES `redcap_projects` (`project_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `redcap_projects_user_hidden_ibfk_2` FOREIGN KEY (`ui_id`) REFERENCES `redcap_user_information` (`ui_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 
 
 # Dump of table redcap_pub_articles
 # ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `redcap_pub_articles`;
+
+CREATE TABLE `redcap_pub_articles` (
+  `article_id` int(10) NOT NULL AUTO_INCREMENT,
+  `pubsrc_id` int(10) NOT NULL,
+  `pub_id` varchar(16) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'The publication source''s ID for the article (e.g., a PMID in the case of PubMed)',
+  `title` text COLLATE utf8mb4_unicode_ci,
+  `volume` varchar(16) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `issue` varchar(16) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `pages` varchar(16) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `journal` text COLLATE utf8mb4_unicode_ci,
+  `journal_abbrev` varchar(64) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `pub_date` date DEFAULT NULL,
+  `epub_date` date DEFAULT NULL,
+  PRIMARY KEY (`article_id`),
+  UNIQUE KEY `pubsrc_id` (`pubsrc_id`,`pub_id`),
+  CONSTRAINT `redcap_pub_articles_ibfk_1` FOREIGN KEY (`pubsrc_id`) REFERENCES `redcap_pub_sources` (`pubsrc_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Articles pulled from a publication source (e.g., PubMed)';
 
 
 
 # Dump of table redcap_pub_authors
 # ------------------------------------------------------------
 
+DROP TABLE IF EXISTS `redcap_pub_authors`;
+
+CREATE TABLE `redcap_pub_authors` (
+  `author_id` int(10) NOT NULL AUTO_INCREMENT,
+  `article_id` int(10) DEFAULT NULL,
+  `author` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`author_id`),
+  KEY `article_id` (`article_id`),
+  KEY `author` (`author`),
+  CONSTRAINT `redcap_pub_authors_ibfk_1` FOREIGN KEY (`article_id`) REFERENCES `redcap_pub_articles` (`article_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 
 
 # Dump of table redcap_pub_matches
 # ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `redcap_pub_matches`;
+
+CREATE TABLE `redcap_pub_matches` (
+  `match_id` int(11) NOT NULL AUTO_INCREMENT,
+  `article_id` int(11) NOT NULL,
+  `project_id` int(11) DEFAULT NULL,
+  `external_project_id` varchar(32) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'FK 1/2 referencing redcap_projects_external (not explicitly defined as FK to allow redcap_projects_external to be blown away)',
+  `external_custom_type` varchar(32) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'FK 2/2 referencing redcap_projects_external (not explicitly defined as FK to allow redcap_projects_external to be blown away)',
+  `search_term` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `matched` int(1) DEFAULT NULL,
+  `matched_time` datetime DEFAULT NULL,
+  `email_count` int(11) NOT NULL DEFAULT '0',
+  `email_time` datetime DEFAULT NULL,
+  `unique_hash` varchar(32) COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`match_id`),
+  UNIQUE KEY `unique_hash` (`unique_hash`),
+  KEY `article_id` (`article_id`),
+  KEY `external_custom_type` (`external_custom_type`),
+  KEY `external_project_id` (`external_project_id`),
+  KEY `project_id` (`project_id`),
+  CONSTRAINT `redcap_pub_matches_ibfk_1` FOREIGN KEY (`article_id`) REFERENCES `redcap_pub_articles` (`article_id`) ON UPDATE CASCADE,
+  CONSTRAINT `redcap_pub_matches_ibfk_2` FOREIGN KEY (`project_id`) REFERENCES `redcap_projects` (`project_id`) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
 
 # Dump of table redcap_pub_mesh_terms
 # ------------------------------------------------------------
 
+DROP TABLE IF EXISTS `redcap_pub_mesh_terms`;
+
+CREATE TABLE `redcap_pub_mesh_terms` (
+  `mesh_id` int(10) NOT NULL AUTO_INCREMENT,
+  `article_id` int(10) DEFAULT NULL,
+  `mesh_term` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`mesh_id`),
+  KEY `article_id` (`article_id`),
+  KEY `mesh_term` (`mesh_term`(191)),
+  CONSTRAINT `redcap_pub_mesh_terms_ibfk_1` FOREIGN KEY (`article_id`) REFERENCES `redcap_pub_articles` (`article_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 
 
 # Dump of table redcap_pub_sources
 # ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `redcap_pub_sources`;
+
+CREATE TABLE `redcap_pub_sources` (
+  `pubsrc_id` int(11) NOT NULL,
+  `pubsrc_name` varchar(32) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `pubsrc_last_crawl_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`pubsrc_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='The different places where we grab publications from';
 
 LOCK TABLES `redcap_pub_sources` WRITE;
 /*!40000 ALTER TABLE `redcap_pub_sources` DISABLE KEYS */;
@@ -2265,10 +4341,101 @@ UNLOCK TABLES;
 # Dump of table redcap_queue
 # ------------------------------------------------------------
 
+DROP TABLE IF EXISTS `redcap_queue`;
+
+CREATE TABLE `redcap_queue` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `key` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `data` blob,
+  `status` enum('ready','processing','completed','error','canceled') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `created_at` (`created_at`),
+  KEY `key_index` (`key`(191)),
+  KEY `updated_at` (`updated_at`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 
 
 # Dump of table redcap_randomization
 # ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `redcap_randomization`;
+
+CREATE TABLE `redcap_randomization` (
+  `rid` int(10) NOT NULL AUTO_INCREMENT,
+  `project_id` int(10) DEFAULT NULL,
+  `stratified` int(1) NOT NULL DEFAULT '1' COMMENT '1=Stratified, 0=Block',
+  `group_by` enum('DAG','FIELD') COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Randomize by group?',
+  `target_field` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `target_event` int(10) DEFAULT NULL,
+  `source_field1` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `source_event1` int(10) DEFAULT NULL,
+  `source_field2` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `source_event2` int(10) DEFAULT NULL,
+  `source_field3` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `source_event3` int(10) DEFAULT NULL,
+  `source_field4` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `source_event4` int(10) DEFAULT NULL,
+  `source_field5` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `source_event5` int(10) DEFAULT NULL,
+  `source_field6` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `source_event6` int(10) DEFAULT NULL,
+  `source_field7` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `source_event7` int(10) DEFAULT NULL,
+  `source_field8` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `source_event8` int(10) DEFAULT NULL,
+  `source_field9` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `source_event9` int(10) DEFAULT NULL,
+  `source_field10` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `source_event10` int(10) DEFAULT NULL,
+  `source_field11` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `source_event11` int(10) DEFAULT NULL,
+  `source_field12` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `source_event12` int(10) DEFAULT NULL,
+  `source_field13` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `source_event13` int(10) DEFAULT NULL,
+  `source_field14` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `source_event14` int(10) DEFAULT NULL,
+  `source_field15` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `source_event15` int(10) DEFAULT NULL,
+  PRIMARY KEY (`rid`),
+  UNIQUE KEY `project_id` (`project_id`),
+  KEY `source_event1` (`source_event1`),
+  KEY `source_event10` (`source_event10`),
+  KEY `source_event11` (`source_event11`),
+  KEY `source_event12` (`source_event12`),
+  KEY `source_event13` (`source_event13`),
+  KEY `source_event14` (`source_event14`),
+  KEY `source_event15` (`source_event15`),
+  KEY `source_event2` (`source_event2`),
+  KEY `source_event3` (`source_event3`),
+  KEY `source_event4` (`source_event4`),
+  KEY `source_event5` (`source_event5`),
+  KEY `source_event6` (`source_event6`),
+  KEY `source_event7` (`source_event7`),
+  KEY `source_event8` (`source_event8`),
+  KEY `source_event9` (`source_event9`),
+  KEY `target_event` (`target_event`),
+  CONSTRAINT `redcap_randomization_ibfk_1` FOREIGN KEY (`project_id`) REFERENCES `redcap_projects` (`project_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `redcap_randomization_ibfk_10` FOREIGN KEY (`source_event3`) REFERENCES `redcap_events_metadata` (`event_id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `redcap_randomization_ibfk_11` FOREIGN KEY (`source_event4`) REFERENCES `redcap_events_metadata` (`event_id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `redcap_randomization_ibfk_12` FOREIGN KEY (`source_event5`) REFERENCES `redcap_events_metadata` (`event_id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `redcap_randomization_ibfk_13` FOREIGN KEY (`source_event6`) REFERENCES `redcap_events_metadata` (`event_id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `redcap_randomization_ibfk_14` FOREIGN KEY (`source_event7`) REFERENCES `redcap_events_metadata` (`event_id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `redcap_randomization_ibfk_15` FOREIGN KEY (`source_event8`) REFERENCES `redcap_events_metadata` (`event_id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `redcap_randomization_ibfk_16` FOREIGN KEY (`source_event9`) REFERENCES `redcap_events_metadata` (`event_id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `redcap_randomization_ibfk_17` FOREIGN KEY (`target_event`) REFERENCES `redcap_events_metadata` (`event_id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `redcap_randomization_ibfk_2` FOREIGN KEY (`source_event1`) REFERENCES `redcap_events_metadata` (`event_id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `redcap_randomization_ibfk_3` FOREIGN KEY (`source_event10`) REFERENCES `redcap_events_metadata` (`event_id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `redcap_randomization_ibfk_4` FOREIGN KEY (`source_event11`) REFERENCES `redcap_events_metadata` (`event_id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `redcap_randomization_ibfk_5` FOREIGN KEY (`source_event12`) REFERENCES `redcap_events_metadata` (`event_id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `redcap_randomization_ibfk_6` FOREIGN KEY (`source_event13`) REFERENCES `redcap_events_metadata` (`event_id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `redcap_randomization_ibfk_7` FOREIGN KEY (`source_event14`) REFERENCES `redcap_events_metadata` (`event_id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `redcap_randomization_ibfk_8` FOREIGN KEY (`source_event15`) REFERENCES `redcap_events_metadata` (`event_id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `redcap_randomization_ibfk_9` FOREIGN KEY (`source_event2`) REFERENCES `redcap_events_metadata` (`event_id`) ON DELETE SET NULL ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 LOCK TABLES `redcap_randomization` WRITE;
 /*!40000 ALTER TABLE `redcap_randomization` DISABLE KEYS */;
@@ -2284,114 +4451,513 @@ UNLOCK TABLES;
 # Dump of table redcap_randomization_allocation
 # ------------------------------------------------------------
 
+DROP TABLE IF EXISTS `redcap_randomization_allocation`;
+
+CREATE TABLE `redcap_randomization_allocation` (
+  `aid` int(10) NOT NULL AUTO_INCREMENT,
+  `rid` int(10) NOT NULL DEFAULT '0',
+  `project_status` int(1) NOT NULL DEFAULT '0' COMMENT 'Used in dev or prod status',
+  `is_used_by` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Used by a record?',
+  `group_id` int(10) DEFAULT NULL COMMENT 'DAG',
+  `target_field` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Data value',
+  `source_field1` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Data value',
+  `source_field2` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Data value',
+  `source_field3` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Data value',
+  `source_field4` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Data value',
+  `source_field5` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Data value',
+  `source_field6` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Data value',
+  `source_field7` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Data value',
+  `source_field8` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Data value',
+  `source_field9` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Data value',
+  `source_field10` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Data value',
+  `source_field11` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Data value',
+  `source_field12` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Data value',
+  `source_field13` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Data value',
+  `source_field14` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Data value',
+  `source_field15` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Data value',
+  PRIMARY KEY (`aid`),
+  UNIQUE KEY `rid_status_usedby` (`rid`,`project_status`,`is_used_by`),
+  KEY `group_id` (`group_id`),
+  CONSTRAINT `redcap_randomization_allocation_ibfk_1` FOREIGN KEY (`group_id`) REFERENCES `redcap_data_access_groups` (`group_id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `redcap_randomization_allocation_ibfk_2` FOREIGN KEY (`rid`) REFERENCES `redcap_randomization` (`rid`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 
 
 # Dump of table redcap_record_counts
 # ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `redcap_record_counts`;
+
+CREATE TABLE `redcap_record_counts` (
+  `project_id` int(11) NOT NULL,
+  `record_count` int(11) DEFAULT NULL,
+  `time_of_count` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `record_list_status` enum('NOT_STARTED','PROCESSING','COMPLETE','FIX_SORT') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'NOT_STARTED',
+  `time_of_list_cache` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`project_id`),
+  KEY `time_of_count` (`time_of_count`),
+  KEY `time_of_list_cache` (`time_of_list_cache`),
+  CONSTRAINT `redcap_record_counts_ibfk_1` FOREIGN KEY (`project_id`) REFERENCES `redcap_projects` (`project_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
 
 # Dump of table redcap_record_dashboards
 # ------------------------------------------------------------
 
+DROP TABLE IF EXISTS `redcap_record_dashboards`;
+
+CREATE TABLE `redcap_record_dashboards` (
+  `rd_id` int(11) NOT NULL AUTO_INCREMENT,
+  `project_id` int(11) DEFAULT NULL,
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` text COLLATE utf8mb4_unicode_ci,
+  `filter_logic` text COLLATE utf8mb4_unicode_ci,
+  `orientation` enum('V','H') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'H',
+  `group_by` enum('form','event') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'event',
+  `selected_forms_events` text COLLATE utf8mb4_unicode_ci,
+  `arm` tinyint(2) DEFAULT NULL,
+  `sort_event_id` int(11) DEFAULT NULL,
+  `sort_field_name` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `sort_order` enum('ASC','DESC') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'ASC',
+  PRIMARY KEY (`rd_id`),
+  KEY `project_id` (`project_id`),
+  KEY `sort_event_id` (`sort_event_id`),
+  CONSTRAINT `redcap_record_dashboards_ibfk_1` FOREIGN KEY (`project_id`) REFERENCES `redcap_projects` (`project_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `redcap_record_dashboards_ibfk_2` FOREIGN KEY (`sort_event_id`) REFERENCES `redcap_events_metadata` (`event_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 
 
 # Dump of table redcap_record_list
 # ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `redcap_record_list`;
+
+CREATE TABLE `redcap_record_list` (
+  `project_id` int(10) NOT NULL,
+  `arm` tinyint(2) NOT NULL,
+  `record` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `dag_id` int(10) DEFAULT NULL,
+  `sort` mediumint(7) DEFAULT NULL,
+  PRIMARY KEY (`project_id`,`arm`,`record`),
+  KEY `dag_project_arm` (`dag_id`,`project_id`,`arm`),
+  KEY `project_record` (`project_id`,`record`),
+  KEY `sort_project_arm` (`sort`,`project_id`,`arm`),
+  CONSTRAINT `redcap_record_list_ibfk_1` FOREIGN KEY (`dag_id`) REFERENCES `redcap_data_access_groups` (`group_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `redcap_record_list_ibfk_2` FOREIGN KEY (`project_id`) REFERENCES `redcap_projects` (`project_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
 
 # Dump of table redcap_reports
 # ------------------------------------------------------------
 
+DROP TABLE IF EXISTS `redcap_reports`;
+
+CREATE TABLE `redcap_reports` (
+  `report_id` int(10) NOT NULL AUTO_INCREMENT,
+  `project_id` int(10) NOT NULL,
+  `title` text COLLATE utf8mb4_unicode_ci,
+  `report_order` int(3) DEFAULT NULL,
+  `user_access` enum('ALL','SELECTED') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'ALL',
+  `user_edit_access` enum('ALL','SELECTED') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'ALL',
+  `description` text COLLATE utf8mb4_unicode_ci,
+  `combine_checkbox_values` tinyint(1) NOT NULL DEFAULT '0',
+  `output_dags` int(1) NOT NULL DEFAULT '0',
+  `output_survey_fields` int(1) NOT NULL DEFAULT '0',
+  `output_missing_data_codes` int(1) NOT NULL DEFAULT '0',
+  `remove_line_breaks_in_values` int(1) NOT NULL DEFAULT '1',
+  `orderby_field1` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `orderby_sort1` enum('ASC','DESC') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `orderby_field2` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `orderby_sort2` enum('ASC','DESC') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `orderby_field3` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `orderby_sort3` enum('ASC','DESC') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `advanced_logic` text COLLATE utf8mb4_unicode_ci,
+  `filter_type` enum('RECORD','EVENT') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'EVENT',
+  `dynamic_filter1` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `dynamic_filter2` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `dynamic_filter3` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`report_id`),
+  UNIQUE KEY `project_report_order` (`project_id`,`report_order`),
+  KEY `project_id` (`project_id`),
+  CONSTRAINT `redcap_reports_ibfk_1` FOREIGN KEY (`project_id`) REFERENCES `redcap_projects` (`project_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 
 
 # Dump of table redcap_reports_access_dags
 # ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `redcap_reports_access_dags`;
+
+CREATE TABLE `redcap_reports_access_dags` (
+  `report_id` int(10) NOT NULL AUTO_INCREMENT,
+  `group_id` int(10) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`report_id`,`group_id`),
+  KEY `group_id` (`group_id`),
+  CONSTRAINT `redcap_reports_access_dags_ibfk_1` FOREIGN KEY (`group_id`) REFERENCES `redcap_data_access_groups` (`group_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `redcap_reports_access_dags_ibfk_2` FOREIGN KEY (`report_id`) REFERENCES `redcap_reports` (`report_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
 
 # Dump of table redcap_reports_access_roles
 # ------------------------------------------------------------
 
+DROP TABLE IF EXISTS `redcap_reports_access_roles`;
+
+CREATE TABLE `redcap_reports_access_roles` (
+  `report_id` int(10) NOT NULL DEFAULT '0',
+  `role_id` int(10) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`report_id`,`role_id`),
+  KEY `role_id` (`role_id`),
+  CONSTRAINT `redcap_reports_access_roles_ibfk_1` FOREIGN KEY (`report_id`) REFERENCES `redcap_reports` (`report_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `redcap_reports_access_roles_ibfk_2` FOREIGN KEY (`role_id`) REFERENCES `redcap_user_roles` (`role_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 
 
 # Dump of table redcap_reports_access_users
 # ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `redcap_reports_access_users`;
+
+CREATE TABLE `redcap_reports_access_users` (
+  `report_id` int(10) NOT NULL AUTO_INCREMENT,
+  `username` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  PRIMARY KEY (`report_id`,`username`),
+  KEY `username` (`username`),
+  CONSTRAINT `redcap_reports_access_users_ibfk_1` FOREIGN KEY (`report_id`) REFERENCES `redcap_reports` (`report_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
 
 # Dump of table redcap_reports_edit_access_dags
 # ------------------------------------------------------------
 
+DROP TABLE IF EXISTS `redcap_reports_edit_access_dags`;
+
+CREATE TABLE `redcap_reports_edit_access_dags` (
+  `report_id` int(10) NOT NULL AUTO_INCREMENT,
+  `group_id` int(10) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`report_id`,`group_id`),
+  KEY `group_id` (`group_id`),
+  CONSTRAINT `redcap_reports_edit_access_dags_ibfk_1` FOREIGN KEY (`group_id`) REFERENCES `redcap_data_access_groups` (`group_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `redcap_reports_edit_access_dags_ibfk_2` FOREIGN KEY (`report_id`) REFERENCES `redcap_reports` (`report_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 
 
 # Dump of table redcap_reports_edit_access_roles
 # ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `redcap_reports_edit_access_roles`;
+
+CREATE TABLE `redcap_reports_edit_access_roles` (
+  `report_id` int(10) NOT NULL DEFAULT '0',
+  `role_id` int(10) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`report_id`,`role_id`),
+  KEY `role_id` (`role_id`),
+  CONSTRAINT `redcap_reports_edit_access_roles_ibfk_1` FOREIGN KEY (`report_id`) REFERENCES `redcap_reports` (`report_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `redcap_reports_edit_access_roles_ibfk_2` FOREIGN KEY (`role_id`) REFERENCES `redcap_user_roles` (`role_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
 
 # Dump of table redcap_reports_edit_access_users
 # ------------------------------------------------------------
 
+DROP TABLE IF EXISTS `redcap_reports_edit_access_users`;
+
+CREATE TABLE `redcap_reports_edit_access_users` (
+  `report_id` int(10) NOT NULL AUTO_INCREMENT,
+  `username` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  PRIMARY KEY (`report_id`,`username`),
+  KEY `username` (`username`),
+  CONSTRAINT `redcap_reports_edit_access_users_ibfk_1` FOREIGN KEY (`report_id`) REFERENCES `redcap_reports` (`report_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 
 
 # Dump of table redcap_reports_fields
 # ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `redcap_reports_fields`;
+
+CREATE TABLE `redcap_reports_fields` (
+  `report_id` int(10) DEFAULT NULL,
+  `field_name` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `field_order` int(3) DEFAULT NULL,
+  `limiter_group_operator` enum('AND','OR') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `limiter_event_id` int(10) DEFAULT NULL,
+  `limiter_operator` enum('E','NE','GT','GTE','LT','LTE','CHECKED','UNCHECKED','CONTAINS','NOT_CONTAIN','STARTS_WITH','ENDS_WITH') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `limiter_value` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  UNIQUE KEY `report_id_field_name_order` (`report_id`,`field_name`,`field_order`),
+  KEY `field_name` (`field_name`),
+  KEY `limiter_event_id` (`limiter_event_id`),
+  KEY `report_id_field_order` (`report_id`,`field_order`),
+  CONSTRAINT `redcap_reports_fields_ibfk_1` FOREIGN KEY (`limiter_event_id`) REFERENCES `redcap_events_metadata` (`event_id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `redcap_reports_fields_ibfk_2` FOREIGN KEY (`report_id`) REFERENCES `redcap_reports` (`report_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
 
 # Dump of table redcap_reports_filter_dags
 # ------------------------------------------------------------
 
+DROP TABLE IF EXISTS `redcap_reports_filter_dags`;
+
+CREATE TABLE `redcap_reports_filter_dags` (
+  `report_id` int(10) NOT NULL AUTO_INCREMENT,
+  `group_id` int(10) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`report_id`,`group_id`),
+  KEY `group_id` (`group_id`),
+  CONSTRAINT `redcap_reports_filter_dags_ibfk_1` FOREIGN KEY (`group_id`) REFERENCES `redcap_data_access_groups` (`group_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `redcap_reports_filter_dags_ibfk_2` FOREIGN KEY (`report_id`) REFERENCES `redcap_reports` (`report_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 
 
 # Dump of table redcap_reports_filter_events
 # ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `redcap_reports_filter_events`;
+
+CREATE TABLE `redcap_reports_filter_events` (
+  `report_id` int(10) NOT NULL AUTO_INCREMENT,
+  `event_id` int(10) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`report_id`,`event_id`),
+  KEY `event_id` (`event_id`),
+  CONSTRAINT `redcap_reports_filter_events_ibfk_1` FOREIGN KEY (`event_id`) REFERENCES `redcap_events_metadata` (`event_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `redcap_reports_filter_events_ibfk_2` FOREIGN KEY (`report_id`) REFERENCES `redcap_reports` (`report_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
 
 # Dump of table redcap_reports_folders
 # ------------------------------------------------------------
 
+DROP TABLE IF EXISTS `redcap_reports_folders`;
+
+CREATE TABLE `redcap_reports_folders` (
+  `folder_id` int(10) NOT NULL AUTO_INCREMENT,
+  `project_id` int(10) DEFAULT NULL,
+  `name` varchar(64) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `position` smallint(4) DEFAULT NULL,
+  PRIMARY KEY (`folder_id`),
+  UNIQUE KEY `position_project_id` (`position`,`project_id`),
+  KEY `project_id` (`project_id`),
+  CONSTRAINT `redcap_reports_folders_ibfk_1` FOREIGN KEY (`project_id`) REFERENCES `redcap_projects` (`project_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 
 
 # Dump of table redcap_reports_folders_items
 # ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `redcap_reports_folders_items`;
+
+CREATE TABLE `redcap_reports_folders_items` (
+  `folder_id` int(10) DEFAULT NULL,
+  `report_id` int(10) DEFAULT NULL,
+  UNIQUE KEY `folder_id_report_id` (`folder_id`,`report_id`),
+  KEY `report_id` (`report_id`),
+  CONSTRAINT `redcap_reports_folders_items_ibfk_1` FOREIGN KEY (`folder_id`) REFERENCES `redcap_reports_folders` (`folder_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `redcap_reports_folders_items_ibfk_2` FOREIGN KEY (`report_id`) REFERENCES `redcap_reports` (`report_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
 
 # Dump of table redcap_sendit_docs
 # ------------------------------------------------------------
 
+DROP TABLE IF EXISTS `redcap_sendit_docs`;
+
+CREATE TABLE `redcap_sendit_docs` (
+  `document_id` int(11) NOT NULL AUTO_INCREMENT,
+  `doc_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `doc_orig_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `doc_type` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `doc_size` int(11) DEFAULT NULL,
+  `send_confirmation` int(1) NOT NULL DEFAULT '0',
+  `expire_date` datetime DEFAULT NULL,
+  `username` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `location` int(1) NOT NULL DEFAULT '0' COMMENT '1 = Home page; 2 = File Repository; 3 = Form',
+  `docs_id` int(11) NOT NULL DEFAULT '0',
+  `date_added` datetime DEFAULT NULL,
+  `date_deleted` datetime DEFAULT NULL COMMENT 'When really deleted from server (only applicable for location=1)',
+  PRIMARY KEY (`document_id`),
+  KEY `date_added` (`date_added`),
+  KEY `docs_id_location` (`location`,`docs_id`),
+  KEY `expire_location_deleted` (`expire_date`,`location`,`date_deleted`),
+  KEY `user_id` (`username`(191))
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 
 
 # Dump of table redcap_sendit_recipients
 # ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `redcap_sendit_recipients`;
+
+CREATE TABLE `redcap_sendit_recipients` (
+  `recipient_id` int(11) NOT NULL AUTO_INCREMENT,
+  `email_address` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `sent_confirmation` int(1) NOT NULL DEFAULT '0',
+  `download_date` datetime DEFAULT NULL,
+  `download_count` int(11) NOT NULL DEFAULT '0',
+  `document_id` int(11) NOT NULL DEFAULT '0' COMMENT 'FK from redcap_sendit_docs',
+  `guid` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `pwd` varchar(32) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`recipient_id`),
+  KEY `document_id` (`document_id`),
+  KEY `email_address` (`email_address`(191)),
+  KEY `guid` (`guid`),
+  CONSTRAINT `redcap_sendit_recipients_ibfk_1` FOREIGN KEY (`document_id`) REFERENCES `redcap_sendit_docs` (`document_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
 
 # Dump of table redcap_sessions
 # ------------------------------------------------------------
 
+DROP TABLE IF EXISTS `redcap_sessions`;
+
+CREATE TABLE `redcap_sessions` (
+  `session_id` varchar(32) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `session_data` mediumtext COLLATE utf8mb4_unicode_ci,
+  `session_expiration` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`session_id`),
+  KEY `session_expiration` (`session_expiration`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Stores user authentication session data';
+
+LOCK TABLES `redcap_sessions` WRITE;
+/*!40000 ALTER TABLE `redcap_sessions` DISABLE KEYS */;
+
+INSERT INTO `redcap_sessions` (`session_id`, `session_data`, `session_expiration`)
+VALUES
+	('435ad4cb72266a6050815f98077a4305','_authsession|a:10:{s:4:\"data\";a:0:{}s:9:\"sessionip\";s:10:\"172.18.0.1\";s:16:\"sessionuseragent\";s:82:\"Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:88.0) Gecko/20100101 Firefox/88.0\";s:19:\"sessionforwardedfor\";s:0:\"\";s:12:\"challengekey\";s:32:\"a53d8fc1af1cc779f280b1b8239da079\";s:15:\"challengecookie\";s:32:\"cf9eb325798883797291de049fc831e4\";s:10:\"registered\";b:1;s:8:\"username\";s:10:\"test_admin\";s:9:\"timestamp\";i:1619624765;s:4:\"idle\";i:1619625037;}username|s:10:\"test_admin\";redcap_csrf_token|a:1:{s:19:\"2021-04-28 10:46:05\";s:32:\"539d8dc5ec3de2050c38378cd6521749\";}mc_open|s:1:\"0\";thread_id|s:0:\"\";thread_msg|s:0:\"\";action_icons_state|s:0:\"\";conv_win_size|s:3:\"122\";important|s:1:\"0\";msg_container_top|s:7:\"238.4px\";message_center_container_height|s:3:\"660\";msg_wrapper_height|s:5:\"338.6\";msg_container_height|s:5:\"421.6\";tagged_data|s:0:\"\";','2021-04-28 11:16:07'),
+	('81c32e7b7980f43e9c1b9116bdf10ed4','_authsession|a:10:{s:4:\"data\";a:0:{}s:9:\"sessionip\";s:10:\"172.18.0.1\";s:16:\"sessionuseragent\";s:82:\"Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:88.0) Gecko/20100101 Firefox/88.0\";s:19:\"sessionforwardedfor\";s:0:\"\";s:12:\"challengekey\";s:32:\"556df11576870f17fc8d7a05f1685ced\";s:15:\"challengecookie\";s:32:\"7189e529121948dd620fe7062a212a0c\";s:10:\"registered\";b:1;s:8:\"username\";s:9:\"test_user\";s:9:\"timestamp\";i:1619624763;s:4:\"idle\";i:1619624763;}username|s:9:\"test_user\";redcap_csrf_token|a:1:{s:19:\"2021-04-28 10:46:03\";s:32:\"6737f6e58ffc99e3f1848f12f4363489\";}mc_open|s:1:\"0\";','2021-04-28 11:16:04');
+
+/*!40000 ALTER TABLE `redcap_sessions` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 # Dump of table redcap_surveys
 # ------------------------------------------------------------
 
+DROP TABLE IF EXISTS `redcap_surveys`;
+
+CREATE TABLE `redcap_surveys` (
+  `survey_id` int(10) NOT NULL AUTO_INCREMENT,
+  `project_id` int(10) DEFAULT NULL,
+  `form_name` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'NULL = assume first form',
+  `title` text COLLATE utf8mb4_unicode_ci COMMENT 'Survey title',
+  `instructions` text COLLATE utf8mb4_unicode_ci COMMENT 'Survey instructions',
+  `acknowledgement` text COLLATE utf8mb4_unicode_ci COMMENT 'Survey acknowledgement',
+  `question_by_section` int(1) NOT NULL DEFAULT '0' COMMENT '0 = one-page survey',
+  `display_page_number` int(1) NOT NULL DEFAULT '1',
+  `question_auto_numbering` int(1) NOT NULL DEFAULT '1',
+  `survey_enabled` int(1) NOT NULL DEFAULT '1',
+  `save_and_return` int(1) NOT NULL DEFAULT '0',
+  `save_and_return_code_bypass` tinyint(1) NOT NULL DEFAULT '0',
+  `logo` int(10) DEFAULT NULL COMMENT 'FK for redcap_edocs_metadata',
+  `hide_title` int(1) NOT NULL DEFAULT '0',
+  `view_results` int(1) NOT NULL DEFAULT '0',
+  `min_responses_view_results` int(5) NOT NULL DEFAULT '10',
+  `check_diversity_view_results` int(1) NOT NULL DEFAULT '0',
+  `end_survey_redirect_url` text COLLATE utf8mb4_unicode_ci COMMENT 'URL to redirect to after completing survey',
+  `survey_expiration` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Timestamp when survey expires',
+  `promis_skip_question` int(1) NOT NULL DEFAULT '0' COMMENT 'Allow participants to skip questions on PROMIS CATs',
+  `survey_auth_enabled_single` int(1) NOT NULL DEFAULT '0' COMMENT 'Enable Survey Login for this single survey?',
+  `edit_completed_response` int(1) NOT NULL DEFAULT '0' COMMENT 'Allow respondents to return and edit a completed response?',
+  `hide_back_button` tinyint(1) NOT NULL DEFAULT '0',
+  `show_required_field_text` tinyint(1) NOT NULL DEFAULT '1',
+  `confirmation_email_subject` text COLLATE utf8mb4_unicode_ci,
+  `confirmation_email_content` text COLLATE utf8mb4_unicode_ci,
+  `confirmation_email_from` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `confirmation_email_from_display` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Email sender display name',
+  `confirmation_email_attach_pdf` tinyint(1) DEFAULT '0',
+  `confirmation_email_attachment` int(10) DEFAULT NULL COMMENT 'FK for redcap_edocs_metadata',
+  `text_to_speech` int(1) NOT NULL DEFAULT '0',
+  `text_to_speech_language` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'en',
+  `end_survey_redirect_next_survey` tinyint(1) NOT NULL DEFAULT '0',
+  `theme` int(10) DEFAULT NULL,
+  `text_size` tinyint(2) DEFAULT NULL,
+  `font_family` tinyint(2) DEFAULT NULL,
+  `theme_text_buttons` varchar(6) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `theme_bg_page` varchar(6) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `theme_text_title` varchar(6) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `theme_bg_title` varchar(6) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `theme_text_sectionheader` varchar(6) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `theme_bg_sectionheader` varchar(6) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `theme_text_question` varchar(6) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `theme_bg_question` varchar(6) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `enhanced_choices` smallint(1) NOT NULL DEFAULT '0',
+  `repeat_survey_enabled` tinyint(1) NOT NULL DEFAULT '0',
+  `repeat_survey_btn_text` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `repeat_survey_btn_location` enum('BEFORE_SUBMIT','AFTER_SUBMIT') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'BEFORE_SUBMIT',
+  `response_limit` int(7) DEFAULT NULL,
+  `response_limit_include_partials` tinyint(1) NOT NULL DEFAULT '1',
+  `response_limit_custom_text` text COLLATE utf8mb4_unicode_ci,
+  `survey_time_limit_days` smallint(3) DEFAULT NULL,
+  `survey_time_limit_hours` tinyint(2) DEFAULT NULL,
+  `survey_time_limit_minutes` tinyint(2) DEFAULT NULL,
+  `email_participant_field` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `end_of_survey_pdf_download` tinyint(4) NOT NULL DEFAULT '0',
+  `pdf_save_to_field` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `pdf_save_to_event_id` int(10) DEFAULT NULL,
+  `pdf_auto_archive` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0=Disabled, 1=Normal, 2=eConsent',
+  `pdf_econsent_version` varchar(64) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `pdf_econsent_type` varchar(64) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `pdf_econsent_firstname_field` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `pdf_econsent_firstname_event_id` int(11) DEFAULT NULL,
+  `pdf_econsent_lastname_field` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `pdf_econsent_lastname_event_id` int(11) DEFAULT NULL,
+  `pdf_econsent_dob_field` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `pdf_econsent_dob_event_id` int(11) DEFAULT NULL,
+  `pdf_econsent_allow_edit` tinyint(1) NOT NULL DEFAULT '0',
+  `pdf_econsent_signature_field1` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `pdf_econsent_signature_field2` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `pdf_econsent_signature_field3` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `pdf_econsent_signature_field4` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `pdf_econsent_signature_field5` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`survey_id`),
+  UNIQUE KEY `logo` (`logo`),
+  UNIQUE KEY `project_form` (`project_id`,`form_name`),
+  KEY `confirmation_email_attachment` (`confirmation_email_attachment`),
+  KEY `pdf_econsent_dob_event_id` (`pdf_econsent_dob_event_id`),
+  KEY `pdf_econsent_firstname_event_id` (`pdf_econsent_firstname_event_id`),
+  KEY `pdf_econsent_lastname_event_id` (`pdf_econsent_lastname_event_id`),
+  KEY `pdf_save_to_event_id` (`pdf_save_to_event_id`),
+  KEY `survey_expiration_enabled` (`survey_expiration`,`survey_enabled`),
+  KEY `theme` (`theme`),
+  CONSTRAINT `redcap_surveys_ibfk_1` FOREIGN KEY (`confirmation_email_attachment`) REFERENCES `redcap_edocs_metadata` (`doc_id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `redcap_surveys_ibfk_2` FOREIGN KEY (`logo`) REFERENCES `redcap_edocs_metadata` (`doc_id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `redcap_surveys_ibfk_3` FOREIGN KEY (`pdf_econsent_dob_event_id`) REFERENCES `redcap_events_metadata` (`event_id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `redcap_surveys_ibfk_4` FOREIGN KEY (`pdf_econsent_firstname_event_id`) REFERENCES `redcap_events_metadata` (`event_id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `redcap_surveys_ibfk_5` FOREIGN KEY (`pdf_econsent_lastname_event_id`) REFERENCES `redcap_events_metadata` (`event_id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `redcap_surveys_ibfk_6` FOREIGN KEY (`pdf_save_to_event_id`) REFERENCES `redcap_events_metadata` (`event_id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `redcap_surveys_ibfk_7` FOREIGN KEY (`project_id`) REFERENCES `redcap_projects` (`project_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `redcap_surveys_ibfk_8` FOREIGN KEY (`theme`) REFERENCES `redcap_surveys_themes` (`theme_id`) ON DELETE SET NULL ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Table for survey data';
+
 LOCK TABLES `redcap_surveys` WRITE;
 /*!40000 ALTER TABLE `redcap_surveys` DISABLE KEYS */;
 
-INSERT INTO `redcap_surveys` (`survey_id`, `project_id`, `form_name`, `title`, `instructions`, `acknowledgement`, `question_by_section`, `display_page_number`, `question_auto_numbering`, `survey_enabled`, `save_and_return`, `save_and_return_code_bypass`, `logo`, `hide_title`, `view_results`, `min_responses_view_results`, `check_diversity_view_results`, `end_survey_redirect_url`, `survey_expiration`, `promis_skip_question`, `survey_auth_enabled_single`, `edit_completed_response`, `hide_back_button`, `show_required_field_text`, `confirmation_email_subject`, `confirmation_email_content`, `confirmation_email_from`, `confirmation_email_from_display`, `confirmation_email_attach_pdf`, `confirmation_email_attachment`, `text_to_speech`, `text_to_speech_language`, `end_survey_redirect_next_survey`, `theme`, `text_size`, `font_family`, `theme_text_buttons`, `theme_bg_page`, `theme_text_title`, `theme_bg_title`, `theme_text_sectionheader`, `theme_bg_sectionheader`, `theme_text_question`, `theme_bg_question`, `enhanced_choices`, `repeat_survey_enabled`, `repeat_survey_btn_text`, `repeat_survey_btn_location`, `response_limit`, `response_limit_include_partials`, `response_limit_custom_text`, `survey_time_limit_days`, `survey_time_limit_hours`, `survey_time_limit_minutes`, `email_participant_field`, `end_of_survey_pdf_download`, `pdf_auto_archive`, `pdf_econsent_version`, `pdf_econsent_type`, `pdf_econsent_firstname_field`, `pdf_econsent_firstname_event_id`, `pdf_econsent_lastname_field`, `pdf_econsent_lastname_event_id`, `pdf_econsent_dob_field`, `pdf_econsent_dob_event_id`, `pdf_econsent_allow_edit`, `pdf_econsent_signature_field1`, `pdf_econsent_signature_field2`, `pdf_econsent_signature_field3`, `pdf_econsent_signature_field4`, `pdf_econsent_signature_field5`)
+INSERT INTO `redcap_surveys` (`survey_id`, `project_id`, `form_name`, `title`, `instructions`, `acknowledgement`, `question_by_section`, `display_page_number`, `question_auto_numbering`, `survey_enabled`, `save_and_return`, `save_and_return_code_bypass`, `logo`, `hide_title`, `view_results`, `min_responses_view_results`, `check_diversity_view_results`, `end_survey_redirect_url`, `survey_expiration`, `promis_skip_question`, `survey_auth_enabled_single`, `edit_completed_response`, `hide_back_button`, `show_required_field_text`, `confirmation_email_subject`, `confirmation_email_content`, `confirmation_email_from`, `confirmation_email_from_display`, `confirmation_email_attach_pdf`, `confirmation_email_attachment`, `text_to_speech`, `text_to_speech_language`, `end_survey_redirect_next_survey`, `theme`, `text_size`, `font_family`, `theme_text_buttons`, `theme_bg_page`, `theme_text_title`, `theme_bg_title`, `theme_text_sectionheader`, `theme_bg_sectionheader`, `theme_text_question`, `theme_bg_question`, `enhanced_choices`, `repeat_survey_enabled`, `repeat_survey_btn_text`, `repeat_survey_btn_location`, `response_limit`, `response_limit_include_partials`, `response_limit_custom_text`, `survey_time_limit_days`, `survey_time_limit_hours`, `survey_time_limit_minutes`, `email_participant_field`, `end_of_survey_pdf_download`, `pdf_save_to_field`, `pdf_save_to_event_id`, `pdf_auto_archive`, `pdf_econsent_version`, `pdf_econsent_type`, `pdf_econsent_firstname_field`, `pdf_econsent_firstname_event_id`, `pdf_econsent_lastname_field`, `pdf_econsent_lastname_event_id`, `pdf_econsent_dob_field`, `pdf_econsent_dob_event_id`, `pdf_econsent_allow_edit`, `pdf_econsent_signature_field1`, `pdf_econsent_signature_field2`, `pdf_econsent_signature_field3`, `pdf_econsent_signature_field4`, `pdf_econsent_signature_field5`)
 VALUES
-	(1,4,'survey','Example Survey','<p style=\"margin-top: 10px; margin-right: 0px; margin-bottom: 10px; margin-left: 0px; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 12px; text-align: left; line-height: 1.5em; max-width: 700px; clear: both; padding: 0px;\">These are your survey instructions that you would enter for your survey participants. You may put whatever text you like here, which may include information about the purpose of the survey, who is taking the survey, or how to take the survey.</p><br><p style=\"margin-top: 10px; margin-right: 0px; margin-bottom: 10px; margin-left: 0px; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 12px; text-align: left; line-height: 1.5em; max-width: 700px; clear: both; padding: 0px;\">Surveys can use a single survey link for all respondents, which can be posted on a webpage or emailed out from your email application of choice. <strong>By default, all survey responses are collected anonymously</strong> (that is, unless your survey asks for name, email, or other identifying information). If you wish to track individuals who have taken your survey, you may upload a list of email addresses into a Participant List within REDCap, in which you can have REDCap send them an email invitation, which will track if they have taken the survey and when it was taken. This method still collects responses anonymously, but if you wish to identify an individual respondent\'s answers, you may do so by also providing an Identifier in your Participant List. Of course, in that case you may want to inform your respondents in your survey\'s instructions that their responses are not being collected anonymously and can thus be traced back to them.</p>','<p><strong>Thank you for taking the survey.</strong></p><br><p>Have a nice day!</p>',0,1,0,1,1,0,NULL,0,0,10,0,NULL,NULL,0,0,0,0,1,NULL,NULL,NULL,NULL,0,NULL,0,'en',0,NULL,NULL,16,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,0,NULL,'BEFORE_SUBMIT',NULL,1,NULL,NULL,NULL,NULL,NULL,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),
-	(2,9,'participant_info_survey','Follow-Up Survey','<p><strong>Please complete the survey below.</strong></p>\r\n<p>Thank you!</p>','<p><strong>Thank you for taking the survey.</strong></p>\r\n<p>Have a nice day!</p>',0,1,1,1,1,0,NULL,0,0,10,0,NULL,NULL,0,0,0,0,1,NULL,NULL,NULL,NULL,0,NULL,0,'en',0,NULL,NULL,16,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,0,NULL,'BEFORE_SUBMIT',NULL,1,NULL,NULL,NULL,NULL,NULL,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),
-	(3,9,'participant_morale_questionnaire','Patient Morale Questionnaire','<p><strong>Please complete the survey below.</strong></p>\r\n<p>Thank you!</p>','<p><strong>Thank you for taking the survey.</strong></p>\r\n<p>Have a nice day!</p>',0,1,1,1,1,0,NULL,0,0,10,0,NULL,NULL,0,0,0,0,1,NULL,NULL,NULL,NULL,0,NULL,0,'en',0,NULL,NULL,16,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,0,NULL,'BEFORE_SUBMIT',NULL,1,NULL,NULL,NULL,NULL,NULL,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),
-	(4,9,'prescreening_survey','Pre-Screening Survey','<p><strong>Please complete the survey below.</strong></p>\r\n<p>Thank you!</p>','<p><strong>Thank you for taking the survey.</strong></p>\r\n<p>Have a nice day!</p>',0,1,1,1,0,0,NULL,0,0,10,0,NULL,NULL,0,0,0,0,1,NULL,NULL,NULL,NULL,0,NULL,0,'en',0,NULL,NULL,16,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,0,NULL,'BEFORE_SUBMIT',NULL,1,NULL,NULL,NULL,NULL,NULL,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),
-	(5,10,'participant_info_survey','Follow-Up Survey','<p><strong>Please complete the survey below.</strong></p>\r\n<p>Thank you!</p>','<p><strong>Thank you for taking the survey.</strong></p>\r\n<p>Have a nice day!</p>',0,1,1,1,1,0,NULL,0,0,10,0,NULL,NULL,0,0,0,0,1,NULL,NULL,NULL,NULL,0,NULL,0,'en',0,NULL,NULL,16,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,0,NULL,'BEFORE_SUBMIT',NULL,1,NULL,NULL,NULL,NULL,NULL,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),
-	(6,10,'participant_morale_questionnaire','Patient Morale Questionnaire','<p><strong>Please complete the survey below.</strong></p>\r\n<p>Thank you!</p>','<p><strong>Thank you for taking the survey.</strong></p>\r\n<p>Have a nice day!</p>',0,1,1,1,1,0,NULL,0,0,10,0,NULL,NULL,0,0,0,0,1,NULL,NULL,NULL,NULL,0,NULL,0,'en',0,NULL,NULL,16,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,0,NULL,'BEFORE_SUBMIT',NULL,1,NULL,NULL,NULL,NULL,NULL,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),
-	(7,10,'prescreening_survey','Pre-Screening Survey','<p><strong>Please complete the survey below.</strong></p>\r\n<p>Thank you!</p>','<p><strong>Thank you for taking the survey.</strong></p>\r\n<p>Have a nice day!</p>',0,1,1,1,0,0,NULL,0,0,10,0,NULL,NULL,0,0,0,0,1,NULL,NULL,NULL,NULL,0,NULL,0,'en',0,NULL,NULL,16,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,0,NULL,'BEFORE_SUBMIT',NULL,1,NULL,NULL,NULL,NULL,NULL,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),
-	(8,11,'survey','Example Survey to Demonstrate Piping','This survey will demonstrate some basic examples of the Piping feature in REDCap.','<p style=\"font-size:14px;\"><strong>[first_name], thank you for taking the survey.</strong></p><br><p>Have a nice day!</p>',1,1,0,1,0,0,NULL,0,0,10,0,NULL,NULL,0,0,0,0,1,NULL,NULL,NULL,NULL,0,NULL,0,'en',0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,0,NULL,'BEFORE_SUBMIT',NULL,1,NULL,NULL,NULL,NULL,NULL,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,NULL,NULL,NULL,NULL,NULL);
+	(1,4,'survey','Example Survey','<p style=\"margin-top: 10px; margin-right: 0px; margin-bottom: 10px; margin-left: 0px; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 12px; text-align: left; line-height: 1.5em; max-width: 700px; clear: both; padding: 0px;\">These are your survey instructions that you would enter for your survey participants. You may put whatever text you like here, which may include information about the purpose of the survey, who is taking the survey, or how to take the survey.</p><br><p style=\"margin-top: 10px; margin-right: 0px; margin-bottom: 10px; margin-left: 0px; font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 12px; text-align: left; line-height: 1.5em; max-width: 700px; clear: both; padding: 0px;\">Surveys can use a single survey link for all respondents, which can be posted on a webpage or emailed out from your email application of choice. <strong>By default, all survey responses are collected anonymously</strong> (that is, unless your survey asks for name, email, or other identifying information). If you wish to track individuals who have taken your survey, you may upload a list of email addresses into a Participant List within REDCap, in which you can have REDCap send them an email invitation, which will track if they have taken the survey and when it was taken. This method still collects responses anonymously, but if you wish to identify an individual respondent\'s answers, you may do so by also providing an Identifier in your Participant List. Of course, in that case you may want to inform your respondents in your survey\'s instructions that their responses are not being collected anonymously and can thus be traced back to them.</p>','<p><strong>Thank you for taking the survey.</strong></p><br><p>Have a nice day!</p>',0,1,0,1,1,0,NULL,0,0,10,0,NULL,NULL,0,0,0,0,1,NULL,NULL,NULL,NULL,0,NULL,0,'en',0,NULL,NULL,16,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,0,NULL,'BEFORE_SUBMIT',NULL,1,NULL,NULL,NULL,NULL,NULL,0,NULL,NULL,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),
+	(2,9,'participant_info_survey','Follow-Up Survey','<p><strong>Please complete the survey below.</strong></p>\r\n<p>Thank you!</p>','<p><strong>Thank you for taking the survey.</strong></p>\r\n<p>Have a nice day!</p>',0,1,1,1,1,0,NULL,0,0,10,0,NULL,NULL,0,0,0,0,1,NULL,NULL,NULL,NULL,0,NULL,0,'en',0,NULL,NULL,16,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,0,NULL,'BEFORE_SUBMIT',NULL,1,NULL,NULL,NULL,NULL,NULL,0,NULL,NULL,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),
+	(3,9,'participant_morale_questionnaire','Patient Morale Questionnaire','<p><strong>Please complete the survey below.</strong></p>\r\n<p>Thank you!</p>','<p><strong>Thank you for taking the survey.</strong></p>\r\n<p>Have a nice day!</p>',0,1,1,1,1,0,NULL,0,0,10,0,NULL,NULL,0,0,0,0,1,NULL,NULL,NULL,NULL,0,NULL,0,'en',0,NULL,NULL,16,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,0,NULL,'BEFORE_SUBMIT',NULL,1,NULL,NULL,NULL,NULL,NULL,0,NULL,NULL,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),
+	(4,9,'prescreening_survey','Pre-Screening Survey','<p><strong>Please complete the survey below.</strong></p>\r\n<p>Thank you!</p>','<p><strong>Thank you for taking the survey.</strong></p>\r\n<p>Have a nice day!</p>',0,1,1,1,0,0,NULL,0,0,10,0,NULL,NULL,0,0,0,0,1,NULL,NULL,NULL,NULL,0,NULL,0,'en',0,NULL,NULL,16,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,0,NULL,'BEFORE_SUBMIT',NULL,1,NULL,NULL,NULL,NULL,NULL,0,NULL,NULL,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),
+	(5,10,'participant_info_survey','Follow-Up Survey','<p><strong>Please complete the survey below.</strong></p>\r\n<p>Thank you!</p>','<p><strong>Thank you for taking the survey.</strong></p>\r\n<p>Have a nice day!</p>',0,1,1,1,1,0,NULL,0,0,10,0,NULL,NULL,0,0,0,0,1,NULL,NULL,NULL,NULL,0,NULL,0,'en',0,NULL,NULL,16,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,0,NULL,'BEFORE_SUBMIT',NULL,1,NULL,NULL,NULL,NULL,NULL,0,NULL,NULL,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),
+	(6,10,'participant_morale_questionnaire','Patient Morale Questionnaire','<p><strong>Please complete the survey below.</strong></p>\r\n<p>Thank you!</p>','<p><strong>Thank you for taking the survey.</strong></p>\r\n<p>Have a nice day!</p>',0,1,1,1,1,0,NULL,0,0,10,0,NULL,NULL,0,0,0,0,1,NULL,NULL,NULL,NULL,0,NULL,0,'en',0,NULL,NULL,16,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,0,NULL,'BEFORE_SUBMIT',NULL,1,NULL,NULL,NULL,NULL,NULL,0,NULL,NULL,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),
+	(7,10,'prescreening_survey','Pre-Screening Survey','<p><strong>Please complete the survey below.</strong></p>\r\n<p>Thank you!</p>','<p><strong>Thank you for taking the survey.</strong></p>\r\n<p>Have a nice day!</p>',0,1,1,1,0,0,NULL,0,0,10,0,NULL,NULL,0,0,0,0,1,NULL,NULL,NULL,NULL,0,NULL,0,'en',0,NULL,NULL,16,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,0,NULL,'BEFORE_SUBMIT',NULL,1,NULL,NULL,NULL,NULL,NULL,0,NULL,NULL,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),
+	(8,11,'survey','Example Survey to Demonstrate Piping','This survey will demonstrate some basic examples of the Piping feature in REDCap.','<p style=\"font-size:14px;\"><strong>[first_name], thank you for taking the survey.</strong></p><br><p>Have a nice day!</p>',1,1,0,1,0,0,NULL,0,0,10,0,NULL,NULL,0,0,0,0,1,NULL,NULL,NULL,NULL,0,NULL,0,'en',0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,0,NULL,'BEFORE_SUBMIT',NULL,1,NULL,NULL,NULL,NULL,NULL,0,NULL,NULL,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,NULL,NULL,NULL,NULL,NULL);
 
 /*!40000 ALTER TABLE `redcap_surveys` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -2400,75 +4966,372 @@ UNLOCK TABLES;
 # Dump of table redcap_surveys_emails
 # ------------------------------------------------------------
 
+DROP TABLE IF EXISTS `redcap_surveys_emails`;
+
+CREATE TABLE `redcap_surveys_emails` (
+  `email_id` int(10) NOT NULL AUTO_INCREMENT,
+  `survey_id` int(10) DEFAULT NULL,
+  `email_subject` text COLLATE utf8mb4_unicode_ci,
+  `email_content` text COLLATE utf8mb4_unicode_ci,
+  `email_sender` int(10) DEFAULT NULL COMMENT 'FK ui_id from redcap_user_information',
+  `email_sender_display` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Email sender display name',
+  `email_account` enum('1','2','3') COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Sender''s account (1=Primary, 2=Secondary, 3=Tertiary)',
+  `email_static` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Sender''s static email address (only for scheduled invitations)',
+  `email_sent` datetime DEFAULT NULL COMMENT 'Null=Not sent yet (scheduled)',
+  `delivery_type` enum('PARTICIPANT_PREF','EMAIL','VOICE_INITIATE','SMS_INITIATE','SMS_INVITE_MAKE_CALL','SMS_INVITE_RECEIVE_CALL','SMS_INVITE_WEB') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'EMAIL',
+  `append_survey_link` tinyint(1) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`email_id`),
+  KEY `email_sender` (`email_sender`),
+  KEY `email_sent` (`email_sent`),
+  KEY `survey_id_email_sent` (`survey_id`,`email_sent`),
+  CONSTRAINT `redcap_surveys_emails_ibfk_1` FOREIGN KEY (`email_sender`) REFERENCES `redcap_user_information` (`ui_id`) ON DELETE SET NULL ON UPDATE SET NULL,
+  CONSTRAINT `redcap_surveys_emails_ibfk_2` FOREIGN KEY (`survey_id`) REFERENCES `redcap_surveys` (`survey_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Track emails sent out';
+
 
 
 # Dump of table redcap_surveys_emails_recipients
 # ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `redcap_surveys_emails_recipients`;
+
+CREATE TABLE `redcap_surveys_emails_recipients` (
+  `email_recip_id` int(10) NOT NULL AUTO_INCREMENT,
+  `email_id` int(10) DEFAULT NULL COMMENT 'FK redcap_surveys_emails',
+  `participant_id` int(10) DEFAULT NULL COMMENT 'FK redcap_surveys_participants',
+  `static_email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Static email address of recipient (used when participant has no email)',
+  `static_phone` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Static phone number of recipient (used when participant has no phone number)',
+  `delivery_type` enum('EMAIL','VOICE_INITIATE','SMS_INITIATE','SMS_INVITE_MAKE_CALL','SMS_INVITE_RECEIVE_CALL','SMS_INVITE_WEB') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'EMAIL',
+  PRIMARY KEY (`email_recip_id`),
+  KEY `emt_id` (`email_id`),
+  KEY `participant_id` (`participant_id`),
+  CONSTRAINT `redcap_surveys_emails_recipients_ibfk_1` FOREIGN KEY (`email_id`) REFERENCES `redcap_surveys_emails` (`email_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `redcap_surveys_emails_recipients_ibfk_2` FOREIGN KEY (`participant_id`) REFERENCES `redcap_surveys_participants` (`participant_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Track email recipients';
 
 
 
 # Dump of table redcap_surveys_emails_send_rate
 # ------------------------------------------------------------
 
+DROP TABLE IF EXISTS `redcap_surveys_emails_send_rate`;
+
+CREATE TABLE `redcap_surveys_emails_send_rate` (
+  `esr_id` int(10) NOT NULL AUTO_INCREMENT,
+  `sent_begin_time` datetime DEFAULT NULL COMMENT 'Time email batch was sent',
+  `emails_per_batch` int(10) DEFAULT NULL COMMENT 'Number of emails sent in this batch',
+  `emails_per_minute` int(6) DEFAULT NULL COMMENT 'Number of emails sent per minute for this batch',
+  PRIMARY KEY (`esr_id`),
+  KEY `sent_begin_time` (`sent_begin_time`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Capture the rate that emails are sent per minute by REDCap';
+
 
 
 # Dump of table redcap_surveys_erase_twilio_log
 # ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `redcap_surveys_erase_twilio_log`;
+
+CREATE TABLE `redcap_surveys_erase_twilio_log` (
+  `tl_id` int(10) NOT NULL AUTO_INCREMENT,
+  `project_id` int(10) DEFAULT NULL,
+  `ts` datetime DEFAULT NULL,
+  `sid` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `sid_hash` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`tl_id`),
+  UNIQUE KEY `sid` (`sid`),
+  UNIQUE KEY `sid_hash` (`sid_hash`),
+  KEY `project_id` (`project_id`),
+  KEY `ts` (`ts`),
+  CONSTRAINT `redcap_surveys_erase_twilio_log_ibfk_1` FOREIGN KEY (`project_id`) REFERENCES `redcap_projects` (`project_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Temporary storage of Twilio logs to be deleted';
 
 
 
 # Dump of table redcap_surveys_login
 # ------------------------------------------------------------
 
+DROP TABLE IF EXISTS `redcap_surveys_login`;
+
+CREATE TABLE `redcap_surveys_login` (
+  `ts` datetime DEFAULT NULL,
+  `response_id` int(10) DEFAULT NULL,
+  `login_success` tinyint(1) NOT NULL DEFAULT '1',
+  KEY `response_id` (`response_id`),
+  KEY `ts_response_id_success` (`ts`,`response_id`,`login_success`),
+  CONSTRAINT `redcap_surveys_login_ibfk_1` FOREIGN KEY (`response_id`) REFERENCES `redcap_surveys_response` (`response_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 
 
 # Dump of table redcap_surveys_participants
 # ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `redcap_surveys_participants`;
+
+CREATE TABLE `redcap_surveys_participants` (
+  `participant_id` int(10) NOT NULL AUTO_INCREMENT,
+  `survey_id` int(10) DEFAULT NULL,
+  `event_id` int(10) DEFAULT NULL,
+  `hash` varchar(10) CHARACTER SET latin1 COLLATE latin1_general_cs DEFAULT NULL,
+  `legacy_hash` varchar(32) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Migrated from RS',
+  `access_code` varchar(9) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `access_code_numeral` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `participant_email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'NULL if public survey',
+  `participant_identifier` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `participant_phone` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `delivery_preference` enum('EMAIL','VOICE_INITIATE','SMS_INITIATE','SMS_INVITE_MAKE_CALL','SMS_INVITE_RECEIVE_CALL','SMS_INVITE_WEB') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `link_expiration` datetime DEFAULT NULL,
+  `link_expiration_override` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`participant_id`),
+  UNIQUE KEY `access_code` (`access_code`),
+  UNIQUE KEY `access_code_numeral` (`access_code_numeral`),
+  UNIQUE KEY `hash` (`hash`),
+  UNIQUE KEY `legacy_hash` (`legacy_hash`),
+  KEY `event_id` (`event_id`),
+  KEY `participant_email_phone` (`participant_email`(191),`participant_phone`),
+  KEY `survey_event_email` (`survey_id`,`event_id`,`participant_email`(191)),
+  CONSTRAINT `redcap_surveys_participants_ibfk_1` FOREIGN KEY (`event_id`) REFERENCES `redcap_events_metadata` (`event_id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `redcap_surveys_participants_ibfk_2` FOREIGN KEY (`survey_id`) REFERENCES `redcap_surveys` (`survey_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Table for survey data';
 
 
 
 # Dump of table redcap_surveys_pdf_archive
 # ------------------------------------------------------------
 
+DROP TABLE IF EXISTS `redcap_surveys_pdf_archive`;
+
+CREATE TABLE `redcap_surveys_pdf_archive` (
+  `doc_id` int(10) DEFAULT NULL,
+  `record` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `event_id` int(10) DEFAULT NULL,
+  `survey_id` int(10) DEFAULT NULL,
+  `instance` smallint(4) NOT NULL DEFAULT '1',
+  `identifier` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `version` varchar(64) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `type` varchar(64) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ip` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  UNIQUE KEY `doc_id` (`doc_id`),
+  KEY `event_id` (`event_id`),
+  KEY `record_event_survey_instance` (`record`,`event_id`,`survey_id`,`instance`),
+  KEY `survey_id` (`survey_id`),
+  CONSTRAINT `redcap_surveys_pdf_archive_ibfk_1` FOREIGN KEY (`doc_id`) REFERENCES `redcap_edocs_metadata` (`doc_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `redcap_surveys_pdf_archive_ibfk_2` FOREIGN KEY (`event_id`) REFERENCES `redcap_events_metadata` (`event_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `redcap_surveys_pdf_archive_ibfk_3` FOREIGN KEY (`survey_id`) REFERENCES `redcap_surveys` (`survey_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 
 
 # Dump of table redcap_surveys_phone_codes
 # ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `redcap_surveys_phone_codes`;
+
+CREATE TABLE `redcap_surveys_phone_codes` (
+  `pc_id` int(10) NOT NULL AUTO_INCREMENT,
+  `phone_number` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `twilio_number` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `access_code` varchar(12) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `project_id` int(10) DEFAULT NULL,
+  PRIMARY KEY (`pc_id`),
+  KEY `participant_twilio_phone` (`phone_number`,`twilio_number`),
+  KEY `project_id` (`project_id`),
+  CONSTRAINT `redcap_surveys_phone_codes_ibfk_1` FOREIGN KEY (`project_id`) REFERENCES `redcap_projects` (`project_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
 
 # Dump of table redcap_surveys_queue
 # ------------------------------------------------------------
 
+DROP TABLE IF EXISTS `redcap_surveys_queue`;
+
+CREATE TABLE `redcap_surveys_queue` (
+  `sq_id` int(10) NOT NULL AUTO_INCREMENT,
+  `survey_id` int(10) DEFAULT NULL,
+  `event_id` int(10) DEFAULT NULL,
+  `active` int(1) NOT NULL DEFAULT '1' COMMENT 'Is it currently active?',
+  `auto_start` int(1) NOT NULL DEFAULT '0' COMMENT 'Automatically start if next after survey completion',
+  `condition_surveycomplete_survey_id` int(10) DEFAULT NULL COMMENT 'survey_id of trigger',
+  `condition_surveycomplete_event_id` int(10) DEFAULT NULL COMMENT 'event_id of trigger',
+  `condition_andor` enum('AND','OR') COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Include survey complete AND/OR logic',
+  `condition_logic` text COLLATE utf8mb4_unicode_ci COMMENT 'Logic using field values',
+  PRIMARY KEY (`sq_id`),
+  UNIQUE KEY `survey_event` (`survey_id`,`event_id`),
+  KEY `condition_surveycomplete_event_id` (`condition_surveycomplete_event_id`),
+  KEY `condition_surveycomplete_survey_event` (`condition_surveycomplete_survey_id`,`condition_surveycomplete_event_id`),
+  KEY `event_id` (`event_id`),
+  CONSTRAINT `redcap_surveys_queue_ibfk_1` FOREIGN KEY (`condition_surveycomplete_event_id`) REFERENCES `redcap_events_metadata` (`event_id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `redcap_surveys_queue_ibfk_2` FOREIGN KEY (`condition_surveycomplete_survey_id`) REFERENCES `redcap_surveys` (`survey_id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `redcap_surveys_queue_ibfk_3` FOREIGN KEY (`event_id`) REFERENCES `redcap_events_metadata` (`event_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `redcap_surveys_queue_ibfk_4` FOREIGN KEY (`survey_id`) REFERENCES `redcap_surveys` (`survey_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 
 
 # Dump of table redcap_surveys_queue_hashes
 # ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `redcap_surveys_queue_hashes`;
+
+CREATE TABLE `redcap_surveys_queue_hashes` (
+  `project_id` int(10) NOT NULL DEFAULT '0',
+  `record` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `hash` varchar(10) CHARACTER SET latin1 COLLATE latin1_general_cs DEFAULT NULL,
+  PRIMARY KEY (`project_id`,`record`),
+  UNIQUE KEY `hash` (`hash`),
+  CONSTRAINT `redcap_surveys_queue_hashes_ibfk_1` FOREIGN KEY (`project_id`) REFERENCES `redcap_projects` (`project_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
 
 # Dump of table redcap_surveys_response
 # ------------------------------------------------------------
 
+DROP TABLE IF EXISTS `redcap_surveys_response`;
+
+CREATE TABLE `redcap_surveys_response` (
+  `response_id` int(11) NOT NULL AUTO_INCREMENT,
+  `participant_id` int(10) DEFAULT NULL,
+  `record` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `instance` smallint(4) NOT NULL DEFAULT '1',
+  `start_time` datetime DEFAULT NULL,
+  `first_submit_time` datetime DEFAULT NULL,
+  `completion_time` datetime DEFAULT NULL,
+  `return_code` varchar(8) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `results_code` varchar(8) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`response_id`),
+  UNIQUE KEY `participant_record` (`participant_id`,`record`,`instance`),
+  KEY `completion_time` (`completion_time`),
+  KEY `first_submit_time` (`first_submit_time`),
+  KEY `record_participant` (`record`,`participant_id`,`instance`),
+  KEY `results_code` (`results_code`),
+  KEY `return_code` (`return_code`),
+  KEY `start_time` (`start_time`),
+  CONSTRAINT `redcap_surveys_response_ibfk_1` FOREIGN KEY (`participant_id`) REFERENCES `redcap_surveys_participants` (`participant_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 
 
 # Dump of table redcap_surveys_scheduler
 # ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `redcap_surveys_scheduler`;
+
+CREATE TABLE `redcap_surveys_scheduler` (
+  `ss_id` int(10) NOT NULL AUTO_INCREMENT,
+  `survey_id` int(10) DEFAULT NULL,
+  `event_id` int(10) DEFAULT NULL,
+  `instance` enum('FIRST','AFTER_FIRST') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'FIRST' COMMENT 'survey instance being triggered',
+  `active` int(1) NOT NULL DEFAULT '1' COMMENT 'Is it currently active?',
+  `email_subject` text COLLATE utf8mb4_unicode_ci COMMENT 'Survey invitation subject',
+  `email_content` text COLLATE utf8mb4_unicode_ci COMMENT 'Survey invitation text',
+  `email_sender` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Static email address of sender',
+  `email_sender_display` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Email sender display name',
+  `condition_surveycomplete_survey_id` int(10) DEFAULT NULL COMMENT 'survey_id of trigger',
+  `condition_surveycomplete_event_id` int(10) DEFAULT NULL COMMENT 'event_id of trigger',
+  `condition_surveycomplete_instance` enum('FIRST','PREVIOUS') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'FIRST' COMMENT 'instance of trigger',
+  `condition_andor` enum('AND','OR') COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Include survey complete AND/OR logic',
+  `condition_logic` text COLLATE utf8mb4_unicode_ci COMMENT 'Logic using field values',
+  `condition_send_time_option` enum('IMMEDIATELY','TIME_LAG','NEXT_OCCURRENCE','EXACT_TIME') COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'When to send invites after condition is met',
+  `condition_send_time_lag_days` int(4) DEFAULT NULL COMMENT 'Wait X days to send invites after condition is met',
+  `condition_send_time_lag_hours` int(2) DEFAULT NULL COMMENT 'Wait X hours to send invites after condition is met',
+  `condition_send_time_lag_minutes` int(2) DEFAULT NULL COMMENT 'Wait X seconds to send invites after condition is met',
+  `condition_send_time_lag_field` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `condition_send_time_lag_field_after` enum('before','after') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'after',
+  `condition_send_next_day_type` enum('DAY','WEEKDAY','WEEKENDDAY','SUNDAY','MONDAY','TUESDAY','WEDNESDAY','THURSDAY','FRIDAY','SATURDAY') COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Wait till specific day/time to send invites after condition is met',
+  `condition_send_next_time` time DEFAULT NULL COMMENT 'Wait till specific day/time to send invites after condition is met',
+  `condition_send_time_exact` datetime DEFAULT NULL COMMENT 'Wait till exact date/time to send invites after condition is met',
+  `delivery_type` enum('EMAIL','VOICE_INITIATE','SMS_INITIATE','SMS_INVITE_MAKE_CALL','SMS_INVITE_RECEIVE_CALL','PARTICIPANT_PREF','SMS_INVITE_WEB') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'EMAIL',
+  `reminder_type` enum('TIME_LAG','NEXT_OCCURRENCE','EXACT_TIME') COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'When to send reminders after original invite is sent',
+  `reminder_timelag_days` int(3) DEFAULT NULL COMMENT 'Wait X days to send reminders',
+  `reminder_timelag_hours` int(2) DEFAULT NULL COMMENT 'Wait X hours to send reminders',
+  `reminder_timelag_minutes` int(2) DEFAULT NULL COMMENT 'Wait X seconds to send reminders',
+  `reminder_nextday_type` enum('DAY','WEEKDAY','WEEKENDDAY','SUNDAY','MONDAY','TUESDAY','WEDNESDAY','THURSDAY','FRIDAY','SATURDAY') COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Wait till specific day/time to send reminders',
+  `reminder_nexttime` time DEFAULT NULL COMMENT 'Wait till specific day/time to send reminders',
+  `reminder_exact_time` datetime DEFAULT NULL COMMENT 'Wait till exact date/time to send reminders',
+  `reminder_num` int(3) NOT NULL DEFAULT '0' COMMENT 'Reminder recurrence',
+  `reeval_before_send` int(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`ss_id`),
+  UNIQUE KEY `survey_event_instance` (`survey_id`,`event_id`,`instance`),
+  KEY `condition_surveycomplete_event_id` (`condition_surveycomplete_event_id`),
+  KEY `condition_surveycomplete_survey_event` (`condition_surveycomplete_survey_id`,`condition_surveycomplete_event_id`),
+  KEY `event_id` (`event_id`),
+  CONSTRAINT `redcap_surveys_scheduler_ibfk_1` FOREIGN KEY (`condition_surveycomplete_event_id`) REFERENCES `redcap_events_metadata` (`event_id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `redcap_surveys_scheduler_ibfk_2` FOREIGN KEY (`condition_surveycomplete_survey_id`) REFERENCES `redcap_surveys` (`survey_id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `redcap_surveys_scheduler_ibfk_3` FOREIGN KEY (`event_id`) REFERENCES `redcap_events_metadata` (`event_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `redcap_surveys_scheduler_ibfk_4` FOREIGN KEY (`survey_id`) REFERENCES `redcap_surveys` (`survey_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
 
 # Dump of table redcap_surveys_scheduler_queue
 # ------------------------------------------------------------
 
+DROP TABLE IF EXISTS `redcap_surveys_scheduler_queue`;
+
+CREATE TABLE `redcap_surveys_scheduler_queue` (
+  `ssq_id` int(10) NOT NULL AUTO_INCREMENT,
+  `ss_id` int(10) DEFAULT NULL COMMENT 'FK for surveys_scheduler table',
+  `email_recip_id` int(10) DEFAULT NULL COMMENT 'FK for redcap_surveys_emails_recipients table',
+  `reminder_num` int(3) NOT NULL DEFAULT '0' COMMENT 'Email reminder instance (0 = original invitation)',
+  `record` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'NULL if record not created yet',
+  `instance` smallint(4) NOT NULL DEFAULT '1',
+  `scheduled_time_to_send` datetime DEFAULT NULL COMMENT 'Time invitation will be sent',
+  `status` enum('QUEUED','SENDING','SENT','DID NOT SEND','DELETED') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'QUEUED' COMMENT 'Survey invitation status (default=QUEUED)',
+  `time_sent` datetime DEFAULT NULL COMMENT 'Actual time invitation was sent',
+  `reason_not_sent` enum('EMAIL ADDRESS NOT FOUND','PHONE NUMBER NOT FOUND','EMAIL ATTEMPT FAILED','UNKNOWN','SURVEY ALREADY COMPLETED','VOICE/SMS SETTING DISABLED','ERROR SENDING SMS','ERROR MAKING VOICE CALL','LINK HAD ALREADY EXPIRED','PARTICIPANT OPTED OUT') COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Explanation of why invitation did not send, if applicable',
+  PRIMARY KEY (`ssq_id`),
+  UNIQUE KEY `email_recip_id_record` (`email_recip_id`,`record`,`reminder_num`,`instance`),
+  UNIQUE KEY `ss_id_record` (`ss_id`,`record`,`reminder_num`,`instance`),
+  KEY `send_sent_status` (`scheduled_time_to_send`,`time_sent`,`status`),
+  KEY `status` (`status`),
+  KEY `time_sent` (`time_sent`),
+  CONSTRAINT `redcap_surveys_scheduler_queue_ibfk_1` FOREIGN KEY (`email_recip_id`) REFERENCES `redcap_surveys_emails_recipients` (`email_recip_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `redcap_surveys_scheduler_queue_ibfk_2` FOREIGN KEY (`ss_id`) REFERENCES `redcap_surveys_scheduler` (`ss_id`) ON DELETE SET NULL ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 
 
 # Dump of table redcap_surveys_short_codes
 # ------------------------------------------------------------
 
+DROP TABLE IF EXISTS `redcap_surveys_short_codes`;
+
+CREATE TABLE `redcap_surveys_short_codes` (
+  `ts` datetime DEFAULT NULL,
+  `participant_id` int(10) DEFAULT NULL,
+  `code` varchar(6) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  UNIQUE KEY `code` (`code`),
+  KEY `participant_id_ts` (`participant_id`,`ts`),
+  CONSTRAINT `redcap_surveys_short_codes_ibfk_1` FOREIGN KEY (`participant_id`) REFERENCES `redcap_surveys_participants` (`participant_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 
 
 # Dump of table redcap_surveys_themes
 # ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `redcap_surveys_themes`;
+
+CREATE TABLE `redcap_surveys_themes` (
+  `theme_id` int(10) NOT NULL AUTO_INCREMENT,
+  `theme_name` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ui_id` int(10) DEFAULT NULL COMMENT 'NULL = Theme is available to all users',
+  `theme_text_buttons` varchar(6) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `theme_bg_page` varchar(6) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `theme_text_title` varchar(6) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `theme_bg_title` varchar(6) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `theme_text_sectionheader` varchar(6) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `theme_bg_sectionheader` varchar(6) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `theme_text_question` varchar(6) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `theme_bg_question` varchar(6) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`theme_id`),
+  KEY `theme_name` (`theme_name`),
+  KEY `ui_id` (`ui_id`),
+  CONSTRAINT `redcap_surveys_themes_ibfk_1` FOREIGN KEY (`ui_id`) REFERENCES `redcap_user_information` (`ui_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 LOCK TABLES `redcap_surveys_themes` WRITE;
 /*!40000 ALTER TABLE `redcap_surveys_themes` DISABLE KEYS */;
@@ -2493,37 +5356,154 @@ UNLOCK TABLES;
 # Dump of table redcap_todo_list
 # ------------------------------------------------------------
 
+DROP TABLE IF EXISTS `redcap_todo_list`;
+
+CREATE TABLE `redcap_todo_list` (
+  `request_id` int(11) NOT NULL AUTO_INCREMENT,
+  `request_from` int(11) DEFAULT NULL,
+  `request_to` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `todo_type` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `action_url` text COLLATE utf8mb4_unicode_ci,
+  `status` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `request_time` datetime DEFAULT NULL,
+  `project_id` int(10) DEFAULT NULL,
+  `request_completion_time` datetime DEFAULT NULL,
+  `request_completion_userid` int(11) DEFAULT NULL,
+  `comment` text COLLATE utf8mb4_unicode_ci,
+  PRIMARY KEY (`request_id`),
+  KEY `project_id` (`project_id`),
+  KEY `request_completion_userid` (`request_completion_userid`),
+  KEY `request_from` (`request_from`),
+  KEY `request_time` (`request_time`),
+  KEY `status` (`status`),
+  KEY `todo_type` (`todo_type`),
+  CONSTRAINT `redcap_todo_list_ibfk_1` FOREIGN KEY (`project_id`) REFERENCES `redcap_projects` (`project_id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `redcap_todo_list_ibfk_2` FOREIGN KEY (`request_completion_userid`) REFERENCES `redcap_user_information` (`ui_id`) ON DELETE SET NULL,
+  CONSTRAINT `redcap_todo_list_ibfk_3` FOREIGN KEY (`request_from`) REFERENCES `redcap_user_information` (`ui_id`) ON DELETE SET NULL ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 
 
 # Dump of table redcap_two_factor_response
 # ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `redcap_two_factor_response`;
+
+CREATE TABLE `redcap_two_factor_response` (
+  `tf_id` int(10) NOT NULL AUTO_INCREMENT,
+  `user_id` int(10) DEFAULT NULL,
+  `time_sent` datetime DEFAULT NULL,
+  `phone_number` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `verified` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`tf_id`),
+  KEY `phone_number` (`phone_number`),
+  KEY `time_sent` (`time_sent`),
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `redcap_two_factor_response_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `redcap_user_information` (`ui_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
 
 # Dump of table redcap_user_allowlist
 # ------------------------------------------------------------
 
+DROP TABLE IF EXISTS `redcap_user_allowlist`;
+
+CREATE TABLE `redcap_user_allowlist` (
+  `username` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  PRIMARY KEY (`username`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 
 
 # Dump of table redcap_user_information
 # ------------------------------------------------------------
 
+DROP TABLE IF EXISTS `redcap_user_information`;
+
+CREATE TABLE `redcap_user_information` (
+  `ui_id` int(10) NOT NULL AUTO_INCREMENT,
+  `username` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `user_email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Primary email',
+  `user_email2` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Secondary email',
+  `user_email3` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Tertiary email',
+  `user_phone` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `user_phone_sms` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `user_firstname` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `user_lastname` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `user_inst_id` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `super_user` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'Can access all projects and their data',
+  `account_manager` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'Can manage user accounts',
+  `access_system_config` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'Can access system configuration pages',
+  `access_system_upgrade` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'Can perform system upgrade',
+  `access_external_module_install` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'Can install, upgrade, and configure external modules',
+  `admin_rights` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'Can set administrator privileges',
+  `access_admin_dashboards` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'Can access admin dashboards',
+  `user_creation` datetime DEFAULT NULL COMMENT 'Time user account was created',
+  `user_firstvisit` datetime DEFAULT NULL,
+  `user_firstactivity` datetime DEFAULT NULL,
+  `user_lastactivity` datetime DEFAULT NULL,
+  `user_lastlogin` datetime DEFAULT NULL,
+  `user_suspended_time` datetime DEFAULT NULL,
+  `user_expiration` datetime DEFAULT NULL COMMENT 'Time at which the user will be automatically suspended from REDCap',
+  `user_access_dashboard_view` datetime DEFAULT NULL,
+  `user_access_dashboard_email_queued` enum('QUEUED','SENDING') COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Tracks status of email reminder for User Access Dashboard',
+  `user_sponsor` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Username of user''s sponsor or contact person',
+  `user_comments` text COLLATE utf8mb4_unicode_ci COMMENT 'Miscellaneous comments about user',
+  `allow_create_db` int(1) NOT NULL DEFAULT '1',
+  `email_verify_code` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Primary email verification code',
+  `email2_verify_code` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Secondary email verification code',
+  `email3_verify_code` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Tertiary email verification code',
+  `datetime_format` enum('M-D-Y_24','M-D-Y_12','M/D/Y_24','M/D/Y_12','M.D.Y_24','M.D.Y_12','D-M-Y_24','D-M-Y_12','D/M/Y_24','D/M/Y_12','D.M.Y_24','D.M.Y_12','Y-M-D_24','Y-M-D_12','Y/M/D_24','Y/M/D_12','Y.M.D_24','Y.M.D_12') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'M/D/Y_12' COMMENT 'User''s preferred datetime viewing format',
+  `number_format_decimal` enum('.',',') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '.' COMMENT 'User''s preferred decimal format',
+  `number_format_thousands_sep` enum(',','.','','SPACE','''') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT ',' COMMENT 'User''s preferred thousands separator',
+  `two_factor_auth_secret` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `display_on_email_users` int(1) NOT NULL DEFAULT '1',
+  `two_factor_auth_twilio_prompt_phone` tinyint(1) NOT NULL DEFAULT '1',
+  `two_factor_auth_code_expiration` int(3) NOT NULL DEFAULT '2',
+  `api_token` varchar(64) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `messaging_email_preference` enum('NONE','2_HOURS','4_HOURS','6_HOURS','8_HOURS','12_HOURS','DAILY') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '4_HOURS',
+  `messaging_email_urgent_all` tinyint(1) NOT NULL DEFAULT '1',
+  `messaging_email_ts` datetime DEFAULT NULL,
+  `messaging_email_general_system` tinyint(1) NOT NULL DEFAULT '1',
+  `ui_state` mediumtext COLLATE utf8mb4_unicode_ci,
+  `api_token_auto_request` tinyint(1) NOT NULL DEFAULT '0',
+  `fhir_data_mart_create_project` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`ui_id`),
+  UNIQUE KEY `api_token` (`api_token`),
+  UNIQUE KEY `email2_verify_code` (`email2_verify_code`),
+  UNIQUE KEY `email3_verify_code` (`email3_verify_code`),
+  UNIQUE KEY `email_verify_code` (`email_verify_code`),
+  UNIQUE KEY `username` (`username`),
+  KEY `two_factor_auth_secret` (`two_factor_auth_secret`),
+  KEY `user_access_dashboard_email_queued` (`user_access_dashboard_email_queued`),
+  KEY `user_access_dashboard_view` (`user_access_dashboard_view`),
+  KEY `user_comments` (`user_comments`(190)),
+  KEY `user_creation` (`user_creation`),
+  KEY `user_email` (`user_email`(191)),
+  KEY `user_expiration` (`user_expiration`),
+  KEY `user_firstactivity` (`user_firstactivity`),
+  KEY `user_firstname` (`user_firstname`(191)),
+  KEY `user_firstvisit` (`user_firstvisit`),
+  KEY `user_inst_id` (`user_inst_id`(191)),
+  KEY `user_lastactivity` (`user_lastactivity`),
+  KEY `user_lastlogin` (`user_lastlogin`),
+  KEY `user_lastname` (`user_lastname`(191)),
+  KEY `user_sponsor` (`user_sponsor`(191)),
+  KEY `user_suspended_time` (`user_suspended_time`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 LOCK TABLES `redcap_user_information` WRITE;
 /*!40000 ALTER TABLE `redcap_user_information` DISABLE KEYS */;
 
-INSERT INTO `redcap_user_information` (`ui_id`, `username`, `user_email`, `user_email2`, `user_email3`, `user_phone`, `user_phone_sms`, `user_firstname`, `user_lastname`, `user_inst_id`, `super_user`, `account_manager`, `access_system_config`, `access_system_upgrade`, `access_external_module_install`, `admin_rights`, `access_admin_dashboards`, `user_creation`, `user_firstvisit`, `user_firstactivity`, `user_lastactivity`, `user_lastlogin`, `user_suspended_time`, `user_expiration`, `user_access_dashboard_view`, `user_access_dashboard_email_queued`, `user_sponsor`, `user_comments`, `allow_create_db`, `email_verify_code`, `email2_verify_code`, `email3_verify_code`, `datetime_format`, `number_format_decimal`, `number_format_thousands_sep`, `two_factor_auth_secret`, `display_on_email_users`, `two_factor_auth_twilio_prompt_phone`, `two_factor_auth_code_expiration`, `api_token`, `messaging_email_preference`, `messaging_email_urgent_all`, `messaging_email_ts`, `ui_state`, `api_token_auto_request`, `fhir_data_mart_create_project`)
+INSERT INTO `redcap_user_information` (`ui_id`, `username`, `user_email`, `user_email2`, `user_email3`, `user_phone`, `user_phone_sms`, `user_firstname`, `user_lastname`, `user_inst_id`, `super_user`, `account_manager`, `access_system_config`, `access_system_upgrade`, `access_external_module_install`, `admin_rights`, `access_admin_dashboards`, `user_creation`, `user_firstvisit`, `user_firstactivity`, `user_lastactivity`, `user_lastlogin`, `user_suspended_time`, `user_expiration`, `user_access_dashboard_view`, `user_access_dashboard_email_queued`, `user_sponsor`, `user_comments`, `allow_create_db`, `email_verify_code`, `email2_verify_code`, `email3_verify_code`, `datetime_format`, `number_format_decimal`, `number_format_thousands_sep`, `two_factor_auth_secret`, `display_on_email_users`, `two_factor_auth_twilio_prompt_phone`, `two_factor_auth_code_expiration`, `api_token`, `messaging_email_preference`, `messaging_email_urgent_all`, `messaging_email_ts`, `messaging_email_general_system`, `ui_state`, `api_token_auto_request`, `fhir_data_mart_create_project`)
 VALUES
-	(1,'site_admin','joe.user@projectredcap.org',NULL,NULL,NULL,NULL,'Joe','User',NULL,0,0,0,0,0,0,0,NULL,'2020-09-18 15:10:17','2020-09-18 15:10:17','2020-09-18 15:10:17','2020-09-18 15:10:17',NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,NULL,NULL,'M/D/Y_12','.',',','63CBYWNHPKWGGPGQ',1,1,2,NULL,'4_HOURS',1,NULL,NULL,0,0),
-	(2,'test_admin','test_admin@test.test','','',NULL,NULL,'Test','Admin','',1,1,1,1,1,1,1,'2020-09-18 15:10:17',
-	 '2020-09-18 15:10:17','2020-09-18 15:10:17','2020-09-23 15:11:46','2020-09-23 15:11:21',NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,NULL,NULL,'M-D-Y_24','.','','P6T3NSJLY4EFQMBY',1,1,2,NULL,'4_HOURS',1,NULL,NULL,0,0),
-	(3,'test_user','test_user@test.test','','',NULL,NULL,'Test','User','',0,0,0,0,0,0,0,'2020-09-18 15:10:17',
-	 '2020-09-18 15:10:17','2020-09-18 15:10:17','2020-09-18 15:10:17','2020-09-18 15:10:17',NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,NULL,NULL,'M-D-Y_24','.','','E4NET5B5SWDYRCG6',1,1,2,NULL,'4_HOURS',1,NULL,NULL,0,0),
-	(4,'test_user_b','test_user_b@test.test','','',NULL,NULL,'Test','User_B','',0,0,0,0,0,0,0,'2020-09-18 15:10:17',
-	 '2020-09-18 15:10:17','2020-09-18 15:10:17','2020-09-18 15:10:17','2020-09-18 15:10:17',NULL,NULL,NULL,NULL,NULL,NULL,0,NULL,NULL,NULL,'M-D-Y_24','.','','4TDAVAAS2C2AFEJT',1,1,2,NULL,'4_HOURS',1,NULL,NULL,0,0),
-	(5,'test_user_c','test_user_c@test.test','','',NULL,NULL,'Test','User_C','',0,0,0,0,0,0,0,'2020-09-23 15:10:42',
-	 '2020-09-23 15:11:07','2020-09-23 15:10:55','2020-09-23 15:11:13','2020-09-23 15:10:56',NULL,NULL,NULL,NULL,NULL,NULL,0,NULL,NULL,NULL,'M-D-Y_24','.','','NC3XHQLSYXQSY7EO',1,1,2,NULL,'4_HOURS',1,NULL,NULL,0,0),
-	(6,'test_deleteuser','test_deleteuser@test.test','','',NULL,NULL,'Test','DeleteUser','',0,0,0,0,0,0,0,'2020-09-23
-15:11:46','2020-09-23 15:12:13','2020-09-23 15:11:59','2020-09-23 15:12:20','2020-09-23 15:12:00',NULL,NULL,NULL,NULL,NULL,NULL,0,NULL,NULL,NULL,'M-D-Y_24','.','','ME5FA2KWGLXCUQIR',1,1,2,NULL,'4_HOURS',1,NULL,NULL,0,0);
+	(1,'site_admin','joe.user@projectredcap.org',NULL,NULL,NULL,NULL,'Joe','User',NULL,0,0,0,0,0,0,0,NULL,'2020-09-18 15:10:17','2020-09-18 15:10:17','2020-09-18 15:10:17','2020-09-18 15:10:17',NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,NULL,NULL,'M/D/Y_12','.',',','63CBYWNHPKWGGPGQ',1,1,2,NULL,'4_HOURS',1,NULL,1,NULL,0,0),
+	(2,'test_admin','test_admin@test.test','','',NULL,NULL,'Test','Admin','',1,1,1,1,1,1,1,'2020-09-18 15:10:17','2020-09-18 15:10:17','2020-09-18 15:10:17','2021-04-28 10:50:02','2021-04-28 10:46:58',NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,NULL,NULL,'M-D-Y_24','.','','P6T3NSJLY4EFQMBY',1,1,2,NULL,'4_HOURS',1,NULL,1,NULL,0,0),
+	(3,'test_user','test_user@test.test','','',NULL,NULL,'Test','User','',0,0,0,0,0,0,0,'2020-09-18 15:10:17','2020-09-18 15:10:17','2020-09-18 15:10:17','2020-09-18 15:10:17','2021-04-28 10:46:03',NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,NULL,NULL,'M-D-Y_24','.','','E4NET5B5SWDYRCG6',1,1,2,NULL,'4_HOURS',1,NULL,1,NULL,0,0),
+	(4,'test_user_b','test_user_b@test.test','','',NULL,NULL,'Test','User_B','',0,0,0,0,0,0,0,'2020-09-18 15:10:17','2020-09-18 15:10:17','2020-09-18 15:10:17','2020-09-18 15:10:17','2020-09-18 15:10:17',NULL,NULL,NULL,NULL,NULL,NULL,0,NULL,NULL,NULL,'M-D-Y_24','.','','4TDAVAAS2C2AFEJT',1,1,2,NULL,'4_HOURS',1,NULL,1,NULL,0,0),
+	(5,'test_user_c','test_user_c@test.test','','',NULL,NULL,'Test','User_C','',0,0,0,0,0,0,0,'2020-09-23 15:10:42','2020-09-23 15:11:07','2020-09-23 15:10:55','2020-09-23 15:11:13','2020-09-23 15:10:56',NULL,NULL,NULL,NULL,NULL,NULL,0,NULL,NULL,NULL,'M-D-Y_24','.','','NC3XHQLSYXQSY7EO',1,1,2,NULL,'4_HOURS',1,NULL,1,NULL,0,0),
+	(6,'test_deleteuser','test_deleteuser@test.test','','',NULL,NULL,'Test','DeleteUser','',0,0,0,0,0,0,0,'2020-09-23 15:11:46','2020-09-23 15:12:13','2020-09-23 15:11:59','2020-09-23 15:12:20','2020-09-23 15:12:00',NULL,NULL,NULL,NULL,NULL,NULL,0,NULL,NULL,NULL,'M-D-Y_24','.','','ME5FA2KWGLXCUQIR',1,1,2,NULL,'4_HOURS',1,NULL,1,NULL,0,0);
 
 /*!40000 ALTER TABLE `redcap_user_information` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -2531,6 +5511,60 @@ UNLOCK TABLES;
 
 # Dump of table redcap_user_rights
 # ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `redcap_user_rights`;
+
+CREATE TABLE `redcap_user_rights` (
+  `project_id` int(10) NOT NULL DEFAULT '0',
+  `username` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `expiration` date DEFAULT NULL,
+  `role_id` int(10) DEFAULT NULL,
+  `group_id` int(10) DEFAULT NULL,
+  `lock_record` int(1) NOT NULL DEFAULT '0',
+  `lock_record_multiform` int(1) NOT NULL DEFAULT '0',
+  `lock_record_customize` int(1) NOT NULL DEFAULT '0',
+  `data_export_tool` int(1) NOT NULL DEFAULT '1',
+  `data_import_tool` int(1) NOT NULL DEFAULT '1',
+  `data_comparison_tool` int(1) NOT NULL DEFAULT '1',
+  `data_logging` int(1) NOT NULL DEFAULT '1',
+  `file_repository` int(1) NOT NULL DEFAULT '1',
+  `double_data` int(1) NOT NULL DEFAULT '0',
+  `user_rights` int(1) NOT NULL DEFAULT '1',
+  `data_access_groups` int(1) NOT NULL DEFAULT '1',
+  `graphical` int(1) NOT NULL DEFAULT '1',
+  `reports` int(1) NOT NULL DEFAULT '1',
+  `design` int(1) NOT NULL DEFAULT '0',
+  `calendar` int(1) NOT NULL DEFAULT '1',
+  `data_entry` text COLLATE utf8mb4_unicode_ci,
+  `api_token` varchar(32) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `api_export` int(1) NOT NULL DEFAULT '0',
+  `api_import` int(1) NOT NULL DEFAULT '0',
+  `mobile_app` int(1) NOT NULL DEFAULT '0',
+  `mobile_app_download_data` int(1) NOT NULL DEFAULT '0',
+  `record_create` int(1) NOT NULL DEFAULT '1',
+  `record_rename` int(1) NOT NULL DEFAULT '0',
+  `record_delete` int(1) NOT NULL DEFAULT '0',
+  `dts` int(1) NOT NULL DEFAULT '0' COMMENT 'DTS adjudication page',
+  `participants` int(1) NOT NULL DEFAULT '1',
+  `data_quality_design` int(1) NOT NULL DEFAULT '0',
+  `data_quality_execute` int(1) NOT NULL DEFAULT '0',
+  `data_quality_resolution` int(1) NOT NULL DEFAULT '0' COMMENT '0=No access, 1=View only, 2=Respond, 3=Open, close, respond, 4=Open only, 5=Open and respond',
+  `random_setup` int(1) NOT NULL DEFAULT '0',
+  `random_dashboard` int(1) NOT NULL DEFAULT '0',
+  `random_perform` int(1) NOT NULL DEFAULT '0',
+  `realtime_webservice_mapping` int(1) NOT NULL DEFAULT '0' COMMENT 'User can map fields for RTWS',
+  `realtime_webservice_adjudicate` int(1) NOT NULL DEFAULT '0' COMMENT 'User can adjudicate data for RTWS',
+  `external_module_config` text COLLATE utf8mb4_unicode_ci,
+  PRIMARY KEY (`project_id`,`username`),
+  UNIQUE KEY `api_token` (`api_token`),
+  KEY `group_id` (`group_id`),
+  KEY `project_id` (`project_id`),
+  KEY `role_id` (`role_id`),
+  KEY `username` (`username`),
+  CONSTRAINT `redcap_user_rights_ibfk_1` FOREIGN KEY (`group_id`) REFERENCES `redcap_data_access_groups` (`group_id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `redcap_user_rights_ibfk_2` FOREIGN KEY (`project_id`) REFERENCES `redcap_projects` (`project_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `redcap_user_rights_ibfk_3` FOREIGN KEY (`role_id`) REFERENCES `redcap_user_roles` (`role_id`) ON DELETE SET NULL ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 LOCK TABLES `redcap_user_rights` WRITE;
 /*!40000 ALTER TABLE `redcap_user_rights` DISABLE KEYS */;
@@ -2558,10 +5592,69 @@ UNLOCK TABLES;
 # Dump of table redcap_user_roles
 # ------------------------------------------------------------
 
+DROP TABLE IF EXISTS `redcap_user_roles`;
+
+CREATE TABLE `redcap_user_roles` (
+  `role_id` int(10) NOT NULL AUTO_INCREMENT,
+  `project_id` int(10) DEFAULT NULL,
+  `role_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Name of user role',
+  `lock_record` int(1) NOT NULL DEFAULT '0',
+  `lock_record_multiform` int(1) NOT NULL DEFAULT '0',
+  `lock_record_customize` int(1) NOT NULL DEFAULT '0',
+  `data_export_tool` int(1) NOT NULL DEFAULT '1',
+  `data_import_tool` int(1) NOT NULL DEFAULT '1',
+  `data_comparison_tool` int(1) NOT NULL DEFAULT '1',
+  `data_logging` int(1) NOT NULL DEFAULT '1',
+  `file_repository` int(1) NOT NULL DEFAULT '1',
+  `double_data` int(1) NOT NULL DEFAULT '0',
+  `user_rights` int(1) NOT NULL DEFAULT '1',
+  `data_access_groups` int(1) NOT NULL DEFAULT '1',
+  `graphical` int(1) NOT NULL DEFAULT '1',
+  `reports` int(1) NOT NULL DEFAULT '1',
+  `design` int(1) NOT NULL DEFAULT '0',
+  `calendar` int(1) NOT NULL DEFAULT '1',
+  `data_entry` text COLLATE utf8mb4_unicode_ci,
+  `api_export` int(1) NOT NULL DEFAULT '0',
+  `api_import` int(1) NOT NULL DEFAULT '0',
+  `mobile_app` int(1) NOT NULL DEFAULT '0',
+  `mobile_app_download_data` int(1) NOT NULL DEFAULT '0',
+  `record_create` int(1) NOT NULL DEFAULT '1',
+  `record_rename` int(1) NOT NULL DEFAULT '0',
+  `record_delete` int(1) NOT NULL DEFAULT '0',
+  `dts` int(1) NOT NULL DEFAULT '0' COMMENT 'DTS adjudication page',
+  `participants` int(1) NOT NULL DEFAULT '1',
+  `data_quality_design` int(1) NOT NULL DEFAULT '0',
+  `data_quality_execute` int(1) NOT NULL DEFAULT '0',
+  `data_quality_resolution` int(1) NOT NULL DEFAULT '0' COMMENT '0=No access, 1=View only, 2=Respond, 3=Open, close, respond',
+  `random_setup` int(1) NOT NULL DEFAULT '0',
+  `random_dashboard` int(1) NOT NULL DEFAULT '0',
+  `random_perform` int(1) NOT NULL DEFAULT '0',
+  `realtime_webservice_mapping` int(1) NOT NULL DEFAULT '0' COMMENT 'User can map fields for RTWS',
+  `realtime_webservice_adjudicate` int(1) NOT NULL DEFAULT '0' COMMENT 'User can adjudicate data for RTWS',
+  `external_module_config` text COLLATE utf8mb4_unicode_ci,
+  PRIMARY KEY (`role_id`),
+  KEY `project_id` (`project_id`),
+  CONSTRAINT `redcap_user_roles_ibfk_1` FOREIGN KEY (`project_id`) REFERENCES `redcap_projects` (`project_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 
 
 # Dump of table redcap_validation_types
 # ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `redcap_validation_types`;
+
+CREATE TABLE `redcap_validation_types` (
+  `validation_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Unique name for Data Dictionary',
+  `validation_label` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Label in Online Designer',
+  `regex_js` text COLLATE utf8mb4_unicode_ci,
+  `regex_php` text COLLATE utf8mb4_unicode_ci,
+  `data_type` enum('date','datetime','datetime_seconds','email','integer','mrn','number','number_comma_decimal','phone','postal_code','ssn','text','time','char') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `legacy_value` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `visible` int(1) NOT NULL DEFAULT '1' COMMENT 'Show in Online Designer?',
+  UNIQUE KEY `validation_name` (`validation_name`),
+  KEY `data_type` (`data_type`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 LOCK TABLES `redcap_validation_types` WRITE;
 /*!40000 ALTER TABLE `redcap_validation_types` DISABLE KEYS */;
@@ -2611,6 +5704,22 @@ UNLOCK TABLES;
 # Dump of table redcap_web_service_cache
 # ------------------------------------------------------------
 
+DROP TABLE IF EXISTS `redcap_web_service_cache`;
+
+CREATE TABLE `redcap_web_service_cache` (
+  `cache_id` int(10) NOT NULL AUTO_INCREMENT,
+  `project_id` int(10) DEFAULT NULL,
+  `service` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `category` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `value` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `label` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`cache_id`),
+  UNIQUE KEY `project_service_cat_value` (`project_id`,`service`,`category`,`value`),
+  KEY `category` (`category`),
+  KEY `service_cat_value` (`service`,`category`,`value`),
+  CONSTRAINT `redcap_web_service_cache_ibfk_1` FOREIGN KEY (`project_id`) REFERENCES `redcap_projects` (`project_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 
 
 
@@ -2620,6 +5729,5 @@ UNLOCK TABLES;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-
 
 COMMIT;
