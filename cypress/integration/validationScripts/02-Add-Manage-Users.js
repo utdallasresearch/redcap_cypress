@@ -13,10 +13,6 @@ describe('2 - Add/Manage Users', {
 
     describe('User Settings', () => {
         it('Should have access to edit System-Level User Settings', () => {
-            console.log('enter 1st test')
-            console.log(cy.getUserInfo)
-            // cy.mysql_db('seeds/validations/2/validation-pre-2')
-           // cy.set_user_type('admin')
             cy.visit_version({page: "ControlCenter/index.php"})
                 .then(() => {
                     cy.get('div#control_center_menu')
@@ -63,7 +59,7 @@ describe('2 - Add/Manage Users', {
 
                     cy.get("body").contains("Your system configuration values have now been changed!")
                 })
-            console.log('exit test')
+
         })
     })
 
@@ -81,7 +77,6 @@ describe('2 - Add/Manage Users', {
                     cy.get('h4')
                         .contains('User Management for Table-based Authentication')
                 })
-            console.log('exit test')
         })
 
         it('Should have ability to create table-based users.', () => {
@@ -121,7 +116,6 @@ describe('2 - Add/Manage Users', {
                 cy.get('body')
                     .should('contain.text', 'User has been successfully saved. An email with login information was sent to: ' + email)
             })
-            console.log('exit test')
         })
 
         it('Should not have the ability to create duplicate users.', () => {
