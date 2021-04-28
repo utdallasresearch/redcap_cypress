@@ -8,7 +8,7 @@ describe('3 - Admin Users', {
     })
 
 
-    it('Should have form elements to add/edit admin users', () => {
+    it('3-1/6: Should have form elements to add/edit admin users', () => {
 
         cy.set_user_type('admin')
         cy.visit_version({page: 'ControlCenter/superusers.php'}).then( () => {
@@ -30,7 +30,7 @@ describe('3 - Admin Users', {
         })
     })
 
-    it('Should have the ability to grant administrator and account manager access to the system for individual' +
+    it('3-7: Should have the ability to grant administrator and account manager access to the system for individual' +
         ' users', () => {
 
         cy.set_user_type('admin')
@@ -80,7 +80,7 @@ describe('3 - Admin Users', {
         })
     })
 
-    it('Should allow test_user to access Control Center as admin', () => {
+    it('3-8: Should allow test_user to access Control Center as admin', () => {
         cy.mysql_db('seeds/validations/3/validation-pre-3-4')
         cy.set_user_type('standard')
         cy.visit_version({page: 'ControlCenter/superusers.php'}).then( () => {
@@ -93,50 +93,102 @@ describe('3 - Admin Users', {
         })
     })
 
-    it('Should have the ability to revoke administrator and account manager access to the system for individual users', () => {
+    it('3-9: Should have the ability to revoke administrator and account manager access to the system for' +
+        ' individual' +
+        ' users', () => {
         cy.mysql_db('seeds/validations/3/validation-pre-3-4')
         cy.set_user_type('admin')
 
         let username = 'test_user'
 
-        cy.visit_version({page: 'ControlCenter/superusers.php'}).then( () => {
+        cy.visit_version({page: 'ControlCenter/superusers.php'})
+            .then( () => {
+                cy.get('table#admin-rights-table tbody tr#user3')
+                    .within(() => {
+                        cy.get('td:first')
+                            .should('contain.text', username)
 
-            cy.get('tr#user3').contains(username)
-            cy.get('input#3-admin_rights').uncheck()
-            cy.get('input#3-super_user').uncheck()
-            cy.get('input#3-account_manager').uncheck()
-            cy.get('input#3-access_system_config').uncheck()
-            cy.get('input#3-access_system_upgrade').uncheck()
-            cy.get('input#3-access_external_module_install').uncheck()
-            cy.get('input#3-access_admin_dashboards').uncheck()
+                        cy.get('input#3-admin_rights')
+                            .should('be.checked')
+                            .uncheck()
+                            .should('not.be.checked')
 
-            cy.get('.ui-dialog').within(($dialog) => {
-                cy.get('.ui-dialog-titlebar').should(($div) => {
-                    expect($div).to.contain('NOTICE')
-                })
-                cy.get('div.simpleDialog.ui-dialog-content').should(($div) => {
-                    expect($div).to.contain('Please be aware that you have unchecked' +
-                        ' ALL the administrator privileges for this user')
-                })
+                        cy.get('input#3-super_user')
+                            .should('be.checked')
+                            .uncheck()
+                            .should('not.be.checked')
+
+                        cy.get('input#3-account_manager')
+                            .should('be.checked')
+                            .uncheck()
+                            .should('not.be.checked')
+
+                        cy.get('input#3-access_system_config')
+                            .should('be.checked')
+                            .uncheck()
+                            .should('not.be.checked')
+
+                        cy.get('input#3-access_system_upgrade')
+                            .should('be.checked')
+                            .uncheck()
+                            .should('not.be.checked')
+
+                        cy.get('input#3-access_external_module_install')
+                            .should('be.checked')
+                            .uncheck()
+                            .should('not.be.checked')
+
+                        cy.get('input#3-access_admin_dashboards')
+                            .should('be.checked')
+                            .uncheck()
+                            .should('not.be.checked')
+                    })
+
+                cy.get('div.ui-dialog')
+                    .then( () => {
+                        cy.get('div.ui-dialog-titlebar')
+                            .should('contain.text', 'NOTICE')
+
+                        cy.get('div.ui-dialog-content')
+                            .should('contain.text', 'Please be aware that you have unchecked ALL the administrator privileges for this user')
+
+                        cy.get('div.ui-dialog-buttonpane button')
+                            .contains('Close')
+                            .click({ force: true })
+                    })
+
+                // ToDo: Craptacular bug in REDCap here, displays 2 dialog boxen over top of each other
+                // Second verse, same as the first
+                cy.get('div.ui-dialog')
+                    .then( () => {
+                        cy.get('div.ui-dialog-titlebar')
+                            .should('contain.text', 'NOTICE')
+
+                        cy.get('div.ui-dialog-content')
+                            .should('contain.text', 'Please be aware that you have unchecked ALL the administrator privileges for this user')
+
+                        cy.get('div.ui-dialog-buttonpane button')
+                            .contains('Close')
+                            .click({force:true})
+                    })
             })
-            cy.get('.ui-dialog').within(() => {
-                cy.get('.ui-dialog-buttonpane').within(() => {
-                    cy.get('button.ui-button.ui-corner-all.ui-widget').contains('Close').click({force: true})
-                })
-            })
-            cy.visit_version({page: 'ControlCenter/superusers.php'})
-            cy.get('table#admin-rights-table')
-                .should('not.contain', username)
 
-        })
+        // reload the page to show the user is no longer listed
+        cy.visit_version({page: 'ControlCenter/superusers.php'})
+            .then( () => {
+                cy.get('table#admin-rights-table')
+                    .should('not.contain', username)
+            })
     })
 
-    it('Should not allow test_user to access Control Center as admin', () => {
+    it('3-10: Should not allow test_user to access Control Center as admin', () => {
         cy.mysql_db('seeds/validations/3/validation-pre-3-9')
         cy.set_user_type('standard')
-        cy.visit_version({page: ''}).then( () => {
-            cy.get('ul.nav > li')
-                .should('not.contain', 'Control Center')
-        })
+
+        cy.visit_base({url: '/'})
+            .then( () => {
+                cy.get('ul.nav > li')
+                    .should('not.contain', 'Control Center')
+            })
     })
 })
