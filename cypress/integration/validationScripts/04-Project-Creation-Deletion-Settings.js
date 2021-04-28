@@ -5,9 +5,8 @@ describe('4 - Manage Project Creation/Deletion Settings', {
 }, () => {
 
     describe('Global User Project Settings', () => {
-        // 4-2
 
-        it('Should allow admin user to manage global user project settings for creating new projects.', () => {
+        it('4-2: Should allow admin user to manage global user project settings for creating new projects.', () => {
             cy.set_user_type('admin')
             cy.mysql_db('seeds/validations/4/validation-pre-4-2')
 
@@ -42,9 +41,7 @@ describe('4 - Manage Project Creation/Deletion Settings', {
             })
         })
 
-        // 4-3
-
-        it('Should allow admin to set global privs for moving projects to production.', () => {
+        it('4-3: Should allow admin to set global privs for moving projects to production.', () => {
             cy.set_user_type('admin')
             cy.mysql_db('seeds/validations/4/validation-pre-4-3')
 
@@ -73,9 +70,7 @@ describe('4 - Manage Project Creation/Deletion Settings', {
             })
         })
 
-        // 4-4
-
-        it('Should allow admin to set global privs for users to edit survey responses.', () => {
+        it('4-4: Should allow admin to set global privs for users to edit survey responses.', () => {
             cy.set_user_type('admin')
             cy.mysql_db('seeds/validations/4/validation-pre-4-4')
 
@@ -102,9 +97,7 @@ describe('4 - Manage Project Creation/Deletion Settings', {
             })
         })
 
-        // 4-5
-
-        it('Should allow admin to set global privs for users to allow draft-mode changes.', () => {
+        it('4-5: Should allow admin to set global privs for users to allow draft-mode changes.', () => {
             cy.set_user_type('admin')
             cy.mysql_db('seeds/validations/4/validation-pre-4-5')
 
@@ -135,9 +128,7 @@ describe('4 - Manage Project Creation/Deletion Settings', {
             })
         })
 
-        // 4-6
-
-        it('Should allow admin to set global user privs to add or modify events and arms while in production.', () => {
+        it('4-6: Should allow admin to set global user privs to add or modify events and arms while in production.', () => {
             cy.set_user_type('admin')
             cy.mysql_db('seeds/validations/4/validation-pre-4-6')
 
@@ -168,9 +159,7 @@ describe('4 - Manage Project Creation/Deletion Settings', {
 
     describe('Individual User Project Settings', () => {
 
-        // 4-7
-
-        it('Should allow admin to edit individual user project settings.', () => {
+        it('4-7: Should allow admin to edit individual user project settings.', () => {
             cy.set_user_type('admin')
             cy.mysql_db('seeds/validations/4/validation-pre-4-7')
 
@@ -207,9 +196,7 @@ describe('4 - Manage Project Creation/Deletion Settings', {
             })
         })
 
-        // 4-8
-
-        it('Should not allow underprivileged users to create projects.', () => {
+        it('4-8: Should not allow underprivileged users to create projects.', () => {
             cy.set_user_type('standard')
             cy.mysql_db('seeds/validations/4/validation-pre-4-8')
 
@@ -223,9 +210,7 @@ describe('4 - Manage Project Creation/Deletion Settings', {
             })
         })
 
-        // 4-9/10
-
-        it('Should allow a privileged user to request a project.', () => {
+        it('4-9/10: Should allow a privileged user to request a project.', () => {
             cy.set_user_type('standard')
             cy.mysql_db('seeds/validations/4/validation-pre-4-9')
 
@@ -245,9 +230,7 @@ describe('4 - Manage Project Creation/Deletion Settings', {
             })
         })
 
-        // 4-11 - 4-12
-
-        it('Should have the ability to grant users permission to create a project', () => {
+        it('4-11/12: Should have the ability to grant users permission to create a project', () => {
             cy.mysql_db('seeds/validations/4/validation-pre-4-11')
             cy.set_user_type('admin')
 
@@ -270,9 +253,7 @@ describe('4 - Manage Project Creation/Deletion Settings', {
                 })
         })
 
-        // 4-13
-
-        it('Should give permission to privileged users to create projects.', () => {
+        it('4-13/14: Should give permission to privileged users to create projects.', () => {
             cy.mysql_db('seeds/validations/4/validation-pre-4-13')
             cy.set_user_type('standard')
 
@@ -312,9 +293,7 @@ describe('4 - Manage Project Creation/Deletion Settings', {
             })
         })
 
-        // 15
-
-        it('Should allow the user to modify project settings.', () => {
+        it('4-15: Should allow the user to modify project settings.', () => {
             cy.set_user_type('standard')
             cy.mysql_db('seeds/validations/4/validation-pre-4-15')
 
@@ -364,9 +343,7 @@ describe('4 - Manage Project Creation/Deletion Settings', {
             })
         })
 
-        // 16
-
-        it('Should allow the user to modify project instrument.', () => {
+        it('4-16: Should allow the user to modify project instrument.', () => {
             cy.set_user_type('standard')
             cy.mysql_db('seeds/validations/4/validation-pre-4-16')
 
@@ -432,9 +409,7 @@ describe('4 - Manage Project Creation/Deletion Settings', {
             })
         })
 
-        // 17
-
-        it('Should allow a user to copy an instrument.', () => {
+        it('4-17: Should allow a user to copy an instrument.', () => {
             cy.set_user_type('standard')
             cy.mysql_db('seeds/validations/4/validation-pre-4-17')
 
@@ -485,9 +460,7 @@ describe('4 - Manage Project Creation/Deletion Settings', {
             })
         })
 
-        // 18
-
-         it('Should allow a user to add a field to a project copy', () => {
+        it('4-18: Should allow a user to add a field to a project copy', () => {
              cy.set_user_type('standard')
              cy.mysql_db('seeds/validations/4/validation-pre-4-18')
 
@@ -539,9 +512,7 @@ describe('4 - Manage Project Creation/Deletion Settings', {
             })
         })
 
-        // 19
-
-        it('Should allow a user to copy a project.', () => {
+        it('4-19/20: Should allow a user to copy a project.', () => {
             cy.set_user_type('standard')
             cy.mysql_db('seeds/validations/4/validation-pre-4-19')
 
@@ -613,9 +584,7 @@ describe('4 - Manage Project Creation/Deletion Settings', {
 
         })
 
-        // 21
-
-        it('Should request a project be moved to production then cancel.', () => {
+        it('4-21/22: Should request a project be moved to production then cancel.', () => {
             cy.set_user_type('standard')
             cy.mysql_db('seeds/validations/4/validation-pre-4-21')
 
@@ -652,9 +621,7 @@ describe('4 - Manage Project Creation/Deletion Settings', {
             })
         })
 
-        // 23
-
-        it('Should allow an admin to give permission to users to move projects to production', () => {
+        it('4-23: Should allow an admin to give permission to users to move projects to production', () => {
             cy.set_user_type('admin')
             cy.mysql_db('seeds/validations/4/validation-pre-4-23')
 
@@ -670,9 +637,7 @@ describe('4 - Manage Project Creation/Deletion Settings', {
             })
         })
 
-        // 24
-
-        it('Should allow a user to move a project to production', () => {
+        it('4-24/26Should allow a user to move a project to production', () => {
             cy.set_user_type('standard')
             cy.mysql_db('seeds/validations/4/validation-pre-4-24')
 
@@ -715,9 +680,7 @@ describe('4 - Manage Project Creation/Deletion Settings', {
             })
         })
 
-        // 27
-
-        it('Should allow an admin to delete a project but cancel.', () => {
+        it('4-27/28: Should allow an admin to delete a project but cancel.', () => {
             cy.set_user_type('admin')
             cy.mysql_db('seeds/validations/4/validation-pre-4-27')
 
@@ -749,9 +712,7 @@ describe('4 - Manage Project Creation/Deletion Settings', {
             })
         })
 
-        // 29
-
-        it('Should allow an admin delete a project.', () => {
+        it('4-29: Should allow an admin delete a project.', () => {
             cy.set_user_type('admin')
             cy.mysql_db('seeds/validations/4/validation-pre-4-29')
 
@@ -798,9 +759,7 @@ describe('4 - Manage Project Creation/Deletion Settings', {
 
     describe('User-Level Project Settings', () => {
 
-        // 30
-
-        it('Should should allow a user to enable longitudinal data', () => {
+        it('4-30/31: Should should allow a user to enable longitudinal data', () => {
             cy.set_user_type('standard')
             cy.mysql_db('seeds/validations/4/validation-pre-4-30')
 
@@ -894,9 +853,7 @@ describe('4 - Manage Project Creation/Deletion Settings', {
             })
         })
 
-        // 32
-
-        it('Should allow the user to designate data collection instruments', () => {
+        it('4-32/35: Should allow the user to designate data collection instruments', () => {
             cy.set_user_type('standard')
             cy.mysql_db('seeds/validations/4/validation-pre-4-32')
 
@@ -1046,9 +1003,7 @@ describe('4 - Manage Project Creation/Deletion Settings', {
             })
         })
 
-        // 36
-
-        it('Should enable optional modules and customizations', () => {
+        it('4-36: Should enable optional modules and customizations', () => {
             cy.set_user_type('standard')
             cy.mysql_db('seeds/validations/4/validation-pre-4-36')
 
@@ -1132,9 +1087,7 @@ describe('4 - Manage Project Creation/Deletion Settings', {
             })
         })
 
-        // 37
-
-        it('Should allow the user to enable surveys', () => {
+        it('4-37/40: Should allow the user to enable surveys', () => {
             cy.set_user_type('standard')
             cy.mysql_db('seeds/validations/4/validation-pre-4-37')
 
@@ -1320,9 +1273,7 @@ describe('4 - Manage Project Creation/Deletion Settings', {
             })
         })
 
-        // 41
-
-        it('Should set the survey as offline', () => {
+        it('4-41: Should set the survey as offline', () => {
             cy.set_user_type('standard')
             cy.mysql_db('seeds/validations/4/validation-pre-4-41')
 
@@ -1371,9 +1322,7 @@ describe('4 - Manage Project Creation/Deletion Settings', {
             })
         })
 
-        // 42
-
-        it('Should set the survey as active.', () => {
+        it('4-42: Should set the survey as active.', () => {
             cy.set_user_type('standard')
             cy.mysql_db('seeds/validations/4/validation-pre-4-42')
 
@@ -1420,10 +1369,8 @@ describe('4 - Manage Project Creation/Deletion Settings', {
             })
         })
 
-        // 43
         // todo: Varies from v9 validation scripts
-
-        it('Should setup survey distribution tools.', () => {
+        it('4-43: Should setup survey distribution tools.', () => {
             cy.set_user_type('standard')
             cy.mysql_db('seeds/validations/4/validation-pre-4-43')
 
@@ -1484,9 +1431,7 @@ describe('4 - Manage Project Creation/Deletion Settings', {
             })
         })
 
-        // 44
-
-        it('Should prevent editing of records that are read-only.', () => {
+        it('4-44: Should prevent editing of records that are read-only.', () => {
             cy.set_user_type('standard')
             cy.mysql_db('seeds/validations/4/validation-pre-4-44')
 
@@ -1552,9 +1497,7 @@ describe('4 - Manage Project Creation/Deletion Settings', {
             })
         })
 
-        // 45
-
-        it('Should allow admin to enable editing of survey responses.', () => {
+        it('4-45: Should allow admin to enable editing of survey responses.', () => {
             cy.set_user_type('admin')
             cy.mysql_db('seeds/validations/4/validation-pre-4-45')
 
@@ -1576,9 +1519,7 @@ describe('4 - Manage Project Creation/Deletion Settings', {
             })
         })
 
-        // 47
-
-        it('Should allow privileged regular user to edit survey responses.', () => {
+        it('4-47/49: Should allow privileged regular user to edit survey responses.', () => {
             cy.set_user_type('standard')
             cy.mysql_db('seeds/validations/4/validation-pre-4-47')
 
@@ -1675,9 +1616,7 @@ describe('4 - Manage Project Creation/Deletion Settings', {
             })
         })
 
-        // 50
-
-        it('Should allow privileged regular user to enable project optional modules and customizations', () => {
+        it('4-50: Should allow privileged regular user to enable project optional modules and customizations', () => {
             cy.set_user_type('standard')
             cy.mysql_db('seeds/validations/4/validation-pre-4-50')
 
@@ -1736,9 +1675,7 @@ describe('4 - Manage Project Creation/Deletion Settings', {
             })
         })
 
-        // 51
-
-        it('Should have the ability to move projects to production.', () => {
+        it('4-51: Should have the ability to move projects to production.', () => {
             cy.set_user_type('standard')
             cy.mysql_db('seeds/validations/4/validation-pre-4-51')
 
@@ -1783,9 +1720,7 @@ describe('4 - Manage Project Creation/Deletion Settings', {
             })
         })
 
-        // 52
-
-        it('Should not allow delete options to projects.', () => {
+        it('4-52: Should not allow delete options to projects.', () => {
             cy.set_user_type('standard')
             cy.mysql_db('seeds/validations/4/validation-pre-4-52')
 
@@ -1841,9 +1776,7 @@ describe('4 - Manage Project Creation/Deletion Settings', {
             })
         })
 
-        // 53
-
-        it('Should allow adding fields to instruments in draft mode.', () => {
+        it('4-53: Should allow adding fields to instruments in draft mode.', () => {
             cy.set_user_type('standard')
             cy.mysql_db('seeds/validations/4/validation-pre-4-53')
 
@@ -1946,9 +1879,7 @@ describe('4 - Manage Project Creation/Deletion Settings', {
             })
         })
 
-        // 54
-
-        it('4-54: Should allow admin to review project changes in production.', () => {
+        it('4-54/55: Should allow admin to review project changes in production.', () => {
             cy.set_user_type('admin')
             cy.mysql_db('seeds/validations/4/validation-pre-4-54')
 
@@ -2006,9 +1937,7 @@ describe('4 - Manage Project Creation/Deletion Settings', {
                 .click()
         })
 
-        // 56
-
-        it('Should allow admin to set automatic approval for draft mode changes.', () => {
+        it('4-56: Should allow admin to set automatic approval for draft mode changes.', () => {
             cy.set_user_type('admin')
             cy.mysql_db('seeds/validations/4/validation-pre-4-56')
 
@@ -2030,9 +1959,7 @@ describe('4 - Manage Project Creation/Deletion Settings', {
             })
         })
 
-        // 57
-
-        it('Should allow user to to have draft mode changes auto-approved.', () => {
+        it('4-57/58: Should allow user to to have draft mode changes auto-approved.', () => {
             cy.set_user_type('standard')
             cy.mysql_db('seeds/validations/4/validation-pre-4-57')
 
@@ -2147,9 +2074,7 @@ describe('4 - Manage Project Creation/Deletion Settings', {
             })
         })
 
-        // 59
-
-        it('Should prevent user from editing events while in production.', () => {
+        it('4-59/60: Should prevent user from editing events while in production.', () => {
             cy.set_user_type('standard')
             cy.mysql_db('seeds/validations/4/validation-pre-4-59')
 
@@ -2208,9 +2133,7 @@ describe('4 - Manage Project Creation/Deletion Settings', {
             })
         })
 
-        // 61
-
-        it('Should allow admin to edit permissions to allow modifying events and arms while in production', () => {
+        it('4-61/62: Should allow admin to edit permissions to allow modifying events and arms while in production', () => {
             cy.set_user_type('admin')
             cy.mysql_db('seeds/validations/4/validation-pre-4-61')
 
@@ -2236,9 +2159,7 @@ describe('4 - Manage Project Creation/Deletion Settings', {
             })
         })
 
-        // 63
-
-        it('Should allow users to edit events and arms while in production.', () => {
+        it('4-63: Should allow users to edit events and arms while in production.', () => {
             cy.set_user_type('standard')
             cy.mysql_db('seeds/validations/4/validation-pre-4-63')
 
