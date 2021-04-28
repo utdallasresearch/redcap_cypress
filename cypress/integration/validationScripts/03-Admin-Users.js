@@ -182,7 +182,7 @@ describe('3 - Admin Users', {
     })
 
     it('3-10: Should not allow test_user to access Control Center as admin', () => {
-        cy.mysql_db('seeds/validations/3/validation-pre-3-9')
+        cy.mysql_db('seeds/validations/3/validation-pre-3-10')
         cy.set_user_type('standard')
 
         cy.visit_base({url: '/'})
