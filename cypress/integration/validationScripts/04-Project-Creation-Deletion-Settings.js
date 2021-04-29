@@ -8,37 +8,36 @@ describe('4 - Manage Project Creation/Deletion Settings', {
 
         it('4-2: Should allow admin user to manage global user project settings for creating new projects.', () => {
             cy.set_user_type('admin')
-            cy.mysql_db('seeds/validations/4/validation-pre-4-2')
+            cy.mysql_db('seeds/validations/4/validation-pre-4')
 
             cy.visit_version({page: "ControlCenter/index.php"})
                 .then(() => {
-                    cy.get('.cc_menu_item')
-                        .within(() => {
-                            cy.get('a')
-                                .contains('User Settings')
-                                .click()
-                        })
-                    cy.get('h4')
-                        .contains(' System-level User Settings')
-                    cy.get('td.cc_label').should(($td) => {
-                        expect($td).to.contain('Allow normal users to create new projects?')
-                    })
-
-                    cy.get('select[name="superusers_only_create_project"]')
-                        .select('No, only Administrators can create new projects')
-                        .should('have.value', '1')
-                        .select('Yes, normal users can create new projects')
-                        .should('have.value', '0')
-
-                    cy.get('select[name="superusers_only_create_project"]')
-                        .select('No, only Administrators can create new projects')
-
-                    cy.get('input')
-                        .contains('Save Changes')
+                    cy.get('.cc_menu_item a')
+                        .contains('User Settings')
                         .click()
+                })
 
-                    cy.get("body").contains("Your system configuration values have now been changed!")
-            })
+            cy.get('h4')
+                .should('contain.text', ' System-level User Settings')
+            cy.get('td.cc_label')
+                .should('contain.text', 'Allow normal users to create new projects?')
+
+
+            cy.get('select[name="superusers_only_create_project"]')
+                .select('No, only Administrators can create new projects')
+                .should('have.value', '1')
+                .select('Yes, normal users can create new projects')
+                .should('have.value', '0')
+
+            cy.get('select[name="superusers_only_create_project"]')
+                .select('No, only Administrators can create new projects')
+
+            cy.get('input')
+                .contains('Save Changes')
+                .click()
+
+            cy.get("body")
+                .should('contain.text', 'Your system configuration values have now been changed!')
         })
 
         it('4-3: Should allow admin to set global privs for moving projects to production.', () => {
@@ -637,7 +636,7 @@ describe('4 - Manage Project Creation/Deletion Settings', {
             })
         })
 
-        it('4-24/26Should allow a user to move a project to production', () => {
+        it('4-24/26: Should allow a user to move a project to production', () => {
             cy.set_user_type('standard')
             cy.mysql_db('seeds/validations/4/validation-pre-4-24')
 
