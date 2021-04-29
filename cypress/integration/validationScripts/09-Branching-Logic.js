@@ -159,6 +159,7 @@ describe('09 - Branching Logic', {
         })
 
         describe('User Interface', () => {
+
             it('9-1: Should have the ability to show a field ONLY when specific conditions are met', () => {
                 cy.set_user_type('standard')
                 cy.mysql_db('seeds/validations/9/validation-pre-9-1')
@@ -180,43 +181,16 @@ describe('09 - Branching Logic', {
                 cy.get('table#table-forms_surveys tbody tr#row_1 td:nth-child(2) a')
                     .contains('Data Types')
                     .click()
+
                 cy.viewport(1280, 1280)
-                let rows = cy.get('table#draggable > tbody.formtbody > tr')
+                let rows = cy.get('table#draggable tbody.formtbody tr')
                 let renumAlert = false
 
-                function dAndDItem() {
-                    cy.get('ul#ulnameList li.ui-draggable-handle:first').as('draggable')
-                    cy.get('div#dropZone1').as('droppable')
-
-                    cy.get('@draggable')
-                        .drag('@droppable', {
-                            position: 'center',
-                            force: true
-                        })
-
-                    // TODO: Various recommended methods for drag-n-drop in cypress no-workie. Resorted to using the
-                    //  @4tw/cypress-drag-drop plugin, which works great. Leaving for posterity.
-
-                    // cy.get('@draggable')
-                    //     .click()
-                    //     .trigger('dragstart', { force: true })
-                    // cy.get('@droppable')
-                    //     .trigger('dragover', { force: true })
-                    //     .trigger('dragcenter', { force: true })
-                    //     .trigger('drop', { force: true })
-
-                    // cy.get('ul#ulnameList li:first')
-                    //     .trigger('mousedown', { which: 1 })
-                    //     .trigger('mousemove', {
-                    //         clientX: 650,
-                    //         clientY: 550,
-                    //         screenX: 650,
-                    //         screenY: 550,
-                    //         pageX: 650,
-                    //         pageY: 550
-                    //     })
-                    //     .trigger('mouseup', { force: true })
-                    }
+                function moveItem(element, contents, xaxis, yaxis) {
+                    cy.get(element)
+                        .should('contain.text', contents)
+                        .move({x:xaxis, y:yaxis, force:true})
+                }
 
                 function processRows(row) {
                     let rowid = row.attr('id')
@@ -230,12 +204,13 @@ describe('09 - Branching Logic', {
                                 })
 
                             cy.get('div.ui-dialog')
+                                .should('be.visible')
                                 .then(() => {
                                     cy.get('div.ui-dialog-titlebar')
                                         .should('contain.text', 'Add/Edit Branching Logic')
 
                                     cy.get('input[value=drag]')
-                                        .click()
+                                        .check()
 
                                     // implement guards to prevent premature actions in drag-n-drop
                                     cy.get('div#working')
@@ -245,25 +220,30 @@ describe('09 - Branching Logic', {
                                         .should('be.visible')
                                         .and('have.length.gt', 5)
 
-                                    dAndDItem()
+                                    // perform the drag and drop
+                                    moveItem('ul#ulnameList li.ui-draggable-handle:first', 'record_id', 400, 0)
 
-                                    cy.get('div#dropZone1 li:first')
+                                    cy.get('div#dropZone1')
                                         .should('contain.text', 'record_id')
-                                        .within(() => {
-                                            cy.get('select')
-                                                .focus()
-                                                .select('=')
-                                                .blur()
-                                            cy.get('input')
-                                                .focus()
-                                                .clear()
-                                                .type('999')
-                                                .blur()
+                                        .then( () => {
+                                            cy.get('div#dropZone1 li:first')
+                                                .within(() => {
+                                                    cy.get('select')
+                                                        .focus()
+                                                        .select('=')
+                                                        .blur()
+                                                    cy.get('input')
+                                                        .focus()
+                                                        .clear()
+                                                        .type('999')
+                                                        .blur()
+                                                })
+
+                                            cy.get('div.ui-dialog-buttonset button')
+                                                .contains('Save')
+                                                .click()
                                         })
 
-                                    cy.get('div.ui-dialog-buttonset button')
-                                        .contains('Save')
-                                        .click()
                                 })
 
                             cy.get('tr#' + rowid)
@@ -284,6 +264,7 @@ describe('09 - Branching Logic', {
                         }
                     }
                 }
+
                 rows.each(processRows)
             })
 
@@ -448,7 +429,6 @@ describe('09 - Branching Logic', {
                     .should('contain.text', 'Save & Exit Form')
             })
 
-
             it('9-4: Should display the modify instrument page', () => {
                 cy.set_user_type('standard')
                 cy.mysql_db('seeds/validations/9/validation-pre-9-4')
@@ -474,7 +454,7 @@ describe('09 - Branching Logic', {
                     .contains('Modify instrument')
                     .click()
 
-                // ToDo: Cypress auto-clicks the Leave button, as listed in 9.4
+                // ToDo: Note that Cypress auto-clicks the Leave confirmation button, as listed in 9.4
 
                 cy.get('div#subheaderDiv2')
                     .should('contain.text', 'BranchingLogic')
