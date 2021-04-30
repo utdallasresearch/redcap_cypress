@@ -440,6 +440,7 @@ describe('09 - Branching Logic', {
                             .click()
                     })
 
+                cy.viewport(1280, 1280)
                 cy.get('div.hang a')
                     .contains('Add / Edit Records')
                     .click()
@@ -464,11 +465,13 @@ describe('09 - Branching Logic', {
                     .should('contain.text', 'Current instrument')
                     .and('contain.text', 'Data Types')
 
+
                 cy.get('tr#descriptive_text_file-tr td table tbody tr:first td div.frmedit_icons a:nth-child(2)')
                     .should('contain.html', 'arrow_branch_side.png')
                     .click()
 
                 cy.get('div.ui-dialog ')
+                    .should('be.visible')
                     .then( () => {
                         cy.get('div.ui-dialog-titlebar')
                             .should('contain.text', 'Add/Edit Branching Logic')
@@ -487,18 +490,13 @@ describe('09 - Branching Logic', {
                             .click()
 
 
-                        cy.get('#ulnameList > li:nth-child(18)')
-                            .as('draggable')
+                        cy.get('#ulnameList li:nth-child(18)')
+                            .scrollIntoView()
+                            .should('be.visible')
+                            .should('contain.text', "multiple_radio_manual = Choice101 (101)")
+                            .move({x:400, y:0, force:true})
 
-                        cy.get('div#dropZone1').as('droppable')
-
-                        cy.get('@draggable')
-                            .drag('@droppable', {
-                                position: 'center',
-                                force: true
-                            })
-                        cy.wait(500)
-                        cy.get('#dropZone1 > li')
+                        cy.get('#dropZone1')
                             .should('contain.text', "multiple_radio_manual = Choice101 (101)")
 
                         cy.get('button')
@@ -512,7 +510,7 @@ describe('09 - Branching Logic', {
 
             })
 
-            it('9-5: ', () => {
+            it('9-5: Should have a name here.', () => {
                 cy.set_user_type('standard')
                 cy.mysql_db('seeds/validations/9/validation-pre-9-5')
 
@@ -600,7 +598,7 @@ describe('09 - Branching Logic', {
 
             })
 
-            it('9-11: ', () => {
+            it('9-11: Should have a name here.', () => {
                 cy.set_user_type('standard')
                 cy.mysql_db('seeds/validations/9/validation-pre-9-11')
 
