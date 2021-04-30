@@ -598,7 +598,7 @@ describe('09 - Branching Logic', {
 
             })
 
-            it('9-11: Should have a name here.', () => {
+            it('9-6: Should have a name here.', () => {
                 cy.set_user_type('standard')
                 cy.mysql_db('seeds/validations/9/validation-pre-9-11')
 
