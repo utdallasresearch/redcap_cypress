@@ -145,6 +145,7 @@ describe('3 - Admin Users', {
                     })
 
                 cy.get('div.ui-dialog')
+                    .should('be.visible')
                     .then( () => {
                         cy.get('div.ui-dialog-titlebar')
                             .should('contain.text', 'NOTICE')
@@ -159,7 +160,10 @@ describe('3 - Admin Users', {
 
                 // ToDo: Craptacular bug in REDCap here, displays 2 dialog boxen over top of each other
                 // Second verse, same as the first
+
+
                 cy.get('div.ui-dialog')
+                    .should('be.visible')
                     .then( () => {
                         cy.get('div.ui-dialog-titlebar')
                             .should('contain.text', 'NOTICE')
